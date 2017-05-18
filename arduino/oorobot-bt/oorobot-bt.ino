@@ -47,23 +47,7 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 AccelStepper stepper1(HALFSTEP, motorPin1, motorPin3, motorPin2, motorPin4);
 AccelStepper stepper2(HALFSTEP, motorPin5, motorPin7, motorPin6, motorPin8);
 
-/*
-  String buttonActions[] = {"",
-  "GO", "", "CLEAR", "", "DOWN", "", "RIGHT", "PAUSE", "LEFT", "", "UP", "",
-  //long click actions
-  ""  , "", "CLEAR_ALL", "",     "",  "",     "",  "",    "", "", "",  ""
-  };
-*/
 
-int buttonActions[] = { -1,
-                        0, -1, 6, -1, 2, -1, 4, 5, 3, -1, 1, -1,
-                        //long click actions
-                        -1, -1, 7, -1, -1, -1, -1, -1, -1, 7, -1, -1
-                      };
-
-
-// variables
-// custom characters for LCD made with https://omerk.github.io/lcdchargen/
 byte up[8] = {
   0b00000,
   0b00100,
@@ -85,7 +69,7 @@ byte down[8] = {
   0b00100,
   0b00000
 };
-
+/*
 byte right[8] = {
   0b00000,
   0b00100,
@@ -96,19 +80,19 @@ byte right[8] = {
   0b00000,
   0b00000
 };
-/*
-  byte right[8] = {
+*/
+byte right[8] = {
   0b00000,
   0b00100,
   0b00010,
   0b11111,
-  0b1001ali0,. Il faut
+  0b10010,
   0b10100,
   0b10000,
   0b00000
-  };
-*/
+};
 
+/*
 byte left[8]  = {
   0b00000,
   0b00100,
@@ -119,9 +103,9 @@ byte left[8]  = {
   0b00000,
   0b00000
 };
+*/
 
-/*
-  byte left[8]  = {
+byte left[8]  = {
   0b00000,
   0b00100,
   0b01000,
@@ -130,8 +114,8 @@ byte left[8]  = {
   0b00101,
   0b00001,
   0b00000
-  };
-*/
+};
+
 byte pause[8] = {
   0b00000,
   0b00000,
@@ -153,7 +137,7 @@ int pauseState = 4;
 //int turnSteps = 1625; // number of steps for a 90 degree turn. 6cm wheels
 //int lineStepsCM = 220; // number of steps to do 1cm
 //int turnSteps = 1010; // number of steps for a 90 degree turn. 8,6cm wheels
-int turnSteps = 1300; // number of steps for a 90 degree turn. 8,6cm wheels
+int turnSteps = 1280; // number of steps for a 90 degree turn. 8,6cm wheels
 int lineStepsCM = 145; // number of steps to do 1cm
 int pauseDelay = 3000; // delay for pause state
 int stepDelay = 800; // delay between 2 movements
@@ -178,37 +162,65 @@ int col = 0;
 int row = 0;
 
 int LONG_CLICK_DELAY = 500;
-int DEBOUNCING_DELAY = 100;
-int lastButton = 0;
+int DEBOUNCING_DELAY = 200;
+int lastButton = -1;
 unsigned long lastClick = 0;
 
+String btOrders[] = {"", "/\\", "\\/", "<-", "->", "_"};
+
+/*
+ * 0 : go
+ * 1 : up
+ * 2 : down
+ * 3 : right
+ * 4 : left
+ * 5 : pause
+ * 6 : clear
+ * 7 : clear all
+ * -1 : nothing
+*/
 int getPressedButton() {
-  int value = constrain(map((analogRead(KEYS_PIN) - 400), 0, 623, 0, 20), 0, 20);
-  int b = 0;
-  switch (value) {
-    case 2: b = 1; break;
-    case 3: b = 2; break;
-    case 4: b = 3; break;
-    case 5: b = 4; break;
-    case 6: b = 5; break;
-    case 7: b = 6; break;
-    case 9: b = 7; break;
-    case 10: b = 8; break;
-    case 12: b = 9; break;
-    case 14: b = 10; break;
-    case 17: b = 11; break;
-    case 20: b = 12; break;
-    default: b = 0;
-  }
-  if (b != lastButton && millis() > lastClick + DEBOUNCING_DELAY) {
-    lastClick = millis();
-    lastButton = b;
-  } else if (b != 0) {
-    b = 0;
-    if (millis() > lastClick + LONG_CLICK_DELAY) {
-      lastClick = millis();
-      b = lastButton + 12;
+  int raw = analogRead(KEYS_PIN);
+  int b = -1;
+  if (raw>100) {
+    Serial.println(raw);
+    if (raw>900) {
+      b=1;      
+    } else if (raw>580 && raw<610) {
+      b=2;
+    } else if (raw>670 && raw<690) {
+      b=4;
+    } else if (raw>750 && raw<790) {
+      b=3;
+    } else if (raw>700 && raw<740) {
+      b=5;
+    } else if (raw>510 && raw<560) {
+      b=6;
+    } else if (raw>460 && raw<500) {
+      b=0;
+    }
+        
+    unsigned long currentClick=millis();
+    Serial.print("current:");
+    Serial.println(currentClick);
+    Serial.println(b);
+    Serial.print("last:");
+    Serial.println(lastClick);
+    Serial.println(lastButton);
+    if (currentClick > lastClick + DEBOUNCING_DELAY) {
+      lastClick = currentClick;
+      Serial.println(b);
       lastButton = b;
+    }  else if (b == 6) {
+      if (currentClick > lastClick + LONG_CLICK_DELAY) {
+        lastClick = currentClick;
+        b = 7;
+        lastButton = b;
+      } else {
+        b = -1;
+      }
+    } else {
+        b = -1;
     }
   }
   return b;
@@ -279,6 +291,12 @@ void displayStepLength() {
   Serial.println(F(" cm"));
 }
 
+void btDisplayOrders() {
+  for (int i=0;i<orderSaved; i++) {
+    BTSerie.print(btOrders[orders[i]]);
+  }
+  BTSerie.println();
+}
 
 void loop() {
   //Serial.println(digitalRead(BUTTON));
@@ -310,12 +328,10 @@ void loop() {
     stepLengthChanged = true;
   }
 
-  int activeButton = buttonActions[getPressedButton()];
+  int activeButton = getPressedButton();
   char recvChar;
   if (BTSerie.available()) {
         recvChar = BTSerie.read();
-        //"GO", "", "CLEAR", "", "DOWN", "", "RIGHT", "PAUSE", "LEFT", "", "UP", "",
-        // 0,  -1, 6      , -1,  2     , -1, 4,       5,        3, -1,     1, -1,
         switch ( recvChar ) {
           case 'u' :
             activeButton=1;
@@ -368,25 +384,42 @@ void loop() {
         lcd.setCursor(col, row);
         lcd.setBacklight(HIGH);
         if (orderSaved >= maxOrders) {
+          BTSerie.println("too many orders");
           Serial.println(F("too many orders"));
         } else {
           lcd.printByte(activeButton - 1);
           orders[orderSaved] = activeButton;
           orderSaved++;
+          btDisplayOrders();
         }
+        lastLedHight=millis();
         break;
       case 6:
         Serial.println(F("clear"));
         lcd.setBacklight(HIGH);
-        orderSaved--;
-        if (orderSaved < 0) {
-          orderSaved = 0;
+        if (isMoving) {
+          disableMotors();
+          isMoving=false;
+          lcd.clear();
+          lcd.setBacklight(HIGH);
+          lcd.print("arret !");
+          BTSerie.println("arret !");
+          delay(stepDelay * 2);
+          displayLastOrders();
+          btDisplayOrders();
+          lastLedHight=millis();
+        } else {
+          orderSaved--;
+          if (orderSaved < 0) {
+            orderSaved = 0;
+          }
+          col = orderSaved % 16;
+          row = orderSaved / 16;
+          lcd.setCursor(col, row);
+          lcd.print(" ");
+          btDisplayOrders();
         }
-        col = orderSaved % 16;
-        row = orderSaved / 16;
-        lcd.setCursor(col, row);
-        lcd.print(" ");
-        disableMotors();
+        lastLedHight=millis();
         break;
       case 7:
         Serial.println(F("clear all"));
@@ -396,6 +429,7 @@ void loop() {
         lcd.setCursor(col, row);
         col = 0;
         row = 0;
+        lastLedHight=millis();
         disableMotors();
         break;
     }
@@ -411,8 +445,11 @@ void loop() {
         lcd.clear();
         lcd.setBacklight(HIGH);
         lcd.print("fin !");
+        BTSerie.println("fin !");
         delay(stepDelay * 2);
         displayLastOrders();
+        btDisplayOrders();
+        lastLedHight=millis();
         //lcd.setBacklight(LOW);
       } else {
       }
@@ -421,6 +458,7 @@ void loop() {
     if (orderSaved==0 && millis()>lastLedHight+3000) {
       lcd.setBacklight(LOW);  
     }
+    delay(50);
   }
 }
 
@@ -447,6 +485,14 @@ boolean launchNextOrder() {
     lcd.print(orderSaved);
     lcd.print(" : ");
     lcd.printByte(orders[orderLaunched] - 1);
+
+    BTSerie.print("etape ");
+    BTSerie.print((orderLaunched + 1));
+    BTSerie.print(" sur ");
+    BTSerie.print(orderSaved);
+    BTSerie.print(" : ");
+    BTSerie.println(btOrders[orders[orderLaunched]]);
+
     delay(stepDelay);
     lcd.setBacklight(LOW);
 
