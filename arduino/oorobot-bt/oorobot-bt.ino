@@ -166,7 +166,7 @@ int DEBOUNCING_DELAY = 200;
 int lastButton = -1;
 unsigned long lastClick = 0;
 
-String btOrders[] = {"", "/\\", "\\/", "<-", "->", "_"};
+String btOrders[] = {"", "/\\ ", "\\/ ", "<- ", "-> ", "_ "};
 
 /*
  * 0 : go
@@ -458,7 +458,6 @@ void loop() {
     if (orderSaved==0 && millis()>lastLedHight+3000) {
       lcd.setBacklight(LOW);  
     }
-    delay(50);
   }
 }
 

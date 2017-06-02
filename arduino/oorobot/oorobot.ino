@@ -416,7 +416,6 @@ void loop() {
     if (orderSaved==0 && millis()>lastLedHight+3000) {
       lcd.setBacklight(LOW);  
     }
-    delay(50);
   }
 }
 
