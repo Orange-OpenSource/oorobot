@@ -9,9 +9,7 @@ J'ai  eu cette idée en discutant avec une professeure des écoles (Maître Form
 
 Je me suis donc lancé dans ce side-project profitant des imprimantes 3D  disponibles chez SOFT Lannion, de mes compétences en Arduino et en cherchant les composants sur AliExpress (merci à Gaël Breard pour m'avoir  formé sur ces 2 derniers sujets).
  
-Au final, la première version revient à 17€ de composants (et environ 3€   de frais de port) et ne demande aucune soudure. Le   châssis peut être imprimé sur un imprimante 3D possédant  un plateau de 20cm  sur  20cm :
-
-![oorobot](http://img.rd.francetelecom.fr/lutim/IXq7qecq.jpg =50%x50%)
+Au final, la première version revient à 17€ de composants (et environ 3€   de frais de port) et ne demande aucune soudure. Le châssis peut être imprimé sur un imprimante 3D possédant un plateau de 20cm sur 20cm
 
 Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
 
@@ -33,8 +31,6 @@ Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
 -  Grâce à l'encodeur rotatif on peut paramétrer la distance que fait le   robot sur les actions avancer/reculer. L'affichage de la distance se   fait sur l'afficheur LCD. C'est sans doute ici l'enseignant qui fera le choix de la distance effectuée par le robot.
 
 ## Le matériel
-
-![materiel](http://img.rd.francetelecom.fr/lutim/PFfe9xCx =50%x50%)
 
 ###À acheter :
 - 1 [arduino nano](https://fr.aliexpress.com/store/product/Nano-CH340-ATmega328P-MicroUSB-Compatible-for-Arduino-Nano-V3/1950989_32572612009.html) : 2.40€
@@ -63,8 +59,6 @@ Avoir un tube de colle forte peut-être utile si les trous de vis sont un peu tr
     - Soit on utilise  une batterie 5V pour téléphone portable de [ce style](https://fr.aliexpress.com/item/Super-Slim-Chocolate-Style-Power-Bank-5600mAh-Portable-External-Battery-Charger-Powerbank-Pack-For-SAMSUNG-IPHONE/32506163522.html) ou [celui là](https://fr.aliexpress.com/item/Real-Capacity-2000mAh-emergency-Power-Bank-External-Charger-Rechargeable-Battery-powerbank-for-Android-Samsung-Xiaomi/32740573704.html)  à 8€ (non testées). La deuxième batterie se branche directement sur la  prise micro-USB de l'Arduino. Pour attacher la première sous le châssis  le plus simple est d'utiliser du scratch adhésif.
     - Soit on prend une batterie plus rustique : [Batterie 3000mAh](https://fr.aliexpress.com/item/Super-Rechargeable-Pack-Protable-Lith-ion-Battery-for-DC-5V-3000mAh-EU-US-Plug/32675572113.html) à 13,50€. Pour le branchement il faut prendre [une fiche femelle](https://fr.aliexpress.com/item/DC12V-5pcs-Male-5pcs-Female-2-1x5-5MM-DC-Power-Plug-Jack-Adapter-Connector-Plug-for/32584832143.html)  dans lequel on vient visser les fils d'un cable coupé. On branche alors  l'autre côté du câble sur n'importe quelle broche +5V et Ground du  shield.
 
-![](http://img.rd.francetelecom.fr/lutim/ds2HSdN3 =50%x50%)
-    
 Les  batteries ont l'avantage d'être bien régulées (et peuvent donc être  directement branchées sur l'arduino). L'autre avantage est qu'elles disposent, la  plupart du temps, d'un bouton marche/arrêt.
 
 Sans  optimisation, lors des premiers essais réalisés on mesure que lors  des  déplacements le montage consomme 0,36A, puis quand l'afficheur LCD est   allumé il consomme 0,05A et quand il ne fait rien 0,03A.
@@ -77,27 +71,7 @@ Sans  optimisation, lors des premiers essais réalisés on mesure que lors  des 
 - Il faut garder un trou dans l'axe du moyeu des roues pour pouvoir insérer un crayon
 - Il faut ajouter un système pour gérer le frottement sur le sol du chassis (idée : utiliser une bille encastrée dans un support)
 
-
-Premier chassis (Modèle trouvé sur Internet) :
-    
-![premier chassis récupéré sur internet](http://img.rd.francetelecom.fr/lutim/PTY0qYiV =50%x50%)
-
-Première version réalisée avec [BlockSCAD](https://www.blockscad3d.com/editor/) : 
-    
-![première version de face](http://img.rd.francetelecom.fr/lutim/aWBTyhOQ =50%x50%)
-![première version de coté](http://img.rd.francetelecom.fr/lutim/eUI4S0ZS =50%x50%)
-
-Version améliorée (support d'écran mieux placé, roue encodeuse mieux tenue, incrustation marque "Orange") :
-    
-![version 1.1](http://img.rd.francetelecom.fr/lutim/IXq7qecq =50%x50%)
-
-Vue du dessous avec le conteneur de piles et la partie hébergeant la bille.
-
-![version 1.1 en-dessous](http://img.rd.francetelecom.fr/lutim/so2xzF3J =50%x50%)
-
-![vue 3D BlockSCAD](http://img.rd.francetelecom.fr/lutim/Uts8EFA3 =50%x50%)
-
-Les parties conçues :
+Les parties conçues (voir répertoire 3D) :
 - Deux roues rapides à imprimer de  diamètre 9cm avec les encoches pour  insérer en force les moteurs  pas-à-pas et des rebords pour retenir les  élastiques
 - Un support pour insérer une bille pour faire 3ième roue
 -  Un  châssis contenant les supports nécessaires pour fixer les  composants.  Utilisation des contrôleurs des moteurs pas-à-pas pour  faire des "yeux".  La roue encodeuse est pour le moment bloquée dans ces  contrôleurs (oubli  lors de la modélisation). Le bloc de piles peut se  fixer sous le  châssis (pour mon prototype j'utilise une batterie  externe de téléphone portable).
@@ -134,9 +108,12 @@ Liste de matériel :
 
 ##Pilotage avec le Bluetooth
  
-Les premiers essais avec un module Bluetooth HC-06 sont concluants, je peux piloter mon robot avec mon téléphone portable (via l'application "Bluetooth Serial Controler") ou mon PC (via minicom).
-
-![](http://img.rd.francetelecom.fr/lutim/KZOwZXuw =20%x20%)
+Les premiers essais avec un module Bluetooth HC-06 sont concluants, je peux piloter mon robot avec mon téléphone portable (via l'application "Bluetooth Serial Controler") ou mon PC (via minicom) (voir répertoire android).
 
 La prochaine étape est de piloter le robot via mblock et de faire une application Android pour contrôler le robot.
+
+
+##Licences
+
+Le code est sous GPL2, les modèles 3D et la documentation sont sous CC-BY-SA.
 

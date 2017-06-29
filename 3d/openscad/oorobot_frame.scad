@@ -1,5 +1,47 @@
 ﻿//!OpenSCAD
 
+module left_eye() {
+  translate([47, -22, 30]){
+    rotate([0, 60, 0]){
+      scale([1, 1, 1.4]){
+        difference() {
+          translate([0, 0, 0]){
+            translate([0, 13, 2]){
+              pico();
+            }
+            translate([0, -13, 2]){
+              pico();
+            }
+            translate([30, 13, 2]){
+              pico();
+            }
+            translate([30, -13, 2]){
+              pico();
+            }
+            translate([-4, -17, 0]){
+              cube([38, 34, 2], center=false);
+            }
+            color([0.93,0,0]) {
+              translate([14, 14, 0]){
+                cube([10, 10, 2], center=false);
+                translate([9, 0, 0]){
+                  rotate([0, 0, 20]){
+                    cube([4, 10, 2], center=false);
+                  }
+                }
+              }
+            }
+          }
+
+          translate([24, 16, 0]){
+            cylinder(r1=1, r2=1, h=2, center=false);
+          }
+        }
+      }
+    }
+  }
+}
+
 module right_eye() {
   translate([47, 22, 30]){
     rotate([0, 60, 0]){
@@ -40,10 +82,6 @@ module right_eye() {
       }
     }
   }
-}
-
-module left_eye() {
-
 }
 
 module screen_support() {
@@ -141,7 +179,7 @@ module keyboard_support() {
 }
 
 module arduino_support() {
-  translate([-86, 0, 2]){
+  translate([-82, 0, 2]){
     translate([0, -24, 0]){
       color([1,0.8,0]) {
         pico();
@@ -301,7 +339,7 @@ module side(mirror2) {
           translate([80, 1, 0]){
             mirror([1,0,0]){
               rotate([90, 0, 0]){
-                // size is multiplied by 0.75 because openScad fonts size is in points, not pixels
+                // size is multiplied by 0.75 because openScad font sizes are in points, not pixels
                 linear_extrude( height=1, twist=0, center=false){
                   text("oorobot", font = "Roboto", size = 22*0.75);
                 }
@@ -312,7 +350,7 @@ module side(mirror2) {
         } else {
           translate([2, -1, 0]){
             rotate([90, 0, 0]){
-              // size is multiplied by 0.75 because openScad fonts size is in points, not pixels
+              // size is multiplied by 0.75 because openScad font sizes are in points, not pixels
               linear_extrude( height=1, twist=0, center=false){
                 text("oorobot", font = "Roboto", size = 22*0.75);
               }
@@ -386,45 +424,6 @@ module roue(epaisseur) {
   }
 }
 
-translate([47, -22, 30]){
-  rotate([0, 60, 0]){
-    scale([1, 1, 1.4]){
-      difference() {
-        translate([0, 0, 0]){
-          translate([0, 13, 2]){
-            pico();
-          }
-          translate([0, -13, 2]){
-            pico();
-          }
-          translate([30, 13, 2]){
-            pico();
-          }
-          translate([30, -13, 2]){
-            pico();
-          }
-          translate([-4, -17, 0]){
-            cube([38, 34, 2], center=false);
-          }
-          color([0.93,0,0]) {
-            translate([14, 14, 0]){
-              cube([10, 10, 2], center=false);
-              translate([9, 0, 0]){
-                rotate([0, 0, 20]){
-                  cube([4, 10, 2], center=false);
-                }
-              }
-            }
-          }
-        }
-
-        translate([24, 16, 0]){
-          cylinder(r1=1, r2=1, h=2, center=false);
-        }
-      }
-    }
-  }
-}
 screw_hole_radius = 0.95;
 height = 24;
 width = 88;

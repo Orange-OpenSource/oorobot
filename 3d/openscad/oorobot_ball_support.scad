@@ -1,45 +1,41 @@
 ﻿//!OpenSCAD
 
 module bottom() {
+  height = 28;
   {
     $fn=100;    //set sides to 100
     difference() {
-      color([1,0.8,0]) {
-        translate([0, 0, 12.5]){
-          difference() {
-            cube([23, 23, 23.5], center=true);
-
-            translate([9, 9, -12.5]){
-              cylinder(r1=1, r2=1, h=5, center=false);
-            }
-            translate([-9, 9, -12.5]){
-              cylinder(r1=1, r2=1, h=5, center=false);
-            }
-            translate([9, -9, -12.5]){
-              cylinder(r1=1, r2=1, h=5, center=false);
-            }
-            translate([-9, -9, -12.5]){
-              cylinder(r1=1, r2=1, h=5, center=false);
-            }
-          }
-        }
-        translate([0, 0, 23.5]){
-          difference() {
-            cube([35, 7, 1.5], center=true);
-
-            translate([15, 0, -0.75]){
-              cylinder(r1=1.25, r2=1.25, h=1.5, center=false);
-            }
-            translate([-15, 0, -0.75]){
-              cylinder(r1=1.25, r2=1.25, h=1.5, center=false);
-            }
-          }
-        }
+      translate([0, 0, (height / 2)]){
+        cube([23, 23, height], center=true);
       }
 
-      color([1,0.8,0]) {
+      translate([0, 0, height]){
         rotate([0, 0, 45]){
-          cube([16.2, 16.2, 14], center=true);
+          cube([16.5, 16.5, 16.5], center=true);
+        }
+        translate([9, 9, -5]){
+          cylinder(r1=1, r2=1, h=5, center=false);
+        }
+        translate([9, -9, -5]){
+          cylinder(r1=1, r2=1, h=5, center=false);
+        }
+        translate([-9, 9, -5]){
+          cylinder(r1=1, r2=1, h=5, center=false);
+        }
+        translate([-9, -9, -5]){
+          cylinder(r1=1, r2=1, h=5, center=false);
+        }
+      }
+    }
+    translate([0, 0, 0.75]){
+      difference() {
+        cube([35, 7, 1.5], center=true);
+
+        translate([15, 0, -0.75]){
+          cylinder(r1=1.25, r2=1.25, h=1.5, center=false);
+        }
+        translate([-15, 0, -0.75]){
+          cylinder(r1=1.25, r2=1.25, h=1.5, center=false);
         }
       }
     }
@@ -86,10 +82,10 @@ module top2() {
   }
 }
 
+translate([0, 30, 0]){
+  bottom();
+}
 mirror([0,0,1]){
-  translate([0, 30, -24.2]){
-    bottom();
-  }
   translate([0, 0, -1]){
     top2();
   }
