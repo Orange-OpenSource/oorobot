@@ -2,6 +2,15 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <EEPROM.h>
+#include <SoftwareSerial.h>  //Software Serial Port
+
+// Bluetooth HC-06
+#define RxD 12    //Pin 10 pour RX (pin0=serial) vert
+#define TxD 13    //Pin 11 pour TX, on peut changer noir
+#define HAVE_BLUETOOTH 0
+#if HAVE_BLUETOOTH
+SoftwareSerial BTSerie(RxD,TxD);
+#endif
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #define printByte(args)  write(args);
@@ -21,9 +30,10 @@
 //LiquidCrystal_I2C lcd(I2C_ADDR,En_pin,Rw_pin,Rs_pin,D4_pin,D5_pin,D6_pin,D7_pin);
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
-#define CLK  3  // Pin 9 to clk on encoder
-#define DT   2  // Pin 8 to DT on encoder
-#define BUTTON 13  // Pin 8 to DT on encoder
+// Rotary encoder
+#define CLK  3 
+#define DT   2 
+#define BUTTON 13 
 
 #define KEYS_PIN A0
 
@@ -43,11 +53,6 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 AccelStepper stepper1(HALFSTEP, motorPin1, motorPin3, motorPin2, motorPin4);
 AccelStepper stepper2(HALFSTEP, motorPin5, motorPin7, motorPin6, motorPin8);
 
-
-
-
-// variables
-// custom characters for LCD made with https://omerk.github.io/lcdchargen/
 byte up[8] = {
   0b00000,
   0b00100,
@@ -69,18 +74,7 @@ byte down[8] = {
   0b00100,
   0b00000
 };
-/*
-byte right[8] = {
-  0b00000,
-  0b00100,
-  0b00010,
-  0b11111,
-  0b00010,
-  0b00100,
-  0b00000,
-  0b00000
-};
-*/
+
 byte right[8] = {
   0b00000,
   0b00100,
@@ -91,19 +85,6 @@ byte right[8] = {
   0b10000,
   0b00000
 };
-
-/*
-byte left[8]  = {
-  0b00000,
-  0b00100,
-  0b01000,
-  0b11111,
-  0b01000,
-  0b00100,
-  0b00000,
-  0b00000
-};
-*/
 
 byte left[8]  = {
   0b00000,
@@ -134,17 +115,13 @@ int leftArrow = 2;
 int pauseState = 4;
 
 // Stepper motors setup
-//int turnSteps = 1625; // number of steps for a 90 degree turn. 6cm wheels
-//int lineStepsCM = 220; // number of steps to do 1cm
-//int turnSteps = 1010; // number of steps for a 90 degree turn. 8,6cm wheels
-int turnSteps = 1250; // number of steps for a 90 degree turn. 8,6cm wheels
+int turnSteps = 1280; // number of steps for a 90 degree turn. 8,6cm wheels
 int lineStepsCM = 145; // number of steps to do 1cm
 int pauseDelay = 3000; // delay for pause state
 int stepDelay = 800; // delay between 2 movements
 int stepperSpeed = 900; //speed of the stepper (steps per second)
 int steps1 = 0; // keep track of the step count for motor 1
 int steps2 = 0; // keep track of the step count for motor 2
-
 
 int stepLength = 0;
 int newStepLength = 20;
@@ -166,6 +143,7 @@ int DEBOUNCING_DELAY = 200;
 int lastButton = -1;
 unsigned long lastClick = 0;
 
+String btOrders[] = {"", "/\\ ", "\\/ ", "<- ", "-> ", "_ "};
 
 /*
  * 0 : go
@@ -243,7 +221,14 @@ void setup() {
   pinMode (CLK, INPUT);
   pinMode (DT, INPUT);
   pinMode (BUTTON , INPUT);
-
+  
+  // Bluetooth module init
+  #if HAVE_BLUETOOTH
+  pinMode(RxD, INPUT);
+  pinMode(TxD, OUTPUT);
+  BTSerie.begin(9600);  //57600
+  #endif
+  
   rotation = digitalRead(CLK);
 
   // LCD init
@@ -287,6 +272,14 @@ void displayStepLength() {
   Serial.println(F(" cm"));
 }
 
+void btDisplayOrders() {
+  #if HAVE_BLUETOOTH
+  for (int i=0;i<orderSaved; i++) {
+    BTSerie.print(btOrders[orders[i]]);
+  }
+  BTSerie.println();
+  #endif
+}
 
 void loop() {
   //Serial.println(digitalRead(BUTTON));
@@ -320,7 +313,34 @@ void loop() {
 
   int activeButton = getPressedButton();
   char recvChar;
-
+  #if HAVE_BLUETOOTH
+  if (BTSerie.available()) {
+        recvChar = BTSerie.read();
+        switch ( recvChar ) {
+          case 'u' :
+            activeButton=1;
+            break;
+          case 'd' :
+            activeButton=2;
+            break;
+          case 'l' :
+            activeButton=3;
+            break;
+          case 'r' :
+            activeButton=4;
+            break;
+          case 'p' :
+            activeButton=5;
+            break;
+          case 'g' :
+            activeButton=0;
+            break;
+          case 'e' :
+            activeButton=6;
+            break;
+        }
+  }
+  #endif
   if (activeButton >= 0) {
     Serial.println(activeButton);
     switch (activeButton) {
@@ -349,11 +369,15 @@ void loop() {
         lcd.setCursor(col, row);
         lcd.setBacklight(HIGH);
         if (orderSaved >= maxOrders) {
+          #if HAVE_BLUETOOTH
+          BTSerie.println("too many orders");
+          #endif
           Serial.println(F("too many orders"));
         } else {
           lcd.printByte(activeButton - 1);
           orders[orderSaved] = activeButton;
           orderSaved++;
+          btDisplayOrders();
         }
         lastLedHight=millis();
         break;
@@ -366,8 +390,12 @@ void loop() {
           lcd.clear();
           lcd.setBacklight(HIGH);
           lcd.print("arret !");
+          #if HAVE_BLUETOOTH
+          BTSerie.println("arret !");
+          #endif
           delay(stepDelay * 2);
           displayLastOrders();
+          btDisplayOrders();
           lastLedHight=millis();
         } else {
           orderSaved--;
@@ -378,6 +406,7 @@ void loop() {
           row = orderSaved / 16;
           lcd.setCursor(col, row);
           lcd.print(" ");
+          btDisplayOrders();
         }
         lastLedHight=millis();
         break;
@@ -405,8 +434,12 @@ void loop() {
         lcd.clear();
         lcd.setBacklight(HIGH);
         lcd.print("fin !");
+        #if HAVE_BLUETOOTH
+        BTSerie.println("fin !");
+        #endif
         delay(stepDelay * 2);
         displayLastOrders();
+        btDisplayOrders();
         lastLedHight=millis();
         //lcd.setBacklight(LOW);
       } else {
@@ -442,6 +475,16 @@ boolean launchNextOrder() {
     lcd.print(orderSaved);
     lcd.print(" : ");
     lcd.printByte(orders[orderLaunched] - 1);
+
+    #if HAVE_BLUETOOTH
+    BTSerie.print("etape ");
+    BTSerie.print((orderLaunched + 1));
+    BTSerie.print(" sur ");
+    BTSerie.print(orderSaved);
+    BTSerie.print(" : ");
+    BTSerie.println(btOrders[orders[orderLaunched]]);
+    #endif
+    
     delay(stepDelay);
     lcd.setBacklight(LOW);
 
@@ -512,7 +555,7 @@ void stepBackward() {
   int target = stepLength * lineStepsCM;
   stepper1.move(target);
   stepper1.setSpeed(stepperSpeed);
-  stepper2.move(-target);
+  stepper2.move(-target);ema
   stepper2.setSpeed(stepperSpeed);
 }
 

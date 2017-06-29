@@ -117,3 +117,7 @@ La prochaine étape est de piloter le robot via mblock et de faire une applicati
 
 Le code est sous GPL2, les modèles 3D et la documentation sont sous CC-BY-SA.
 
+##Les projets équivalents
+
+- [escornabot](http://escornabot.com/web/en) : un projet espagnol vraiment dans le même esprit mais qui demande un peu connaissance technique pour la partie clavier (soudure)
+
