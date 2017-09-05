@@ -13,6 +13,8 @@ Au final, la première version revient à 17€ de composants (et environ 3€ d
 
 Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
 
+![oorobot images](https://user-images.githubusercontent.com/16662847/30054294-e8c59754-922b-11e7-99d7-73ff45a40565.jpg)
+
 ## Le principe
 
 - On allume le robot
@@ -31,6 +33,8 @@ Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
 -  Grâce à l'encodeur rotatif on peut paramétrer la distance que fait le   robot sur les actions avancer/reculer. L'affichage de la distance se   fait sur l'afficheur LCD. C'est sans doute ici l'enseignant qui fera le choix de la distance effectuée par le robot.
 
 ## Le matériel
+
+![oorobot matos](https://user-images.githubusercontent.com/16662847/30054291-e54f2de2-922b-11e7-99b5-8817725353d8.jpg)
 
 ### À acheter :
 - 1 [arduino nano](https://fr.aliexpress.com/store/product/Nano-CH340-ATmega328P-MicroUSB-Compatible-for-Arduino-Nano-V3/1950989_32572612009.html) : 2.40€
@@ -63,8 +67,11 @@ Les  batteries ont l'avantage d'être bien régulées (et peuvent donc être  di
 
 Sans  optimisation, lors des premiers essais réalisés on mesure que lors  des  déplacements le montage consomme 0,36A, puis quand l'afficheur LCD est   allumé il consomme 0,05A et quand il ne fait rien 0,03A.
 
+![oorobot batterie](https://user-images.githubusercontent.com/16662847/30054578-cb1eb1ee-922c-11e7-91bd-371b7fd1f299.jpg)
 
 ## Le châssis
+
+![oorobot chassis](https://user-images.githubusercontent.com/16662847/30054293-e757263a-922b-11e7-9b8a-6885336bb8da.jpg)
 
 - Il doit être solide
 - Les roues doivent être assez grandes pour que le robot avance assez rapidement
@@ -76,7 +83,7 @@ Les parties conçues (voir répertoire 3D) :
 - Un support pour insérer une bille pour faire 3ième roue
 -  Un  châssis contenant les supports nécessaires pour fixer les  composants.  Utilisation des contrôleurs des moteurs pas-à-pas pour  faire des "yeux".  La roue encodeuse est pour le moment bloquée dans ces  contrôleurs (oubli  lors de la modélisation). Le bloc de piles peut se  fixer sous le  châssis (pour mon prototype j'utilise une batterie  externe de téléphone portable).
  
-L'impression de la   deuxième version (1.1) des pièces a pris 5h30 et consommé 96g   de matière avec les réglages suivant (sur une imprimante Volumic  Stream  30 pro):
+L'impression de la deuxième version (1.1) des pièces a pris 5h30 et consommé 96g de matière avec les réglages suivant (sur une imprimante Volumic  Stream  30 pro):
 - qualité normale (200 microns)
 - densité de remplissage : 20%
 - épaisseur des bords : 0.6 mm (au lieu de 1.2mm par défaut sur les profils Cura de l'imprimante)
@@ -112,7 +119,6 @@ Les premiers essais avec un module Bluetooth HC-06 sont concluants, je peux pilo
 
 La prochaine étape est de piloter le robot via mblock et de faire une application Android pour contrôler le robot.
 
-
 ## Licences
 
 Le code est sous [GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.fr.html), les modèles 3D et la documentation sont sous [CC-BY-SA](https://creativecommons.org/licenses/by-sa/2.0/deed.fr).
@@ -120,4 +126,3 @@ Le code est sous [GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.fr.htm
 ## Les projets équivalents
 
 - [escornabot](http://escornabot.com/web/en) : un projet espagnol vraiment dans le même esprit mais qui demande un peu connaissance technique pour la partie clavier (soudure)
-
