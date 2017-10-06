@@ -43,7 +43,7 @@ Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
 - 1 [encodeur rotatif](https://fr.aliexpress.com/store/product/1pcs-Rotary-Encoder-Module-Brick-Sensor-Development-for-arduino-KY-040/1022067_32714247694.html) : 0,50€
 - 1 [clavier 3x4 boutons](https://fr.aliexpress.com/item/Button-Keypad-3x4-module/32530917534.html) : 2,40€
 - 1 [écran LCD 2x16 caractères sur interface I2C](https://fr.aliexpress.com/store/product/LCD1602-I2C-LCD-1602-module-Blue-screen-IIC-I2C-for-arduino-LCD1602-Adapter-plate/1022067_32651314933.html) : 1,90€
-- 1 [conteneur de pile LR6](https://fr.aliexpress.com/item/2016-New-Arrival-6-x-AA-Battery-Case-Storage-Holder-Storage-Box-for-6pc-Batteries-With/32659644068.html) : 0,80€
+- 1 [conteneur de pile LR6](https://fr.aliexpress.com/item/New-6-x-AA-Battery-Case-Storage-Holder-With-DC2-1-Power-Jack-For-Arduino/32801965248.html) : 0,80€
 - 1 [lot de cables "dupont" de 20cm](https://fr.aliexpress.com/item/Free-Shipping-80pcs-dupont-cable-jumper-wire-dupont-line-female-to-female-dupont-line-20cm-1P/1699285992.html) : 0,90€
 - [des vis M2x5mm ](https://fr.aliexpress.com/item/Screw-50Pcs-L510-1-M2-5-of-Stainless-Steel-Screws-Nuts-Assortment-High-Quality-Novelty-Design/32599943462.html) ou [celles-ci](https://fr.aliexpress.com/item/50Pcs-lot-Screw-M2-5-of-Screws-Nuts-Assortment-Bolts-Screw-Spike-Round-Head-Screw-2mm/32722845879.html) : 0,80€
 
