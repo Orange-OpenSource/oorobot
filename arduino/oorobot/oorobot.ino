@@ -24,7 +24,7 @@ SoftwareSerial BTSerie(RxD,TxD);
 #define Rw_pin  1
 #define Rs_pin  0
 #define D4_pin  4
-#define D5_pin  5
+#define D5_pin  5b
 #define D6_pin  6
 #define D7_pin  7
 //LiquidCrystal_I2C lcd(I2C_ADDR,En_pin,Rw_pin,Rs_pin,D4_pin,D5_pin,D6_pin,D7_pin);
@@ -33,7 +33,7 @@ LiquidCrystal_I2C lcd(0x27, 20, 4);
 // Rotary encoder
 #define CLK  3 
 #define DT   2 
-#define BUTTON 13 
+#define BUTTON A1
 
 #define KEYS_PIN A0
 
@@ -115,7 +115,7 @@ int leftArrow = 2;
 int pauseState = 4;
 
 // Stepper motors setup
-int turnSteps = 1280; // number of steps for a 90 degree turn. 8,6cm wheels
+int turnSteps = 1240; // number of steps for a 90 degree turn. 8,6cm wheels
 int lineStepsCM = 145; // number of steps to do 1cm
 int pauseDelay = 3000; // delay for pause state
 int stepDelay = 800; // delay between 2 movements
@@ -138,68 +138,79 @@ boolean isMoving = false;
 int col = 0;
 int row = 0;
 
+String btOrders[] = {"", "/\\ ", "\\/ ", "<- ", "-> ", "_ "};
+
+  /*
+   * 0 : go
+   * 1 : up
+   * 2 : down
+   * 3 : right
+   * 4 : left
+   * 5 : pause
+   * 6 : clear
+   * 7 : clear all
+   * -1 : nothing
+  */
+int buttonsMap[]= {
+   3, 0,-1, 6,-1, 4,-1, 1, 5, 2,-1,-1,
+  -1,-1,-1, 7,-1,-1,-1,-1,-1,-1,-1,-1
+  };
+  
 int LONG_CLICK_DELAY = 500;
 int DEBOUNCING_DELAY = 200;
 int lastButton = -1;
-unsigned long lastClick = 0;
-
-String btOrders[] = {"", "/\\ ", "\\/ ", "<- ", "-> ", "_ "};
-
-/*
- * 0 : go
- * 1 : up
- * 2 : down
- * 3 : right
- * 4 : left
- * 5 : pause
- * 6 : clear
- * 7 : clear all
- * -1 : nothing
-*/
+unsigned long lastClick = 0;  
 int getPressedButton() {
   int raw = analogRead(KEYS_PIN);
   int b = -1;
-  if (raw>100) {
-    Serial.println(raw);
-    if (raw>900) {
+  if (raw>=472) {
+    if (raw>=981) {
       b=1;      
-    } else if (raw>580 && raw<610) {
+    } else if (raw>=894 && raw<=966) {
       b=2;
-    } else if (raw>670 && raw<690) {
-      b=4;
-    } else if (raw>750 && raw<790) {
+    } else if (raw>=823 && raw<877) {
       b=3;
-    } else if (raw>700 && raw<740) {
+    } else if (raw>=763 && raw<=817) {
+      b=4;
+    } else if (raw>=707 && raw<=753) {
       b=5;
-    } else if (raw>510 && raw<560) {
+    } else if (raw>=662 && raw<=698) {
       b=6;
-    } else if (raw>460 && raw<500) {
+    } else if (raw>=622 && raw<=698) {
+      b=7;
+    } else if (raw>=586 && raw<=614) {
+      b=8;
+    } else if (raw>=556 && raw<=584) {
+      b=9;
+    } else if (raw>=526 && raw<=554) {
+      b=10;
+    } else if (raw>=501 && raw<=519) {
       b=0;
+    } else if (raw>=472 && raw<=508) {
+      b=11;
     }
         
     unsigned long currentClick=millis();
-    Serial.print("current:");
-    Serial.println(currentClick);
-    Serial.println(b);
-    Serial.print("last:");
-    Serial.println(lastClick);
-    Serial.println(lastButton);
-    if (currentClick > lastClick + DEBOUNCING_DELAY) {
-      lastClick = currentClick;
-      Serial.println(b);
-      lastButton = b;
-    }  else if (b == 6) {
-      if (currentClick > lastClick + LONG_CLICK_DELAY) {
+    if (lastButton != b) {
+      if (currentClick > lastClick + DEBOUNCING_DELAY) {
         lastClick = currentClick;
-        b = 7;
         lastButton = b;
       } else {
         b = -1;
       }
     } else {
+      if (currentClick > lastClick + LONG_CLICK_DELAY) {
+        lastButton = b;
+        b = b+12;
+        lastClick = currentClick;
+      } else {
         b = -1;
+      }
     }
+  } else {
+    lastButton=-1;
   }
+  
   return b;
 }
 
@@ -217,11 +228,14 @@ int lastLedHight=0;
 
 void setup() {
   Serial.begin(9600);
+  pinMode (KEYS_PIN, INPUT);
+
   // Rotary encoder init
   pinMode (CLK, INPUT);
   pinMode (DT, INPUT);
   pinMode (BUTTON , INPUT);
-  
+  digitalWrite(BUTTON, HIGH);      
+   
   // Bluetooth module init
   #if HAVE_BLUETOOTH
   pinMode(RxD, INPUT);
@@ -281,10 +295,13 @@ void btDisplayOrders() {
   #endif
 }
 
+int mode=0;
+
 void loop() {
   //Serial.println(digitalRead(BUTTON));
   //delay(50);
-
+  int buttonNotPressed= digitalRead(BUTTON);
+  //Serial.println(buttonNotPressed);
   int value = digitalRead(CLK);
   if (value != rotation) { // we use the DT pin to find out which way we turning.
     if (digitalRead(DT) != value) {  // Clockwise
@@ -312,6 +329,7 @@ void loop() {
   }
 
   int activeButton = getPressedButton();
+ 
   char recvChar;
   #if HAVE_BLUETOOTH
   if (BTSerie.available()) {
@@ -342,6 +360,8 @@ void loop() {
   }
   #endif
   if (activeButton >= 0) {
+    activeButton=buttonsMap[activeButton];
+    
     Serial.println(activeButton);
     switch (activeButton) {
       case 0:
@@ -555,7 +575,7 @@ void stepBackward() {
   int target = stepLength * lineStepsCM;
   stepper1.move(target);
   stepper1.setSpeed(stepperSpeed);
-  stepper2.move(-target);ema
+  stepper2.move(-target);
   stepper2.setSpeed(stepperSpeed);
 }
 
