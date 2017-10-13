@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="-51.577624"
-     inkscape:cy="602.5708"
+     inkscape:cx="-51.480688"
+     inkscape:cy="659.63429"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -187,55 +187,6 @@
            x="1198.4161"
            y="-1248.946"
            transform="matrix(0,1,-1,0,0,0)" />
-      </g>
-    </g>
-    <g
-       id="g4695"
-       transform="translate(-1185.4505,-1862.871)">
-      <rect
-         y="1701.8811"
-         x="681.84412"
-         height="244.47467"
-         width="244.47467"
-         id="rect4490-0"
-         style="fill:#ffffff;stroke:#000000;stroke-width:3.55682921;stroke-miterlimit:4;stroke-dasharray:none" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path4639-2"
-         d="m 683.12712,1824.1184 248.0315,0"
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:12.05495453;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path4639-2-6"
-         d="m 804.08145,1700.1027 0,248.0315"
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:12.05495453;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <g
-         id="g4629"
-         transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,1167.3209,75.16764)">
-        <rect
-           style="fill:#37abc8;stroke:none;stroke-width:4.43848705;stroke-miterlimit:4;stroke-dasharray:none"
-           id="rect4492-6"
-           width="23.099829"
-           height="138.25722"
-           x="970.45825"
-           y="1460.0253" />
-        <path
-           sodipodi:type="star"
-           style="fill:#37abc8;stroke:none;stroke-width:3.81682134;stroke-miterlimit:4;stroke-dasharray:none"
-           id="path4494-0"
-           sodipodi:sides="3"
-           sodipodi:cx="982.00824"
-           sodipodi:cy="1447.6478"
-           sodipodi:r1="54.517525"
-           sodipodi:r2="27.258762"
-           sodipodi:arg1="0.52359878"
-           sodipodi:arg2="1.5707963"
-           inkscape:flatsided="false"
-           inkscape:rounded="0"
-           inkscape:randomized="0"
-           d="m 1029.2218,1474.9066 -47.21356,0 -47.21356,0 23.60678,-40.8882 23.60678,-40.8881 23.60676,40.8881 z"
-           inkscape:transform-center-y="-13.629318"
-           inkscape:transform-center-x="4.0254872e-05" />
       </g>
     </g>
     <g
