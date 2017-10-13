@@ -73,7 +73,7 @@ Les  batteries ont l'avantage d'être bien régulées (et peuvent donc être  di
 
 Sans  optimisation, lors des premiers essais réalisés on mesure que lors  des  déplacements le montage consomme 0,36A, puis quand l'afficheur LCD est   allumé il consomme 0,05A et quand il ne fait rien 0,03A.
 
-##  Le châssis
+## Le châssis
 
 - Il doit être solide
 - Les roues doivent être assez grandes pour que le robot avance assez rapidement
@@ -91,22 +91,21 @@ L'impression de la version actuelle des pièces a pris 5h20 et consommé 98g de 
 - épaisseur des bords : 0.8 mm (au lieu de 1.2mm par défaut sur les profils Cura de l'imprimante)
  
 
-##Historique
+## Historique
 
-###Le char
+### Le char
 
 Déplacement des roues au centre du châssis. Centre de gravité descendu au maximum.
 
 ![oorobot char](https://user-images.githubusercontent.com/16662847/31552021-93f34d60-b036-11e7-818c-848a15284af5.jpg)
 
-###Le chariot
+### Le chariot
 
 Premier "vrai" modèle. Présence d'une roue encodeuse pour le reglage du pas qui a été enlevé dans la version actuelle (utilisation du clavier)
 
 ![oorobot chariot](https://user-images.githubusercontent.com/16662847/30054294-e8c59754-922b-11e7-99d7-73ff45a40565.jpg)
 
-###Le prototype
-
+### Le prototype
 
 ![proto](https://user-images.githubusercontent.com/16662847/31553956-59681558-b03c-11e7-8821-879849a6639c.jpg)
 
