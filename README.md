@@ -1,3 +1,5 @@
+![logo](https://user-images.githubusercontent.com/16662847/31556092-c84bd66a-b043-11e7-81af-0e9399535bd9.png)
+
 # OoRoBoT : Un robot (totalement) DIY
 
 L'idée est de créer un robot destiné aux enfants de maternelle (MS/GS) sur le principe de [la BeeBot](http://www.robotsenclasse.ch/robots-en-classe/beebot), tout en suivant les contraintes suivantes :

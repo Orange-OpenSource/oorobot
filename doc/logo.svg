@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="155.43092mm"
+   height="91.467499mm"
+   viewBox="0 0 550.73949 324.09744"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/home/hljl8419/Documents/git/kids/oorobot/doc/logo.png"
+   inkscape:export-xdpi="163.42"
+   inkscape:export-ydpi="163.42">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="240.92449"
+     inkscape:cy="141.21432"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-129.42857,-242.58568)">
+    <ellipse
+       ry="25.194818"
+       rx="25.198881"
+       style="fill:#ffffff;fill-opacity:1;stroke:#37abc8;stroke-width:6.29921246;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path4150-7"
+       cx="-232.00214"
+       cy="538.33667"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:#37abc8;fill-opacity:1;stroke:none;stroke-width:7.08661413;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4144-6"
+       width="63.779526"
+       height="60.31398"
+       x="-263.89191"
+       y="491.60889"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:#37abc8;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4136"
+       width="425.19684"
+       height="212.59842"
+       x="-625.3092"
+       y="308.33521"
+       transform="scale(-1,1)" />
+    <path
+       sodipodi:type="star"
+       style="fill:#37abc8;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path4138"
+       sodipodi:sides="3"
+       sodipodi:cx="597.00012"
+       sodipodi:cy="465.46356"
+       sodipodi:r1="89.90358"
+       sodipodi:r2="44.95179"
+       sodipodi:arg1="0.52359878"
+       sodipodi:arg2="1.5707963"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 674.85891,510.41535 -77.85879,0 -77.85878,0 38.92939,-67.42768 38.92939,-67.42769 38.92939,67.42769 z"
+       inkscape:transform-center-y="-35.433063"
+       transform="matrix(-0.91018814,0,0,1.5764921,743.67714,-283.73215)" />
+    <ellipse
+       style="fill:#37abc8;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path4140"
+       cx="-627.01843"
+       cy="414.6344"
+       rx="53.149605"
+       ry="106.29921"
+       transform="scale(-1,1)" />
+    <ellipse
+       style="fill:#ffffff;fill-opacity:1;stroke:#37abc8;stroke-width:7.08661413;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path4142"
+       cx="412.71078"
+       cy="404.6344"
+       rx="158.5054"
+       ry="158.50542" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:67.20115662px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="261.77383"
+       y="427.95319"
+       id="text4146"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4148"
+         x="261.77383"
+         y="427.95319"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Medium';fill:#37abc8;fill-opacity:1">OoRoBoT</tspan></text>
+    <circle
+       r="25.19685"
+       style="fill:#ffffff;fill-opacity:1;stroke:#37abc8;stroke-width:6.29921246;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path4150-7-3"
+       cx="-593.41943"
+       cy="538.33667"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:#37abc8;fill-opacity:1;stroke:none;stroke-width:7.08661413;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4144-6-5"
+       width="63.779526"
+       height="60.236221"
+       x="-625.3092"
+       y="491.68665"
+       transform="scale(-1,1)" />
+  </g>
+</svg>
