@@ -7,9 +7,19 @@
 #include <LiquidCrystal_I2C.h>
 #include <LiquidMenu.h>
 #include <AccelStepper.h>
+#include <SoftwareSerial.h>
 
-#define OOROBOT_VERSION "0.99"
+#define OOROBOT_VERSION "1.00"
 #define KEYS_PIN A0
+#define SCREEN_TIMEOUT 14
+#define INVERT_DIRECTION 0 // On some step motors direction may be inverted
+
+#define HAVE_BLUETOOTH 1
+#if HAVE_BLUETOOTH
+#define RxD 12
+#define TxD 13
+SoftwareSerial BTSerie(RxD,TxD);
+#endif
 
 // motor pins
 #define motorPin1  4     // IN1 on the ULN2003 driver 1
@@ -93,14 +103,36 @@ byte left[8]  = {
 byte pause[8] = {
   0b00000,
   0b00000,
+  0b01010,
+  0b01010,
+  0b01010,
+  0b01010,
   0b00000,
-  0b00000,
-  0b00000,
-  0b10001,
-  0b11111,
   0b00000
 };
-  
+
+byte agrave[8] = {
+  0b01000,
+  0b00100,
+  0b01110,
+  0b00001,
+  0b01111,
+  0b10001,
+  0b01111,
+  0b00000
+};
+
+byte ecirc[8] = {
+  0b00100,
+  0b01010,
+  0b01110,
+  0b10001,
+  0b11111,
+  0b10001,
+  0b01110,
+  0b00000
+};
+
 int LONG_CLICK_DELAY = 500;
 int DEBOUNCING_DELAY = 300;
 int lastButtonId = -1;
@@ -205,6 +237,7 @@ void setup() {
   lcd.createChar(3, left);
   lcd.createChar(5, pause);
   lcd.createChar(6, bullet);
+  lcd.createChar(7, agrave);
 
   // stepper motors init
   stepper1.setMaxSpeed(2000.0);
@@ -213,6 +246,13 @@ void setup() {
   stepper2.setMaxSpeed(2000.0);
   stepper2.move(-1); 
   stepper2.setSpeed(stepperSpeed);
+
+  // Bluetooth module init
+  #if HAVE_BLUETOOTH
+  pinMode(RxD, INPUT);
+  pinMode(TxD, OUTPUT);
+  BTSerie.begin(9600);
+  #endif
 }
 
 void loop() {
@@ -220,7 +260,7 @@ void loop() {
   int buttonId=getPressedButton();
   String button="";
   // Screen off after 4s
-  if (currentTime>lastChangeDisplay+4000L) {
+  if (currentTime>lastChangeDisplay+SCREEN_TIMEOUT*1000) {
     if (selectedMenu!=OFF_MENU) {
       previousMenu=selectedMenu;
       selectedMenu=OFF_MENU;
@@ -229,21 +269,31 @@ void loop() {
   }  
   if (buttonId>=0) {
     button = buttonsMap[buttonId];
-    if (button!="") {
-      actionButtonForScreen(button);
+  } else {
+    #if HAVE_BLUETOOTH
+    if (BTSerie.available()) {
+        char c = BTSerie.read();
+        button = String(c);
+        //Serial.println(button);
     }
+    #endif  
+  }
+  if (button!="") {
+    actionButtonForScreen(button);
   }
   if (isMoving) {
     if (isCommandTerminated()) {
       Serial.println(F("step delay"));
       if (! launchNextCommand()) {
         Serial.println(F("program terminated"));
-        //orderSaved = 0;
         isMoving = false;
         disableMotors();
         lcd.clear();
         lcd.setBacklight(HIGH);
         lcd.print("fin !");
+        #if HAVE_BLUETOOTH
+        BTSerie.println("fin !");
+        #endif        
         delay(stepDelay * 2);
         selectedMenu=CTRL_MENU;
         changeDisplay=1;
@@ -272,7 +322,11 @@ void actionButtonForScreen(String button) {
       } else if (button == "C") {
         commands.remove(commands.length()-1);
       } else if (button != "" && button != "+" && button != "-" && button != "s") {
-        commands+=button;
+        if (commands.length()<32) {
+          commands+=button;
+        } else {
+          Serial.println("too many commands");  
+        }
       } else {
         changeDisplay=0;
       }
@@ -342,11 +396,20 @@ void updateScreen() {
       lcd.display();
       lcd.setCursor(0, 0);
       lcd.print("  OoRoBoT "+String(OOROBOT_VERSION));
+      lcd.setCursor(0, 1);
+      lcd.print("Pret \7 demarrer!");
+      #if HAVE_BLUETOOTH
+        BTSerie.println("OoRoBoT "+String(OOROBOT_VERSION));
+        BTSerie.println("En attente de commandes");
+      #endif
       previousMenu=CTRL_MENU;
       selectedMenu=CTRL_MENU;      
     } else if (selectedMenu==CTRL_MENU) {
       lcd.setBacklight(HIGH);
       String c = displayCommands(commands);
+      #if HAVE_BLUETOOTH
+        BTSerie.println(commands);
+      #endif
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print(c.substring(0, 16));
@@ -362,6 +425,15 @@ void updateScreen() {
       lcd.print(" 1 Tour:"+String(params.turnSteps)+"pas");
       lcd.setCursor(0, selectedLine);
       lcd.print("\6");
+      #if HAVE_BLUETOOTH
+        if (selectedLine == 0) {
+          BTSerie.println("Distance:"+String(cm)+"."+String(mm)+"cm");
+        } else {
+          BTSerie.println("1 Tour:"+String(params.turnSteps)+"pas");    
+        }
+        
+      #endif
+
     } else if (selectedMenu==CTRL_MENU){
       lcd.setBacklight(HIGH);
     } else if (selectedMenu==OFF_MENU){
@@ -394,6 +466,14 @@ boolean launchNextCommand() {
     lcd.print(commands.length());
     lcd.print(" : ");
     lcd.print(displayCommands(String(commands[commandLaunched])));
+    #if HAVE_BLUETOOTH
+    BTSerie.print("etape ");
+    BTSerie.print((commandLaunched + 1));
+    BTSerie.print(" sur ");
+    BTSerie.print(commands.length());
+    BTSerie.print(" : ");
+    BTSerie.println(String(commands[commandLaunched]));
+    #endif    
     delay(stepDelay);
     lcd.setBacklight(LOW);
     enableMotors();
@@ -428,8 +508,6 @@ boolean launchNextCommand() {
 boolean isCommandTerminated() {
   steps1 = stepper1.distanceToGo();
   steps2 = stepper2.distanceToGo();
-  //Serial.println(steps1);
-  //Serial.println(steps2);  
   stepper1.runSpeedToPosition();
   stepper2.runSpeedToPosition();
 
@@ -453,7 +531,9 @@ void disableMotors() {
 void stepForward() {
   isMoving = true;
   int target = params.stepCm / 10 * lineStepsCM;
+  #if INVERT_DIRECTION
   target = target * -1;
+  #endif
   stepper1.move(-target);
   stepper1.setSpeed(stepperSpeed);
   stepper2.move(target);
@@ -464,7 +544,9 @@ void stepForward() {
 void stepBackward() {
   isMoving = true;
   int target = params.stepCm / 10 * lineStepsCM;
+  #if INVERT_DIRECTION
   target = target * -1;
+  #endif
   stepper1.move(target);
   stepper1.setSpeed(stepperSpeed);
   stepper2.move(-target);
