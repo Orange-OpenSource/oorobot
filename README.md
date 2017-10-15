@@ -1,4 +1,4 @@
-![logo](https://user-images.githubusercontent.com/16662847/31556092-c84bd66a-b043-11e7-81af-0e9399535bd9.png)
+![logo](https://user-images.githubusercontent.com/16662847/31585642-ae9a9994-b1c5-11e7-8c0f-f822c5dd9941.png)
 
 # OoRoBoT : Un robot (totalement) DIY
 
