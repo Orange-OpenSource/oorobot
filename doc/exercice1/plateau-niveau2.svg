@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="1291.4616"
-     inkscape:cy="828.72823"
+     inkscape:cx="1341.6288"
+     inkscape:cy="1152.4317"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="mm"
@@ -1446,5 +1446,16 @@
          d="m 762.48175,-245.86389 c -1.8598,-9.93722 -6.70748,-19.6065 -12.96725,-25.86666 -8.23304,-8.23304 -21.95234,-13.76491 -34.13879,-13.76491 -8.16175,0 -14.97693,2.50145 -19.70885,7.23414 l 60.37956,60.37956 c 6.34027,-6.34142 8.62593,-16.27864 6.43533,-27.98213 z"
          id="path6071-6-0" />
     </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1512.7916"
+       y="-985.17438"
+       id="text10323"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan10325"
+         x="1512.7916"
+         y="-985.17438">Images sous &quot;Flaticon Basic License&quot;,  auteurs : Freepik et Pixel Buddha </tspan></text>
   </g>
 </svg>
