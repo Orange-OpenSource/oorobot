@@ -32,12 +32,12 @@ Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
 - Quand l'enfant le veut il peut lancer son programme avec le bouton "Lancer"
 - Le robot éxecute alors chaque ordre en faisant une courte  pause entre chacun d'entre eux.
 - Quand le programme est terminé, la liste des ordres se réaffiche et l'enfant peut faire d'éventuels ajustements.
-- On peut accéder au réglage des paramètres en fasant un appui long sur un bouton dédié. Les paramètres sont :
+- On peut accéder au réglage des paramètres en faisant un appui long sur un bouton dédié. Les paramètres sont :
     - La distance parcourue pour les déplacements "avancer" et "reculer".
     - Le nombre de pas que les moteurs doivent faire pour effectuer un tour complet (qui peut varier selon la surface sur laquelle doit évoluer le robot)
     
 
-Pour changer de ligne il faut appuyer sur les touches "avancer" ou "reculer", pour changer les valeurs il faut appuyer sur les touche "tourner à droite" et "tourner à gauche". Un appui long sur ces touches permet d'augmenter la valeur d'incrément.
+Pour changer de ligne il faut appuyer sur les touches "avancer" ou "reculer", pour changer les valeurs il faut appuyer sur les touches "tourner à droite" et "tourner à gauche". Un appui long sur ces touches permet d'augmenter la valeur d'incrément.
 
 Pour annuler les changements des paramètres il faut appuyer sur le bouton "effacer". Pour quitter les paramètres en les sauvegardant il faut apppuyer sur la touche "lancer" ou "paramètre"
 
@@ -58,8 +58,8 @@ Pour annuler les changements des paramètres il faut appuyer sur le bouton "effa
 Soit un total d'environ **17€**  (14€ de matériel et 3€ de  frais de port) et surtout **aucune soudure n'est nécessaire** ! De plus les  moteurs pas-à-pas, bien que lents, sont très silencieux.
 
 ### À récupérer :
--  4 vis M3 pour fixer les moteurs pas-à-pas (vis utilisées pour tenir les  disques durs ou les cartes mères), des vis/écrous peuvent également faire l'affaire ou en dernier  recours de la colle forte
-- 2 grands élastiques pour les pneus
+-  4 vis M3 pour fixer les moteurs pas-à-pas (vis utilisées pour tenir les  disques durs ou les cartes mères), des vis/écrous peuvent également faire l'affaire ou en dernier recours de la colle forte.
+- 2 grands élastiques pour les pneus.
 - 2 billes en verre standard (diamètre 16mm) pour la roue arrière.
 
 Avoir un tube de colle forte peut-être utile si les trous de vis sont un peu trop grands. C'est aussi pratique pour coller les elastiques sur les roues ou pour éviter que la prise du conteneur de piles ne se dévisse.
@@ -73,7 +73,7 @@ Avoir un tube de colle forte peut-être utile si les trous de vis sont un peu tr
 
 Les  batteries ont l'avantage d'être bien régulées (et peuvent donc être  directement branchées sur l'Arduino). L'autre avantage est qu'elles disposent, la  plupart du temps, d'un bouton marche/arrêt.
 
-Sans  optimisation, lors des premiers essais réalisés on mesure que lors  des  déplacements le montage consomme 0,36A, puis quand l'afficheur LCD est   allumé il consomme 0,05A et quand il ne fait rien 0,03A.
+Sans  optimisation, lors des premiers essais réalisés on mesure que lors des déplacements le montage consomme 0,36A, puis quand l'afficheur LCD est allumé il consomme 0,05A et quand il ne fait rien 0,03A.
 
 ## Le châssis
 
@@ -83,7 +83,7 @@ Sans  optimisation, lors des premiers essais réalisés on mesure que lors  des 
 - Il faut ajouter un système pour gérer le frottement sur le sol du chassis (idée : utiliser une bille encastrée dans un support)
 
 Les parties conçues (voir répertoire 3D) :
-- Deux roues rapides à imprimer de  diamètre 9cm avec les encoches pour insérer en force les moteurs pas-à-pas et des rebords pour retenir les élastiques
+- Deux roues rapides à imprimer de diamètre 9cm avec les encoches pour insérer en force les moteurs pas-à-pas et des rebords pour retenir les élastiques
 - Un support pour insérer les billes pour stabiliser le robot
 - Un châssis contenant les supports nécessaires pour fixer les  composants. Utilisation des contrôleurs des moteurs pas-à-pas pour faire des "yeux".
  
@@ -103,7 +103,7 @@ Déplacement des roues au centre du châssis. Centre de gravité descendu au max
 
 ### Le chariot
 
-Premier "vrai" modèle. Présence d'une roue encodeuse pour le reglage du pas qui a été enlevé dans la version actuelle (utilisation du clavier)
+Premier "vrai" modèle. Présence d'une roue encodeuse pour le réglage du pas qui a été enlevé dans la version actuelle (utilisation du clavier)
 
 ![oorobot chariot](https://user-images.githubusercontent.com/16662847/30054294-e8c59754-922b-11e7-99d7-73ff45a40565.jpg)
 
