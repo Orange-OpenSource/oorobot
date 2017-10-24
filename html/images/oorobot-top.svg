@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="150mm"
+   height="150mm"
+   viewBox="0 0 531.49607 531.49606"
+   id="svg10346"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="oorobot-top.svg">
+  <defs
+     id="defs10348" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="-55.542926"
+     inkscape:cy="157.32908"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata10351">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-30.854895,-14.370248)">
+    <path
+       style="fill:#37abc8;fill-opacity:1;stroke:none;stroke-width:1.63051975;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 127.33929,16.00082 0,529.86523 338.52735,0 0,-529.86523 -338.52735,0 z m 169.26368,8.361328 52.53515,90.994142 52.53321,90.99219 -105.06836,0 -105.07032,0 52.53516,-90.99219 52.53516,-90.994142 z m 0,223.082032 a 25.422167,25.422167 0 0 1 25.42187,25.42187 25.422167,25.422167 0 0 1 -25.42187,25.42188 25.422167,25.422167 0 0 1 -25.42188,-25.42188 25.422167,25.422167 0 0 1 25.42188,-25.42187 z m -125.82618,94.22656 248.03126,0 0,88.58203 -248.03126,0 0,-88.58203 z"
+       id="rect4783"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#37abc8;stroke-width:5.6692915;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4785"
+       width="16.134628"
+       height="317.31573"
+       x="101.68954"
+       y="114.20834" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#37abc8;stroke-width:5.6692915;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4785-3"
+       width="16.134628"
+       height="317.31573"
+       x="475.3187"
+       y="114.20834" />
+    <rect
+       style="fill:#37abc8;fill-opacity:1;stroke:none;stroke-width:1.58190751;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4785-3-6"
+       width="16.134628"
+       height="134.79564"
+       x="264.79904"
+       y="-252.19948"
+       transform="matrix(0,1,-1,0,0,0)" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text5572"
+       y="404.16245"
+       x="179.08768"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         style="font-size:50px;fill:#37abc8;fill-opacity:1"
+         y="404.16245"
+         x="179.08768"
+         id="tspan5574"
+         sodipodi:role="line">OoRoBoT</tspan></text>
+    <rect
+       style="fill:#37abc8;fill-opacity:1;stroke:none;stroke-width:1.58190751;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4785-3-6-7"
+       width="16.134628"
+       height="134.79564"
+       x="263.03754"
+       y="-474.48404"
+       transform="matrix(0,1,-1,0,0,0)" />
+  </g>
+</svg>

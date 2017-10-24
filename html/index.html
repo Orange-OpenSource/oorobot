@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
+    <title>Test plateau</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+    table {
+	  border: 1px solid black;
+	  border-collapse: collapse;
+    }
+    #board {
+	  margin: 100px;
+    }
+    td {
+      border: 1px solid black;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    td img {
+      width: 80%;
+      height: auto;
+    }
+    #oorobot {
+	  position: absolute;
+	  opacity: 0.8;
+    }
+    </style>
+    <script>
+    $.fn.animateRotate = function(startAngle, endAngle, duration, easing, complete){
+	  return this.each(function(){
+	    var elem = $(this);
+	    $({deg: startAngle}).animate({deg: endAngle}, {
+		  duration: duration,
+		  easing: easing,
+		  step: function(now){
+		    elem.css({
+			  '-moz-transform':'rotate('+now+'deg)',
+			  '-webkit-transform':'rotate('+now+'deg)',
+			  '-o-transform':'rotate('+now+'deg)',
+			  '-ms-transform':'rotate('+now+'deg)',
+			  'transform':'rotate('+now+'deg)'
+		    });
+		  },
+		  complete: complete || $.noop
+	    });
+	  });
+    };
+    var width=100;
+	var licenses={};
+    var animationDelay=700;
+    var pauseDelay=200;
+    var currentGrid;
+    var gridPosition;
+    var starts={};
+    var bounds={
+      row: {min:0, max:0},
+      col: {min:0, max:0},
+    };
+    var ends={};
+    var commands="";
+    var commandsIcons={
+	  "U" : "fa fa-arrow-up fa-4x",
+	  "D" : "fa fa-arrow-down fa-4x",
+	  "R" : "fa fa-arrow-right fa-4x",
+	  "L" : "fa fa-arrow-left fa-4x",
+	  "P" : "fa fa-pause fa-4x",
+    };
+    var oorobotPos={
+      "row": 0,
+      "col": 0,
+      "direction" : 0
+    };
+    function loadGrid(grid) {
+      $("#board > tbody").empty();
+      var row=0;
+      bounds.row.min=0;
+      bounds.col.min=0;
+      grid.lines.forEach(function(line) {
+	    var tr=$("<tr>");
+	    var col=0;
+	    line.boxes.forEach(function(box) {
+		  var td=$("<td>");
+          if (box) {
+		    if (box.img) {
+			  td.append($("<img>").attr("src", box.img));
+		    }
+		    if (box.type=="start") {
+			  box.mode.split(/\s+/).forEach(function(mode) {
+			    starts[mode]={"row":row, "col":col};
+			  });
+		    }
+			if (box.license && box.license.type && box.license.author) {
+			  licenses[box.license.author]=box.license;
+			}
+		  }
+		  col++;
+		  if (col > bounds.col.max) {
+		    bounds.col.max=col;
+		  }
+		  tr.append(td);
+	    });
+	    row++;
+	    if (row > bounds.row.max) {
+		  bounds.row.max=row;
+	    }
+	    $("#board > tbody").append(tr);
+      });
+	  $("#board td").width(width).height(width);;
+      $("#board > caption").text(grid.name);
+      $("#oorobot").height(width);
+	  $("#licenses").empty();
+	  console.log(licenses);
+	  for (author in licenses) {
+		$("#licenses").append($("<p>").text(author.author));
+	  }
+      currentGrid=grid;
+      initGame();
+    }
+    function initGame(mode) {
+      if (mode==null) {
+	    mode=currentGrid.defaultMode;
+	  }  
+      $("#commandDisplay>").css("background-color", "white").css("color", "black");
+      gridPosition=$("#board tbody").offset();
+	  if (starts[mode]) {
+	    oorobotPos.row=starts[mode].row;
+	    oorobotPos.col=starts[mode].col;
+	    oorobotPos.direction=0;
+	    $("#oorobot").css("top", gridPosition.top+1+oorobotPos.row*(width+3)).css("left", gridPosition.left+oorobotPos.col*(width+3)).animateRotate(0,0,0,"linear");
+	  } else {
+	    console.log("no mode selected");  
+	  }  
+    }
+    var commandLaunched=0;
+    function startGame() {
+      initGame();
+	  commandLaunched=0
+      launchNextCommand();
+    }
+    function launchNextCommand() {
+      if (commandLaunched>0) {
+	    $("#commandDisplay :eq("+(commandLaunched-1)+")").css("background-color", "#999").css("color", "black");
+      }
+      if (commandLaunched < commands.length) {
+	    command=commands[commandLaunched];
+	    $("#commandDisplay :eq("+commandLaunched+")").css("background-color", "green").css("color", "white");
+	    commandLaunched++;
+	    setTimeout(function(){
+		  doMovement(command)}, pauseDelay);
+      } else {console.log("finished")}
+    }
+
+    function doMovement(command) {
+      var colDiff=0;			 
+      var rowDiff=0;
+      var directionDiff=0;
+	  if (command == "U" || command == "D") {
+	    switch(oorobotPos.direction) {
+		  case 0:
+		    rowDiff-=1;
+		    break;            
+		  case 180:
+		    rowDiff+=1;
+		    break;            
+		  case 90:
+		    colDiff+=1;
+		    break;            
+		  case 270:
+		    colDiff-=1;
+		    break;            
+	    }
+	    if (command=="D") {
+		  colDiff=-colDiff;
+		  rowDiff=-rowDiff;
+	    }
+  	  } else if (command == "R") {
+	    directionDiff+=90;
+	  } else if (command == "L") {
+	    directionDiff-=90;
+	  } else if (command == "P") {
+	    setTimeout(launchNextCommand, animationDelay);
+	  }
+	  if (rowDiff!=0 || colDiff!=0) {
+  	    oorobotPos.row+=rowDiff;		 
+	    oorobotPos.col+=colDiff;
+	    console.log("row", oorobotPos.row, "col", oorobotPos.col);
+	    console.log("row min", bounds.row.min, "row max", bounds.row.max);
+	    console.log("col min", bounds.col.min, "col max", bounds.col.max);
+	    var cb=launchNextCommand;
+	    //	     if (oorobotPos.row<bounds.row.min || oorobotPos.row>=bounds.row.max || oorobotPos.col<bounds.col.min || oorobotPos.col>=bounds.col.max) {
+	    if (! currentGrid.lines[oorobotPos.row] || ! currentGrid.lines[oorobotPos.row].boxes[oorobotPos.col]) {
+  		  cb=function(){error("Tu es en dehors du plateau ! ")};
+	    } else if (currentGrid.lines[oorobotPos.row].boxes[oorobotPos.col].type=="forbidden") {
+  		  cb=function(){error("Tu ne pas passer par ici ! ")};
+	    }
+  	    $("#oorobot").animate({"top": gridPosition.top+1+oorobotPos.row*(width+3),"left":gridPosition.left+oorobotPos.col*(width+3)}, animationDelay, cb);
+	  }
+	  if (directionDiff!=0) {
+	    $("#oorobot").animateRotate(oorobotPos.direction, oorobotPos.direction+directionDiff, animationDelay, "linear", launchNextCommand);
+  	    oorobotPos.direction+=directionDiff+360;
+	    oorobotPos.direction=oorobotPos.direction%360;
+	    console.log(oorobotPos.direction);
+	  }
+    }
+    function error(msg) {
+	  $("#commandDisplay :eq("+(commandLaunched-1)+")").css("background-color", "red").css("color", "white");
+	  alert(msg)
+    }
+
+	function addCommand(command) {
+	  if (command) {
+		if (command=="C") {
+		  commands=commands.slice(0,-1);
+		  $("#commandDisplay :last-child").remove();
+		} else if (command=="G") {
+		  startGame();
+		} else {
+		  commands+=command;
+		  $("#commandDisplay").append($("<i>").addClass(commandsIcons[command]));
+		} 
+		$("#commands").val(commands);
+	  }
+	}
+
+	
+    $(window).load(function (){
+	  $(document).keydown(function(e) {
+		var command="";
+	    switch(e.which) {
+		  case 37: // left
+			command="L";
+		    break;
+		  case 38: // up
+			command="U";
+		    break;
+		  case 39: // right
+			command="R";
+		    break;
+		  case 40: // down
+			command="D";
+		    break;
+		  case 40: // down
+			command="D";
+		    break;
+		  case 32: // space
+			command="G";
+		    break;
+		  case 8:
+			command="C";
+		    break;
+		  case 46:
+			command="C";
+		    break;
+		  default: return;
+	    }
+	    e.preventDefault();
+		addCommand(command);
+	  });
+	  
+	  $("#init").on("click", function(e) {
+	    commands="";
+        $("#commands").val("");
+        $("#commandDisplay").empty();
+	    launchNextCommand();
+	    initGame();
+	  });
+	  $("#start").on("click", function(e) {
+	    commands = $("#commands").val();
+	    console.log(commands.length);
+	    startGame();
+	  });
+	  $("#control button").on("click", function(e) {
+	    var command = $(this).attr("command");
+		addCommand(command);
+	  });
+	  $.getJSON("./game-grids.json", function( data ) {
+	    console.log(data);
+	    loadGrid(data["board1"]);
+	  });
+    });
+    </script>
+  </head>
+  <body>
+    <img src="images/oorobot-top.svg" id="oorobot"/>
+    <table id="board">
+      <caption></caption>
+      <tbody>
+      </tbody>
+    </table>
+    <table id="control">
+      <tr><td></td><td><button command="U"><i class="fa fa-arrow-up" aria-hidden="true"></i></button></td><td></td><td><button command="G"><i class="fa fa-play-circle" aria-hidden="true"></i></button></td></tr>
+      <tr><td><button command="L"><i class="fa fa-arrow-left" aria-hidden="true"></i></button></td><td><button command="P"><i class="fa fa-pause" aria-hidden="true"></i></button></td><td><button command="R"><i class="fa fa-arrow-right" aria-hidden="true"></i></button></td><td><button id="init"><i class="fa fa-refresh" aria-hidden="true"></i></button></td></tr>
+      <tr><td></td><td><button command="D"><i class="fa fa-arrow-down" aria-hidden="true"></i></button></td><td></td><td><button command="C"><i class="fa fa-remove" aria-hidden="true"></i></button></td></tr>
+    </table>
+	<div id="licenses"></div>
+    <input type="hidden" size="32" id="commands"/>
+    <div id="commandDisplay"></div>
+  </body>
+</html>

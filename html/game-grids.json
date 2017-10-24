@@ -1,0 +1,50 @@
+{
+    "board1": {
+	"name" : "Plateau 1",
+	"modes" : ["rocket", "house"],
+	"defaultMode" : "house",
+	"lines" : [
+	    {
+		"color": "white",
+		"boxes" : [
+		    {},
+		    {"type": "end", "mode": "rocket", "img": "images/rocket.svg", "license" : {"type" : "Flaticon Basic License", "author" : "Pixel Buddha", "authorRef" : "https://pixelbuddha.net/"}},
+		    {},
+		    {},
+		    {"type": "end", "mode": "house", "img": "images/fireplace.svg", "license" : {"type" : "Flaticon Basic License", "author" : "Freepik", "authorRef" : "http://www.freepik.com/"}},
+		    {}
+		]
+	    },
+	    {
+		"boxes" : [
+		    {},
+		    {},
+		    {},
+		    {},
+		    {},
+		    {"type": "checkpoint", "mode": "house", "img": "images/cap.svg", "license" : {"type" : "Flaticon Basic License", "author" : "Freepik", "authorRef" : "http://www.freepik.com/"}}
+		]
+	    },
+	    {
+		"boxes" : [
+		    {"type": "checkpoint", "mode": "rocket", "img": "images/astronaut.svg", "license" : {"type" : "Flaticon Basic License", "author" : "Freepik", "authorRef" : "http://www.freepik.com/"}},
+		    {},
+		    {"type": "forbidden", "img": "images/maps-and-flags.svg", "license" : {"type" : "Flaticon Basic License", "author" : "Freepik", "authorRef" : "http://www.freepik.com/"}},
+		    {},
+		    {},
+		    {}
+		]
+	    },
+	    {
+		"boxes" : [
+		    {},
+		    {},
+		    {"type": "start", "mode": "rocket house", "img": "images/boy.svg", "license" : {"type" : "Flaticon Basic License", "author" : "Freepik", "authorRef" : "http://www.freepik.com/"}},
+		    {},
+		    {},
+		    {}
+		]
+	    }
+	]
+    }
+}
