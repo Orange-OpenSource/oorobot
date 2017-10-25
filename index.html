@@ -12,13 +12,16 @@
 	  border: 1px solid black;
 	  border-collapse: collapse;
     }
+	#game {
+	  display: flex;
+	  justify-content: center;
+	}
+
     #board {
-	  margin: 100px;
     }
+
     td {
       border: 1px solid black;
-      width: 50px;
-      height: 50px;
       text-align: center;
       vertical-align: middle;
     }
@@ -26,10 +29,30 @@
       width: 80%;
       height: auto;
     }
+
     #oorobot {
 	  position: absolute;
 	  opacity: 0.8;
     }
+
+	#control table {
+	  align-self: center;
+	  border: 0px solid black;
+	}
+	#control table td {
+	   border: 0px solid black;
+	}
+	
+	#control {
+	  display: flex;
+	  justify-content: center;
+	}
+	  
+	#commandsDisplay {
+	  bottom: 0px;
+	  width: 100%;
+	}
+
     </style>
     <script>
     $.fn.animateRotate = function(startAngle, endAngle, duration, easing, complete){
@@ -65,11 +88,11 @@
     var ends={};
     var commands="";
     var commandsIcons={
-	  "U" : "fa fa-arrow-up fa-4x",
-	  "D" : "fa fa-arrow-down fa-4x",
-	  "R" : "fa fa-arrow-right fa-4x",
-	  "L" : "fa fa-arrow-left fa-4x",
-	  "P" : "fa fa-pause fa-4x",
+	  "U" : "fa fa-arrow-up",
+	  "D" : "fa fa-arrow-down",
+	  "R" : "fa fa-arrow-right",
+	  "L" : "fa fa-arrow-left",
+	  "P" : "fa fa-pause",
     };
     var oorobotPos={
       "row": 0,
@@ -111,22 +134,21 @@
 	    }
 	    $("#board > tbody").append(tr);
       });
-	  $("#board td").width(width).height(width);;
-      $("#board > caption").text(grid.name);
-      $("#oorobot").height(width);
 	  $("#licenses").empty();
 	  console.log(licenses);
 	  for (author in licenses) {
 		$("#licenses").append($("<p>").text(author.author));
 	  }
+	  $("#board > caption").text(grid.name);
       currentGrid=grid;
+	  resize();
       initGame();
     }
     function initGame(mode) {
       if (mode==null) {
 	    mode=currentGrid.defaultMode;
 	  }  
-      $("#commandDisplay>").css("background-color", "white").css("color", "black");
+      $("#commandsDisplay>").css("background-color", "white").css("color", "black");
       gridPosition=$("#board tbody").offset();
 	  if (starts[mode]) {
 	    oorobotPos.row=starts[mode].row;
@@ -145,11 +167,15 @@
     }
     function launchNextCommand() {
       if (commandLaunched>0) {
-	    $("#commandDisplay :eq("+(commandLaunched-1)+")").css("background-color", "#999").css("color", "black");
+		var row = (commandLaunched % 16) - 1;
+		var col = parseInt(commandLaunched / 16);
+		$("#commandsDisplay").find("tr").eq(col).find("td").eq(row).css("background-color", "#999").css("color", "black");
       }
       if (commandLaunched < commands.length) {
 	    command=commands[commandLaunched];
-	    $("#commandDisplay :eq("+commandLaunched+")").css("background-color", "green").css("color", "white");
+		var row = (commandLaunched % 16);
+		var col = parseInt(commandLaunched / 16);
+		$("#commandsDisplay").find("tr").eq(col).find("td").eq(row).css("background-color", "green").css("color", "white");
 	    commandLaunched++;
 	    setTimeout(function(){
 		  doMovement(command)}, pauseDelay);
@@ -209,27 +235,50 @@
 	  }
     }
     function error(msg) {
-	  $("#commandDisplay :eq("+(commandLaunched-1)+")").css("background-color", "red").css("color", "white");
+	  var row = (commandLaunched) -1;
+	  var col = parseInt((commandLaunched-1) / 16);
+	  $("#commandsDisplay").find("tr").eq(col).find("td").eq(row).css("background-color", "red").css("color", "black");
 	  alert(msg)
     }
 
 	function addCommand(command) {
 	  if (command) {
 		if (command=="C") {
+		  var row = (commands.length % 16) -1;
+		  var col = parseInt((commands.length-1) / 16);
+		  $("#commandsDisplay").find("tr").eq(col).find("td").eq(row).css("background-color", "white").css("color", "black").find("i").remove();
 		  commands=commands.slice(0,-1);
-		  $("#commandDisplay :last-child").remove();
 		} else if (command=="G") {
 		  startGame();
 		} else {
 		  commands+=command;
-		  $("#commandDisplay").append($("<i>").addClass(commandsIcons[command]));
-		} 
+		  var row = (commands.length % 16) -1;
+		  var col = parseInt((commands.length-1) / 16);
+		  $("#commandsDisplay").find("tr").eq(col).find("td").eq(row).append($("<i>").addClass(commandsIcons[command]));
+		}
+		
 		$("#commands").val(commands);
 	  }
 	}
 
+	function resize() {
+	  var w=$("body").width();
+	  var h=$("body").height();
+	  var w_command=w/16;
+	  $("#commandsDisplay td").css("width", w_command).css("height", w_command).css("font-size", w_command*0.8);
+	  $("#control td button").css("width", w_command).css("height", w_command);
+	  $("#control td button i").css("font-size", w_command*0.8);
+	  if (currentGrid) {
+		var v_rest=h-w_command*6;
+		width = v_rest / (bounds.row.max+2);
+		$("#board td").width(width).height(width);
+		$("#oorobot").height(width);
+	  }
+	}
 	
     $(window).load(function (){
+	  resize();
+
 	  $(document).keydown(function(e) {
 		var command="";
 	    switch(e.which) {
@@ -265,8 +314,10 @@
 	  
 	  $("#init").on("click", function(e) {
 	    commands="";
+		commandLaunched=0;
         $("#commands").val("");
-        $("#commandDisplay").empty();
+        $("#commandsDisplay td").css("background-color", "white").css("color", "black");
+		$("#commandsDisplay td").empty();
 	    launchNextCommand();
 	    initGame();
 	  });
@@ -288,18 +339,29 @@
   </head>
   <body>
     <img src="images/oorobot-top.svg" id="oorobot"/>
-    <table id="board">
-      <caption></caption>
-      <tbody>
-      </tbody>
-    </table>
-    <table id="control">
-      <tr><td></td><td><button command="U"><i class="fa fa-arrow-up" aria-hidden="true"></i></button></td><td></td><td><button command="G"><i class="fa fa-play-circle" aria-hidden="true"></i></button></td></tr>
-      <tr><td><button command="L"><i class="fa fa-arrow-left" aria-hidden="true"></i></button></td><td><button command="P"><i class="fa fa-pause" aria-hidden="true"></i></button></td><td><button command="R"><i class="fa fa-arrow-right" aria-hidden="true"></i></button></td><td><button id="init"><i class="fa fa-refresh" aria-hidden="true"></i></button></td></tr>
-      <tr><td></td><td><button command="D"><i class="fa fa-arrow-down" aria-hidden="true"></i></button></td><td></td><td><button command="C"><i class="fa fa-remove" aria-hidden="true"></i></button></td></tr>
-    </table>
+	<div id="game">
+      <table id="board">
+		<caption></caption>
+		<tbody>
+		</tbody>
+      </table>
+	</div>
 	<div id="licenses"></div>
     <input type="hidden" size="32" id="commands"/>
-    <div id="commandDisplay"></div>
+    <table id="commandsDisplay">
+	  <tr>
+		<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	  </tr>
+	  <tr>
+		<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+	  </tr>
+	</table>
+	<div id="control">
+	  <table>
+		<tr><td></td><td><button command="U"><i class="fa fa-arrow-up" aria-hidden="true"></i></button></td><td></td><td><button command="G"><i class="fa fa-play-circle" aria-hidden="true"></i></button></td></tr>
+		<tr><td><button command="L"><i class="fa fa-arrow-left" aria-hidden="true"></i></button></td><td><button command="P"><i class="fa fa-pause" aria-hidden="true"></i></button></td><td><button command="R"><i class="fa fa-arrow-right" aria-hidden="true"></i></button></td><td><button id="init"><i class="fa fa-refresh" aria-hidden="true"></i></button></td></tr>
+		<tr><td></td><td><button command="D"><i class="fa fa-arrow-down" aria-hidden="true"></i></button></td><td></td><td><button command="C"><i class="fa fa-remove" aria-hidden="true"></i></button></td></tr>
+      </table>
+	</div>
   </body>
 </html>
