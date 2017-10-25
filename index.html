@@ -12,7 +12,7 @@
 	  border: 1px solid black;
 	  border-collapse: collapse;
     }
-	#game {
+	#game, #controlDiv {
 	  display: flex;
 	  justify-content: center;
 	}
@@ -49,8 +49,8 @@
 	}
 	  
 	#commandsDisplay {
-	  bottom: 0px;
-	  width: 100%;
+	  display: flex;
+	  justify-content: center;
 	}
 
     </style>
@@ -263,14 +263,14 @@
 
 	function resize() {
 	  var w=$("body").width();
-	  var h=$("body").height();
-	  var w_command=w/16;
-	  $("#commandsDisplay td").css("width", w_command).css("height", w_command).css("font-size", w_command*0.8);
+	  var h=$(document).height();
+	  var w_command=h/12;
+	  $("#commandsDisplay td").css("width", w_command).css("height", w_command).css("font-size", w_command*0.75);
 	  $("#control td button").css("width", w_command).css("height", w_command);
-	  $("#control td button i").css("font-size", w_command*0.8);
+	  $("#control td button i").css("font-size", w_command*0.75);
 	  if (currentGrid) {
 		var v_rest=h-w_command*6;
-		width = v_rest / (bounds.row.max+2);
+		width = v_rest / (bounds.row.max);
 		$("#board td").width(width).height(width);
 		$("#oorobot").height(width);
 	  }
@@ -345,17 +345,19 @@
 		<tbody>
 		</tbody>
       </table>
+	  <div id="licenses"></div>
+      <input type="hidden" size="32" id="commands"/>
 	</div>
-	<div id="licenses"></div>
-    <input type="hidden" size="32" id="commands"/>
-    <table id="commandsDisplay">
-	  <tr>
-		<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-	  </tr>
-	  <tr>
-		<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-	  </tr>
-	</table>
+	<div id="controlDiv">
+      <table id="commandsDisplay">
+		<tr>
+		  <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		</tr>
+		<tr>
+		  <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		</tr>
+	  </table>
+	</div>
 	<div id="control">
 	  <table>
 		<tr><td></td><td><button command="U"><i class="fa fa-arrow-up" aria-hidden="true"></i></button></td><td></td><td><button command="G"><i class="fa fa-play-circle" aria-hidden="true"></i></button></td></tr>
