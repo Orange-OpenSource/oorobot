@@ -5,16 +5,15 @@
 #include <EEPROM.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#include <LiquidMenu.h>
 #include <AccelStepper.h>
 #include <SoftwareSerial.h>
 
 #define OOROBOT_VERSION "1.00"
 #define KEYS_PIN A0
-#define SCREEN_TIMEOUT 14
+#define SCREEN_TIMEOUT 25
 #define INVERT_DIRECTION 0 // On some step motors direction may be inverted
 
-#define HAVE_BLUETOOTH 1
+#define HAVE_BLUETOOTH 0
 #if HAVE_BLUETOOTH
 #define RxD 12
 #define TxD 13
@@ -194,8 +193,6 @@ int getPressedButton() {
 }
 
 
-LiquidMenu menu(lcd);
-
 struct Params {
   int stepCm;
   int turnSteps;
@@ -213,7 +210,7 @@ String buttonsMap[]= {
   "-",  "", "S","A","","+", "", "",  "",  "","",""
 };
 
-Params params = {140, 1280};
+Params params = {140, 1220};
 int previousMenu=CTRL_MENU;
 int selectedMenu=START_MENU;
 String commands="";
@@ -417,19 +414,22 @@ void updateScreen() {
       lcd.print(c.substring(16, 32));
     } else if (selectedMenu==SETTINGS_MENU){
       lcd.setBacklight(HIGH);
-      lcd.setCursor(0, 0);
+      lcd.clear();
       int cm=params.stepCm/10;
       int mm = params.stepCm-10*cm;
       lcd.print(" Distance:"+String(cm)+"."+String(mm)+"cm");
       lcd.setCursor(0, 1);
-      lcd.print(" 1 Tour:"+String(params.turnSteps)+"pas");
+      lcd.print(" 1/4Tour:"+String(params.turnSteps)+"pas");
+      //lcd.print(" Nb pas 90");
+      //lcd.print((char)223);
+      //lcd.print(":"+String(params.turnSteps)+"");
       lcd.setCursor(0, selectedLine);
       lcd.print("\6");
       #if HAVE_BLUETOOTH
         if (selectedLine == 0) {
           BTSerie.println("Distance:"+String(cm)+"."+String(mm)+"cm");
         } else {
-          BTSerie.println("1 Tour:"+String(params.turnSteps)+"pas");    
+          BTSerie.println("1/4Tour:"+String(params.turnSteps)+"pas");    
         }
         
       #endif
