@@ -120,9 +120,11 @@ Rien de bien compliqué :
 
 Vous trouverez le code dans le répertoire arduino de ce dépôt.
 
-## Le montage :
+## Le montage
 
-Brancher l'arduino Nano sur le "sensor shield" :
+![montage1](https://user-images.githubusercontent.com/16662847/32058336-03825878-ba6a-11e7-93ae-5853149978a3.jpg)
+
+Brancher l'arduino Nano sur le "sensor shield".
 
 Branchement du clavier sur le port A0 :
 - Brancher un fil entre la broche **VCC** du clavier sur la broche **V** de l'Arduino
@@ -155,7 +157,11 @@ Brancher les moteurs pas-à-pas sur les contrôleurs. Noter bien quel contrôleu
 
 Téléverser le programme sur l'Arduino.
 
-Faire un essai de bon fonctionnementt avant de fixer les composants sur le châssis. Ordre de montage des composants :
+Faire un essai de bon fonctionnementt avant de fixer les composants sur le châssis :
+
+![montage2](https://user-images.githubusercontent.com/16662847/32058345-08176f4a-ba6a-11e7-88c3-ec4461ac8067.jpg)
+
+Ordre de montage des composants sur le châssis :
 - Débrancher les moteurs pas-à-pas des contrôleurs
 - Fixer les roues en force sur les moteurs pas-à-pas
 - Faire passer les contrôleurs des moteurs dans les trous placés derrière le support de l'arduino
