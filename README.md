@@ -118,6 +118,54 @@ Rien de bien compliqué :
 - Il faut gérer le clavier analogique (valeurs non stables et mal réparties sur la plage analogique de l'Arduino)
 - Il faut configurer le nombre de "pas" à faire pour avancer d'1 cm et tourner à 90° (selon la taille et l'entraxe des roues)
 
+Vous trouverez le code dans le répertoire arduino de ce dépôt.
+
+## Le montage :
+
+Brancher l'arduino Nano sur le "sensor shield" :
+
+Branchement du clavier sur le port A0 :
+- Brancher un fil entre la broche **VCC** du clavier sur la broche **V** de l'Arduino
+- Brancher un fil entre la broche **GND** du clavier sur la broche **G** de l'Arduino
+- Brancher un fil entre la broche **Out** du clavier sur la broche **S** de l'Arduino
+
+Branchement de l'écran LCD sur une des ligne I2C: 
+- Brancher un fil entre la broche **GND** de l'écran sur la broche **GND** la ligne I2C choisie
+- Brancher un fil entre la broche **VCC** de l'écran sur la broche **5V** la ligne I2C choisie
+- Brancher un fil entre la broche **SDA** de l'écran sur la broche **SDA** la ligne I2C choisie
+- Brancher un fil entre la broche **SCL** de l'écran sur la broche **SCL* la ligne I2C choisie
+
+Branchement des cartes de contrôle des moteurs pas-à-pas :
+- Moteur roue droite sur les port 4, 5, 6 et 7 de l'arduino :
+  - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 4 de l'arduino
+  - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 5 de l'arduino
+  - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 6 de l'arduino
+  - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 7 de l'arduino
+  - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 7 de l'arduino
+  - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 7 de l'arduino
+- Moteur roue gauche sur les port 8, 9, 10 et 11 de l'arduino :
+  - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 8 de l'arduino
+  - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 9 de l'arduino
+  - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 10 de l'arduino
+  - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 11 de l'arduino
+  - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 10 de l'arduino
+  - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 11 de l'arduino
+
+Brancher les moteurs pas-à-pas sur les contrôleurs. Noter bien quel contrôleur est censé piloter quelle roue.
+
+Téléverser le programme sur l'Arduino.
+
+Faire un essai de bon fonctionnementt avant de fixer les composants sur le châssis. Ordre de montage des composants :
+- Débrancher les moteurs pas-à-pas des contrôleurs
+- Fixer les roues en force sur les moteurs pas-à-pas
+- Faire passer les contrôleurs des moteurs dans les trous placés derrière le support de l'arduino
+- Visser l'arduino sur son support
+- Visser les controleurs sur leurs support (garder la cohérence contrôleur moteur droit fixer à droite du robot)
+- Visser le clavier sur son support en passant les cables entre le châssis et le clavier
+- Plier les broches de l'écrans pour les mettre à la verticale. Visser ensuite l'écran sur le châssis
+- Entrer en force les moteurs pas-à-pas dans leur emplacement. Faire passer leurs fils jusqu'à leur contrôleur respectif. Visser ensuite les vis M3 pour maintenir les moteurs au châssis
+- Placer le bloc de pile devant l'arduino
+
 ## Les évolutions
 
 - On ajoute un "capot".
