@@ -205,9 +205,9 @@ int steps1 = 0; // keep track of the step count for motor 1
 int steps2 = 0; // keep track of the step count for motor 2
 int isMoving=false;
 
-String buttonsMap[]= {
-  "L", "G","s", "C","", "R","", "U", "P", "D","","",
-  "-",  "", "S","A","","+", "", "",  "",  "","",""
+char buttonsMap[]= {
+  'L', 'G','s', 'C', 0, 'R', 0, 'U', 'P', 'D', 0, 0,
+  '-',  0, 'S', 'A', 0, '+', 0,  0,   0,   0,  0, 0
 };
 
 Params params = {140, 1220};
@@ -255,7 +255,7 @@ void setup() {
 void loop() {
   long currentTime = millis();
   int buttonId=getPressedButton();
-  String button="";
+  char button=0;
   // Screen off after 4s
   if (currentTime>lastChangeDisplay+SCREEN_TIMEOUT*1000) {
     if (selectedMenu!=OFF_MENU) {
@@ -269,13 +269,12 @@ void loop() {
   } else {
     #if HAVE_BLUETOOTH
     if (BTSerie.available()) {
-        char c = BTSerie.read();
-        button = String(c);
+        button = BTSerie.read();
         //Serial.println(button);
     }
     #endif  
   }
-  if (button!="") {
+  if (button!=0) {
     actionButtonForScreen(button);
   }
   if (isMoving) {
@@ -300,32 +299,41 @@ void loop() {
   updateScreen();
 }
 
-void actionButtonForScreen(String button) {
+void actionButtonForScreen(char button) {
     if (selectedMenu==START_MENU) {
       selectedMenu=CTRL_MENU;
       changeDisplay=1;
     } else if (selectedMenu==CTRL_MENU) {
       changeDisplay=1;
-      if (button == "S") {
-        selectedMenu=SETTINGS_MENU;
-        changeDisplay=1;
-      } else if (button == "G") {
-        selectedMenu=RUNNING_MENU;
-        isMoving = true;
-        commandLaunched=0;
-        launchNextCommand();
-      } else if (button == "A") {          
-        commands="";
-      } else if (button == "C") {
-        commands.remove(commands.length()-1);
-      } else if (button != "" && button != "+" && button != "-" && button != "s") {
-        if (commands.length()<32) {
-          commands+=button;
-        } else {
-          Serial.println("too many commands");  
-        }
-      } else {
-        changeDisplay=0;
+
+      switch(button) {
+        case 'S':
+          selectedMenu=SETTINGS_MENU;
+          changeDisplay=1;
+          break;
+        case 'G':
+          selectedMenu=RUNNING_MENU;
+          isMoving = true;
+          commandLaunched=0;
+          launchNextCommand();
+          break;
+        case 'A':
+          commands="";
+          break;
+        case 'C':
+          commands.remove(commands.length()-1);
+          break;
+        default:
+          if (button != 0 && button != '+' && button != '-' && button != 's') {
+            if (commands.length()<32) {
+              commands+=button;
+            } else {
+              Serial.println("too many commands");
+            }
+          } else {
+            changeDisplay=0;
+          }
+          break;
       }
     } else if (selectedMenu==SETTINGS_MENU){
       actionButtonForSettingsScreen(button);
@@ -344,45 +352,53 @@ void actionButtonForScreen(String button) {
     }  
 }
 
-void actionButtonForSettingsScreen(String button) {
+void actionButtonForSettingsScreen(char button) {
   changeDisplay=1;
-  if (button=="U") {
-    selectedLine++;
-    selectedLine=selectedLine%2;
-  } else if (button=="D") {
-    selectedLine--;
-    selectedLine=selectedLine%2;
-  } else if (button=="R") {
-    if (selectedLine==0) {
-      params.stepCm++;
-    } else {
-      params.turnSteps++;
-    }
-  } else if (button=="+") {
-    if (selectedLine==0) {
-      params.stepCm+=10;
-    } else {
-      params.turnSteps+=10;
-    }
-  } else if (button=="L") {
-    if (selectedLine==0) {
-      params.stepCm--;
-    } else {
-      params.turnSteps--;
-    }
-  } else if (button=="-") {
-    if (selectedLine==0) {
-      params.stepCm-=10;
-    } else {
-      params.turnSteps-=10;
-    }
-  } else {
-    if (button=="s" || button=="G") {
+  switch(button) {
+    case 'U':
+      selectedLine++;
+      selectedLine=selectedLine%2;
+      break;
+    case 'D':
+      selectedLine--;
+      selectedLine=selectedLine%2;
+      break;
+    case 'R':
+      if (selectedLine==0) {
+        params.stepCm++;
+      } else {
+        params.turnSteps++;
+      }
+    case '+':
+      if (selectedLine==0) {
+        params.stepCm+=10;
+      } else {
+        params.turnSteps+=10;
+      }
+      break;
+    case 'L':
+      if (selectedLine==0) {
+        params.stepCm--;
+      } else {
+        params.turnSteps--;
+      }
+      break;
+    case '-':
+      if (selectedLine==0) {
+        params.stepCm-=10;
+      } else {
+        params.turnSteps-=10;
+      }
+      break;
+    case 's':
+    case 'G':
       saveParams();
-    } else if (button == "C") {
-      loadParams(); 
-    }
-    selectedMenu=CTRL_MENU;
+      selectedMenu=CTRL_MENU;
+      break;
+    case 'C':
+      loadParams();
+      selectedMenu=CTRL_MENU;
+      break;
   }
 }
 
