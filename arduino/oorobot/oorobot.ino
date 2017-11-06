@@ -214,7 +214,7 @@ char buttonsMap[]= {
 Params params = {140, 1220};
 int previousMenu=CTRL_MENU;
 int selectedMenu=START_MENU;
-char cmd[MAX_COMMANDS] = {};
+char cmd[MAX_COMMANDS + 1] = {};
 unsigned char cmd_l = 0;
 int changeDisplay=1;
 long lastChangeDisplay=0;
@@ -424,8 +424,9 @@ void updateScreen() {
     } else if (selectedMenu==CTRL_MENU) {
       lcd.setBacklight(HIGH);
       #if HAVE_BLUETOOTH
-        BTSerie.println(commands);
       #endif
+        cmd[cmd_l] = 0;
+        BTSerie.println(cmd);
       lcd.clear();
       lcd.setCursor(0, 0);
       for (char i = 0 ; i < cmd_l ; i++) {
