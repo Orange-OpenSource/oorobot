@@ -6,17 +6,23 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <AccelStepper.h>
-#include <SoftwareSerial.h>
 
 #define OOROBOT_VERSION "1.00"
 #define KEYS_PIN A0
 #define SCREEN_TIMEOUT 25
-#define INVERT_DIRECTION 0 // On some step motors direction may be inverted
 
-#define HAVE_BLUETOOTH 0
-#if HAVE_BLUETOOTH
-#define RxD 12
-#define TxD 13
+// On some step motors direction may be inverted
+// define this symbol to invert the motors direction
+/* #define INVERT_DIRECTION */
+#define MAX_COMMANDS 32
+
+// define this symbol to add bluetooth support
+/* #define HAVE_BLUETOOTH */
+
+#ifdef HAVE_BLUETOOTH
+# include <SoftwareSerial.h>
+# define RxD 12
+# define TxD 13
 SoftwareSerial BTSerie(RxD,TxD);
 #endif
 
@@ -205,19 +211,20 @@ int steps1 = 0; // keep track of the step count for motor 1
 int steps2 = 0; // keep track of the step count for motor 2
 int isMoving=false;
 
-String buttonsMap[]= {
-  "L", "G","s", "C","", "R","", "U", "P", "D","","",
-  "-",  "", "S","A","","+", "", "",  "",  "","",""
+char buttonsMap[]= {
+  'L', 'G','s', 'C', 0, 'R', 0, 'U', 'P', 'D', 0, 0,
+  '-',  0, 'S', 'A', 0, '+', 0,  0,   0,   0,  0, 0
 };
 
 Params params = {140, 1220};
 int previousMenu=CTRL_MENU;
 int selectedMenu=START_MENU;
-String commands="";
+char cmd[MAX_COMMANDS + 1] = {};
+unsigned char cmd_l = 0;
 int changeDisplay=1;
 long lastChangeDisplay=0;
 int selectedLine=0;
-int commandLaunched=0;
+unsigned char commandLaunched=0;
 
 void setup() {
   Serial.begin(9600);
@@ -245,17 +252,17 @@ void setup() {
   stepper2.setSpeed(stepperSpeed);
 
   // Bluetooth module init
-  #if HAVE_BLUETOOTH
+#ifdef HAVE_BLUETOOTH
   pinMode(RxD, INPUT);
   pinMode(TxD, OUTPUT);
   BTSerie.begin(9600);
-  #endif
+#endif
 }
 
 void loop() {
   long currentTime = millis();
   int buttonId=getPressedButton();
-  String button="";
+  char button=0;
   // Screen off after 4s
   if (currentTime>lastChangeDisplay+SCREEN_TIMEOUT*1000) {
     if (selectedMenu!=OFF_MENU) {
@@ -267,15 +274,14 @@ void loop() {
   if (buttonId>=0) {
     button = buttonsMap[buttonId];
   } else {
-    #if HAVE_BLUETOOTH
+#ifdef HAVE_BLUETOOTH
     if (BTSerie.available()) {
-        char c = BTSerie.read();
-        button = String(c);
+        button = BTSerie.read();
         //Serial.println(button);
     }
-    #endif  
+#endif
   }
-  if (button!="") {
+  if (button!=0) {
     actionButtonForScreen(button);
   }
   if (isMoving) {
@@ -288,9 +294,9 @@ void loop() {
         lcd.clear();
         lcd.setBacklight(HIGH);
         lcd.print("fin !");
-        #if HAVE_BLUETOOTH
+#ifdef HAVE_BLUETOOTH
         BTSerie.println("fin !");
-        #endif        
+#endif
         delay(stepDelay * 2);
         selectedMenu=CTRL_MENU;
         changeDisplay=1;
@@ -300,32 +306,43 @@ void loop() {
   updateScreen();
 }
 
-void actionButtonForScreen(String button) {
+void actionButtonForScreen(char button) {
     if (selectedMenu==START_MENU) {
       selectedMenu=CTRL_MENU;
       changeDisplay=1;
     } else if (selectedMenu==CTRL_MENU) {
       changeDisplay=1;
-      if (button == "S") {
-        selectedMenu=SETTINGS_MENU;
-        changeDisplay=1;
-      } else if (button == "G") {
-        selectedMenu=RUNNING_MENU;
-        isMoving = true;
-        commandLaunched=0;
-        launchNextCommand();
-      } else if (button == "A") {          
-        commands="";
-      } else if (button == "C") {
-        commands.remove(commands.length()-1);
-      } else if (button != "" && button != "+" && button != "-" && button != "s") {
-        if (commands.length()<32) {
-          commands+=button;
-        } else {
-          Serial.println("too many commands");  
-        }
-      } else {
-        changeDisplay=0;
+
+      switch(button) {
+        case 'S':
+          selectedMenu=SETTINGS_MENU;
+          changeDisplay=1;
+          break;
+        case 'G':
+          selectedMenu=RUNNING_MENU;
+          isMoving = true;
+          commandLaunched=0;
+          launchNextCommand();
+          break;
+        case 'A':
+          cmd_l = 0;
+          break;
+        case 'C':
+          if (cmd_l > 0) {
+            cmd_l--;
+          }
+          break;
+        default:
+          if (button != 0 && button != '+' && button != '-' && button != 's') {
+            if (cmd_l < MAX_COMMANDS) {
+              cmd[cmd_l++] = button;
+            } else {
+              Serial.println("too many commands");
+            }
+          } else {
+            changeDisplay=0;
+          }
+          break;
       }
     } else if (selectedMenu==SETTINGS_MENU){
       actionButtonForSettingsScreen(button);
@@ -344,45 +361,53 @@ void actionButtonForScreen(String button) {
     }  
 }
 
-void actionButtonForSettingsScreen(String button) {
+void actionButtonForSettingsScreen(char button) {
   changeDisplay=1;
-  if (button=="U") {
-    selectedLine++;
-    selectedLine=selectedLine%2;
-  } else if (button=="D") {
-    selectedLine--;
-    selectedLine=selectedLine%2;
-  } else if (button=="R") {
-    if (selectedLine==0) {
-      params.stepCm++;
-    } else {
-      params.turnSteps++;
-    }
-  } else if (button=="+") {
-    if (selectedLine==0) {
-      params.stepCm+=10;
-    } else {
-      params.turnSteps+=10;
-    }
-  } else if (button=="L") {
-    if (selectedLine==0) {
-      params.stepCm--;
-    } else {
-      params.turnSteps--;
-    }
-  } else if (button=="-") {
-    if (selectedLine==0) {
-      params.stepCm-=10;
-    } else {
-      params.turnSteps-=10;
-    }
-  } else {
-    if (button=="s" || button=="G") {
+  switch(button) {
+    case 'U':
+      selectedLine++;
+      selectedLine=selectedLine%2;
+      break;
+    case 'D':
+      selectedLine--;
+      selectedLine=selectedLine%2;
+      break;
+    case 'R':
+      if (selectedLine==0) {
+        params.stepCm++;
+      } else {
+        params.turnSteps++;
+      }
+    case '+':
+      if (selectedLine==0) {
+        params.stepCm+=10;
+      } else {
+        params.turnSteps+=10;
+      }
+      break;
+    case 'L':
+      if (selectedLine==0) {
+        params.stepCm--;
+      } else {
+        params.turnSteps--;
+      }
+      break;
+    case '-':
+      if (selectedLine==0) {
+        params.stepCm-=10;
+      } else {
+        params.turnSteps-=10;
+      }
+      break;
+    case 's':
+    case 'G':
       saveParams();
-    } else if (button == "C") {
-      loadParams(); 
-    }
-    selectedMenu=CTRL_MENU;
+      selectedMenu=CTRL_MENU;
+      break;
+    case 'C':
+      loadParams();
+      selectedMenu=CTRL_MENU;
+      break;
   }
 }
 
@@ -392,47 +417,58 @@ void updateScreen() {
       //lcd.setBacklight(HIGH);
       lcd.display();
       lcd.setCursor(0, 0);
-      lcd.print("  OoRoBoT "+String(OOROBOT_VERSION));
+      lcd.print("  OoRoBoT " OOROBOT_VERSION);
       lcd.setCursor(0, 1);
       lcd.print("Pret \7 demarrer!");
-      #if HAVE_BLUETOOTH
-        BTSerie.println("OoRoBoT "+String(OOROBOT_VERSION));
+#ifdef HAVE_BLUETOOTH
+        BTSerie.println("OoRoBoT " OOROBOT_VERSION);
         BTSerie.println("En attente de commandes");
-      #endif
+#endif
       previousMenu=CTRL_MENU;
       selectedMenu=CTRL_MENU;      
     } else if (selectedMenu==CTRL_MENU) {
       lcd.setBacklight(HIGH);
-      String c = displayCommands(commands);
-      #if HAVE_BLUETOOTH
-        BTSerie.println(commands);
-      #endif
+#ifdef HAVE_BLUETOOTH
+        cmd[cmd_l] = 0;
+        BTSerie.println(cmd);
+#endif
       lcd.clear();
       lcd.setCursor(0, 0);
-      lcd.print(c.substring(0, 16));
-      lcd.setCursor(0, 1);
-      lcd.print(c.substring(16, 32));
+      for (char i = 0 ; i < cmd_l ; i++) {
+        if (i == 16) {
+          lcd.setCursor(0, 1);
+        }
+        lcd.print(commandToDisplay(cmd[i]));
+      }
     } else if (selectedMenu==SETTINGS_MENU){
       lcd.setBacklight(HIGH);
       lcd.clear();
       int cm=params.stepCm/10;
       int mm = params.stepCm-10*cm;
-      lcd.print(" Distance:"+String(cm)+"."+String(mm)+"cm");
+      lcd.print(" Distance:");
+      lcd.print(cm);
+      lcd.print(".");
+      lcd.print(mm);
+      lcd.print("cm");
       lcd.setCursor(0, 1);
-      lcd.print(" 1/4Tour:"+String(params.turnSteps)+"pas");
-      //lcd.print(" Nb pas 90");
-      //lcd.print((char)223);
-      //lcd.print(":"+String(params.turnSteps)+"");
+      lcd.print(" 1/4Tour:");
+      lcd.print(params.turnSteps);
+      lcd.print("pas");
       lcd.setCursor(0, selectedLine);
       lcd.print("\6");
-      #if HAVE_BLUETOOTH
-        if (selectedLine == 0) {
-          BTSerie.println("Distance:"+String(cm)+"."+String(mm)+"cm");
-        } else {
-          BTSerie.println("1/4Tour:"+String(params.turnSteps)+"pas");    
-        }
-        
-      #endif
+#ifdef HAVE_BLUETOOTH
+      if (selectedLine == 0) {
+        BTSerie.print("Distance:");
+        BTSerie.print(cm);
+        BTSerie.print(".");
+        BTSerie.print(mm);
+        BTSerie.println("cm");
+      } else {
+        BTSerie.print("1/4Tour:");
+        BTSerie.print(params.turnSteps);
+        BTSerie.println("pas");
+      }
+#endif
 
     } else if (selectedMenu==CTRL_MENU){
       lcd.setBacklight(HIGH);
@@ -444,18 +480,30 @@ void updateScreen() {
   changeDisplay=0;
 }
 
-String displayCommands(String commandsS) {
-    String c = commandsS;
-    c.replace("U", "\1");
-    c.replace("D", "\2");
-    c.replace("L", "\3");
-    c.replace("R", "\4");
-    c.replace("P", "\5");
-    return c;
+char commandToDisplay(char c) {
+  switch(c) {
+    case 'U':
+      return 1;
+      break;
+    case 'D':
+      return 2;
+      break;
+    case 'L':
+      return 3;
+      break;
+    case 'R':
+      return 4;
+      break;
+    case 'P':
+      return 5;
+      break;
+    default:
+      return c;
+  }
 }
 
 boolean launchNextCommand() {
-  if (commandLaunched >= commands.length()) {
+  if (commandLaunched >= cmd_l) {
     return false;
   } else {
     disableMotors();
@@ -463,22 +511,21 @@ boolean launchNextCommand() {
     lcd.setBacklight(HIGH);
     lcd.print((commandLaunched + 1));
     lcd.print(" sur ");
-    lcd.print(commands.length());
+    lcd.print(cmd_l);
     lcd.print(" : ");
-    lcd.print(displayCommands(String(commands[commandLaunched])));
-    #if HAVE_BLUETOOTH
+    lcd.print(commandToDisplay(cmd[commandLaunched]));
+#ifdef HAVE_BLUETOOTH
     BTSerie.print("etape ");
     BTSerie.print((commandLaunched + 1));
     BTSerie.print(" sur ");
-    BTSerie.print(commands.length());
+    BTSerie.print(cmd_l);
     BTSerie.print(" : ");
-    BTSerie.println(String(commands[commandLaunched]));
-    #endif    
+    BTSerie.println(cmd[commandLaunched]);
+#endif
     delay(stepDelay);
     lcd.setBacklight(LOW);
     enableMotors();
-    char currentCommand=commands[commandLaunched];
-    switch (currentCommand) {
+    switch (cmd[commandLaunched]) {
       case 'U':
         Serial.println(F("stepForward"));
         stepForward();
@@ -531,9 +578,9 @@ void disableMotors() {
 void stepForward() {
   isMoving = true;
   int target = params.stepCm / 10 * lineStepsCM;
-  #if INVERT_DIRECTION
+#ifdef INVERT_DIRECTION
   target = target * -1;
-  #endif
+#endif
   stepper1.move(-target);
   stepper1.setSpeed(stepperSpeed);
   stepper2.move(target);
@@ -544,9 +591,9 @@ void stepForward() {
 void stepBackward() {
   isMoving = true;
   int target = params.stepCm / 10 * lineStepsCM;
-  #if INVERT_DIRECTION
+#ifdef INVERT_DIRECTION
   target = target * -1;
-  #endif
+#endif
   stepper1.move(target);
   stepper1.setSpeed(stepperSpeed);
   stepper2.move(-target);
