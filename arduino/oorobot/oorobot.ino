@@ -6,18 +6,23 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <AccelStepper.h>
-#include <SoftwareSerial.h>
 
 #define OOROBOT_VERSION "1.00"
 #define KEYS_PIN A0
 #define SCREEN_TIMEOUT 25
-#define INVERT_DIRECTION 0 // On some step motors direction may be inverted
+
+// On some step motors direction may be inverted
+// define this symbol to invert the motors direction
+/* #define INVERT_DIRECTION */
 #define MAX_COMMANDS 32
 
-#define HAVE_BLUETOOTH 0
-#if HAVE_BLUETOOTH
-#define RxD 12
-#define TxD 13
+// define this symbol to add bluetooth support
+/* #define HAVE_BLUETOOTH */
+
+#ifdef HAVE_BLUETOOTH
+# include <SoftwareSerial.h>
+# define RxD 12
+# define TxD 13
 SoftwareSerial BTSerie(RxD,TxD);
 #endif
 
@@ -247,11 +252,11 @@ void setup() {
   stepper2.setSpeed(stepperSpeed);
 
   // Bluetooth module init
-  #if HAVE_BLUETOOTH
+#ifdef HAVE_BLUETOOTH
   pinMode(RxD, INPUT);
   pinMode(TxD, OUTPUT);
   BTSerie.begin(9600);
-  #endif
+#endif
 }
 
 void loop() {
@@ -269,12 +274,12 @@ void loop() {
   if (buttonId>=0) {
     button = buttonsMap[buttonId];
   } else {
-    #if HAVE_BLUETOOTH
+#ifdef HAVE_BLUETOOTH
     if (BTSerie.available()) {
         button = BTSerie.read();
         //Serial.println(button);
     }
-    #endif  
+#endif
   }
   if (button!=0) {
     actionButtonForScreen(button);
@@ -289,9 +294,9 @@ void loop() {
         lcd.clear();
         lcd.setBacklight(HIGH);
         lcd.print("fin !");
-        #if HAVE_BLUETOOTH
+#ifdef HAVE_BLUETOOTH
         BTSerie.println("fin !");
-        #endif        
+#endif
         delay(stepDelay * 2);
         selectedMenu=CTRL_MENU;
         changeDisplay=1;
@@ -415,18 +420,18 @@ void updateScreen() {
       lcd.print("  OoRoBoT " OOROBOT_VERSION);
       lcd.setCursor(0, 1);
       lcd.print("Pret \7 demarrer!");
-      #if HAVE_BLUETOOTH
+#ifdef HAVE_BLUETOOTH
         BTSerie.println("OoRoBoT " OOROBOT_VERSION);
         BTSerie.println("En attente de commandes");
-      #endif
+#endif
       previousMenu=CTRL_MENU;
       selectedMenu=CTRL_MENU;      
     } else if (selectedMenu==CTRL_MENU) {
       lcd.setBacklight(HIGH);
-      #if HAVE_BLUETOOTH
-      #endif
+#ifdef HAVE_BLUETOOTH
         cmd[cmd_l] = 0;
         BTSerie.println(cmd);
+#endif
       lcd.clear();
       lcd.setCursor(0, 0);
       for (char i = 0 ; i < cmd_l ; i++) {
@@ -451,20 +456,19 @@ void updateScreen() {
       lcd.print("pas");
       lcd.setCursor(0, selectedLine);
       lcd.print("\6");
-      #if HAVE_BLUETOOTH
-        if (selectedLine == 0) {
-          BTSerie.print("Distance:");
-          BTSerie.print(cm);
-          BTSerie.print(".");
-          BTSerie.print(mm);
-          BTSerie.println("cm");
-        } else {
-          BTSerie.print("1/4Tour:");
-          BTSerie.print(params.turnSteps);
-          BTSerie.println("pas");
-        }
-        
-      #endif
+#ifdef HAVE_BLUETOOTH
+      if (selectedLine == 0) {
+        BTSerie.print("Distance:");
+        BTSerie.print(cm);
+        BTSerie.print(".");
+        BTSerie.print(mm);
+        BTSerie.println("cm");
+      } else {
+        BTSerie.print("1/4Tour:");
+        BTSerie.print(params.turnSteps);
+        BTSerie.println("pas");
+      }
+#endif
 
     } else if (selectedMenu==CTRL_MENU){
       lcd.setBacklight(HIGH);
@@ -510,14 +514,14 @@ boolean launchNextCommand() {
     lcd.print(cmd_l);
     lcd.print(" : ");
     lcd.print(commandToDisplay(cmd[commandLaunched]));
-    #if HAVE_BLUETOOTH
+#ifdef HAVE_BLUETOOTH
     BTSerie.print("etape ");
     BTSerie.print((commandLaunched + 1));
     BTSerie.print(" sur ");
     BTSerie.print(cmd_l);
     BTSerie.print(" : ");
     BTSerie.println(cmd[commandLaunched]);
-    #endif    
+#endif
     delay(stepDelay);
     lcd.setBacklight(LOW);
     enableMotors();
@@ -574,9 +578,9 @@ void disableMotors() {
 void stepForward() {
   isMoving = true;
   int target = params.stepCm / 10 * lineStepsCM;
-  #if INVERT_DIRECTION
+#ifdef INVERT_DIRECTION
   target = target * -1;
-  #endif
+#endif
   stepper1.move(-target);
   stepper1.setSpeed(stepperSpeed);
   stepper2.move(target);
@@ -587,9 +591,9 @@ void stepForward() {
 void stepBackward() {
   isMoving = true;
   int target = params.stepCm / 10 * lineStepsCM;
-  #if INVERT_DIRECTION
+#ifdef INVERT_DIRECTION
   target = target * -1;
-  #endif
+#endif
   stepper1.move(target);
   stepper1.setSpeed(stepperSpeed);
   stepper2.move(-target);
