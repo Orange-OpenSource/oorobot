@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="2979.9211"
@@ -25,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.24748737"
-     inkscape:cx="194.28776"
-     inkscape:cy="1809.2002"
+     inkscape:zoom="0.35"
+     inkscape:cx="384.18233"
+     inkscape:cy="1585.0213"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="mm"
@@ -45,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -508,26 +509,26 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:51.08012772px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="22.121067"
-       y="-968.28094"
+       x="124.52625"
+       y="-965.4043"
        id="text3487"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3489"
-         x="22.121067"
-         y="-968.28094"
+         x="124.52625"
+         y="-965.4043"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:79.81269836px;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue'">OoRoBoT - Plateau niveau 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="1525.0619"
-       y="-968.28094"
+       y="-965.40491"
        id="text10323"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan10325"
          x="1525.0619"
-         y="-968.28094">Images sous &quot;Flaticon Basic License&quot;,  auteurs : Freepik et Pixel Buddha </tspan></text>
+         y="-965.40491">Images sous &quot;Flaticon Basic License&quot;,  auteurs : Freepik et Pixel Buddha </tspan></text>
     <g
        id="g11657"
        transform="translate(0,21.779326)">
@@ -712,5 +713,14 @@
          id="rect3003-81-4-61"
          style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:5.31496048;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
+    <image
+       y="-1041.7327"
+       x="10.629921"
+       id="image7454"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAABHNCSVQICAgIfAhkiAAAA8VJREFU eJzt3VFu2zAQQEG58P2vnN7gKQDDLOXM/AaRXdcPBLiR+Lqu6+v6UF9f/U97vV5Lv3/n7vrTPv3f 9xP+Tb8BOJlAIAgEgkAgCASCQCC864er24C77d5mXL3+6jbz6vXv7N7m/oTvjxUEgkAgCASCQCAI BIJAIAgEQs5B7uyeQ+zeR989R5j+c/Ddc45VT/j+WEEgCASCQCAIBIJAIAgEgkAgLM1BaLvnDNNz lr/ACgJBIBAEAkEgEAQCQSAQBALhT89Bpp+rdfpzs7CCQBIIBIFAEAgEgUAQCASBQFiag3z6Pvv0 Mcm75yTTz816wvfHCgJBIBAEAkEgEAQCQSAQBAIh5yCeu9R23+/xhDlB+YTvjxUEgkAgCASCQCAI BIJAIAgEwvvpe+0nO/0c8OnffwIrCASBQBAIBIFAEAgEgUAQCITXdV3bNrM//blSq69/Z/p8kWnT 35/rsoJAEggEgUAQCASBQBAIBIFA2Ho+yOlzhqd7+pzkCc8Ns4JAEAgEgUAQCASBQBAIBIFAeH1t 3Eyevp9jek5iTnH2nOw7r28FgSAQCAKBIBAIAoEgEAgCgTA6B/n0ffbdds+ZdnvC+7eCQBAIBIFA EAgEgUAQCASBQMjnYk3fj3Bn+n6TO0/Y5y/mSFYQSAKBIBAIAoEgEAgCgSAQCEvng9yZfq7V3fWn 9/lPnzM9/f07Jx02EwgEgUAQCASBQBAIBIFAeK/sFU/vk5/+3K3d9ztMf/5Pv5/G/SCwSCAQBAJB IBAEAkEgEAQC4ehz0u+cPuc4YR9/8vWnn3v1E6wgEAQCQSAQBAJBIBAEAkEgEF7XdY1tVj99n3/1 +neePkdZtfvz+871rSAQBAJBIBAEAkEgEAQCQSAQ3if/zf7u93b6HODO9HO3Vu1+bpbnYsFmAoEg EAgCgSAQCAKBIBAIS+eDnO5uH3z6uVir72/a9Dn3v/H5WEEgCASCQCAIBIJAIAgEgkAgvOuHT9+H n/79T5gDTL7+CZ+fFQSCQCAIBIJAIAgEgkAgCARCng8yfb7E6ed0T99LM/3/M+03zl+xgkAQCASB QBAIBIFAEAgEgUDI+0FYc/ocZ/r9Td/P434QWCQQCAKBIBAIAoEgEAgCgfCn5yDTc4g7n34/x53d cxb3g8AigUAQCASBQBAIBIFAEAiEpTnI9Jxgt93npN/Zff3p39/tJ76fVhAIAoEgEAgCgSAQCAKB IBAIOQc5fZ97t9V99OnnRk2fH3LCOecr178uKwgkgUAQCASBQBAIBIFAEAgEgUD4D4aPYbY+yaeO AAAAAElFTkSuQmCC "
+       style="image-rendering:optimizeSpeed"
+       preserveAspectRatio="none"
+       height="95.669289"
+       width="95.669289" />
   </g>
 </svg>

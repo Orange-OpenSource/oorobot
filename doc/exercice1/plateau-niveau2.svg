@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="84.099998cm"
@@ -25,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.25"
-     inkscape:cx="1815.5332"
-     inkscape:cy="1198.146"
+     inkscape:zoom="0.5"
+     inkscape:cx="285.16848"
+     inkscape:cy="1649.8536"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="cm"
@@ -44,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -946,14 +947,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:51.08012772px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="22.121067"
-       y="-968.28094"
+       x="124.52617"
+       y="-968.68005"
        id="text3487"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3489"
-         x="22.121067"
-         y="-968.28094"
+         x="124.52617"
+         y="-968.68005"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:79.81269836px;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue'">OoRoBoT - Plateau niveau 2</tspan></text>
     <g
        id="g5850"
@@ -1140,13 +1141,13 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="1198.7916"
-       y="-968.28094"
+       y="-968.68005"
        id="text10323"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan10325"
          x="1198.7916"
-         y="-968.28094">Images sous &quot;Flaticon Basic License&quot;,  auteurs : Freepik, Vectors Market et Pixel Buddha </tspan></text>
+         y="-968.68005">Images sous &quot;Flaticon Basic License&quot;,  auteurs : Freepik, Vectors Market et Pixel Buddha </tspan></text>
     <g
        id="g10142"
        transform="matrix(1.312336,0,0,1.312336,2037.4017,113.38541)">
@@ -1420,5 +1421,33 @@
          id="rect3003-81-4-61"
          style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:5.31496048;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
+    <image
+       y="-1041.7327"
+       x="10.629921"
+       id="image8782"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAABHNCSVQICAgIfAhkiAAAA9pJREFU
+eJzt3VFu2zAQQEG58P2vnN7gMSirLOXM/BZ2bCUPBLil9Lqu6+v6UF9f/dVer9fW61dW778y/flX
+dr/fE/yZ/gBwMoFAEAgEgUAQCASBQHjXP969Tbhreht19/133b0Nvfv+n/D3YwWBIBAIAoEgEAgC
+gSAQCAKBkHOQlbv/u/P0Pvrdc5LpOcv09X3C348VBIJAIAgEgkAgCASCQCAIBMLWHOS3m54jrEzP
+WT6BFQSCQCAIBIJAIAgEgkAgCASCOUjYvW/U3a9fufv9fwMrCASBQBAIBIFAEAgEgUAQCIStOcin
+nxc4fc6xa/r3N/3zv8MKAkEgEAQCQSAQBAJBIBAEAiHnINP79He7+znhu6bnMHc/h/0JrCAQBAJB
+IBAEAkEgEAQCQSAQ3tN7/Z/s9PMiT3/O+k+wgkAQCASBQBAIBIFAEAgEgUB4Xdf1z5vZpz/f4vTz
+DE//fKefp1n5zvWzgkAQCASBQBAIBIFAEAgEgUB4fZ2+Wb1hek6w8vT7Wk2fZ9n1netjBYEgEAgC
+gSAQCAKBIBAIAoGQ50HuHpE8fZ98+rzLrtPPo6z8xOe3gkAQCASBQBAIBIFAEAgEgUC49TzI3XOC
+u52+zz/9+Vae/vmvywoCSSAQBAJBIBAEAkEgEAQCYes8yPTzIabv2zT9/ivT12flCXMuKwgEgUAQ
+CASBQBAIBIFAEAiEreek75qek+ya/vynz6lWTn++yXVZQSAJBIJAIAgEgkAgCASCQCC8d148vU89
+vY9+9+ufPqeYvn7/4/2tIBAEAkEgEAQCQSAQBAJBIBByDjJ936SV6TnHruk5x8ru57t7jvUTcxor
+CASBQBAIBIFAEAgEgUAQCISt8yAru/vQ0+cppl+/Mn1e43TuiwU3EwgEgUAQCASBQBAIBIFAeO/s
+1Z8+J9h1+pzh7us3PcdZ+YnrbwWBIBAIAoEgEAgCgSAQCAKB8P7kMwGrffLpOcz0z981/XyW3d+v
++2LBJoFAEAgEgUAQCASBQBAIhK3ng0w7fYYz/XyLp58XOeH5L1YQCAKBIBAIAoEgEAgCgSAQCFvP
+B3n6fZ9On0PsXt/p1++anvNclxUEkkAgCASCQCAIBIJAIAgEwq3PSX+60+c803OKlU/4flYQCAKB
+IBAIAoEgEAgCgSAQCL96DnL6eY/T70t293PKp59Df11WEEgCgSAQCAKBIBAIAoEgEAhbc5DT9+lX
+ps8bTF+/6Z//BFYQCAKBIBAIAoEgEAgCgSAQCDkHmZ4TnG76vMjK9HmK08/LfOf7W0EgCASCQCAI
+BIJAIAgEgkAgCATCXxpBdo8E+oYuAAAAAElFTkSuQmCC
+"
+       style="image-rendering:optimizeSpeed"
+       preserveAspectRatio="none"
+       height="95.669289"
+       width="95.669289" />
   </g>
 </svg>
