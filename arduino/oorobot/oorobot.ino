@@ -1,6 +1,6 @@
-/*    
- * OoRoBoT code
- * 
+/*
+   OoRoBoT code
+
 */
 #include <EEPROM.h>
 #include <Wire.h>
@@ -17,13 +17,13 @@
 #define MAX_COMMANDS 32
 
 // define this symbol to add bluetooth support
-/* #define HAVE_BLUETOOTH */
+#define HAVE_BLUETOOTH
 
 #ifdef HAVE_BLUETOOTH
 # include <SoftwareSerial.h>
 # define RxD 12
 # define TxD 13
-SoftwareSerial BTSerie(RxD,TxD);
+SoftwareSerial BTSerie(RxD, TxD);
 #endif
 
 // motor pins
@@ -142,38 +142,38 @@ int LONG_CLICK_DELAY = 500;
 int DEBOUNCING_DELAY = 300;
 int lastButtonId = -1;
 unsigned long lastClick = 0;
-unsigned long lastRawPressed=0;
+unsigned long lastRawPressed = 0;
 int getPressedButton() {
   int raw = analogRead(KEYS_PIN);
   int b = -1;
-  if (raw>=472) {
-    lastRawPressed=millis();
-    if (raw>=981) {
-      b=1;      
-    } else if (raw>=894 && raw<=966) {
-      b=2;
-    } else if (raw>=823 && raw<877) {
-      b=3;
-    } else if (raw>=763 && raw<=817) {
-      b=4;
-    } else if (raw>=707 && raw<=753) {
-      b=5;
-    } else if (raw>=662 && raw<=698) {
-      b=6;
-    } else if (raw>=622 && raw<=698) {
-      b=7;
-    } else if (raw>=586 && raw<=614) {
-      b=8;
-    } else if (raw>=556 && raw<=584) {
-      b=9;
-    } else if (raw>=526 && raw<=554) {
-      b=10;
-    } else if (raw>=501 && raw<=519) {
-      b=0;
-      } else if (raw>=472 && raw<=508) {
-      b=11;
+  if (raw >= 472) {
+    lastRawPressed = millis();
+    if (raw >= 981) {
+      b = 1;
+    } else if (raw >= 894 && raw <= 966) {
+      b = 2;
+    } else if (raw >= 823 && raw < 877) {
+      b = 3;
+    } else if (raw >= 763 && raw <= 817) {
+      b = 4;
+    } else if (raw >= 707 && raw <= 753) {
+      b = 5;
+    } else if (raw >= 662 && raw <= 698) {
+      b = 6;
+    } else if (raw >= 622 && raw <= 698) {
+      b = 7;
+    } else if (raw >= 586 && raw <= 614) {
+      b = 8;
+    } else if (raw >= 556 && raw <= 584) {
+      b = 9;
+    } else if (raw >= 526 && raw <= 554) {
+      b = 10;
+    } else if (raw >= 501 && raw <= 519) {
+      b = 0;
+    } else if (raw >= 472 && raw <= 508) {
+      b = 11;
     }
-    unsigned long currentClick=millis();
+    unsigned long currentClick = millis();
     if (lastButtonId != b) {
       if (currentClick > lastClick + DEBOUNCING_DELAY) {
         lastClick = currentClick;
@@ -184,15 +184,15 @@ int getPressedButton() {
     } else {
       if (currentClick > lastClick + LONG_CLICK_DELAY) {
         lastButtonId = b;
-        b = b+12;
+        b = b + 12;
         lastClick = currentClick;
       } else {
         b = -1;
       }
     }
   } else {
-    if (millis()-lastRawPressed>100) {
-      lastButtonId=-1;
+    if (millis() - lastRawPressed > 100) {
+      lastButtonId = -1;
     }
   }
   return b;
@@ -209,27 +209,27 @@ int stepDelay = 800;
 int stepperSpeed = 900; //speed of the stepper (steps per second)
 int steps1 = 0; // keep track of the step count for motor 1
 int steps2 = 0; // keep track of the step count for motor 2
-int isMoving=false;
+int isMoving = false;
 
-char buttonsMap[]= {
-  'L', 'G','s', 'C', 0, 'R', 0, 'U', 'P', 'D', 0, 0,
+char buttonsMap[] = {
+  'L', 'G', 's', 'C', 0, 'R', 0, 'U', 'P', 'D', 0, 0,
   '-',  0, 'S', 'A', 0, '+', 0,  0,   0,   0,  0, 0
 };
 
 Params params = {140, 1220};
-int previousMenu=CTRL_MENU;
-int selectedMenu=START_MENU;
+int previousMenu = CTRL_MENU;
+int selectedMenu = START_MENU;
 char cmd[MAX_COMMANDS + 1] = {};
 unsigned char cmd_l = 0;
-int changeDisplay=1;
-long lastChangeDisplay=0;
-int selectedLine=0;
-unsigned char commandLaunched=0;
+int changeDisplay = 1;
+long lastChangeDisplay = 0;
+int selectedLine = 0;
+unsigned char commandLaunched = 0;
 
 void setup() {
   Serial.begin(9600);
   loadParams();
-  
+
   pinMode(KEYS_PIN, INPUT);
 
   // This is the I2C LCD object initialization.
@@ -245,43 +245,43 @@ void setup() {
 
   // stepper motors init
   stepper1.setMaxSpeed(2000.0);
-  stepper1.move(1);  
+  stepper1.move(1);
   stepper1.setSpeed(stepperSpeed);
   stepper2.setMaxSpeed(2000.0);
-  stepper2.move(-1); 
+  stepper2.move(-1);
   stepper2.setSpeed(stepperSpeed);
 
   // Bluetooth module init
 #ifdef HAVE_BLUETOOTH
   pinMode(RxD, INPUT);
   pinMode(TxD, OUTPUT);
-  BTSerie.begin(9600);
+  BTSerie.begin(38400);
 #endif
 }
 
 void loop() {
   long currentTime = millis();
-  int buttonId=getPressedButton();
-  char button=0;
+  int buttonId = getPressedButton();
+  char button = 0;
   // Screen off after 4s
-  if (currentTime>lastChangeDisplay+SCREEN_TIMEOUT*1000) {
-    if (selectedMenu!=OFF_MENU) {
-      previousMenu=selectedMenu;
-      selectedMenu=OFF_MENU;
-      changeDisplay=1;
+  if (currentTime > lastChangeDisplay + SCREEN_TIMEOUT * 1000) {
+    if (selectedMenu != OFF_MENU) {
+      previousMenu = selectedMenu;
+      selectedMenu = OFF_MENU;
+      changeDisplay = 1;
     }
-  }  
-  if (buttonId>=0) {
+  }
+  if (buttonId >= 0) {
     button = buttonsMap[buttonId];
   } else {
 #ifdef HAVE_BLUETOOTH
     if (BTSerie.available()) {
-        button = BTSerie.read();
-        //Serial.println(button);
+      button = BTSerie.read();
+      //Serial.println(button);
     }
 #endif
   }
-  if (button!=0) {
+  if (button != 0) {
     actionButtonForScreen(button);
   }
   if (isMoving) {
@@ -298,8 +298,8 @@ void loop() {
         BTSerie.println("fin !");
 #endif
         delay(stepDelay * 2);
-        selectedMenu=CTRL_MENU;
-        changeDisplay=1;
+        selectedMenu = CTRL_MENU;
+        changeDisplay = 1;
       }
     }
   }
@@ -307,113 +307,125 @@ void loop() {
 }
 
 void actionButtonForScreen(char button) {
-    if (selectedMenu==START_MENU) {
-      selectedMenu=CTRL_MENU;
-      changeDisplay=1;
-    } else if (selectedMenu==CTRL_MENU) {
-      changeDisplay=1;
+  if (selectedMenu == START_MENU) {
+    selectedMenu = CTRL_MENU;
+    changeDisplay = 1;
+  } else if (selectedMenu == CTRL_MENU) {
+    changeDisplay = 1;
 
-      switch(button) {
-        case 'S':
-          selectedMenu=SETTINGS_MENU;
-          changeDisplay=1;
-          break;
-        case 'G':
-          selectedMenu=RUNNING_MENU;
-          isMoving = true;
-          commandLaunched=0;
-          launchNextCommand();
-          break;
-        case 'A':
-          cmd_l = 0;
-          break;
-        case 'C':
-          if (cmd_l > 0) {
-            cmd_l--;
-          }
-          break;
-        default:
-          if (button != 0 && button != '+' && button != '-' && button != 's') {
-            if (cmd_l < MAX_COMMANDS) {
-              cmd[cmd_l++] = button;
-            } else {
-              Serial.println("too many commands");
-            }
-          } else {
-            changeDisplay=0;
-          }
-          break;
-      }
-    } else if (selectedMenu==SETTINGS_MENU){
-      actionButtonForSettingsScreen(button);
-    } else if (selectedMenu==RUNNING_MENU){
-      disableMotors();
-      isMoving=false;
-      lcd.clear();
-      lcd.setBacklight(HIGH);
-      lcd.print("Arret!");
-      delay(stepDelay * 2);
-      selectedMenu=CTRL_MENU;
-      changeDisplay=1;
-    } else if (selectedMenu==OFF_MENU){
-      selectedMenu=previousMenu;
-      changeDisplay=1;
-    }  
+    switch (button) {
+      case 'S':
+        selectedMenu = SETTINGS_MENU;
+        changeDisplay = 1;
+        break;
+      case 'G':
+        selectedMenu = RUNNING_MENU;
+        isMoving = true;
+        commandLaunched = 0;
+        launchNextCommand();
+        break;
+      case 'A':
+        cmd_l = 0;
+        break;
+      case 'C':
+        if (cmd_l > 0) {
+          cmd_l--;
+        }
+        break;
+      case 'U' :
+      case 'D' :
+      case 'L' :
+      case 'R' :
+      case 'P' :
+        if (cmd_l < MAX_COMMANDS) {
+          cmd[cmd_l++] = button;
+        } else {
+          Serial.println("too many commands");
+        }
+        break;
+      case 0 :
+      case '+' :
+      case '-' :
+      case 's' :
+        changeDisplay = 0;
+        break;
+      default:
+        Serial.println("Unknown Command");
+        #ifdef HAVE_BLUETOOTH
+        BTSerie.println("Unknown Command");
+        #endif
+        break;
+    }
+  } else if (selectedMenu == SETTINGS_MENU) {
+    actionButtonForSettingsScreen(button);
+  } else if (selectedMenu == RUNNING_MENU) {
+    disableMotors();
+    isMoving = false;
+    lcd.clear();
+    lcd.setBacklight(HIGH);
+    lcd.print("Arret!");
+    delay(stepDelay * 2);
+    selectedMenu = CTRL_MENU;
+    changeDisplay = 1;
+  } else if (selectedMenu == OFF_MENU) {
+    selectedMenu = previousMenu;
+    changeDisplay = 1;
+  }
 }
 
 void actionButtonForSettingsScreen(char button) {
-  changeDisplay=1;
-  switch(button) {
+  changeDisplay = 1;
+  switch (button) {
     case 'U':
       selectedLine++;
-      selectedLine=selectedLine%2;
+      selectedLine = selectedLine % 2;
       break;
     case 'D':
       selectedLine--;
-      selectedLine=selectedLine%2;
+      selectedLine = selectedLine % 2;
       break;
     case 'R':
-      if (selectedLine==0) {
+      if (selectedLine == 0) {
         params.stepCm++;
       } else {
         params.turnSteps++;
       }
     case '+':
-      if (selectedLine==0) {
-        params.stepCm+=10;
+      if (selectedLine == 0) {
+        params.stepCm += 10;
       } else {
-        params.turnSteps+=10;
+        params.turnSteps += 10;
       }
       break;
     case 'L':
-      if (selectedLine==0) {
+      if (selectedLine == 0) {
         params.stepCm--;
       } else {
         params.turnSteps--;
       }
       break;
     case '-':
-      if (selectedLine==0) {
-        params.stepCm-=10;
+      if (selectedLine == 0) {
+        params.stepCm -= 10;
       } else {
-        params.turnSteps-=10;
+        params.turnSteps -= 10;
       }
       break;
     case 's':
     case 'G':
       saveParams();
-      selectedMenu=CTRL_MENU;
+      selectedMenu = CTRL_MENU;
       break;
     case 'C':
       loadParams();
-      selectedMenu=CTRL_MENU;
+      selectedMenu = CTRL_MENU;
       break;
   }
 }
 
 void updateScreen() {
   if (changeDisplay) {
-    if (selectedMenu==START_MENU) {
+    if (selectedMenu == START_MENU) {
       //lcd.setBacklight(HIGH);
       lcd.display();
       lcd.setCursor(0, 0);
@@ -421,16 +433,16 @@ void updateScreen() {
       lcd.setCursor(0, 1);
       lcd.print("Pret \7 demarrer!");
 #ifdef HAVE_BLUETOOTH
-        BTSerie.println("OoRoBoT " OOROBOT_VERSION);
-        BTSerie.println("En attente de commandes");
+      BTSerie.println("OoRoBoT " OOROBOT_VERSION);
+      BTSerie.println("En attente de commandes");
 #endif
-      previousMenu=CTRL_MENU;
-      selectedMenu=CTRL_MENU;      
-    } else if (selectedMenu==CTRL_MENU) {
+      previousMenu = CTRL_MENU;
+      selectedMenu = CTRL_MENU;
+    } else if (selectedMenu == CTRL_MENU) {
       lcd.setBacklight(HIGH);
 #ifdef HAVE_BLUETOOTH
-        cmd[cmd_l] = 0;
-        BTSerie.println(cmd);
+      cmd[cmd_l] = 0;
+      BTSerie.println(cmd);
 #endif
       lcd.clear();
       lcd.setCursor(0, 0);
@@ -440,11 +452,11 @@ void updateScreen() {
         }
         lcd.print(commandToDisplay(cmd[i]));
       }
-    } else if (selectedMenu==SETTINGS_MENU){
+    } else if (selectedMenu == SETTINGS_MENU) {
       lcd.setBacklight(HIGH);
       lcd.clear();
-      int cm=params.stepCm/10;
-      int mm = params.stepCm-10*cm;
+      int cm = params.stepCm / 10;
+      int mm = params.stepCm - 10 * cm;
       lcd.print(" Distance:");
       lcd.print(cm);
       lcd.print(".");
@@ -470,18 +482,18 @@ void updateScreen() {
       }
 #endif
 
-    } else if (selectedMenu==CTRL_MENU){
+    } else if (selectedMenu == CTRL_MENU) {
       lcd.setBacklight(HIGH);
-    } else if (selectedMenu==OFF_MENU){
+    } else if (selectedMenu == OFF_MENU) {
       lcd.setBacklight(LOW);
     }
-    lastChangeDisplay=millis();
+    lastChangeDisplay = millis();
   }
-  changeDisplay=0;
+  changeDisplay = 0;
 }
 
 char commandToDisplay(char c) {
-  switch(c) {
+  switch (c) {
     case 'U':
       return 1;
       break;
@@ -544,7 +556,7 @@ boolean launchNextCommand() {
         break;
       case 'P':
         Serial.println(F("pause"));
-        delay(params.turnSteps*2);
+        delay(params.turnSteps * 2);
         break;
     }
     commandLaunched++;
@@ -584,7 +596,7 @@ void stepForward() {
   stepper1.move(-target);
   stepper1.setSpeed(stepperSpeed);
   stepper2.move(target);
-  stepper2.setSpeed(stepperSpeed);  
+  stepper2.setSpeed(stepperSpeed);
 
 }
 
@@ -617,17 +629,17 @@ void turnRight() {
 }
 
 void saveParams() {
-  EEPROM.put(0, params);  
+  EEPROM.put(0, params);
 }
 
 void loadParams() {
   Params savedParams;
   EEPROM.get(0, savedParams);
-  if (savedParams.stepCm>0 && savedParams.stepCm<500) {
-    params.stepCm=savedParams.stepCm;
+  if (savedParams.stepCm > 0 && savedParams.stepCm < 500) {
+    params.stepCm = savedParams.stepCm;
   }
-  if (savedParams.turnSteps>0 && savedParams.turnSteps<5000) {
-    params.turnSteps=savedParams.turnSteps;
+  if (savedParams.turnSteps > 0 && savedParams.turnSteps < 5000) {
+    params.turnSteps = savedParams.turnSteps;
   }
 }
 
