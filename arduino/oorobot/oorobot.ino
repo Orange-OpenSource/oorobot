@@ -224,7 +224,7 @@ unsigned char cmd_l = 0;
 int changeDisplay = 1;
 long lastChangeDisplay = 0;
 int selectedLine = 0;
-unsigned char commandLaunched = 0;
+short commandLaunched = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -306,55 +306,75 @@ void loop() {
   updateScreen();
 }
 
+short consecutive_numbers = 0;
+#define MAX_CONSECUTIVE_NUMBERS 3
+
 void actionButtonForScreen(char button) {
   if (selectedMenu == START_MENU) {
     selectedMenu = CTRL_MENU;
     changeDisplay = 1;
   } else if (selectedMenu == CTRL_MENU) {
     changeDisplay = 1;
-
-    switch (button) {
-      case 'S':
-        selectedMenu = SETTINGS_MENU;
-        changeDisplay = 1;
-        break;
-      case 'G':
-        selectedMenu = RUNNING_MENU;
-        isMoving = true;
-        commandLaunched = 0;
-        launchNextCommand();
-        break;
-      case 'A':
-        cmd_l = 0;
-        break;
-      case 'C':
-        if (cmd_l > 0) {
-          cmd_l--;
-        }
-        break;
-      case 'U' :
-      case 'D' :
-      case 'L' :
-      case 'R' :
-      case 'P' :
-        if (cmd_l < MAX_COMMANDS) {
-          cmd[cmd_l++] = button;
-        } else {
-          Serial.println("too many commands");
-        }
-        break;
-      case 0 :
-      case '+' :
-      case '-' :
-      case 's' :
-        changeDisplay = 0;
-        break;
-      default:
-        Serial.println("Unknown Command");
-        #ifdef HAVE_BLUETOOTH
-        BTSerie.println("Unknown Command");
-        #endif
-        break;
+    if ( button > 48 - 7 && button < 58) // it's a number
+    {
+      consecutive_numbers++;
+      if (consecutive_numbers > MAX_CONSECUTIVE_NUMBERS)
+      {
+        Serial.println("number too hight");
+        return;
+      }
+      else
+      {
+        cmd[cmd_l++] = button;
+        return;
+      }
+    }
+    else
+    {
+      consecutive_numbers = 0;
+      switch (button) {
+        case 'S':
+          selectedMenu = SETTINGS_MENU;
+          changeDisplay = 1;
+          break;
+        case 'G':
+          selectedMenu = RUNNING_MENU;
+          isMoving = true;
+          commandLaunched = 0;
+          launchNextCommand();
+          break;
+        case 'A':
+          cmd_l = 0;
+          break;
+        case 'C':
+          if (cmd_l > 0) {
+            cmd_l--;
+          }
+          break;
+        case 'U' :
+        case 'D' :
+        case 'L' :
+        case 'R' :
+        case 'P' :
+          if (cmd_l < MAX_COMMANDS) {
+            cmd[cmd_l++] = button;
+          } else {
+            Serial.println("too many commands");
+          }
+          break;
+        case 0 :
+        case '+' :
+        case '-' :
+        case 's' :
+          changeDisplay = 0;
+          break;
+        default:
+          Serial.println("Unknown Command");
+#ifdef HAVE_BLUETOOTH
+          BTSerie.println("Unknown Command");
+#endif
+          break;
+      }
     }
   } else if (selectedMenu == SETTINGS_MENU) {
     actionButtonForSettingsScreen(button);
@@ -537,7 +557,16 @@ boolean launchNextCommand() {
     delay(stepDelay);
     lcd.setBacklight(LOW);
     enableMotors();
-    switch (cmd[commandLaunched]) {
+
+
+
+
+    char command = cmd[commandLaunched];
+    short stepSize = getStepSize(cmd, &commandLaunched);
+
+    Serial.print("stepSize :");
+    Serial.println(stepSize);
+    switch (command) {
       case 'U':
         Serial.println(F("stepForward"));
         stepForward();
@@ -563,6 +592,54 @@ boolean launchNextCommand() {
     return true;
   }
 }
+
+
+short getStepSize(char* cmd,  short* commandLaunched)
+{
+  char command = cmd[*commandLaunched];
+  short stepsize = 0;
+  for (short i = 0; i < MAX_CONSECUTIVE_NUMBERS ; i++)
+  {
+
+ 
+
+    if (*commandLaunched + 1 < MAX_COMMANDS - 1 )
+    {
+
+
+
+      if (cmd[*commandLaunched + 1] > 47 && cmd[*commandLaunched + 1] < 58)
+      {
+
+        stepsize = stepsize * 10 + cmd[*commandLaunched + 1 ] - 48;       
+        *commandLaunched= *commandLaunched +1;
+
+     
+      }
+    }
+  }
+
+  if (stepsize == 0)
+  {
+    switch (command) {
+      case 'U':
+      case 'D':
+        stepsize = 100; //10cm
+        break;
+      case 'L':
+      case 'R':
+        stepsize = 90;  // 90°;
+        break;
+      case 'P':
+        break;
+    }
+  }
+
+  return stepsize;
+
+}
+
+
 
 boolean isCommandTerminated() {
   steps1 = stepper1.distanceToGo();
