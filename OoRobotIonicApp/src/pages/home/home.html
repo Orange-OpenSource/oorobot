@@ -14,6 +14,34 @@
         </ion-select>
       </ion-item>
       <div> {{message}}</div>
+
+
+
+      <ion-grid>
+          <ion-row >
+            <ion-col col-4 > </ion-col> 
+            <ion-col col-4 > <button ion-button  icon-only full (click)="command('U')"><ion-icon name="md-arrow-round-up"></ion-icon></button></ion-col>   
+            <ion-col col-4 ></ion-col>
+          </ion-row>
+          <ion-row >
+              <ion-col col-4 >  <button ion-button  icon-only full  (click)="command('L')"><ion-icon name="ios-undo"></ion-icon></button></ion-col> 
+              <ion-col col-4 > <button ion-button  icon-only  full (click)="command('P')"><ion-icon name="md-pause"></ion-icon></button> </ion-col>   
+              <ion-col col-4 > <button ion-button  icon-only  full (click)="command('R')"><ion-icon name="ios-redo"></ion-icon></button></ion-col>
+            </ion-row>
+            <ion-row >
+                <ion-col col-4 > </ion-col> 
+                <ion-col col-4 > <button ion-button  icon-only  full  (click)="command('D')"><ion-icon name="md-arrow-round-down"></ion-icon></button> </ion-col>   
+                <ion-col col-4 ></ion-col>
+           </ion-row>
+           <ion-row >
+  
+             <ion-col col-4 ><button ion-button  icon-only  full  (click)="command('G')"><ion-icon name="md-play"></ion-icon></button>  </ion-col> 
+        
+              <ion-col col-4 ><button ion-button  icon-only  full  (click)="command('C')"><ion-icon name="md-remove-circle"></ion-icon></button> </ion-col>
+              <ion-col col-4 ><button ion-button  icon-only  full  (click)="command('S')"><ion-icon name="md-settings"></ion-icon></button> </ion-col>
+            </ion-row>
+        </ion-grid>
+<!--
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1550px" height="1100px" viewBox="0 0 1550 1100"
     preserveAspectRatio="xMidYMid meet">
     <rect id="svgEditorBackground" x="0" y="0" width="1550" height="1100" style="fill: none; stroke: none;" />
@@ -44,4 +72,18 @@
       style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e6_shape" transform="matrix(0.414063 0 0 0.414063 184 384)"
       (tap)="command('C')" />
   </svg>
+-->
+<ion-grid>
+  <ion-row *ngFor="let col of numKeyboard" >
+    <ion-col col-4 *ngFor="let num of col">
+      <button *ngIf="num<10" ion-button full (click)="command(num+'')">{{num}}</button>
+
+     <button *ngIf="num==10"  ion-button  icon-only  full  (click)="command('G')"><ion-icon name="md-play"></ion-icon></button> 
+             
+     <button *ngIf="num==11"  ion-button  icon-only  full  (click)="command('C')"><ion-icon name="md-remove-circle"></ion-icon></button> 
+
+    </ion-col>
+  </ion-row>
+</ion-grid>
+  
 </ion-content>

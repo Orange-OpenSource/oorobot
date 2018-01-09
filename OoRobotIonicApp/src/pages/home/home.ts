@@ -12,6 +12,7 @@ export class HomePage {
   btledevices:any;
   mydevice:any;
   message:string;
+  numKeyboard:Array<Array<number>> = [[1,2,3],[4,5,6],[7,8,9],[0,10,11]];
   constructor(private bluetoothSerial:BluetoothSerial,public navCtrl: NavController) {
     this.bluetoothSerial.list().then((data)=>{console.log(JSON.stringify(data))
     this.btledevices=data;
