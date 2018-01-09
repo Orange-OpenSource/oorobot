@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+    <ion-item>
+        <ion-label>Select Device</ion-label>
+        <ion-select [(ngModel)]="mydevice" (ionChange)="OnBTChange(mydevice)">
+          <ion-option *ngFor="let device of btledevices"  [value]="device">{{device.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <div> {{message}}</div>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1550px" height="1100px" viewBox="0 0 1550 1100"
+    preserveAspectRatio="xMidYMid meet">
+    <rect id="svgEditorBackground" x="0" y="0" width="1550" height="1100" style="fill: none; stroke: none;" />
+    <defs id="svgEditorDefs">
+      <polygon id="svgEditorShapeDefs" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;" />
+    </defs>
+    <path d="M-5.5505617977528265,-8.179775280898873h1.9999999999999982l-3.9999999999999982,-4l-4.000000000000001,4h2v3.999999999999999h4.000000000000001Z"
+      style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e1_shape" transform="matrix(11.125 0 0 11.125 229.5 177.5)"
+    (tap)="command('U')"/>
+    <path d="M29.70974192534436,10.07904338061861h2l-4,-4.000000000000002l-4,4.000000000000002h2v4.0000000000000036h4Z" style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;"
+      id="e7_shape" transform="matrix(-11.1244 -0.119747 0.119747 -11.1244 450.796 401.191)"  (tap)="command('D')"/>
+    <path d="M-4.8607955203922595,-7.718750135041796a1.8,1.8,0,1,0,0,-3.5999999999999996h-2v1l-1.2500000000000027,-1.625l1.2500000000000027,-1.625v0.9999999999999982h2a2.25,2.25,0,0,1,0,6.25Z"
+      style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e3_shape" transform="matrix(12.1379 0 0 12.1379 103.448 303.697)"
+      (tap)="command('L')" />
+    <path d="M16.625669157101353,-7.934710113391379a1.8,1.8,0,1,0,0,-3.599999999999998h-2v1l-1.25,-1.625l1.25,-1.625v1h2a2.25,2.25,0,0,1,0,6.250000000000001Z"
+      style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e10_shape" transform="matrix(-11.9233 0 0 12.1379 439.038 303.697)"
+      (tap)="command('R')" />
+    <g transform="matrix(0.739583 0 0 0.739583 96.1792 137.167)" style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;"
+      id="e4_shape">
+      <path d="M39.983 112c4.419 0 8-3.581 8-8v-80c0-4.419-3.581-8-8-8h-16c-4.418 0-8 3.581-8 8v80c0 4.419 3.582 8 8 8h16z" />
+      <path d="M103.983 112c4.419 0 8-3.581 8-8v-80c0-4.419-3.581-8-8-8h-16c-4.418 0-8 3.581-8 8v80c0 4.419 3.582 8 8 8h16z"
+      (tap)="command('P')" />
+    </g>
+    <path d="M-15.523629437995208,12.1025463202505v88.346c0,6.099999999999994,6.552000000000003,9.956000000000003,11.884000000000004,6.994l79.525,-44.173c5.486999999999995,-3.048000000000002,5.486999999999995,-10.939999999999998,0,-13.987000000000002l-79.525,-44.173c-5.332000000000001,-2.9619999999999997,-11.884,0.8940000000000001,-11.884,6.994Z"
+      style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e5_shape" transform="matrix(0.507814 0 0 0.507814 72.8831 379.922)"
+      (tap)="command('G')" />
+    <path d="M42.264150943395975,125.58490566037733c35.34700000000001,0,64,-28.65299999999999,64,-64s-28.65299999999999,-64,-64,-64s-64,28.653,-64,64s28.652999999999995,64,64,64ZM12.607150943395979,43.241905660377334c-3.125,-3.1240000000000023,-3.125,-8.189,0,-11.314s8.189,-3.125,11.314999999999998,0l18.342,18.343000000000004l18.343000000000004,-18.343000000000004c3.125,-3.125,8.189000000000007,-3.125,11.314999999999998,0s3.1239999999999952,8.189,0,11.314l-18.34400000000001,18.342999999999996l18.343000000000004,18.343000000000004c3.1239999999999952,3.1239999999999952,3.1239999999999952,8.189000000000007,0,11.314000000000007c-1.5630000000000024,1.5619999999999976,-3.6089999999999947,2.3430000000000035,-5.6569999999999965,2.3430000000000035s-4.093999999999994,-0.7810000000000059,-5.6569999999999965,-2.3430000000000035l-18.343000000000004,-18.343000000000004l-18.342999999999996,18.343000000000004c-1.5630000000000095,1.5619999999999976,-3.609000000000009,2.3430000000000035,-5.657000000000004,2.3430000000000035s-4.094000000000001,-0.7810000000000059,-5.6569999999999965,-2.3430000000000035c-3.125,-3.1239999999999952,-3.125,-8.188999999999993,0,-11.313999999999993l18.343000000000004,-18.343000000000004l-18.343000000000004,-18.343000000000004Z"
+      style="fill:khaki; stroke:black; vector-effect:non-scaling-stroke;stroke-width:1px;" id="e6_shape" transform="matrix(0.414063 0 0 0.414063 184 384)"
+      (tap)="command('C')" />
+  </svg>
+</ion-content>
