@@ -17,10 +17,10 @@
 // On some step motors direction may be inverted
 // define this symbol to invert the motors direction
 /* #define INVERT_DIRECTION */
-#define MAX_COMMANDS 32
+#define MAX_COMMANDS 512
 
 // define this symbol to add bluetooth support
-//#define HAVE_BLUETOOTH
+//define HAVE_BLUETOOTH
 
 #ifdef HAVE_BLUETOOTH
 # include <SoftwareSerial.h>
