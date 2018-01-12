@@ -18,9 +18,10 @@
 // define this symbol to invert the motors direction
 /* #define INVERT_DIRECTION */
 #define MAX_COMMANDS 512
+#define MAX_LOOPS 10
 
 // define this symbol to add bluetooth support
-//define HAVE_BLUETOOTH
+#define HAVE_BLUETOOTH
 
 #ifdef HAVE_BLUETOOTH
 # include <SoftwareSerial.h>
@@ -75,6 +76,10 @@ Params params = {140, 1220};
 int previousMenu = CTRL_MENU;
 int selectedMenu = START_MENU;
 char cmd[MAX_COMMANDS + 1] = {};
+int loopCounter[MAX_LOOPS] = {};
+int loopPointer[MAX_LOOPS] = {};
+int loopIndex=0;
+
 unsigned char cmd_l = 0;
 int changeDisplay = 1;
 long lastChangeDisplay = 0;
@@ -83,7 +88,7 @@ short commandLaunched = 0;
 short consecutive_numbers = 0;
 #define MAX_CONSECUTIVE_NUMBERS 3
 short num_of_cmd = 0;
-short max_num_cmd = 0;;
+short max_num_cmd = 0;
 
 
 void setup() {
@@ -129,7 +134,6 @@ void loop() {
     }
   } else {
 #ifdef HAVE_BLUETOOTH
-
     while (BTSerie.available()) {
       button = BTSerie.read();
       //Serial.println(button);
@@ -138,6 +142,13 @@ void loop() {
       }
     }
 #endif
+    while (Serial.available()) {
+      button = Serial.read();
+      //Serial.println(button);
+      if (button != 0) {
+        actionButtonForScreen(button);
+      }
+    }
   }
 
 
@@ -154,7 +165,7 @@ void loop() {
 #ifdef HAVE_BLUETOOTH
         BTSerie.println("fin !");
 #endif
-        delay(stepDelay * 2);
+        delay(1000);
         selectedMenu = CTRL_MENU;
         changeDisplay = 1;
       }
@@ -208,6 +219,7 @@ void actionButtonForScreen(char button) {
           selectedMenu = RUNNING_MENU;
           isMoving = true;
           commandLaunched = 0;
+
           max_num_cmd = num_of_cmd;
           num_of_cmd = 0;
           launchNextCommand();
@@ -215,6 +227,7 @@ void actionButtonForScreen(char button) {
           break;
         case 'A':
           cmd_l = 0;
+          commandLaunched = 0;
           num_of_cmd = 0;
           break;
         case 'C':
@@ -227,6 +240,8 @@ void actionButtonForScreen(char button) {
             num_of_cmd--;
           }
           break;
+        case 'B' :
+        case 'E' :
         case 'U' :
         case 'D' :
         case 'L' :
@@ -262,7 +277,7 @@ void actionButtonForScreen(char button) {
     lcd.clear();
     lcd.setBacklight(HIGH);
     lcd.print("Arret!");
-    delay(stepDelay * 2);
+    delay(1000);
     selectedMenu = CTRL_MENU;
     changeDisplay = 1;
   } else if (selectedMenu == OFF_MENU) {
@@ -412,6 +427,9 @@ char commandToDisplay(char c) {
   }
 }
 
+int startLoop=-1;
+int remainingLoop=0;
+
 boolean launchNextCommand() {
   if (commandLaunched >= cmd_l) {
     return false;
@@ -432,13 +450,17 @@ boolean launchNextCommand() {
     BTSerie.print(" : ");
     BTSerie.println(cmd[commandLaunched]);
 #endif
+    Serial.print("etape ");
+    Serial.print((num_of_cmd + 1));
+    Serial.print(" sur ");
+    Serial.print(max_num_cmd);
+    Serial.print(" : ");
+    Serial.println(cmd[commandLaunched]);
+
     num_of_cmd++;
     delay(stepDelay);
     lcd.setBacklight(LOW);
     enableMotors();
-
-
-
 
     char command = cmd[commandLaunched];
     short stepSize = getStepSize(cmd, &commandLaunched);
@@ -446,6 +468,10 @@ boolean launchNextCommand() {
     Serial.print("stepSize :");
     Serial.println(stepSize);
     switch (command) {
+      case 'W':
+        Serial.println(F("set wainting step delay"));
+        stepDelay=stepSize;
+        break;      
       case 'U':
         Serial.println(F("stepForward"));
         stepForward(stepSize);
@@ -464,7 +490,30 @@ boolean launchNextCommand() {
         break;
       case 'P':
         Serial.println(F("pause"));
-        delay(params.turnSteps * 2);
+        delay(stepSize);
+        break;
+      case 'B':
+        Serial.println(F("begin loop"));
+        if (loopIndex>=MAX_LOOPS) {
+          Serial.println("too many loops included");
+        } else {
+          loopCounter[loopIndex] = stepSize;
+          loopPointer[loopIndex] = commandLaunched;
+          loopIndex++;
+          startLoop=commandLaunched;
+          remainingLoop=stepSize;
+        }
+        break;
+      case 'E':
+        Serial.println(F("end loop"));      
+        if (loopCounter[loopIndex-1]>1) {
+          commandLaunched=loopPointer[loopIndex-1];
+          loopCounter[loopIndex-1]--;
+        } else {
+          if (loopIndex>0) {
+            loopIndex--;
+          }
+        }
         break;
     }
     commandLaunched++;
@@ -492,15 +541,18 @@ short getStepSize(char* cmd,  short* commandLaunched)
   if (stepsize == 0)
   {
     switch (command) {
+      case 'W':
+        stepsize = 20; // step waiting delay
       case 'U':
       case 'D':
-        stepsize = 100; //10cm
+        stepsize = 140; //10cm
         break;
       case 'L':
       case 'R':
         stepsize = 90;  // 90°;
         break;
       case 'P':
+        stepsize=stepDelay*2;
         break;
     }
   }
