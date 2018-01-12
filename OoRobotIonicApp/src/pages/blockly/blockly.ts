@@ -99,6 +99,13 @@ export class BlocklyPage {
       return text;
     };
 
+    Blockly.FieldAngle.ROUND = 1;
+    Blockly.FieldAngle.HALF = 100;
+    Blockly.FieldAngle.CLOCKWISE = true;
+    Blockly.FieldAngle.OFFSET = 90;
+    Blockly.FieldAngle.WRAP = 360;
+    Blockly.FieldAngle.RADIUS = Blockly.FieldAngle.HALF - 1;
+
     Blockly.Blocks['Start'] = {
       init: function () {
         this.jsonInit({
