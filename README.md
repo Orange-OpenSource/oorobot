@@ -194,6 +194,28 @@ Les premiers essais avec un module Bluetooth HC-06 sont concluants, je peux pilo
 
 La prochaine étape est de piloter le robot via mblock et de faire une application Android pour contrôler le robot.
 
+Syntaxe :
+[<lettre><chiffre>*]*
+
+Combinaisons possibles
+- U (up). Les chiffres correspondent aux nombres de mm à faire.
+- D (down). Les chiffres correspondent aux nombres de mm à faire.
+- R (right). Les chiffres correspondent à l'angle à faire.
+- L (left). Les chiffres correspondent à l'angle à faire.
+- B (begin loop). Les chiffres correspondent au nombre de répétitions des commandes suivantes (jusqu'à trouver la lettre E)
+- E (end loop). Pas de chiffre attendu
+- P (pause). Faire une attente de x ms
+- W (waiting). Les chiffres correspondent au temps d'attente (en ms) entre 2 mouvements.
+- p (pencil). 0 pour baisser et 1 pour lever le crayon (pas encore réalisé)
+
+Une étoile :
+U50R144U50R144U50R144U50R144U50R144
+ou
+B5U50R144E
+
+
+
+
 ## Licences
 
 Le code est sous [GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.fr.html), les modèles 3D et la documentation sont sous [CC-BY-SA](https://creativecommons.org/licenses/by-sa/2.0/deed.fr).
