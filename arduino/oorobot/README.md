@@ -1,4 +1,4 @@
-# OoBoBoT: arduino firmware
+# OoRoBoT: arduino firmware
 
 This is the source code of the OoRoBoT firmware.
 
