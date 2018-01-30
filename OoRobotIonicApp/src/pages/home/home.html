@@ -7,10 +7,6 @@
 
 
 <ion-content padding>
-
-
-
-
   <ion-grid>
     <ion-row>
       <ion-col col-4> </ion-col>
@@ -48,13 +44,11 @@
       <ion-col col-4></ion-col>
     </ion-row>
     <ion-row>
-
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('G')">
           <ion-icon name="md-play"></ion-icon>
         </button>
       </ion-col>
-
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('C')">
           <ion-icon name="md-remove-circle"></ion-icon>
@@ -64,23 +58,6 @@
         <button ion-button icon-only full (click)="command('S')">
           <ion-icon name="md-settings"></ion-icon>
         </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
- 
-  <ion-grid>
-    <ion-row *ngFor="let col of numKeyboard">
-      <ion-col col-4 *ngFor="let num of col">
-        <button *ngIf="num<10" ion-button full (click)="command(num+'')">{{num}}</button>
-
-        <button *ngIf="num==10" ion-button icon-only full (click)="command('G')">
-          <ion-icon name="md-play"></ion-icon>
-        </button>
-
-        <button *ngIf="num==11" ion-button icon-only full (click)="command('C')">
-          <ion-icon name="md-remove-circle"></ion-icon>
-        </button>
-
       </ion-col>
     </ion-row>
   </ion-grid>

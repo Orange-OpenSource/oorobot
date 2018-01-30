@@ -31,12 +31,12 @@ export class BlocklyPage {
     let generated: string = Blockly.JavaScript.workspaceToCode(this.myWorkspace);
 
     console.log(generated)
-    if (generated.indexOf('command') == 0 && generated.lastIndexOf('command') == 0)
-      this.code = "A" + generated.substring(7, generated.length) + "G";
+    if (generated.indexOf('command') == 0 && generated.lastIndexOf('command') == 0) {
+      this.code = "AAW30" + generated.substring(7, generated.length) + "G";
+      this.blProvider.serialWritePreferedDevice(this.code).then(() => {
 
-    this.blProvider.serialWritePreferedDevice(this.code).then(() => {
-    });
-
+      });
+    }
   }
 
   ionViewDidEnter() {
@@ -95,7 +95,7 @@ export class BlocklyPage {
     let controlColor = "#F0DC27";
     let startColor = "#74C042";
 
-    Blockly.Generator.prototype.prefixLines = function (text, prefix) {  // Need to Overide this function not supported by ionic 
+    Blockly.Generator.prototype.prefixLines = function (text, prefix) {  // Need to Overide this function not supported by ionic
       return text;
     };
 
@@ -163,7 +163,7 @@ export class BlocklyPage {
     Blockly.Blocks['Pause'] = {
       init: function () {
         this.jsonInit({
-          "message0": '%1',
+          "message0": '%1 %2',
           "args0": [
 
             {
@@ -172,6 +172,11 @@ export class BlocklyPage {
               "width": 40,
               "height": 40,
               "alt": "*"
+            },
+            {
+              "type": "field_number",
+              "name": "FIELDNAME",
+              "value": 100
             }
           ],
           "colour": moveColor,
@@ -334,9 +339,9 @@ export class BlocklyPage {
 
     Blockly.JavaScript['Pause'] = function (block) {
       // Search the text for a substring.
-      // let operator = block.getFieldValue('FIELDNAME');
+      let operator = block.getFieldValue('FIELDNAME');
 
-      let code = "P";
+      let code = "P" + operator;
       return code;
     };
 
@@ -354,12 +359,7 @@ export class BlocklyPage {
       // Search the text for a substring.
       let operator = block.getFieldValue('FIELDNAME');
       let subcode = Blockly.JavaScript.statementToCode(block, 'DO');
-      let code = "";
-      for (let i = 0; i < operator; i++) {
-        code += subcode;
-      }
-
-      return code;
+      return "B"+operator+subcode+"E";
     };
 
   }

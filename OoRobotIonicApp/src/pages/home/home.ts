@@ -11,7 +11,6 @@ import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 
 export class HomePage {
 
-  numKeyboard: Array<Array<number>> = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [0, 10, 11]];
   constructor(public navCtrl: NavController, private blProvider: BluetoothProvider) {
 
   }
