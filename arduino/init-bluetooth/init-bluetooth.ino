@@ -26,7 +26,7 @@
     B Sets the baud rate to 921600
     C Sets the baud rate to 1382400    
     */
-    String baud = "6";
+    String baud = "4";
 
     static const char s[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     int i=0;
@@ -36,14 +36,14 @@
     { 
       randomSeed(analogRead(A1));
       unsigned r = random(sizeof(s));
-      deviceName=deviceSuffix+s[random(sizeof(s)+1)]+s[random(sizeof(s)+1)]+s[random(sizeof(s)+1)]+s[random(sizeof(s)+1)];
+      deviceName=deviceSuffix+s[random(sizeof(s)-1)]+s[random(sizeof(s)-1)]+s[random(sizeof(s)-1)]+s[random(sizeof(s)-1)];
       
       Serial.begin(9600);
       delay(500); 
       // Bluetooth module init
       pinMode(RxD, INPUT); 
       pinMode(TxD, OUTPUT); 
-      BTSerie.begin(38400); // Change it after previous baud configuration
+      BTSerie.begin(9600); // Change it after previous baud configuration
     } 
     void loop() 
     { 
