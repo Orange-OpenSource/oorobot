@@ -48,6 +48,10 @@ SoftwareSerial BTSerie(RxD, TxD);
 #define RUNNING_MENU 3
 #define OFF_MENU 4
 
+#define MAX_STEPPER_SPEED 900
+#define MIN_STEPPER_SPEED 200
+int stepperSpeed = MIN_STEPPER_SPEED;
+
 // Initialize with pin sequence IN1-IN3-IN2-IN4 for using the AccelStepper with 28BYJ-48
 AccelStepper stepper1(AccelStepper::HALF4WIRE, motorPin1, motorPin3, motorPin2, motorPin4);
 AccelStepper stepper2(AccelStepper::HALF4WIRE, motorPin5, motorPin7, motorPin6, motorPin8);
@@ -62,7 +66,6 @@ struct Params {
 
 int lineStepsCM = 145; // number of steps to do 1cm
 int stepDelay = 800;
-int stepperSpeed = 900; //speed of the stepper (steps per second)
 int steps1 = 0; // keep track of the step count for motor 1
 int steps2 = 0; // keep track of the step count for motor 2
 int isMoving = false;
@@ -89,14 +92,13 @@ short consecutive_numbers = 0;
 #define MAX_CONSECUTIVE_NUMBERS 3
 short num_of_cmd = 0;
 short max_num_cmd = 0;
-
+long startMovement=0;
 
 void setup() {
   Serial.begin(9600);
   loadParams();
   setupButtons();
 
-  // This is the I2C LCD object initialization.
   lcd.init();
   lcd.backlight();
   lcd.createChar(1, up);
@@ -108,18 +110,17 @@ void setup() {
   lcd.createChar(7, agrave);
 
   // stepper motors init
-  stepper1.setMaxSpeed(2000.0);
+  stepper1.setMaxSpeed(1000);
   stepper1.move(1);
-  stepper1.setSpeed(stepperSpeed);
-  stepper2.setMaxSpeed(2000.0);
-  stepper2.move(-1);
-  stepper2.setSpeed(stepperSpeed);
 
+  stepper2.setMaxSpeed(1000);
+  stepper2.move(-1);
+  
   // Bluetooth module init
 #ifdef HAVE_BLUETOOTH
   pinMode(RxD, INPUT);
   pinMode(TxD, OUTPUT);
-  BTSerie.begin(38400);
+  BTSerie.begin(9600);
 #endif
 }
 
@@ -193,6 +194,8 @@ void actionButtonForScreen(char button) {
     changeDisplay = 1;
   } else if (selectedMenu == CTRL_MENU) {
     changeDisplay = 1;
+    Serial.print("New char : ");    
+    Serial.println(button);
     if ( button > 47  && button < 58) // it's a number
     {
       consecutive_numbers++;
@@ -216,6 +219,7 @@ void actionButtonForScreen(char button) {
           changeDisplay = 1;
           break;
         case 'G':
+          stepDelay = 800;
           selectedMenu = RUNNING_MENU;
           isMoving = true;
           commandLaunched = 0;
@@ -246,6 +250,7 @@ void actionButtonForScreen(char button) {
         case 'D' :
         case 'L' :
         case 'R' :
+        case 'W' :        
         case 'P' :
           if (cmd_l < MAX_COMMANDS) {
             cmd[cmd_l++] = button;
@@ -469,7 +474,7 @@ boolean launchNextCommand() {
     Serial.println(stepSize);
     switch (command) {
       case 'W':
-        Serial.println(F("set wainting step delay"));
+        Serial.println(F("set waiting step delay"));
         stepDelay=stepSize;
         break;      
       case 'U':
@@ -525,7 +530,7 @@ boolean launchNextCommand() {
 short getStepSize(char* cmd,  short* commandLaunched)
 {
   char command = cmd[*commandLaunched];
-  short stepsize = 0;
+  int stepsize = 0;
   for (short i = 0; i < MAX_CONSECUTIVE_NUMBERS ; i++)
   {
     if (*commandLaunched + 1 < MAX_COMMANDS - 1 )
@@ -542,10 +547,11 @@ short getStepSize(char* cmd,  short* commandLaunched)
   {
     switch (command) {
       case 'W':
-        stepsize = 20; // step waiting delay
+        stepsize = stepDelay;
+        break;
       case 'U':
       case 'D':
-        stepsize = 140; //10cm
+        stepsize = params.stepCm; //10cm
         break;
       case 'L':
       case 'R':
@@ -562,11 +568,27 @@ short getStepSize(char* cmd,  short* commandLaunched)
 }
 
 boolean isCommandTerminated() {
+  int diff = (millis() - startMovement);
+  if (diff>=100) {
+    startMovement=millis();
+    stepperSpeed+=100;
+    if (stepperSpeed>MAX_STEPPER_SPEED) {
+      stepperSpeed=MAX_STEPPER_SPEED;
+    } else {
+      Serial.print("speed:");
+      Serial.println(stepperSpeed);        
+      stepper2.setSpeed(stepperSpeed);    
+      stepper1.setSpeed(stepperSpeed);    
+    }
+    
+  } 
+
   steps1 = stepper1.distanceToGo();
   steps2 = stepper2.distanceToGo();
+  //Serial.println(steps1);  
   stepper1.runSpeedToPosition();
   stepper2.runSpeedToPosition();
-
+  
   if (steps1 == 0 && steps2 == 0) {
     return true;
   } else {
@@ -575,59 +597,63 @@ boolean isCommandTerminated() {
 }
 
 void enableMotors() {
+  stepper1.setCurrentPosition(0);
+  stepper2.setCurrentPosition(0);
   stepper1.enableOutputs();
   stepper2.enableOutputs();
 }
 
 void disableMotors() {
+  stepper1.stop();
+  stepper2.stop();
   stepper1.disableOutputs();
   stepper2.disableOutputs();
 }
 
 void stepForward(short distance) {
   isMoving = true;
+  startMovement=millis();
+  stepperSpeed = MIN_STEPPER_SPEED;
+    
   int target = (int)  (((float)params.stepCm / 10.0f) * ((float)distance * (float)lineStepsCM / 100.0f));
-
 #ifdef INVERT_DIRECTION
-  target = target * -1;
+  target = target * -1; 
 #endif
   stepper1.move(-target);
-  stepper1.setSpeed(stepperSpeed);
   stepper2.move(target);
-  stepper2.setSpeed(stepperSpeed);
-
 }
 
 void stepBackward(short distance) {
   isMoving = true;
+  startMovement=millis();
+  stepperSpeed = MIN_STEPPER_SPEED;
+
   int target = (int)  (((float)params.stepCm / 10.0f) * ((float)distance * (float)lineStepsCM / 100.0f));
 #ifdef INVERT_DIRECTION
   target = target * -1;
 #endif
-  stepper1.move(target);
-  stepper1.setSpeed(stepperSpeed);
-  stepper2.move(-target);
-  stepper2.setSpeed(stepperSpeed);
+  stepper1.moveTo(target);
+  stepper2.moveTo(-target);
 }
 
 void turnLeft(short angle) {
   isMoving = true;
+  startMovement=millis();
+  stepperSpeed = MIN_STEPPER_SPEED;
 
   int angleStep = (int)((float)angle / 90.0 * (float)params.turnSteps);
-
-  stepper1.move(angleStep);
-  stepper1.setSpeed(stepperSpeed);
-  stepper2.move(angleStep);
-  stepper2.setSpeed(stepperSpeed);
+  stepper1.moveTo(angleStep);
+  stepper2.moveTo(angleStep);
 }
 
 void turnRight(short angle) {
   isMoving = true;
+  startMovement=millis();
+  stepperSpeed = MIN_STEPPER_SPEED;
+
   int angleStep = (int)((float)angle / 90.0 * (float)params.turnSteps);
-  stepper1.move(-angleStep);
-  stepper1.setSpeed(stepperSpeed);
-  stepper2.move(-angleStep);
-  stepper2.setSpeed(stepperSpeed);
+  stepper1.moveTo(-angleStep);
+  stepper2.moveTo(-angleStep);
 }
 
 void saveParams() {
