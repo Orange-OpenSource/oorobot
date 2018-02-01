@@ -9,13 +9,21 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-4> </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('U')">
+          <ion-icon name="md-arrow-dropup-circle"></ion-icon>
+        </button>
+      </ion-col>
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('U')">
           <ion-icon name="md-arrow-round-up"></ion-icon>
         </button>
       </ion-col>
-      <ion-col col-4></ion-col>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('U')">
+          <ion-icon name="md-arrow-dropdown-circle"></ion-icon>
+        </button>
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-4>

@@ -52,8 +52,10 @@ export class BlocklyPage {
       '<block type="Down"></block>' +
       '<block type="Left"></block>' +
       '<block type="Right"></block>' +
-      '<block type="Pause"></block>' +
+      '<block type="PenUp">   </block>' +
+      '<block type="PenDown">   </block>' +
       '<block type="Loop">   </block>' +
+      '<block type="Pause"></block>' +
       '</xml>'
 
 
@@ -306,6 +308,54 @@ export class BlocklyPage {
       }
     };
 
+    Blockly.Blocks['PenUp'] = {
+      init: function () {
+        this.jsonInit({
+          "message0": '%1',
+          "args0": [
+
+            {
+              "type": "field_image",
+              "src": "assets/svg/pen-up.svg",
+              "width": 40,
+              "height": 40,
+              "alt": "*"
+            }
+          ],
+          "colour": moveColor,
+          "tooltip": "",
+          "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
+          "previousStatement": null,
+          "nextStatement": null,
+        });
+      }
+    };
+
+    Blockly.Blocks['PenDown'] = {
+      init: function () {
+        this.jsonInit({
+          "message0": '%1',
+          "args0": [
+
+            {
+              "type": "field_image",
+              "src": "assets/svg/pen-down.svg",
+              "width": 40,
+              "height": 40,
+              "alt": "*"
+            }
+          ],
+          "colour": moveColor,
+          "tooltip": "",
+          "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
+          "previousStatement": null,
+          "nextStatement": null,
+        });
+      }
+    };
+
+
+
     Blockly.JavaScript['Start'] = function (block) {
       // Search the text for a substring.
       let code = Blockly.JavaScript.statementToCode(block, 'DO');
@@ -318,6 +368,19 @@ export class BlocklyPage {
       let operator = block.getFieldValue('FIELDNAME');
 
       let code = "U" + operator;
+      return code;
+    };
+
+    Blockly.JavaScript['PenUp'] = function () {
+      // Search the text for a substring.
+      let code = "|";
+      return code;
+    };
+
+
+    Blockly.JavaScript['PenDown'] = function () {
+      // Search the text for a substring.
+      let code = "!";
       return code;
     };
 
