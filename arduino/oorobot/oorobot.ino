@@ -6,6 +6,7 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <AccelStepper.h>
+#include <Servo.h>
 #include "charset.h"
 #include "buttons.h"
 
@@ -16,7 +17,7 @@
 
 // On some step motors direction may be inverted
 // define this symbol to invert the motors direction
-/* #define INVERT_DIRECTION */
+#define INVERT_DIRECTION
 #define MAX_COMMANDS 512
 #define MAX_LOOPS 10
 
@@ -56,6 +57,8 @@ int stepperSpeed = MIN_STEPPER_SPEED;
 AccelStepper stepper1(AccelStepper::HALF4WIRE, motorPin1, motorPin3, motorPin2, motorPin4);
 AccelStepper stepper2(AccelStepper::HALF4WIRE, motorPin5, motorPin7, motorPin6, motorPin8);
 
+Servo penServo;
+
 // The I2C LCD object
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -71,7 +74,7 @@ int steps2 = 0; // keep track of the step count for motor 2
 int isMoving = false;
 
 char buttonsMap[] = {
-  'L', 'G', 's', 'C', 0, 'R', 0, 'U', 'P', 'D', 0, 0,
+  'L', 'G', 's', 'C', 0, 'R', 0, 'U', 'P', 'D', '|', '!',
   '-',  0, 'S', 'A', 0, '+', 0,  0,   0,   0,  0, 0
 };
 
@@ -98,6 +101,7 @@ void setup() {
   Serial.begin(9600);
   loadParams();
   setupButtons();
+  Serial.println(F("Setup"));
 
   lcd.init();
   lcd.backlight();
@@ -115,7 +119,9 @@ void setup() {
 
   stepper2.setMaxSpeed(1000);
   stepper2.move(-1);
-  
+
+  penServo.attach(3);
+  penServo.write(3);
   // Bluetooth module init
 #ifdef HAVE_BLUETOOTH
   pinMode(RxD, INPUT);
@@ -162,9 +168,9 @@ void loop() {
         disableMotors();
         lcd.clear();
         lcd.setBacklight(HIGH);
-        lcd.print("fin !");
+        lcd.print(F("fin !"));
 #ifdef HAVE_BLUETOOTH
-        BTSerie.println("fin !");
+        BTSerie.println(F("fin !"));
 #endif
         delay(1000);
         selectedMenu = CTRL_MENU;
@@ -194,14 +200,14 @@ void actionButtonForScreen(char button) {
     changeDisplay = 1;
   } else if (selectedMenu == CTRL_MENU) {
     changeDisplay = 1;
-    Serial.print("New char : ");    
+    Serial.print(F("New char : "));    
     Serial.println(button);
     if ( button > 47  && button < 58) // it's a number
     {
       consecutive_numbers++;
       if (consecutive_numbers > MAX_CONSECUTIVE_NUMBERS)
       {
-        Serial.println("number too hight");
+        Serial.println(F("number too hight"));
         return;
       }
       else
@@ -250,13 +256,15 @@ void actionButtonForScreen(char button) {
         case 'D' :
         case 'L' :
         case 'R' :
-        case 'W' :        
+        case 'W' :
+        case '!' :
+        case '|' :        
         case 'P' :
           if (cmd_l < MAX_COMMANDS) {
             cmd[cmd_l++] = button;
             num_of_cmd++;
           } else {
-            Serial.println("too many commands");
+            Serial.println(F("too many commands"));
           }
           break;
         case 0 :
@@ -266,9 +274,9 @@ void actionButtonForScreen(char button) {
           changeDisplay = 0;
           break;
         default:
-          Serial.println("Unknown Command");
+          Serial.println(F("Unknown Command"));
 #ifdef HAVE_BLUETOOTH
-          BTSerie.println("Unknown Command");
+          BTSerie.println(F("Unknown Command"));
 #endif
           break;
       }
@@ -281,7 +289,7 @@ void actionButtonForScreen(char button) {
     isMoving = false;
     lcd.clear();
     lcd.setBacklight(HIGH);
-    lcd.print("Arret!");
+    lcd.print(F("Arret!"));
     delay(1000);
     selectedMenu = CTRL_MENU;
     changeDisplay = 1;
@@ -349,10 +357,10 @@ void updateScreen() {
       lcd.setCursor(0, 0);
       lcd.print("  OoRoBoT " OOROBOT_VERSION);
       lcd.setCursor(0, 1);
-      lcd.print("Pret \7 demarrer!");
+      lcd.print(F("Pret \7 demarrer!"));
 #ifdef HAVE_BLUETOOTH
       BTSerie.println("OoRoBoT " OOROBOT_VERSION);
-      BTSerie.println("En attente de commandes");
+      BTSerie.println(F("En attente de commandes"));
 #endif
       previousMenu = CTRL_MENU;
       selectedMenu = CTRL_MENU;
@@ -375,28 +383,28 @@ void updateScreen() {
       lcd.clear();
       int cm = params.stepCm / 10;
       int mm = params.stepCm - 10 * cm;
-      lcd.print(" Distance:");
+      lcd.print(F(" Distance:"));
       lcd.print(cm);
-      lcd.print(".");
+      lcd.print(F("."));
       lcd.print(mm);
-      lcd.print("cm");
+      lcd.print(F("cm"));
       lcd.setCursor(0, 1);
-      lcd.print(" 1/4Tour:");
+      lcd.print(F(" 1/4Tour:"));
       lcd.print(params.turnSteps);
-      lcd.print("pas");
+      lcd.print(F("pas"));
       lcd.setCursor(0, selectedLine);
       lcd.print("\6");
 #ifdef HAVE_BLUETOOTH
       if (selectedLine == 0) {
-        BTSerie.print("Distance:");
+        BTSerie.print(F("Distance:"));
         BTSerie.print(cm);
-        BTSerie.print(".");
+        BTSerie.print(F("."));
         BTSerie.print(mm);
-        BTSerie.println("cm");
+        BTSerie.println(F("cm"));
       } else {
-        BTSerie.print("1/4Tour:");
+        BTSerie.print(F("1/4Tour:"));
         BTSerie.print(params.turnSteps);
-        BTSerie.println("pas");
+        BTSerie.println(F("pas"));
       }
 #endif
 
@@ -443,23 +451,23 @@ boolean launchNextCommand() {
     lcd.clear();
     lcd.setBacklight(HIGH);
     lcd.print((num_of_cmd + 1));
-    lcd.print(" sur ");
+    lcd.print(F(" sur "));
     lcd.print(max_num_cmd);
-    lcd.print(" : ");
+    lcd.print(F(" : "));
     lcd.print(commandToDisplay(cmd[commandLaunched]));
 #ifdef HAVE_BLUETOOTH
-    BTSerie.print("etape ");
+    BTSerie.print(F("etape "));
     BTSerie.print((num_of_cmd + 1));
-    BTSerie.print(" sur ");
+    BTSerie.print(F(" sur "));
     BTSerie.print(max_num_cmd);
-    BTSerie.print(" : ");
+    BTSerie.print(F(" : "));
     BTSerie.println(cmd[commandLaunched]);
 #endif
-    Serial.print("etape ");
+    Serial.print(F("etape "));
     Serial.print((num_of_cmd + 1));
-    Serial.print(" sur ");
+    Serial.print(F(" sur "));
     Serial.print(max_num_cmd);
-    Serial.print(" : ");
+    Serial.print(F(" : "));
     Serial.println(cmd[commandLaunched]);
 
     num_of_cmd++;
@@ -470,7 +478,7 @@ boolean launchNextCommand() {
     char command = cmd[commandLaunched];
     short stepSize = getStepSize(cmd, &commandLaunched);
 
-    Serial.print("stepSize :");
+    Serial.print(F("stepSize :"));
     Serial.println(stepSize);
     switch (command) {
       case 'W':
@@ -497,10 +505,20 @@ boolean launchNextCommand() {
         Serial.println(F("pause"));
         delay(stepSize);
         break;
+      case '!' :
+        Serial.println(F("pen down"));
+        penServo.write(3);          
+        delay(100);
+        break;        
+      case '|' :          
+        Serial.println(F("pen up"));
+        penServo.write(9);   
+        delay(100);
+        break;         
       case 'B':
         Serial.println(F("begin loop"));
         if (loopIndex>=MAX_LOOPS) {
-          Serial.println("too many loops included");
+          Serial.println(F("too many loops included"));
         } else {
           loopCounter[loopIndex] = stepSize;
           loopPointer[loopIndex] = commandLaunched;
@@ -545,7 +563,7 @@ short getStepSize(char* cmd,  short* commandLaunched)
 
   if (stepsize == 0)
   {
-    switch (command) {
+    switch (command) {    
       case 'W':
         stepsize = stepDelay;
         break;
@@ -575,7 +593,7 @@ boolean isCommandTerminated() {
     if (stepperSpeed>MAX_STEPPER_SPEED) {
       stepperSpeed=MAX_STEPPER_SPEED;
     } else {
-      Serial.print("speed:");
+      Serial.print(F("speed:"));
       Serial.println(stepperSpeed);        
       stepper2.setSpeed(stepperSpeed);    
       stepper1.setSpeed(stepperSpeed);    
@@ -588,7 +606,7 @@ boolean isCommandTerminated() {
   //Serial.println(steps1);  
   stepper1.runSpeedToPosition();
   stepper2.runSpeedToPosition();
-  
+
   if (steps1 == 0 && steps2 == 0) {
     return true;
   } else {
@@ -619,6 +637,7 @@ void stepForward(short distance) {
 #ifdef INVERT_DIRECTION
   target = target * -1; 
 #endif
+
   stepper1.move(-target);
   stepper2.move(target);
 }
