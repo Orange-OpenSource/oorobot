@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('U')">
+          <ion-icon name="md-arrow-dropup-circle"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('U')">
+          <ion-icon name="md-arrow-round-up"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('U')">
+          <ion-icon name="md-arrow-dropdown-circle"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('L')">
+          <ion-icon name="ios-undo"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('P')">
+          <ion-icon name="md-pause"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('R')">
+          <ion-icon name="ios-redo"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4> </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('D')">
+          <ion-icon name="md-arrow-round-down"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('G')">
+          <ion-icon name="md-play"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('C')">
+          <ion-icon name="md-remove-circle"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('S')">
+          <ion-icon name="md-settings"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
