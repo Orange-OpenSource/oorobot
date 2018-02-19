@@ -97,6 +97,16 @@ short num_of_cmd = 0;
 short max_num_cmd = 0;
 long startMovement=0;
 
+
+
+void moveServo(int angle) {
+  penServo.attach(3);
+  penServo.write(angle);
+  delay(200);
+  penServo.detach();
+}
+
+
 void setup() {
   Serial.begin(9600);
   loadParams();
@@ -120,8 +130,8 @@ void setup() {
   stepper2.setMaxSpeed(1000);
   stepper2.move(-1);
 
-  penServo.attach(3);
-  penServo.write(3);
+  moveServo(5);
+    
   // Bluetooth module init
 #ifdef HAVE_BLUETOOTH
   pinMode(RxD, INPUT);
@@ -507,13 +517,11 @@ boolean launchNextCommand() {
         break;
       case '!' :
         Serial.println(F("pen down"));
-        penServo.write(3);          
-        delay(100);
+        moveServo(0);
         break;        
       case '|' :          
         Serial.println(F("pen up"));
-        penServo.write(9);   
-        delay(100);
+        moveServo(30);
         break;         
       case 'B':
         Serial.println(F("begin loop"));
@@ -543,7 +551,6 @@ boolean launchNextCommand() {
     return true;
   }
 }
-
 
 short getStepSize(char* cmd,  short* commandLaunched)
 {
