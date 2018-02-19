@@ -36,6 +36,7 @@ Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
 - On peut accéder au réglage des paramètres en faisant un appui long sur un bouton dédié. Les paramètres sont :
     - La distance parcourue pour les déplacements "avancer" et "reculer".
     - Le nombre de pas que les moteurs doivent faire pour effectuer un tour complet (qui peut varier selon la surface sur laquelle doit évoluer le robot)
+    
 
 Pour changer de ligne il faut appuyer sur les touches "avancer" ou "reculer", pour changer les valeurs il faut appuyer sur les touches "tourner à droite" et "tourner à gauche". Un appui long sur ces touches permet d'augmenter la valeur d'incrément.
 
@@ -59,6 +60,7 @@ Le robot peut aussi être programmé à distance (bluetooth) via une application
 - 1 [lot de cables "dupont" de 20cm](https://fr.aliexpress.com/item/Free-Shipping-80pcs-dupont-cable-jumper-wire-dupont-line-female-to-female-dupont-line-20cm-1P/1699285992.html) : 0,85€
 - [des vis M2x5mm ](https://fr.aliexpress.com/item/50Pcs-lot-Screw-M2-5-of-Screws-Nuts-Assortment-Bolts-Screw-Spike-Round-Head-Screw-2mm/32722845879.html) : 0,70€
 - [des vis M3x5mm ](https://fr.aliexpress.com/item/M3-x-5mm-Cross-Flat-Head-Countersunk-Bolts-Machine-Screws-100Pcs/32762532904.html) : 1€ : il y en a besoin de 8 en tout par robot, vous pouvez récupérer des vis utilisées pour tenir les  disques durs ou les cartes mères
+
 
 Pour le bluetooth :
 - 1 [module bluetooth HC-06](https://fr.aliexpress.com/store/product/HC-06-Bluetooth-serial-pass-through-module-wireless-serial-communication-from-machine-Wireless-HC06-for-arduino/1022067_32284764842.html) : 2.60€
@@ -135,66 +137,95 @@ Rien de bien compliqué :
 - Il faut gérer le clavier analogique (valeurs non stables et mal réparties sur la plage analogique de l'Arduino)
 - Il faut configurer le nombre de "pas" à faire pour avancer d'1 cm et tourner à 90° (selon la taille et l'entraxe des roues)
 
-Vous trouverez le code dans le répertoire Arduino de ce dépôt.
+Vous trouverez le code dans le répertoire arduino de ce dépôt.
 
 ## Le montage
 
 ![montage1](https://user-images.githubusercontent.com/16662847/32058336-03825878-ba6a-11e7-93ae-5853149978a3.jpg)
 
-Brancher l'Arduino Nano sur le "sensor shield".
+Brancher l'arduino Nano sur le "sensor shield".
 
 Branchement du clavier sur le port A0 :
 - Brancher un fil entre la broche **VCC** du clavier et la broche **V** de l'Arduino
 - Brancher un fil entre la broche **GND** du clavier et la broche **G** de l'Arduino
 - Brancher un fil entre la broche **Out** du clavier et la broche **S** de l'Arduino
 
-Branchement de l'écran LCD sur une des lignes I2C: 
-- Brancher un fil entre la broche **GND** de l'écran et la broche **GND** de la ligne I2C choisie
-- Brancher un fil entre la broche **VCC** de l'écran et la broche **5V** de la ligne I2C choisie
-- Brancher un fil entre la broche **SDA** de l'écran et la broche **SDA** de la ligne I2C choisie
-- Brancher un fil entre la broche **SCL** de l'écran et la broche **SCL** de la ligne I2C choisie
+Branchement de l'écran LCD sur une des ligne I2C: 
+- Brancher un fil entre la broche **GND** de l'écran et la broche **GND** la ligne I2C choisie
+- Brancher un fil entre la broche **VCC** de l'écran et la broche **5V** la ligne I2C choisie
+- Brancher un fil entre la broche **SDA** de l'écran et la broche **SDA** la ligne I2C choisie
+- Brancher un fil entre la broche **SCL** de l'écran et la broche **SCL* la ligne I2C choisie
 
 Branchement des cartes de contrôle des moteurs pas-à-pas :
-- Moteur roue droite sur les port 4, 5, 6 et 7 de l'Arduino :
-  - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 4 de l'Arduino
-  - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 5 de l'Arduino
-  - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 6 de l'Arduino
-  - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 7 de l'Arduino
-  - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 7 de l'Arduino
-  - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 7 de l'Arduino
-- Moteur roue gauche sur les port 8, 9, 10 et 11 de l'Arduino :
-  - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 8 de l'Arduino
-  - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 9 de l'Arduino
-  - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 10 de l'Arduino
-  - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 11 de l'Arduino
-  - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 10 de l'Arduino
-  - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 11 de l'Arduino
+- Moteur roue droite sur les port 4, 5, 6 et 7 de l'arduino :
+  - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 4 de l'arduino
+  - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 5 de l'arduino
+  - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 6 de l'arduino
+  - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 7 de l'arduino
+  - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 7 de l'arduino
+  - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 7 de l'arduino
+- Moteur roue gauche sur les port 8, 9, 10 et 11 de l'arduino :
+  - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 8 de l'arduino
+  - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 9 de l'arduino
+  - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 10 de l'arduino
+  - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 11 de l'arduino
+  - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 10 de l'arduino
+  - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 11 de l'arduino
 
-Brancher les moteurs pas-à-pas sur les contrôleurs. Noter bien quel contrôleur est censé piloter quelle roue.
+Brancher les moteurs pas-à-pas sur les contrôleurs. Marquez les moteurs afin de les différencier facilement lors du montage final.
 
-Téléverser le programme sur l'Arduino.
+Branchement du servo-moteur sur le port 3 : brancher le cable de tel façon que le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**
 
-Faire un essai de bon fonctionnementt avant de fixer les composants sur le châssis :
+Branchement du module bluetooth :
+- Brancher le cable de l'interrupteur :
+  - Brancher un fil entre la broche **G** du port 12 de l'arduino en face du fil noir de l'interrupteur
+  - Brancher un fil entre la broche **V** du port 12 de l'arduino en face du fil rouge de l'interrupteur
+  - Brancher l'autre extrémité de l'interrupteur de tel manière à ce que le fil noir soit en face de la broche **GND** du module bluetooth et le fil rouge en face de la brocher **+5V**
+- Brancher un fil entre la broche **RX** du module bluetooth et la brocher **S** du port 12 de l'arduino
+- Brancher un fil entre la broche **TX** du module bluetooth et la brocher **S** du port 13 de l'arduino
+
+Téléverser le programme *init-bluetooth* sur l'Arduino. Ce programme va configurer le module bluetooth pour :
+- Donner un nom au format "OoRoBoT-XXXX"
+- Configurer le code PIN à 0000
+- Configurer la vitesse de communication à 9600 bauds
+
+Attendre quelques secondes puis téléverser le programme *oorobot* sur l'Arduino. Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le cablage est bien fait :
+- Vérifier le branchement du clavier, un appuie sur un bouton doit afficher des caractères sur l'écran LCD
+- Vérifier le constrate de l'écran : ce dernier doit s'allumer au démarrage, par contre si vous ne voyez rien, pas de panique c'est peut-être tout simplement parce que le constraste est mal réglé. Pour changer ce paramètre il suffit de tourner le petit potentiomètre d'errière l'écran avec un tournevis cruciforme jusquà avoir un bon compromis entre l'affichage des caractères et le fond de l'écran
+- Veuillez noter le dessus du servo-moteur : l'axe du moteur doit être sur la gauche du composant. Vérifier que ce dernier bouge bien si vous appuyer sur les boutons lever/baisser le crayon
+- Vérifier que les moteurs fonctionnent bien: lancer une commande "avance" pour vérifier que les moteurs tournent dans le bon sens. De même avec une commande "tourne à droite".
+- Vérifier le sens de l'interrupteur : jouer avec le bouton de l'interrupteur pour voir dans quelle position il allume ou éteint le module bluetooth. Veuillez noter ces états afin de bien positionner plus tard l'interrupteur sur le chassis.
+- Vérifier que le module bluetooth fonctionne : activer le bluetooth sur votre téléphone/tablette et vérifier que vous pouvez bien vous appairez avec le roboot (code PIN 0000). Si vous le pouvez vérifier ensuite que vous pouvez piloter le robot avec l'application Android fournie (voir plus bas)
+
+Si tout est OK, vous pouvez passer au montage des composants sur le chassis.
 
 ![montage2](https://user-images.githubusercontent.com/16662847/32058345-08176f4a-ba6a-11e7-88c3-ec4461ac8067.jpg)
 
-Ordre de montage des composants sur le châssis :
+Ordre de montage des composants sur le châssis 2D :
+- Monter chaque composant sur son support (à détailler) dont les roues sur les moteurs après les avoir fixer sur les côtés.
+- Placer l'interrupteur et le support à crayon sur le fond du chassis.
+- Encastrer le supports des contrôleurs des moteurs pas-pas, le séparateur et le support du clavier entre les 2 côtés du chassis
+- Encastrer les côtés sur le fond du chassis
+- Encastrer la partie supérieure
+
+
+Ordre de montage des composants sur le châssis 3D :
 - Débrancher les moteurs pas-à-pas des contrôleurs
 - Fixer les roues en force sur les moteurs pas-à-pas
-- Faire passer les contrôleurs des moteurs dans les trous placés derrière le support de l'Arduino
-- Visser l'Arduino sur son support
-- Visser les controleurs sur leurs support (garder la cohérence contrôleur moteur droit fixé à droite du robot)
-- Visser le clavier sur son support en passant les câbles entre le châssis et le clavier
+- Faire passer les contrôleurs des moteurs dans les trous placés derrière le support de l'arduino
+- Visser l'arduino sur son support
+- Visser les controleurs sur leurs support (garder la cohérence contrôleur moteur droit fixer à droite du robot)
+- Visser le clavier sur son support en passant les cables entre le châssis et le clavier
 - Plier les broches de l'écrans pour les mettre à la verticale. Visser ensuite l'écran sur le châssis
 - Entrer en force les moteurs pas-à-pas dans leur emplacement. Faire passer leurs fils jusqu'à leur contrôleur respectif. Visser ensuite les vis M3 pour maintenir les moteurs au châssis
-- Placer le bloc de piles devant l'Arduino
+- Placer le bloc de pile devant l'arduino
 
 ## Les évolutions
 
 - On ajoute un "capot".
-- On ajoute une interface Bluetooth.
+- On ajoute une interface bluetooth.
 - On  ajoute un servomoteur pour soulever/baisser le crayon.
-- On ajoute des capteurs (suivi de ligne, distance) et on fait un _Mbot like_.
+- On ajoute des capteurs (suivi de ligne, distance) et on fait un Mbot like.
 - Il sera possible également d'essayer d'autres moteurs pas-à-pas plus rapides.
 
 
@@ -202,7 +233,7 @@ Ordre de montage des composants sur le châssis :
  
 Les premiers essais avec un module Bluetooth HC-06 sont concluants, je peux piloter mon robot avec mon téléphone portable (via l'application "Bluetooth Serial Controler") ou mon PC (via minicom) (voir répertoire android).
 
-La prochaine étape est de piloter le robot via *mblock* et de faire une application Android pour contrôler le robot. Pour la version mobile/tablette un collègue (Julien) a commencé une application avec Ionic (voir répertoire OoRobotIonicApp) utilisant Blockly pour programmer le robot avec des blocs :
+La prochaine étape est de piloter le robot via mblock et de faire une application Android pour contrôler le robot. Pour la version mobile/tablette un collègue (Julien) a commencé une application avec Ionic (voir répertoire OoRobotIonicApp) utilisant Blockly pour programmer le robot avec des blocs :
 
 ![app](https://user-images.githubusercontent.com/16662847/36200888-63228792-117e-11e8-93df-88c7be66a311.png)
 
@@ -231,6 +262,8 @@ ou
 ```
 !B5U50R144E|
 ```
+
+
 
 ## Licences
 
