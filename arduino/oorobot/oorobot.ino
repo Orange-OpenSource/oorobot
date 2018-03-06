@@ -131,7 +131,7 @@ void setup() {
   stepper2.move(-1);
 
   moveServo(5);
-    
+
   // Bluetooth module init
 #ifdef HAVE_BLUETOOTH
   pinMode(RxD, INPUT);
@@ -210,7 +210,7 @@ void actionButtonForScreen(char button) {
     changeDisplay = 1;
   } else if (selectedMenu == CTRL_MENU) {
     changeDisplay = 1;
-    Serial.print(F("New char : "));    
+    Serial.print(F("New char : "));
     Serial.println(button);
     if ( button > 47  && button < 58) // it's a number
     {
@@ -268,7 +268,7 @@ void actionButtonForScreen(char button) {
         case 'R' :
         case 'W' :
         case '!' :
-        case '|' :        
+        case '|' :
         case 'P' :
           if (cmd_l < MAX_COMMANDS) {
             cmd[cmd_l++] = button;
@@ -494,7 +494,7 @@ boolean launchNextCommand() {
       case 'W':
         Serial.println(F("set waiting step delay"));
         stepDelay=stepSize;
-        break;      
+        break;
       case 'U':
         Serial.println(F("stepForward"));
         stepForward(stepSize);
@@ -518,11 +518,11 @@ boolean launchNextCommand() {
       case '!' :
         Serial.println(F("pen down"));
         moveServo(0);
-        break;        
-      case '|' :          
+        break;
+      case '|' :
         Serial.println(F("pen up"));
         moveServo(30);
-        break;         
+        break;
       case 'B':
         Serial.println(F("begin loop"));
         if (loopIndex>=MAX_LOOPS) {
@@ -536,7 +536,7 @@ boolean launchNextCommand() {
         }
         break;
       case 'E':
-        Serial.println(F("end loop"));      
+        Serial.println(F("end loop"));
         if (loopCounter[loopIndex-1]>1) {
           commandLaunched=loopPointer[loopIndex-1];
           loopCounter[loopIndex-1]--;
@@ -570,7 +570,7 @@ short getStepSize(char* cmd,  short* commandLaunched)
 
   if (stepsize == 0)
   {
-    switch (command) {    
+    switch (command) {
       case 'W':
         stepsize = stepDelay;
         break;
@@ -601,16 +601,16 @@ boolean isCommandTerminated() {
       stepperSpeed=MAX_STEPPER_SPEED;
     } else {
       Serial.print(F("speed:"));
-      Serial.println(stepperSpeed);        
-      stepper2.setSpeed(stepperSpeed);    
-      stepper1.setSpeed(stepperSpeed);    
+      Serial.println(stepperSpeed);
+      stepper2.setSpeed(stepperSpeed);
+      stepper1.setSpeed(stepperSpeed);
     }
-    
-  } 
+
+  }
 
   steps1 = stepper1.distanceToGo();
   steps2 = stepper2.distanceToGo();
-  //Serial.println(steps1);  
+  //Serial.println(steps1);
   stepper1.runSpeedToPosition();
   stepper2.runSpeedToPosition();
 
@@ -639,10 +639,10 @@ void stepForward(short distance) {
   isMoving = true;
   startMovement=millis();
   stepperSpeed = MIN_STEPPER_SPEED;
-    
+
   int target = (int)  (((float)params.stepCm / 10.0f) * ((float)distance * (float)lineStepsCM / 100.0f));
 #ifdef INVERT_DIRECTION
-  target = target * -1; 
+  target = target * -1;
 #endif
 
   stepper1.move(-target);
