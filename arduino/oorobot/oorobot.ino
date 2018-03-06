@@ -326,6 +326,7 @@ void actionButtonForSettingsScreen(char button) {
       } else {
         params.turnSteps++;
       }
+      break;
     case '+':
       if (selectedLine == 0) {
         params.stepCm += 10;
