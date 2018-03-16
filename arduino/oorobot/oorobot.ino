@@ -11,7 +11,7 @@
 #include "buttons.h"
 
 
-#define OOROBOT_VERSION "1.00"
+#define OOROBOT_VERSION "1.1.0"
 
 #define SCREEN_TIMEOUT 25
 
@@ -67,7 +67,7 @@ struct Params {
   int turnSteps;
 };
 
-int lineStepsCM = 145; // number of steps to do 1cm
+int lineStepsCM = 140; // number of steps to do 1cm
 int stepDelay = 800;
 int steps1 = 0; // keep track of the step count for motor 1
 int steps2 = 0; // keep track of the step count for motor 2
@@ -120,8 +120,7 @@ void setup() {
   stepper2.setMaxSpeed(1000);
   stepper2.move(-1);
 
-  penServo.attach(3);
-  penServo.write(3);
+  moveServo(5);  
   // Bluetooth module init
 #ifdef HAVE_BLUETOOTH
   pinMode(RxD, INPUT);
@@ -157,7 +156,6 @@ void loop() {
       }
     }
   }
-
 
   if (isMoving) {
     if (isCommandTerminated()) {
@@ -355,7 +353,7 @@ void updateScreen() {
       //lcd.setBacklight(HIGH);
       lcd.display();
       lcd.setCursor(0, 0);
-      lcd.print("  OoRoBoT " OOROBOT_VERSION);
+      lcd.print(" OoRoBoT  " OOROBOT_VERSION);
       lcd.setCursor(0, 1);
       lcd.print(F("Pret \7 demarrer!"));
 #ifdef HAVE_BLUETOOTH
@@ -449,18 +447,15 @@ boolean launchNextCommand() {
   } else {
     disableMotors();
     lcd.clear();
-    lcd.setBacklight(HIGH);
-    lcd.print((num_of_cmd + 1));
-    lcd.print(F(" sur "));
-    lcd.print(max_num_cmd);
-    lcd.print(F(" : "));
-    lcd.print(commandToDisplay(cmd[commandLaunched]));
+    if (stepDelay>100) {
+      lcd.setBacklight(HIGH);
+      lcd.print((num_of_cmd + 1));
+      lcd.print(F(" sur "));
+      lcd.print(max_num_cmd);
+      lcd.print(F(" : "));
+      lcd.print(commandToDisplay(cmd[commandLaunched]));
+    }
 #ifdef HAVE_BLUETOOTH
-    BTSerie.print(F("etape "));
-    BTSerie.print((num_of_cmd + 1));
-    BTSerie.print(F(" sur "));
-    BTSerie.print(max_num_cmd);
-    BTSerie.print(F(" : "));
     BTSerie.println(cmd[commandLaunched]);
 #endif
     Serial.print(F("etape "));
@@ -473,6 +468,7 @@ boolean launchNextCommand() {
     num_of_cmd++;
     delay(stepDelay);
     lcd.setBacklight(LOW);
+    
     enableMotors();
 
     char command = cmd[commandLaunched];
@@ -586,6 +582,7 @@ short getStepSize(char* cmd,  short* commandLaunched)
 }
 
 boolean isCommandTerminated() {
+  /*
   int diff = (millis() - startMovement);
   if (diff>=100) {
     startMovement=millis();
@@ -599,8 +596,11 @@ boolean isCommandTerminated() {
       stepper1.setSpeed(stepperSpeed);    
     }
     
-  } 
-
+  }
+  */
+  stepper2.setSpeed(MAX_STEPPER_SPEED);    
+  stepper1.setSpeed(MAX_STEPPER_SPEED);
+  
   steps1 = stepper1.distanceToGo();
   steps2 = stepper2.distanceToGo();
   //Serial.println(steps1);  

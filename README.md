@@ -223,6 +223,8 @@ Combinaisons possibles
 - ! baisser le crayon
 - | lever le crayon
 
+c50a30
+
 Pour dessiner une étoile :
 ```
 !U50R144U50R144U50R144U50R144U50R144|
