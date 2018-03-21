@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, Platform, Content } from 'ionic-angular';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { Webcom } from 'webcom';
+
 declare var Blockly: any;
 /**
  * Generated class for the BlocklyPage page.
@@ -32,7 +34,7 @@ export class BlocklyPage {
 
     console.log(generated)
     if (generated.indexOf('command') == 0 && generated.lastIndexOf('command') == 0) {
-      this.code = "AAW30" + generated.substring(7, generated.length) + "G";
+      this.code = "AAW20" + generated.substring(7, generated.length) + "G";
       this.blProvider.serialWritePreferedDevice(this.code).then(() => {
 
       });
@@ -52,9 +54,11 @@ export class BlocklyPage {
       '<block type="Down"></block>' +
       '<block type="Left"></block>' +
       '<block type="Right"></block>' +
+      '<block type="Loop">   </block>' +
       '<block type="PenUp">   </block>' +
       '<block type="PenDown">   </block>' +
-      '<block type="Loop">   </block>' +
+      '<block type="CircleRight">   </block>' +
+      '<block type="CircleLeft">   </block>' +
       '<block type="Pause"></block>' +
       '</xml>'
 
@@ -101,7 +105,7 @@ export class BlocklyPage {
       return text;
     };
 
-    Blockly.FieldAngle.ROUND = 1;
+    Blockly.FieldAngle.ROUND = 15;
     Blockly.FieldAngle.HALF = 100;
     Blockly.FieldAngle.CLOCKWISE = true;
     Blockly.FieldAngle.OFFSET = 90;
@@ -276,6 +280,73 @@ export class BlocklyPage {
       }
     };
 
+    Blockly.Blocks['CircleRight'] = {
+      init: function () {
+        this.jsonInit({
+          "message0": '%1 r%2 a%3',
+          "args0": [
+
+            {
+              "type": "field_image",
+              "src": "assets/svg/circle-right.svg",
+              "width": 40,
+              "height": 40,
+              "alt": "*"
+            },
+            {
+              "type": "field_input",
+              "name": "RADIUS",
+              "text": "100"
+            },
+            {
+              "type": "field_angle",
+              "name": "ANGLE",
+              "angle": "90"
+            }
+          ],
+          "colour": moveColor,
+          "tooltip": "",
+          "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
+          "previousStatement": null,
+          "nextStatement": null,
+        });
+      }
+    };
+
+
+    Blockly.Blocks['CircleLeft'] = {
+      init: function () {
+        this.jsonInit({
+          "message0": '%1 r%2 a%3',
+          "args0": [
+
+            {
+              "type": "field_image",
+              "src": "assets/svg/circle-left.svg",
+              "width": 40,
+              "height": 40,
+              "alt": "*"
+            },
+            {
+              "type": "field_input",
+              "name": "RADIUS",
+              "text": "100"
+            },
+            {
+              "type": "field_angle",
+              "name": "ANGLE",
+              "angle": "90"
+            }
+          ],
+          "colour": moveColor,
+          "tooltip": "",
+          "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
+          "previousStatement": null,
+          "nextStatement": null,
+        });
+      }
+    };
+
     Blockly.Blocks['Loop'] = {
       init: function () {
         this.jsonInit({
@@ -292,7 +363,7 @@ export class BlocklyPage {
             {
               "type": "field_number",
               "name": "FIELDNAME",
-              "value": 5
+              "value": 4
             }
           ],
           "message1": "%1",
@@ -414,6 +485,22 @@ export class BlocklyPage {
       let operator = block.getFieldValue('FIELDNAME');
 
       let code = "R" + operator;
+      return code;
+    };
+
+    Blockly.JavaScript['CircleLeft'] = function (block) {
+      let radius= block.getFieldValue('RADIUS');
+      let angle = block.getFieldValue('ANGLE');
+
+      let code = "r0c" + radius + "a" + angle;
+      return code;
+    };
+
+    Blockly.JavaScript['CircleRight'] = function (block) {
+      let radius= block.getFieldValue('RADIUS');
+      let angle = block.getFieldValue('ANGLE');
+
+      let code = "r1c" + radius + "a" + angle;
       return code;
     };
 
