@@ -26,15 +26,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="285.16848"
-     inkscape:cy="1649.8536"
+     inkscape:zoom="0.25"
+     inkscape:cx="572.40839"
+     inkscape:cy="661.66996"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="cm"
-     inkscape:window-width="1855"
-     inkscape:window-height="1056"
-     inkscape:window-x="65"
+     inkscape:window-width="2495"
+     inkscape:window-height="1416"
+     inkscape:window-x="1345"
      inkscape:window-y="24"
      inkscape:window-maximized="1" />
   <metadata
@@ -955,7 +955,7 @@
          id="tspan3489"
          x="124.52617"
          y="-968.68005"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:79.81269836px;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue'">OoRoBoT - Plateau niveau 2</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:79.81269836px;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue'">OoRoBoT - Plateau 2</tspan></text>
     <g
        id="g5850"
        transform="matrix(0.6538339,0,0,0.6538339,1568.8387,140.88517)">
@@ -1425,26 +1425,7 @@
        y="-1041.7327"
        x="10.629921"
        id="image8782"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAABHNCSVQICAgIfAhkiAAAA9pJREFU
-eJzt3VFu2zAQQEG58P2vnN7gMSirLOXM/BZ2bCUPBLil9Lqu6+v6UF9f/dVer9fW61dW778y/flX
-dr/fE/yZ/gBwMoFAEAgEgUAQCASBQHjXP969Tbhreht19/133b0Nvfv+n/D3YwWBIBAIAoEgEAgC
-gSAQCAKBkHOQlbv/u/P0Pvrdc5LpOcv09X3C348VBIJAIAgEgkAgCASCQCAIBMLWHOS3m54jrEzP
-WT6BFQSCQCAIBIJAIAgEgkAgCASCOUjYvW/U3a9fufv9fwMrCASBQBAIBIFAEAgEgUAQCIStOcin
-nxc4fc6xa/r3N/3zv8MKAkEgEAQCQSAQBAJBIBAEAiHnINP79He7+znhu6bnMHc/h/0JrCAQBAJB
-IBAEAkEgEAQCQSAQ3tN7/Z/s9PMiT3/O+k+wgkAQCASBQBAIBIFAEAgEgUB4Xdf1z5vZpz/f4vTz
-DE//fKefp1n5zvWzgkAQCASBQBAIBIFAEAgEgUB4fZ2+Wb1hek6w8vT7Wk2fZ9n1netjBYEgEAgC
-gSAQCAKBIBAIAoGQ50HuHpE8fZ98+rzLrtPPo6z8xOe3gkAQCASBQBAIBIFAEAgEgUC49TzI3XOC
-u52+zz/9+Vae/vmvywoCSSAQBAJBIBAEAkEgEAQCYes8yPTzIabv2zT9/ivT12flCXMuKwgEgUAQ
-CASBQBAIBIFAEAiEreek75qek+ya/vynz6lWTn++yXVZQSAJBIJAIAgEgkAgCASCQCC8d148vU89
-vY9+9+ufPqeYvn7/4/2tIBAEAkEgEAQCQSAQBAJBIBByDjJ936SV6TnHruk5x8ru57t7jvUTcxor
-CASBQBAIBIFAEAgEgUAQCISt8yAru/vQ0+cppl+/Mn1e43TuiwU3EwgEgUAQCASBQBAIBIFAeO/s
-1Z8+J9h1+pzh7us3PcdZ+YnrbwWBIBAIAoEgEAgCgSAQCAKB8P7kMwGrffLpOcz0z981/XyW3d+v
-+2LBJoFAEAgEgUAQCASBQBAIhK3ng0w7fYYz/XyLp58XOeH5L1YQCAKBIBAIAoEgEAgCgSAQCFvP
-B3n6fZ9On0PsXt/p1++anvNclxUEkkAgCASCQCAIBIJAIAgEwq3PSX+60+c803OKlU/4flYQCAKB
-IBAIAoEgEAgCgSAQCL96DnL6eY/T70t293PKp59Df11WEEgCgSAQCAKBIBAIAoEgEAhbc5DT9+lX
-ps8bTF+/6Z//BFYQCAKBIBAIAoEgEAgCgSAQCDkHmZ4TnG76vMjK9HmK08/LfOf7W0EgCASCQCAI
-BIJAIAgEgkAgCATCXxpBdo8E+oYuAAAAAElFTkSuQmCC
-"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAABHNCSVQICAgIfAhkiAAAA9pJREFU eJzt3VFu2zAQQEG58P2vnN7gMSirLOXM/BZ2bCUPBLil9Lqu6+v6UF9f/dVer9fW61dW778y/flX dr/fE/yZ/gBwMoFAEAgEgUAQCASBQHjXP969Tbhreht19/133b0Nvfv+n/D3YwWBIBAIAoEgEAgC gSAQCAKBkHOQlbv/u/P0Pvrdc5LpOcv09X3C348VBIJAIAgEgkAgCASCQCAIBMLWHOS3m54jrEzP WT6BFQSCQCAIBIJAIAgEgkAgCASCOUjYvW/U3a9fufv9fwMrCASBQBAIBIFAEAgEgUAQCIStOcin nxc4fc6xa/r3N/3zv8MKAkEgEAQCQSAQBAJBIBAEAiHnINP79He7+znhu6bnMHc/h/0JrCAQBAJB IBAEAkEgEAQCQSAQ3tN7/Z/s9PMiT3/O+k+wgkAQCASBQBAIBIFAEAgEgUB4Xdf1z5vZpz/f4vTz DE//fKefp1n5zvWzgkAQCASBQBAIBIFAEAgEgUB4fZ2+Wb1hek6w8vT7Wk2fZ9n1netjBYEgEAgC gSAQCAKBIBAIAoGQ50HuHpE8fZ98+rzLrtPPo6z8xOe3gkAQCASBQBAIBIFAEAgEgUC49TzI3XOC u52+zz/9+Vae/vmvywoCSSAQBAJBIBAEAkEgEAQCYes8yPTzIabv2zT9/ivT12flCXMuKwgEgUAQ CASBQBAIBIFAEAiEreek75qek+ya/vynz6lWTn++yXVZQSAJBIJAIAgEgkAgCASCQCC8d148vU89 vY9+9+ufPqeYvn7/4/2tIBAEAkEgEAQCQSAQBAJBIBByDjJ936SV6TnHruk5x8ru57t7jvUTcxor CASBQBAIBIFAEAgEgUAQCISt8yAru/vQ0+cppl+/Mn1e43TuiwU3EwgEgUAQCASBQBAIBIFAeO/s 1Z8+J9h1+pzh7us3PcdZ+YnrbwWBIBAIAoEgEAgCgSAQCAKB8P7kMwGrffLpOcz0z981/XyW3d+v +2LBJoFAEAgEgUAQCASBQBAIhK3ng0w7fYYz/XyLp58XOeH5L1YQCAKBIBAIAoEgEAgCgSAQCFvP B3n6fZ9On0PsXt/p1++anvNclxUEkkAgCASCQCAIBIJAIAgEwq3PSX+60+c803OKlU/4flYQCAKB IBAIAoEgEAgCgSAQCL96DnL6eY/T70t293PKp59Df11WEEgCgSAQCAKBIBAIAoEgEAhbc5DT9+lX ps8bTF+/6Z//BFYQCAKBIBAIAoEgEAgCgSAQCDkHmZ4TnG76vMjK9HmK08/LfOf7W0EgCASCQCAI BIJAIAgEgkAgCATCXxpBdo8E+oYuAAAAAElFTkSuQmCC "
        style="image-rendering:optimizeSpeed"
        preserveAspectRatio="none"
        height="95.669289"

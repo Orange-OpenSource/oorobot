@@ -27,14 +27,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="384.18233"
+     inkscape:cx="-114.3891"
      inkscape:cy="1585.0213"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="mm"
-     inkscape:window-width="1855"
-     inkscape:window-height="1056"
-     inkscape:window-x="65"
+     inkscape:window-width="2495"
+     inkscape:window-height="1416"
+     inkscape:window-x="1345"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      showguides="false" />
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -517,7 +517,7 @@
          id="tspan3489"
          x="124.52625"
          y="-965.4043"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:79.81269836px;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue'">OoRoBoT - Plateau niveau 1</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:79.81269836px;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue'">OoRoBoT - Plateau 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
