@@ -51,7 +51,7 @@ SoftwareSerial BTSerie(RxD, TxD);
 
 #define MAX_STEPPER_SPEED 900
 #define MIN_STEPPER_SPEED 200
-#define WHEEL_SPACING_MM 140
+#define WHEEL_SPACING_MM 132
 
 int stepperSpeed = MIN_STEPPER_SPEED;
 
@@ -555,7 +555,7 @@ boolean launchNextCommand() {
         moveServo(0);
         break;
       case '|' :
-        Serial.println(F("pen up"));
+        Serial.println(F("pen up"));  
         moveServo(30);
         break;
       case 'c' :
@@ -642,6 +642,7 @@ short getStepSize(char* cmd,  short* commandLaunched)
 }
 
 boolean isCommandTerminated() {
+  /*
   int diff = (millis() - startMovement);
   if (diff>=100) {
     startMovement=millis();
@@ -655,8 +656,9 @@ boolean isCommandTerminated() {
       stepper1.setSpeed(stepperSpeed);
     }
   }
-  //stepper2.setSpeed(MAX_STEPPER_SPEED);    
-  //stepper1.setSpeed(MAX_STEPPER_SPEED);
+  */
+  stepper2.setSpeed(MAX_STEPPER_SPEED);    
+  stepper1.setSpeed(MAX_STEPPER_SPEED);
 
   steps1 = stepper1.distanceToGo();
   steps2 = stepper2.distanceToGo();
@@ -689,6 +691,7 @@ void doCircle(float radius, float angle, boolean reverseOrientation){
   isMoving = true;
   startMovement=millis();
   //AAW10r1c50a90G
+  //AAW10r0c200a45G
   float lenght_big_arc, lenght_small_arc;
   float steps_big_arc, steps_small_arc;
   float speed_big_arc, speed_small_arc;

@@ -14,10 +14,22 @@
 
 
 <ion-content #content no-padding>
+  <div class="ion-canvas">
+    <canvas #canvasDiv></canvas>
+  </div>
   <div #blocklyDiv></div>
 </ion-content>
 
 <ion-footer>
-  <button ion-button full (click)="generateCode()">Go</button>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button full color="secondary" (click)="testCode()">Try</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button full (click)="generateCode()">Go</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-footer>

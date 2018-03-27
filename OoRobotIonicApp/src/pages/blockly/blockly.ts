@@ -1,8 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, Platform, Content } from 'ionic-angular';
+import { ModalController, NavController, NavParams, Platform, Content } from 'ionic-angular';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import { Webcom } from 'webcom';
+import OoRoBoT from './oorobot';
+//import { Dialogs } from '@ionic-native/dialogs';
 
 declare var Blockly: any;
 /**
@@ -12,7 +13,6 @@ declare var Blockly: any;
  * Ionic pages and navigation.
  */
 
-
 @Component({
   selector: 'page-blockly',
   templateUrl: 'blockly.html',
@@ -21,15 +21,25 @@ export class BlocklyPage {
   myWorkspace: any;
   code = "";
   blocklyDivStyle = {};
+  oorobot: any;
+
   @ViewChild('blocklyDiv') blocklyDiv: ElementRef;
   @ViewChild(Content) content: Content;
+  @ViewChild('canvasDiv') canvasDiv: ElementRef;
+
   constructor(private screenOrientation: ScreenOrientation, private blProvider: BluetoothProvider, public navCtrl: NavController, private platform: Platform) {
-
-
     this.setBlocks(); // define Oorobot Blocks
   }
-  generateCode() {
 
+  testCode() {
+
+    let code: string = Blockly.JavaScript.workspaceToCode(this.myWorkspace);
+    this.oorobot.setCommands(code);
+	  this.oorobot.draw();
+
+  }
+
+  generateCode() {
     let generated: string = Blockly.JavaScript.workspaceToCode(this.myWorkspace);
 
     console.log(generated)
@@ -42,6 +52,7 @@ export class BlocklyPage {
   }
 
   ionViewDidEnter() {
+    this.oorobot = new OoRoBoT(this.canvasDiv.nativeElement, 500, 300, "#33cc00");
 
     let blocklyDiv = this.blocklyDiv.nativeElement;
     blocklyDiv.style.height = this.content.contentHeight + "px";
@@ -105,7 +116,7 @@ export class BlocklyPage {
       return text;
     };
 
-    Blockly.FieldAngle.ROUND = 15;
+    Blockly.FieldAngle.ROUND = 5;
     Blockly.FieldAngle.HALF = 100;
     Blockly.FieldAngle.CLOCKWISE = true;
     Blockly.FieldAngle.OFFSET = 90;
