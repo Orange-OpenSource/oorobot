@@ -213,7 +213,6 @@
 	$("#oorobot-test").on("click", () => {
       const code = Blockly.JavaScript.workspaceToCode(workspace);
 	  const xml = Blockly.Xml.workspaceToDom(workspace);
-
 	  localStorage.setItem("code", Blockly.Xml.domToText(xml));
 	  $("#drawDiv").show();
 	  oorobot.setCommands(code);
@@ -233,14 +232,14 @@
 		$("#oorobot-test").trigger("click");
 		setTooltip(btn, 'URL copiée dans le presse papier');
 		hideTooltip(btn);
-		const url = window.location;
+		const url = window.location.origin+window.location.pathname+"?code="+encodeURIComponent(oorobot.commands);
         return url;
       }
 	});
 	const qrcode = new QRCode($("#qrcode")[0]);
 	$("#oorobot-qrcode").on("click", () => {
 	  $("#oorobot-test").trigger("click");
-	  const url = window.location;
+	  const url = window.location.origin+window.location.pathname+"?code="+encodeURIComponent(oorobot.commands);
 	  qrcode.makeCode(url);
 	  $("#qrcodeDiv").show();
 	});
