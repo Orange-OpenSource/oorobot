@@ -126,6 +126,199 @@ class OoRoBoT {
 			console.log(command, size);
 		}
 	}
+
+	toBlocklyXml() {
+		this.lastCircleRadius=0;
+		this.reverseOrientation=1;
+		
+		this.statementsIdx=[];
+		this.statementsIdxHaveLoop=0;
+		let idx=0;
+		this.xml='<xml xmlns="http://www.w3.org/1999/xhtml"><variables></variables><block type="Start"><statement name="DO">';
+		this.statementsIdx.push(0);
+		this.statementsIdxMax=1;
+		while(idx<this.commands.length) {
+			const command = this.commands[idx];
+			let value=""
+			while (this.commands[idx+1] && this.commands[idx+1].match(/^\d$/)) {
+				value += ''+this.commands[idx+1];
+				idx++;
+			}
+			if (value == "") {
+				value = this.getDefaultCommandValue(command);
+			} else {
+				value = parseInt(value);
+			}
+			this.xmlForCommand(command, value);
+			idx++;
+		}
+		this.xml=this.xml.replace(/<next>$/, "");
+		let commands=this.statementsIdx.pop();
+		console.log("end", commands);
+		while(commands-- > 0-this.statementsIdxHaveLoop) {
+			this.xml+="</block></next>";
+		}
+		this.xml=this.xml.replace(/<\/next>$/, "");
+		this.xml+='</statement></block></xml>';
+		console.log(this.xml);
+		return this.xml;
+	}
+	/*
+<xml xmlns="http://www.w3.org/1999/xhtml"><variables></variables>
+  <block type="Start">
+    <statement name="DO">
+       <block type="Up"><field name="FIELDNAME">100</field>
+         <next>
+            <block type="Right"><field name="FIELDNAME">90</field>
+            </block>
+         </next>
+        </block>
+        </next>
+       </block>
+     </statement>
+   </block>
+</xml>
+
+B4U100R90ER45U100
+<xml xmlns="http://www.w3.org/1999/xhtml"><variables></variables>
+<block type="Start">
+B   <statement name="DO">
+4     <block type="Loop"><field name="FIELDNAME">4</field>
+       <statement name="DO">
+U         <block type="Up"><field name="FIELDNAME">100</field>
+           <next>
+R             <block type="Right"><field name="FIELDNAME">90</field>
+             </block>
+           </next>
+         </block>
+E        </statement>
+        <next>
+R          <block type="Right"><field name="FIELDNAME">45</field>
+U            <next>
+               <block type="Up"><field name="FIELDNAME">100</field>
+               </block>
+            </next>
+          </block>
+         </next>
+       </block>
+     </statement>
+</block></xml>
+
+<xml xmlns="http://www.w3.org/1999/xhtml"><variables></variables>
+<block type="Start">
+  <statement name="DO">
+    <block type="Loop"><field name="FIELDNAME">4</field>
+      <statement name="DO">
+        <block type="Up"><field name="FIELDNAME">100</field>
+          <next>
+            <block type="Right"><field name="FIELDNAME">90</field>
+            </block>
+          </next>
+         </block>
+       </statement>
+       <next>
+         <block type="Right"><field name="FIELDNAME">45</field>
+           <next>
+              <block type="Up"><field name="FIELDNAME">100</field>
+              </block>
+           </next>
+         </block>
+   </statement>
+</block></xml>
+
+<xml xmlns="http://www.w3.org/1999/xhtml"><variables></variables>
+<block type="Start">
+    <statement name="DO">
+      <block type="Loop"><field name="FIELDNAME">4</field>
+         <statement name="DO">
+           <block type="Up"><field name="FIELDNAME">100</field>
+             <next>
+                <block type="Right"><field name="FIELDNAME">90</field>
+                </block>
+              </next>
+           </block>
+        </statement>
+        </block>
+        <block type="Right"><field name="FIELDNAME">45</field>
+          <next>
+            <block type="Up"><field name="FIELDNAME">100</field>
+            </block>
+          </next>
+        </block>
+     </statement>
+</block></xml>
+*/
+	xmlForCommand(command, size) {
+		switch (command) {
+		case 'B':
+			this.xml+='<block type="Loop"><field name="FIELDNAME">'+size+'</field><statement name="DO">';
+			this.statementsIdxHaveLoop=1;
+			this.statementsIdx.push(0);
+			break;
+		case 'E':
+			this.xml=this.xml.replace(/<next>$/, "");
+			let commands=this.statementsIdx.pop();
+			while(commands-- > 0) {
+				this.xml+="</block></next>";
+			}
+			this.xml=this.xml.replace(/<\/next>$/, "");
+			this.xml+='</statement><next>';
+			break;
+		case '#':
+			let color="#";
+			size=pad(size, 9);
+			for (let i=0;i<size.length;i+=3) {
+				color+=""+pad(parseInt(size.substr(i, 3)).toString(16), 2);
+			}
+			this.xml+='<block type="PenColor"><field name="FIELDNAME">'+color+'</field><next>';
+			this.statementsIdx[this.statementsIdx.length-1]++;
+			break;
+		case 'U':
+			this.xml+='<block type="Up"><field name="FIELDNAME">'+size+'</field><next>';
+			this.statementsIdx[this.statementsIdx.length-1]++;
+			break;
+		case 'D':
+			this.xml+='<block type="Down"><field name="FIELDNAME">'+size+'</field><next>'
+			this.statementsIdx[this.statementsIdx.length-1]++;
+			break;
+		case 'R':
+			this.xml+='<block type="Right"><field name="FIELDNAME">'+size+'</field><next>'
+			this.statementsIdx[this.statementsIdx.length-1]++;
+			break;
+		case 'L':
+			this.xml+='<block type="Left"><field name="FIELDNAME">'+size+'</field><next>'
+			this.statementsIdx[this.statementsIdx.length-1]++;
+			break;
+		case '!':
+			this.xml+='<block type="PenDown"><next>';
+			this.statementsIdx[this.statementsIdx.length-1]++;
+			break;
+		case '|':
+			this.xml+='<block type="PenUp"><next>';
+			this.statementsIdx[this.statementsIdx.length-1]++;
+			break;
+		case 'c':
+			this.lastCircleRadius=size;
+			break;
+		case 'r':
+			if (size==1) {
+				this.reverseOrientation=1;
+			} else {
+				this.reverseOrientation=-1;         
+			}
+			break;
+		case 'a':
+			if (this.reverseOrientation) {
+				this.xml+='<block type="CircleRight"><field name="RADIUS">'+this.lastCircleRadius+'</field><field name="ANGLE">'+size+'</field><next>'
+			} else {
+				this.xml+='<block type="CircleLeft"><field name="RADIUS">'+this.lastCircleRadius+'</field><field name="ANGLE">'+size+'</field><next>'
+			}
+			this.statementsIdx[this.statementsIdx.length-1]++;
+			break;
+		default:
+			console.log(command, size);
+		}
+	}
 	
 	nextCommand() {
 		if (this.commandLaunched>=this.commands.length) {
