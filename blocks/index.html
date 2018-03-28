@@ -11,7 +11,7 @@
     <script src="https://io.datasync.orange.com/js/latest/webcom.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
 	
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	
 	<script src="./oorobot.js"></script>
 	<script src="qrcode.min.js"></script>
@@ -43,6 +43,7 @@
 	#qrcodeDiv {
 	  top:10px;
 	  left:10px;
+	  z-index: 100;
 	}
 	#drawDiv {
 	  padding-top:10px;
@@ -232,14 +233,14 @@
 		$("#oorobot-test").trigger("click");
 		setTooltip(btn, 'URL copiée dans le presse papier');
 		hideTooltip(btn);
-		const url = window.location.origin+window.location.pathname+"index.html?code="+encodeURIComponent(oorobot.commands);
+		const url = window.location;
         return url;
       }
 	});
 	const qrcode = new QRCode($("#qrcode")[0]);
 	$("#oorobot-qrcode").on("click", () => {
 	  $("#oorobot-test").trigger("click");
-	  const url = window.location.origin+window.location.pathname+"index.html?code="+encodeURIComponent(oorobot.commands);
+	  const url = window.location;
 	  qrcode.makeCode(url);
 	  $("#qrcodeDiv").show();
 	});
