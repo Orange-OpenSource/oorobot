@@ -214,7 +214,7 @@ Ensuite téléverser le programme *oorobot* sur l'Arduino. Ce programme va pilot
 
 Si tout est OK, vous pouvez passer au montage des composants sur le chassis.
 
-[Ordre de montage des composants sur le châssis 2D](2d/README.md)
+[Ordre de montage des composants sur le châssis 2D](2d/)
 
 Ordre de montage des composants sur le châssis 3D :
 
