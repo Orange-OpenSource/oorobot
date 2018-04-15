@@ -159,14 +159,14 @@ Branchement de l'écran LCD sur une des ligne I2C (détacher un groupe de 4 fils
 - Brancher un fil entre la broche **SCL** de l'écran et la broche **SCL* la ligne I2C choisie
 
 Branchement des cartes de contrôle des moteurs pas-à-pas :
-- Moteur roue droite sur les port 4, 5, 6 et 7 de l'arduino (détacher un groupe de 4 fils pour les broches **IN** et un groupe de 2 fils pour les broche **-** et **+**):
+- Moteur roue droite sur les ports 4, 5, 6 et 7 de l'arduino (détacher un groupe de 4 fils pour les broches **IN** et un groupe de 2 fils pour les broches **-** et **+**):
     - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 4 de l'arduino
     - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 5 de l'arduino
     - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 6 de l'arduino
     - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 7 de l'arduino
     - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 7 de l'arduino
     - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 7 de l'arduino
-- Moteur roue gauche sur les port 8, 9, 10 et 11 de l'arduino (détacher un groupe de 4 fils pour les broches **IN** et un groupe de 2 fils pour les broche **-** et **+**):
+- Moteur roue gauche sur les ports 8, 9, 10 et 11 de l'arduino (détacher un groupe de 4 fils pour les broches **IN** et un groupe de 2 fils pour les broches **-** et **+**):
     - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 8 de l'arduino
     - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 9 de l'arduino
     - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 10 de l'arduino
@@ -174,22 +174,22 @@ Branchement des cartes de contrôle des moteurs pas-à-pas :
     - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 10 de l'arduino
     - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 11 de l'arduino
 
-Brancher les moteurs pas-à-pas sur les contrôleurs. Marquez les moteurs droite et gauche afin de les différencier facilement lors du montage final.
+Brancher les moteurs pas-à-pas sur les contrôleurs. Marquer les moteurs droite et gauche afin de les différencier facilement lors du montage final.
 
-Branchement du servo-moteur sur le port 3 : brancher le cable de tel façon que le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**
+Branchement du servo-moteur sur le port 3 : brancher le câble de que le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**
 
-**Attention** pour les personnes ayant commandées [ce modèle de *shield*](https://fr.aliexpress.com/store/product/Nano-I-O-expansion-Shield-for-Arduino-Nano-V3-pinout-Assembled/1950989_32633286806.html) il faut inverser les fils rouge et marron du servomoteur! Pour cela utiliser un petit tournevis plat et soulever légérement le petit ergot au bout d'un des fils (rouge ou marron) puis tirer légérement sur ce dernier, il devrait venir facilement. Faire de même avec le deuxième fil. Rebrancher les fils en les inversant par rapport à leur position initiale. Vous pourrez maintenant faire en sorte de respecter la consigne pour que "le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S** 
+**Attention** pour les personnes ayant commandé [ce modèle de *shield*](https://fr.aliexpress.com/store/product/Nano-I-O-expansion-Shield-for-Arduino-Nano-V3-pinout-Assembled/1950989_32633286806.html) il faut inverser les fils rouge et marron du servomoteur! Pour cela utiliser un petit tournevis plat et soulever légérement le petit ergot au bout d'un des fils (rouge ou marron) puis tirer légèrement sur ce dernier, il devrait venir facilement. Faire de même avec le deuxième fil. Rebrancher les fils en les inversant par rapport à leur position initiale. Vous pourrez maintenant faire en sorte de respecter la consigne pour que "le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**" 
 
-Branchement du module bluetooth :
+Branchement du module Bluetooth :
 - Brancher le cable de l'interrupteur (détacher un groupe de 2 fils):
     - Brancher un fil entre la broche **G** du port 12 de l'arduino en face du fil noir de l'interrupteur
     - Brancher un fil entre la broche **V** du port 12 de l'arduino en face du fil rouge de l'interrupteur
-    - Brancher l'autre extrémité de l'interrupteur de tel manière à ce que le fil noir soit en face de la broche **GND** du module bluetooth et le fil rouge en face de la brocher **+5V**
+    - Brancher l'autre extrémité de l'interrupteur de manière à ce que le fil noir soit en face de la broche **GND** du module bluetooth et le fil rouge en face de la broche **+5V**
 - Brancher le module à l'arduino (détacher un groupe de 2 fils) :
-    - Brancher un fil entre la broche **RX** du module bluetooth et la brocher **S** du port 13 de l'arduino
-    - Brancher un fil entre la broche **TX** du module bluetooth et la brocher **S** du port 12 de l'arduino
+    - Brancher un fil entre la broche **RX** du module bluetooth et la broche **S** du port 13 de l'arduino
+    - Brancher un fil entre la broche **TX** du module bluetooth et la broche **S** du port 12 de l'arduino
 
-Découper les modèles de touches ([disponible ici](doc/menu/menu.pdf)) et les insérer dans le clavier, pour cela il faut sortir les touches (ça vient facilement en tirant dessus) puis enlever la partie transparente (vous pouvez utiliser une paire de ciseaux pour faire levier), placer les découpes et remettre en place les touches.
+Découper les modèles de touches ([disponibles ici](doc/menu/menu.pdf)) et les insérer dans le clavier, pour cela il faut sortir les touches (ça vient facilement en tirant dessus) puis enlever la partie transparente (vous pouvez utiliser une paire de ciseaux pour faire levier), placer les découpes et remettre en place les touches.
 
 Télécharger et installer le programme [Arduino IDE ](https://www.arduino.cc/en/Main/Software) sur votre PC. Brancher l'Arduino avec un cable USB sur votre PC. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée (*/dev/ttyUSBx* sous Linux, *COMx* sous Windows). Sélectionner dans "Outils/Type de carte" le modèle "Arduino Nano"
 
@@ -200,19 +200,19 @@ Télécharger le programme [init-bluetooth](arduino/init-bluetooth) et l'ouvrir 
 
 Attendre quelques secondes puis vérifier que le robot est bien visible en Bluetooth. Vous pouvez utiliser le "moniteur série" (Menu "Options/Moniteur série") du programme Arduino IDE pour voir où en est la configuration du Bluetooth.
 
-Télécharger le programme [oorobot](arduino/oorobot) et l'ouvrir avec le programme *Arduino IDE*. Il faut installer les dépendances suivantes en allant dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis en cherchant et les bonnes versions à installer :
+Télécharger le programme [oorobot](arduino/oorobot) et l'ouvrir avec le programme *Arduino IDE*. Il faut installer les dépendances suivantes en allant dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis en cherchant et les bibliothèques à installer :
 - **AccelStepper** v1.57.1 by Mike McCauley
 - **LiquidCrystal I2C** v1.1.2 by Frank de Brabander
 
-Ensuite téléverser le programme *oorobot* sur l'Arduino. Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le cablage est bien fait :
+Téléverser ensuite le programme *oorobot* sur l'Arduino. Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le câblage est bien réalisé :
 - Vérifier le branchement du clavier, un appui sur un bouton doit afficher des caractères sur l'écran LCD
-- Vérifier le constrate de l'écran : ce dernier doit s'allumer au démarrage, par contre si vous ne voyez rien, pas de panique c'est peut-être tout simplement parce que le constraste est mal réglé. Pour changer ce paramètre il suffit de tourner le petit potentiomètre d'errière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran
-- Veuillez noter le dessus du servo-moteur : l'axe du moteur doit être sur la gauche du composant quand la partie mobile est devant vous. Vérifier que ce dernier bouge bien si vous appuyer sur les boutons lever/baisser le crayon
-- Vérifier que les moteurs fonctionnent bien: lancer une commande "avance" pour vérifier que les moteurs tournent dans le bon sens. De même avec une commande "tourne à droite".
-- Vérifier le sens de l'interrupteur : jouer avec le bouton de l'interrupteur pour voir dans quelle position il allume ou éteint le module bluetooth. Veuillez noter ces états afin de bien positionner plus tard l'interrupteur sur le chassis.
-- Vérifier que le module bluetooth fonctionne : activer le bluetooth sur votre téléphone/tablette et vérifier que vous pouvez bien vous appairez avec le roboot (code PIN 0000). Si vous le pouvez vérifier ensuite que vous pouvez piloter le robot avec l'application Android fournie (voir plus bas)
+- Vérifier le contraste de l'écran : ce dernier doit s'allumer au démarrage, par contre si vous ne voyez rien, pas de panique c'est peut-être tout simplement parce que le constraste est mal réglé. Pour changer ce paramètre il suffit de tourner le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran
+- Marquer le dessus du servo-moteur : l'axe du moteur doit être sur la gauche du composant quand la partie mobile est devant vous. Vérifier que ce dernier bouge bien si vous appuyer sur les boutons lever/baisser le crayon
+- Vérifier que les moteurs fonctionnent bien : lancer une commande "avance" pour vérifier que les moteurs tournent dans le bon sens, faire de même avec une commande "tourne à droite".
+- Vérifier le sens de l'interrupteur : jouer avec le bouton de l'interrupteur pour voir dans quelle position il allume ou éteint le module Bluetooth. Veillez à noter ces états afin de bien positionner plus tard l'interrupteur sur le chassis.
+- Vérifier que le module Bluetooth fonctionne : activer le Bluetooth sur votre téléphone/tablette et vérifier que vous pouvez bien vous appairez avec le roboot (code PIN 0000). Si vous le pouvez vérifier ensuite que vous pouvez piloter le robot avec l'application Android fournie (voir plus bas)
 
-Si tout est OK, vous pouvez passer au montage des composants sur le chassis.
+Tout est OK? vous pouvez passer au montage des composants sur le chassis.
 
 [Ordre de montage des composants sur le châssis 2D](2d/)
 
