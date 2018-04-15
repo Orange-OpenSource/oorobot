@@ -1,7 +1,7 @@
 # OoRoBoT: Notice de montage de la version en MDF
 
 ## Matériel nécessaire
-- Un tournevis cruciforme fin (aimenté si possible)
+- Un tournevis cruciforme fin (aimanté si possible)
 - Un tube de colle liquide (type colle forte pour les plus pressés)
 - Du temps : comptez une heure pour le montage complet
 
@@ -27,7 +27,7 @@
     
 ![bas_on-off_bluetooth](https://user-images.githubusercontent.com/16662847/38666251-c42914f6-3e3e-11e8-97fc-05e0d47564e9.jpg)
      
-- Fixez le servomoteur sur son support (utilisez les vis fournies avec le servomoteur), bien faire attention au sens de rotation, l'axe doit être sur la droite comme sur la photo ci-dessous) :
+- Fixez le servomoteur sur son support (utilisez les vis fournies avec le servomoteur), bien faire attention au sens de rotation, l'axe doit être sur la droite comme sur la photo ci-dessous :
 
  ![support_servomoteur](https://user-images.githubusercontent.com/16662847/38666254-c4681be2-3e3e-11e8-8a9b-3941c1276a81.jpg)
     
@@ -83,7 +83,7 @@
 
 ![mettre_fond_boitier_dans_encoche](https://user-images.githubusercontent.com/16662847/38666274-cf0c7854-3e3e-11e8-96d4-80d4247f4801.jpg)
 
-- Poussez (par le haut du robot) sur cette pièce, elle devrait s'encastrer pour se positionner parallèlement au bas du robot (faire en sorte que des fils ne génent pas cette manipulation)
+- Poussez (par le haut du robot) sur cette pièce, elle devrait s'encastrer pour se positionner parallèlement au bas du robot (faire en sorte que des fils ne gênent pas cette manipulation)
 
 - Encastrez la partie supérieure et à partir des version>=12, encastrez les barres de maintien sur les côtés. Collez le cache autour de l’écran (Attention sur la photo le montage est fini, à cette étape le support à crayon et le boitier de piles ne doivent pas être mis en place) : 
 
@@ -101,7 +101,7 @@ Et pour terminer :
 - Insérer le support de crayon externe dans le robot, vous pouvez mettre un élastique entre le dessus du robot et ce support pour avoir une meilleure pression sur le crayon
 - Calibrer votre robot via le menu "paramètres" (appui long sur le bouton au milieu de la colonne  la plus à droite du clavier):
     - Le nombre de pas que les moteurs doivent faire pour effectuer un 1/4 de tour : pour cela, avec le clavier entrez le programme "tourner à droite" 4 fois et lancez le. Si le robot n'a pas fait exactement un tour, rentrez dans le menu "paramètres" et changez le nombre de pas, appuyez sur le bouton start, vous reviendrez sur votre programme que vous pourrez relancer pour affiner votre réglage
-    - Le nombre de pas que les moteurs doivent faire pour avancer de 10cm, procédez comme pour le réglage d'un tour complet. Vous pouvez utiliser la fonction de dessin avec un crayon pour mesurer la précision du robot.
+    - Le nombre de pas que les moteurs doivent faire pour avancer de 10 cm, procédez comme pour le réglage d'un tour complet. Vous pouvez utiliser la fonction de dessin avec un crayon pour mesurer la précision du robot.
 
 ## Fichiers
 
