@@ -2,16 +2,22 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ModalController, NavController, NavParams, Platform, Content } from 'ionic-angular';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import OoRoBoT from './oorobot';
+import { CanvasModalComponent } from "../../components/canvas-modal/canvas-modal";
+
 //import { Dialogs } from '@ionic-native/dialogs';
 
 declare var Blockly: any;
+declare var Webcom: any;
+//declare var OoRoBoT: any;
 /**
  * Generated class for the BlocklyPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+
+
+
 
 @Component({
   selector: 'page-blockly',
@@ -22,58 +28,238 @@ export class BlocklyPage {
   code = "";
   blocklyDivStyle = {};
   oorobot: any;
+  level: "0";
+  toolboxes = {
+    "0" : '<xml id="toolbox" style="display: none">' +
+      '<block type="Start"></block>' +
+      '<block type="Up"></block>' +
+      '<block type="Down"></block>' +
+      '<block type="Left"></block>' +
+      '<block type="Right"></block>' +
+      '<block type="Loop"></block>' +
+      '<block type="PenUp"></block>' +
+      '<block type="PenDown"></block>' +
+      '<block type="PenColor"></block>' +
+      '<block type="Pause"></block>' +
+      '</xml>',
+    "1" : '<xml id="toolbox" style="display: none">' +
+      '<block type="Start"></block>' +
+      '<block type="Up"></block>' +
+      '<block type="Down"></block>' +
+      '<block type="Left"></block>' +
+      '<block type="Right"></block>' +
+      '<block type="Loop"></block>' +
+      '<block type="PenUp"></block>' +
+      '<block type="PenDown"></block>' +
+      '<block type="PenColor"></block>' +
+      '<block type="CircleRight"></block>' +
+      '<block type="CircleLeft"></block>' +
+      '<block type="Pause"></block>' +
+      '</xml>',
+    "2" : '<xml id="toolbox" style="display: none">' +
+      '<block type="Start"></block>' +
+      '<block type="Up"></block>' +
+      '<block type="Down"></block>' +
+      '<block type="Left"></block>' +
+      '<block type="Right"></block>' +
+      '<block type="Loop"></block>' +
+      '<block type="PenUp"></block>' +
+      '<block type="PenDown"></block>' +
+      '<block type="PenColor"></block>' +
+      '<block type="CircleRight"></block>' +
+      '<block type="CircleLeft"></block>' +
+      '<block type="Pause"></block>' +
+      '</xml>',
+    "3" : '  <xml id="toolbox" style="display: none">\n' +
+    '    <category name="Logic">\n' +
+    '      <category name="If">\n' +
+    '        <block type="controls_if"></block>\n' +
+    '        <block type="controls_if">\n' +
+    '          <mutation else="1"></mutation>\n' +
+    '        </block>\n' +
+    '        <block type="controls_if">\n' +
+    '          <mutation elseif="1" else="1"></mutation>\n' +
+    '        </block>\n' +
+    '      </category>\n' +
+    '      <category name="Boolean">\n' +
+    '        <block type="logic_compare"></block>\n' +
+    '        <block type="logic_operation"></block>\n' +
+    '        <block type="logic_negate"></block>\n' +
+    '        <block type="logic_boolean"></block>\n' +
+    '        <block type="logic_null"></block>\n' +
+    '        <block type="logic_ternary"></block>\n' +
+    '      </category>\n' +
+    '    </category>\n' +
+    '    <category name="Loops">\n' +
+    '      <block type="controls_repeat_ext">\n' +
+    '        <value name="TIMES">\n' +
+    '          <block type="math_number">\n' +
+    '            <field name="NUM">10</field>\n' +
+    '          </block>\n' +
+    '        </value>\n' +
+    '      </block>\n' +
+    '      <block type="controls_whileUntil"></block>\n' +
+    '      <block type="controls_for">\n' +
+    '        <field name="VAR">i</field>\n' +
+    '        <value name="FROM">\n' +
+    '          <block type="math_number">\n' +
+    '            <field name="NUM">1</field>\n' +
+    '          </block>\n' +
+    '        </value>\n' +
+    '        <value name="TO">\n' +
+    '          <block type="math_number">\n' +
+    '            <field name="NUM">10</field>\n' +
+    '          </block>\n' +
+    '        </value>\n' +
+    '        <value name="BY">\n' +
+    '          <block type="math_number">\n' +
+    '            <field name="NUM">1</field>\n' +
+    '          </block>\n' +
+    '        </value>\n' +
+    '      </block>\n' +
+    '      <block type="controls_forEach"></block>\n' +
+    '      <block type="controls_flow_statements"></block>\n' +
+    '    </category>\n' +
+    '    <category name="Math">\n' +
+    '      <block type="math_number"></block>\n' +
+    '      <block type="math_arithmetic"></block>\n' +
+    '      <block type="math_single"></block>\n' +
+    '      <block type="math_trig"></block>\n' +
+    '      <block type="math_constant"></block>\n' +
+    '      <block type="math_number_property"></block>\n' +
+    '      <block type="math_round"></block>\n' +
+    '      <block type="math_on_list"></block>\n' +
+    '      <block type="math_modulo"></block>\n' +
+    '      <block type="math_constrain">\n' +
+    '        <value name="LOW">\n' +
+    '          <block type="math_number">\n' +
+    '            <field name="NUM">1</field>\n' +
+    '          </block>\n' +
+    '        </value>\n' +
+    '        <value name="HIGH">\n' +
+    '          <block type="math_number">\n' +
+    '            <field name="NUM">100</field>\n' +
+    '          </block>\n' +
+    '        </value>\n' +
+    '      </block>\n' +
+    '      <block type="math_random_int">\n' +
+    '        <value name="FROM">\n' +
+    '          <block type="math_number">\n' +
+    '            <field name="NUM">1</field>\n' +
+    '          </block>\n' +
+    '        </value>\n' +
+    '        <value name="TO">\n' +
+    '          <block type="math_number">\n' +
+    '            <field name="NUM">100</field>\n' +
+    '          </block>\n' +
+    '        </value>\n' +
+    '      </block>\n' +
+    '      <block type="math_random_float"></block>\n' +
+    '    </category>\n' +
+    '    <category name="Lists">\n' +
+    '      <block type="lists_create_empty"></block>\n' +
+    '      <block type="lists_create_with"></block>\n' +
+    '      <block type="lists_repeat">\n' +
+    '        <value name="NUM">\n' +
+    '          <block type="math_number">\n' +
+    '            <field name="NUM">5</field>\n' +
+    '          </block>\n' +
+    '        </value>\n' +
+    '      </block>\n' +
+    '      <block type="lists_length"></block>\n' +
+    '      <block type="lists_isEmpty"></block>\n' +
+    '      <block type="lists_indexOf"></block>\n' +
+    '      <block type="lists_getIndex"></block>\n' +
+    '      <block type="lists_setIndex"></block>\n' +
+    '    </category>\n' +
+    '    <category name="Variables" custom="VARIABLE"></category>\n' +
+    '    <category name="Functions" custom="PROCEDURE"></category>'+
+    '</xml>'
+  };
+
 
   @ViewChild('blocklyDiv') blocklyDiv: ElementRef;
   @ViewChild(Content) content: Content;
-  @ViewChild('canvasDiv') canvasDiv: ElementRef;
 
-  constructor(private screenOrientation: ScreenOrientation, private blProvider: BluetoothProvider, public navCtrl: NavController, private platform: Platform) {
+
+  constructor(private screenOrientation: ScreenOrientation, private blProvider: BluetoothProvider, private modalCtrl: ModalController, public navCtrl: NavController, private platform: Platform) {
+    this.level="0";
     this.setBlocks(); // define Oorobot Blocks
+
+    //let ref = new Webcom('https://io.datasync.orange.com/base/legorange/');
+
   }
 
   testCode() {
-
     let code: string = Blockly.JavaScript.workspaceToCode(this.myWorkspace);
-    this.oorobot.setCommands(code);
-	  this.oorobot.draw();
+    code=code.replace(/^command/, '');
+    let canvasModal = this.modalCtrl.create(CanvasModalComponent, { code: code });
+    canvasModal.present();
+  }
+
+  levelChange(val: any) {
+    console.log('LevelChange:', this.level, val);
+    if (
+      ((parseInt(this.level) == 0 || parseInt(this.level) == 1) && (parseInt(val) == 1 || parseInt(val)== 0)) ||
+      ((parseInt(this.level) == 3 || parseInt(this.level) == 2) && (parseInt(val) == 2 || parseInt(val) == 3))
+    ) {
+      this.myWorkspace.updateToolbox(this.toolboxes[val]);
+      this.level=val;
+    }else {
+      this.myWorkspace.dispose();
+      this.myWorkspace = null;
+      this.level=val;
+      this.initWorkspace();
+    }
 
   }
 
   generateCode() {
     let generated: string = Blockly.JavaScript.workspaceToCode(this.myWorkspace);
-
+    generated=generated.replace(/(#\d+)/g, '');
     console.log(generated)
     if (generated.indexOf('command') == 0 && generated.lastIndexOf('command') == 0) {
-      this.code = "AAW20" + generated.substring(7, generated.length) + "G";
+      this.code = "AAW10" + generated.substring(7, generated.length) + "G";
       this.blProvider.serialWritePreferedDevice(this.code).then(() => {
 
       });
     }
   }
 
-  ionViewDidEnter() {
-    this.oorobot = new OoRoBoT(this.canvasDiv.nativeElement, 500, 300, "#33cc00");
-
+  initWorkspace() {
     let blocklyDiv = this.blocklyDiv.nativeElement;
     blocklyDiv.style.height = this.content.contentHeight + "px";
     blocklyDiv.style.width = this.platform.width() + "px";    //   ({"height": 500+"px","width": this.platform.width()+"px"});
     // this.blocklyDivStyle={"height": 500+"px","width": this.platform.width()+"px"};
+    console.log("initWorkspace", this.level);
+    this.myWorkspace = Blockly.inject(blocklyDiv,
+      {
+        media: 'assets/blockly/media/',
+        toolbox: this.toolboxes[this.level],
+        zoom:
+          {
+            controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 3,
+            minScale: 0.3,
+            scaleSpeed: 1.2
+          },
+        grid:
+          {
+            spacing: 50,
+            length: 3,
+            colour: '#ccc',
+            snap: true
+          },
+        trashcan: true
 
-    let toolbox = '<xml id="toolbox" style="display: none">' +
-      '<block type="Start">   </block>' +
-      '<block type="Up">   </block>' +
-      '<block type="Down"></block>' +
-      '<block type="Left"></block>' +
-      '<block type="Right"></block>' +
-      '<block type="Loop">   </block>' +
-      '<block type="PenUp">   </block>' +
-      '<block type="PenDown">   </block>' +
-      '<block type="CircleRight">   </block>' +
-      '<block type="CircleLeft">   </block>' +
-      '<block type="Pause"></block>' +
-      '</xml>'
+      });
+    Blockly.svgResize(this.myWorkspace);
 
+  }
 
+  ionViewDidEnter() {
     this.screenOrientation.onChange().subscribe(
       () => {
         if (this.myWorkspace) {
@@ -87,21 +273,7 @@ export class BlocklyPage {
     );
 
     if (!this.myWorkspace) {
-      this.myWorkspace = Blockly.inject(blocklyDiv,
-        {
-          media: 'assets/blockly/media/',
-          toolbox: toolbox,
-          grid:
-            {
-              spacing: 50,
-              length: 3,
-              colour: '#ccc',
-              snap: true
-            },
-          trashcan: true
-
-        });
-      Blockly.svgResize(this.myWorkspace);
+      this.initWorkspace();
     }
   }
 
@@ -126,7 +298,7 @@ export class BlocklyPage {
     Blockly.Blocks['Start'] = {
       init: function () {
         this.jsonInit({
-          "message0": '%1',
+          "message0": '%1 x%2 y%3',
           "args0": [
 
             {
@@ -135,6 +307,16 @@ export class BlocklyPage {
               "width": 40,
               "height": 40,
               "alt": "*"
+            },
+            {
+              "type": "field_number",
+              "name": "WIDTH",
+              "value": "1000"
+            },
+            {
+              "type": "field_number",
+              "name": "HEIGHT",
+              "value": "600"
             }
           ],
           "message1": "%1",
@@ -243,7 +425,7 @@ export class BlocklyPage {
 
             {
               "type": "field_image",
-              "src": "assets/svg/action-undo.svg",
+              "src": "assets/svg/left.svg",
               "width": 40,
               "height": 40,
               "alt": "*"
@@ -271,7 +453,7 @@ export class BlocklyPage {
 
             {
               "type": "field_image",
-              "src": "assets/svg/action-redo.svg",
+              "src": "assets/svg/right.svg",
               "width": 40,
               "height": 40,
               "alt": "*"
@@ -366,7 +548,7 @@ export class BlocklyPage {
 
             {
               "type": "field_image",
-              "src": "assets/svg/loop-circular.svg",
+              "src": "assets/svg/repeat.svg",
               "width": 40,
               "height": 40,
               "alt": "*"
@@ -436,13 +618,41 @@ export class BlocklyPage {
       }
     };
 
+    Blockly.Blocks['PenColor'] = {
+      init: function () {
+        this.jsonInit({
+          "message0": '%1 %2',
+          "args0": [
+
+            {
+              "type": "field_image",
+              "src": "assets/svg/color-picker.svg",
+              "width": 40,
+              "height": 40,
+              "alt": "*"
+            },
+            {
+              "type": "field_colour",
+              "name": "FIELDNAME",
+              "colour": "#33cc00"
+            }
+          ],
+          "colour": moveColor,
+          "tooltip": "",
+          "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
+          "previousStatement": null,
+          "nextStatement": null,
+        });
+      }
+    };
 
 
     Blockly.JavaScript['Start'] = function (block) {
       // Search the text for a substring.
       let code = Blockly.JavaScript.statementToCode(block, 'DO');
-
-      return "command" + code
+      let width= block.getFieldValue('WIDTH');
+      let height= block.getFieldValue('HEIGHT');
+      return "commandw"+width+"h"+height + code;
     };
 
     Blockly.JavaScript['Up'] = function (block) {
@@ -490,6 +700,15 @@ export class BlocklyPage {
       return code;
     };
 
+    Blockly.JavaScript['PenColor'] = function (block) {
+      let hexColor = block.getFieldValue('FIELDNAME');
+      let color="#";
+      for (let i=1;i<hexColor.length;i+=2) {
+        const v=""+parseInt(hexColor.substr(i, 2), 16);
+        color+=new Array(3 - v.length + 1).join("0")+v;
+      }
+      return color;
+    };
 
     Blockly.JavaScript['Right'] = function (block) {
       // Search the text for a substring.

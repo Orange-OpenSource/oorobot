@@ -1,4 +1,4 @@
-//**********************************************
+  //**********************************************
 // bluetooth HC06 Module configuraiton
 // based on http://nicolasz68.blogspot.fr/2012/09/module-bluetooth-jy-mcu-v104-pour.html
 //

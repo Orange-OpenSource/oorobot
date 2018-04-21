@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAIA,WAAY;EACV,gBAAgB,EAAE,OAAO;EACzB,OAAO,EAAE,IAAI;EACb,MAAM,EAAC,CAAC;;AAEV,eAAgB;EACd,QAAQ,EAAE,MAAM;;AAGlB,kBAAkB;EAChB,gBAAgB,EAAE,KAAK;EACvB,OAAO,EAAC,CAAC;EACT,MAAM,EAAC,CAAC;EACR,gBAAgB,EAAE,QAAQ",
+"sources": ["canvas-modal.scss"],
 "names": [],
 "file": "canvas-modal.css"
 }

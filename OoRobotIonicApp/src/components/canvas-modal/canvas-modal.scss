@@ -1,3 +1,21 @@
 canvas-modal {
 
 }
+
+.ion-canvas {
+  background-color: #AAAAAA;
+  padding: 10px;
+  margin:0;
+}
+.scroll-content {
+  overflow: hidden;
+}
+
+.ion-canvas canvas{
+  background-color: white;
+  padding:0;
+  margin:0;
+  transform-origin: left top;
+  //transform: scaleY(-1);
+
+}

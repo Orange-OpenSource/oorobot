@@ -7,16 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Blockly</ion-title>
+    <ion-title>Programmation</ion-title>
   </ion-navbar>
-
+  <ion-item>
+    <ion-label>Niveau</ion-label>
+    <ion-select (ionChange)="levelChange($event)">
+      <ion-option value="0">Débutant</ion-option>
+      <ion-option value="1" selected="true">Novice</ion-option>
+      <ion-option value="2">Confirmé</ion-option>
+      <ion-option value="3">Expert</ion-option>
+    </ion-select>
+  </ion-item>
 </ion-header>
 
 
 <ion-content #content no-padding>
-  <div class="ion-canvas">
-    <canvas #canvasDiv></canvas>
-  </div>
   <div #blocklyDiv></div>
 </ion-content>
 
@@ -24,10 +29,10 @@
   <ion-grid>
     <ion-row>
       <ion-col col-6>
-        <button ion-button full color="secondary" (click)="testCode()">Try</button>
+        <button ion-button full color="secondary" (click)="testCode()">Essayer</button>
       </ion-col>
       <ion-col col-6>
-        <button ion-button full (click)="generateCode()">Go</button>
+        <button ion-button full (click)="generateCode()">Envoyer</button>
       </ion-col>
     </ion-row>
   </ion-grid>

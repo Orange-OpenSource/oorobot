@@ -1,13 +1,17 @@
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar>
     <ion-title>
-      Test
+      Dessin
     </ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="dismiss()">Close</button>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Fermer</span>
+        <ion-icon name="md-close" showWhen="android, windows, core"></ion-icon>
+      </button>
     </ion-buttons>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <div class="ion-canvas">
     <canvas #canvasDiv></canvas>

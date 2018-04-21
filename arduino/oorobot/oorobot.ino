@@ -1,6 +1,10 @@
 /*
    OoRoBoT code
 
+   Get the following libraries (using the Arduino IDE library manager)
+  - **AccelStepper** v1.57.1 by Mike McCauley
+  - **LiquidCrystal I2C** v1.1.2 by Frank de Brabander
+ 
 */
 #include <EEPROM.h>
 #include <Wire.h>
@@ -11,7 +15,7 @@
 #include "buttons.h"
 
 
-#define OOROBOT_VERSION "1.1.0"
+#define OOROBOT_VERSION "1.1.1"
 
 #define SCREEN_TIMEOUT 25
 
@@ -80,7 +84,7 @@ char buttonsMap[] = {
   '-',  0, 'S', 'A', 0, '+', 0,  0,   0,   0,  0, 0
 };
 
-Params params = {140, 1220, 140};
+Params params = {140, 1430, 100};
 int previousMenu = CTRL_MENU;
 int selectedMenu = START_MENU;
 char cmd[MAX_COMMANDS + 1] = {};
@@ -156,6 +160,7 @@ void loop() {
   } else {
 #ifdef HAVE_BLUETOOTH
     while (BTSerie.available()) {
+      selectedMenu = CTRL_MENU;
       button = BTSerie.read();
       //Serial.println(button);
       if (button != 0) {
@@ -164,6 +169,7 @@ void loop() {
     }
 #endif
     while (Serial.available()) {
+      selectedMenu = CTRL_MENU;
       button = Serial.read();
       //Serial.println(button);
       if (button != 0) {

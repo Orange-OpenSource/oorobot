@@ -27,15 +27,14 @@
       <ion-label>{{device.name}}</ion-label>
       <ion-radio [value]="device" (ionSelect)="OnBTChange(device)"></ion-radio>
     </ion-item>
+
   </ion-list>
-  <ion-item>
- 
-        <img *ngIf="BLstatus==false" src="assets/svg/link-broken.svg" style="width:20%;margin-left:40%">
-        <img  *ngIf="BLstatus==true" src="assets/svg/link-intact.svg" style="width:20%;margin-left:40%">
- 
-  </ion-item>
+  <ion-list>
+    <ion-item>
 
+      <img *ngIf="BLstatus==false" src="assets/svg/link-broken.svg" style="width:20%;margin-left:40%">
+      <img  *ngIf="BLstatus==true" src="assets/svg/link-intact.svg" style="width:20%;margin-left:40%">
 
-
-
+    </ion-item>
+  </ion-list>
 </ion-content>

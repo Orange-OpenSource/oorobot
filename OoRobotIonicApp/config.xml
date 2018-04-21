@@ -85,6 +85,8 @@
     <allow-navigation href="http://192.168.1.240:8100" />
     <plugin name="cordova-plugin-screen-orientation" spec="^3.0.1" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
-    <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
+    <plugin name="cordova-sqlite-storage" spec="^2.3.0" />
+    <allow-navigation href="http://10.193.7.235:8100" />
+    <engine name="android" spec="6.3.0" />
 </widget>

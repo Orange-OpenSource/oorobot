@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 declare var Webcom: any;
@@ -13,7 +12,7 @@ declare var Webcom: any;
 export class ShareProvider {
   ref: any
 
-  constructor(public http: HttpClient) {
+  constructor() {
     console.log('Hello ShareProvider Provider');
     this.ref = new Webcom('https://io.datasync.orange.com/base/oorobot/');
 
@@ -21,12 +20,13 @@ export class ShareProvider {
   }
 
   shareRobot(name) {
+    this.connect();
     this.ref.child("robots").child(name).child("state").child('online').set(true);
     this.ref.child("robots").child(name).child("state").onDisconnect().child('online').set(false);
     this.ref.child("robots").child(name).child("programs").on("child_added", (snapshot) => {
       console.log(snapshot.val());
-
     });
+    return true;
   }
 
   connect() {

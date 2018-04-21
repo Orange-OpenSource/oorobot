@@ -91,7 +91,7 @@
 		  </button>
 		  <a class="navbar-brand" href="#">BlOoRoBoT</a>
 		</div>
-		
+	
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		  <form class="navbar-form navbar-left">
@@ -203,7 +203,7 @@
         },
         trashcan: true});
 
-	const oorobot = new OoRoBoT($("#draw"), 500, 300, "#33cc00");
+	const oorobot = new OoRoBoT($("#draw")[0], 500, 300, "#33cc00");
 
 	
 	$(".modal").on("click", e => {
@@ -455,7 +455,7 @@
 
 				{
 				  "type": "field_image",
-				  "src": "assets/svg/action-undo.svg",
+				  "src": "assets/svg/left.svg",
 				  "width": 40,
 				  "height": 40,
 				  "alt": "*"
@@ -483,7 +483,7 @@
 
 				{
 				  "type": "field_image",
-				  "src": "assets/svg/action-redo.svg",
+				  "src": "assets/svg/right.svg",
 				  "width": 40,
 				  "height": 40,
 				  "alt": "*"
@@ -578,7 +578,7 @@
 
 				{
 				  "type": "field_image",
-				  "src": "assets/svg/loop-circular.svg",
+				  "src": "assets/svg/repeat.svg",
 				  "width": 40,
 				  "height": 40,
 				  "alt": "*"
@@ -706,10 +706,8 @@
 		let hexColor = block.getFieldValue('FIELDNAME');
 		let color="#";
 		for (let i=1;i<hexColor.length;i+=2) {
-		  console.log(hexColor.substr(i, 2), parseInt(hexColor.substr(i, 2), 16), pad(""+parseInt(hexColor.substr(i, 2), 16), 3));
 		  color+=pad(""+parseInt(hexColor.substr(i, 2), 16), 3);
 		}
-		console.log(color);
 		return color;
 	  };
 
