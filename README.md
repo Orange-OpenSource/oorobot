@@ -193,16 +193,27 @@ Découper les modèles de touches ([disponibles ici](doc/menu/menu.pdf)) et les 
 
 Télécharger et installer le programme [Arduino IDE ](https://www.arduino.cc/en/Main/Software) sur votre PC. Brancher l'Arduino avec un cable USB sur votre PC. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée (*/dev/ttyUSBx* sous Linux, *COMx* sous Windows). Sélectionner dans "Outils/Type de carte" le modèle "Arduino Nano"
 
+Il faut installer les dépendances suivantes en allant dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis en cherchant les bibliothèques à installer :
+- **AccelStepper** v1.57.1 by Mike McCauley
+- **LiquidCrystal I2C** v1.1.2 by Frank de Brabander
+
+Si vous voulez changer le nom du module Bluetooth (sinon votre robot sera visible sous le nom "HC-06") il faut faire la manipulation suivante :
+- Brancher votre Arduino sur votre PC. La LED du module Bluetooth doit clignoter rapidement
+- Débrancher le cable arrivant sur la broche VCC du module Bluetooth.
+- Faire un pont sur l'entrée EN comme sur le schéma ci-dessus
+![init-bluetooth-zs-040](https://user-images.githubusercontent.com/16662847/42039305-5c4448ec-7aed-11e8-94a6-b699e708ccbd.jpg)
+- Rebrancher le cable arrivant sur la broche VCC du module Bluetooth. La LED du module Bluetooth devrait clignoter moins rapidement
+
 Télécharger le programme [init-bluetooth](arduino/init-bluetooth) et l'ouvrir avec *Arduino IDE*. Téléverser le programme (2ème bouton en haut à gauche de l'interface) sur l'Arduino. Ce programme va configurer le module Bluetooth pour :
 - Donner un nom au format "OoRoBoT-XXXX"
 - Configurer le code PIN à 0000
 - Configurer la vitesse de communication à 9600 bauds
 
-Attendre quelques secondes puis vérifier que le robot est bien visible en Bluetooth. Vous pouvez utiliser le "moniteur série" (Menu "Options/Moniteur série") du programme Arduino IDE pour voir où en est la configuration du Bluetooth.
+Vous pouvez utiliser le "moniteur série" (Menu "Options/Moniteur série") du programme Arduino IDE pour voir où en est la configuration du Bluetooth.
 
-Télécharger le programme [oorobot](arduino/oorobot) et l'ouvrir avec le programme *Arduino IDE*. Il faut installer les dépendances suivantes en allant dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis en cherchant les bibliothèques à installer :
-- **AccelStepper** v1.57.1 by Mike McCauley
-- **LiquidCrystal I2C** v1.1.2 by Frank de Brabander
+Le nom de votre robot sera affiché sur l'écran LCD. Si ce n'est pas le cas vérifier le contraste de votre écran (en tournant le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran). Si c'est bon vous pouvez enlever le pont sur l'entrée EN du module Bluetooth. Débranchez et rebranchez le cable arrivant sur la broche VCC du module Bluetooth. Votre module Bluetooth devrait clignoter rapidement, il est prêt à être appairé. Vérifiez que vous voyez bien le robot dans la liste des périphériques Bluetooth depuis votre téléphone/tablette.
+
+Télécharger le programme [oorobot](arduino/oorobot) et l'ouvrir avec le programme *Arduino IDE*. 
 
 Téléverser ensuite le programme *oorobot* sur l'Arduino. Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le câblage est bien réalisé :
 - Vérifier le branchement du clavier, un appui sur un bouton doit afficher des caractères sur l'écran LCD
