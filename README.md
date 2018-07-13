@@ -12,9 +12,9 @@ Au fil des évolutions du projet, l'OoRoBoT apporte tout un lot de fonctionnalit
 - Ajout d'une interface Bluetooth permettant de piloter le robot à distance et ainsi permettre de lui donner des ordres complexes (boucles, tracé d'arc de cercle ...)
 - Ajout d'un servomoteur afin de baisser/lever un crayon
 
-Actuellement le robot peut être utilisé de deux façons différentes (comme indiqué dans sur [ce poster](doc/com/oorobot_poster-LIGHT.pdf)) :
-- Pour les enfants de 4 à 7 ans : programmer des parcours sur des plateaux (voir les plateaux disponibles dans le [répertoire /doc/exercices](/doc/exercices))
-- Pour les enfants de 7 à 12 ans : réaliser des tracés avec un langage de programmation par blocs. Vous pouvez vous entrainer à faire des tracés sur [cette page Web](https://orange-opensource.github.io/oorobot/blocks/index.html?code=B4U100R90E%23255000000%7CR45U150!U100r1c100a130r1c100a90) (reproduction de l'interface disponible dans l'application Android)
+Actuellement le robot peut être utilisé de deux façons différentes (comme indiqué dans sur [ce poster](https://github.com/Orange-OpenSource/oorobot/blob/master/doc/com/oorobot_poster-LIGHT.pdf)) :
+- Pour les enfants de 4 à 7 ans : programmer des parcours sur des plateaux (voir les plateaux disponibles dans le [répertoire /doc/exercices](https://github.com/Orange-OpenSource/oorobot/blob/master/doc/exercices))
+- Pour les enfants de 7 à 12 ans : réaliser des tracés avec un langage de programmation par blocs via une tablette Android ([programme disponible ici](https://orange-opensource.github.io/oorobot/apk/oorobot.apk) ). Vous pouvez vous entrainer à faire des tracés sur [cette page Web](https://orange-opensource.github.io/oorobot/blocks/index.html?code=B4U100R90E%23255000000%7CR45U150!U100r1c100a130r1c100a90) (reproduction de l'interface disponible dans l'application Android)
 
 Pour suivre l'évolution du robot vous pouvez suivre le mot dièse [#OoRoBoT sur Twitter](https://twitter.com/hashtag/OoRoBoT?src=hash)
 
@@ -55,7 +55,7 @@ Pour changer de ligne il faut appuyer sur les touches "avancer" ou "reculer", po
 
 Pour annuler les changements des paramètres il faut appuyer sur le bouton "effacer". Pour quitter les paramètres en les sauvegardant il faut apppuyer sur la touche "lancer" ou "paramètre"
 
-Le robot peut aussi être programmé à distance (Bluetooth) via une application Android (disponible [ici](apk/oorobot.apk)).
+Le robot peut aussi être programmé à distance (Bluetooth) via une application Android (disponible [ici](https://orange-opensource.github.io/oorobot/apk/oorobot.apk)).
 
 ## Le matériel
 
@@ -139,7 +139,7 @@ Premier "vrai" modèle. Présence d'une roue encodeuse pour le réglage du pas q
 
 ## Le code
  
-Vous trouverez 2 programmes dans le répertoire Arduino de ce dépôt :
+Vous trouverez 2 programmes dans le répertoire [arduino](https://github.com/Orange-OpenSource/oorobot/tree/master/arduino/) de ce dépôt :
 - init-bluetooth: ce programme permet d'initialiser le module Bluetooth (lui donner un nom au format "OoRoBoT-XXXX" et affecter le code d'appairage 0000). Ce programme n'est à charger qu'une seule fois.
 - oorobot: le programme principal du robot
 
@@ -189,7 +189,7 @@ Branchement du module Bluetooth :
     - Brancher un fil entre la broche **RX** du module Bluetooth et la broche **S** du port 13 de l'Arduino
     - Brancher un fil entre la broche **TX** du module Bluetooth et la broche **S** du port 12 de l'Arduino
 
-Découper les modèles de touches ([disponibles ici](doc/menu/menu.pdf)) et les insérer dans le clavier, pour cela il faut sortir les touches (ça vient facilement en tirant dessus) puis enlever la partie transparente (vous pouvez utiliser une paire de ciseaux pour faire levier), placer les découpes et remettre en place les touches.
+Découper les modèles de touches ([disponibles ici](https://github.com/Orange-OpenSource/oorobot/tree/master/doc/menu/menu.pdf)) et les insérer dans le clavier, pour cela il faut sortir les touches (ça vient facilement en tirant dessus) puis enlever la partie transparente (vous pouvez utiliser une paire de ciseaux pour faire levier), placer les découpes et remettre en place les touches.
 
 Télécharger et installer le programme [Arduino IDE ](https://www.arduino.cc/en/Main/Software) sur votre PC. Brancher l'Arduino avec un cable USB sur votre PC. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée (*/dev/ttyUSBx* sous Linux, *COMx* sous Windows). Sélectionner dans "Outils/Type de carte" le modèle "Arduino Nano"
 
@@ -204,7 +204,7 @@ Si vous voulez changer le nom du module Bluetooth (sinon votre robot sera visibl
 ![init-bluetooth-zs-040](https://user-images.githubusercontent.com/16662847/42039305-5c4448ec-7aed-11e8-94a6-b699e708ccbd.jpg)
 - Rebrancher le cable arrivant sur la broche VCC du module Bluetooth. La LED du module Bluetooth devrait clignoter moins rapidement
 
-Télécharger le programme [init-bluetooth](arduino/init-bluetooth) et l'ouvrir avec *Arduino IDE*. Téléverser le programme (2ème bouton en haut à gauche de l'interface) sur l'Arduino. Ce programme va configurer le module Bluetooth pour :
+Télécharger le programme [init-bluetooth](https://orange-opensource.github.io/oorobot/arduino/init-bluetooth.zip), décompresser le et l'ouvrir avec *Arduino IDE*. Téléverser le programme (2ème bouton en haut à gauche de l'interface) sur l'Arduino. Ce programme va configurer le module Bluetooth pour :
 - Donner un nom au format "OoRoBoT-XXXX"
 - Configurer le code PIN à 0000
 - Configurer la vitesse de communication à 9600 bauds
@@ -213,7 +213,7 @@ Vous pouvez utiliser le "moniteur série" (Menu "Options/Moniteur série") du pr
 
 Le nom de votre robot sera affiché sur l'écran LCD. Si ce n'est pas le cas vérifier le contraste de votre écran (en tournant le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran). Si c'est bon vous pouvez enlever le pont sur l'entrée EN du module Bluetooth. Débranchez et rebranchez le cable arrivant sur la broche VCC du module Bluetooth. Votre module Bluetooth devrait clignoter rapidement, il est prêt à être appairé. Vérifiez que vous voyez bien le robot dans la liste des périphériques Bluetooth depuis votre téléphone/tablette.
 
-Télécharger le programme [oorobot](arduino/oorobot) et l'ouvrir avec le programme *Arduino IDE*. 
+Télécharger le programme [oorobot](https://orange-opensource.github.io/oorobot/arduino/oorobot.zip), le décompresser et l'ouvrir avec le programme *Arduino IDE*. 
 
 Téléverser ensuite le programme *oorobot* sur l'Arduino. Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le câblage est bien réalisé :
 - Vérifier le branchement du clavier, un appui sur un bouton doit afficher des caractères sur l'écran LCD
@@ -225,7 +225,7 @@ Téléverser ensuite le programme *oorobot* sur l'Arduino. Ce programme va pilot
 
 Tout est OK? Vous pouvez passer au montage des composants sur le châssis.
 
-[Ordre de montage des composants sur le châssis 2D](2d/)
+[Ordre de montage des composants sur le châssis 2D](https://github.com/Orange-OpenSource/oorobot/tree/master/2d/)
 
 Ordre de montage des composants sur le châssis 3D :
 
@@ -247,7 +247,7 @@ Le robot est maintenant pilotable via une application pour mobile/tablette (Andr
 
 ![app](https://user-images.githubusercontent.com/16662847/36200888-63228792-117e-11e8-93df-88c7be66a311.png)
 
-Vous pouvez télécharger l'APK [ici](apk/oorobot.apk) 
+Vous pouvez télécharger l'APK [ici](https://orange-opensource.github.io/oorobot/apk/oorobot.apk) 
 
 Afin d'envoyer les programmes sur l'Arduino on a définit un pseudo langage simple sous la forme :
 ```
@@ -283,4 +283,5 @@ Le code est sous [GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.fr.htm
 ## Les projets équivalents
 
 - [escornabot](http://escornabot.com/web/en) : un projet espagnol vraiment dans le même esprit mais qui demande un peu connaissance technique pour la partie clavier (soudure)
+- [scott](http://lamachinerie.org/ressources/scott/) : un projet assez proche de l'OoRoBoT dans l'esprit et le matériel utilisé. La différence principale se situe dans le fait que l'OoRoBoT peut fonctionner de façon autonome avec son clavier et son écran.
 
