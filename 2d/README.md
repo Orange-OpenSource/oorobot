@@ -7,6 +7,7 @@
 
 ## Conseils 
 - Ne vissez pas les vis "à fond" pour fixer les composants dès le début. Placez votre première vis, faites quelques tours de tournevis pour que la vis ne sorte plus puis passer à la vis suivante. Quand toutes les vis sont en place pour tenir votre composant vous pouvez les serrez complétement sur le support.
+- Utilisez de la colle pour faire tenir les pièces si l’emboitement ne suffit pas.
 - Vérifier bien que tous les composants fonctionnent avant de faire ce montage.
 
 ## Le montage 
@@ -60,7 +61,8 @@
 
 ![cote_rondelle_avant_roue](https://user-images.githubusercontent.com/16662847/38666243-c3596ba2-3e3e-11e8-9805-e76f4d51a97b.jpg)
 
-- Collez des élastiques autour des roues
+- Collez des élastiques autour des roues (attention, ce n’est vraiment pas évident : placez doucement l’élastique autour de sa roue, puis ajoutez des points de colle tous les centimètres pour le maintenir une bonne fois pour toute)
+
 - Encastrez les roues (en tenant bien l’arrière des moteurs pour que les vis ne sortent pas) et ajoutez une des formes de "bloqueur" (petit ou grand selon ce que vous préférez) :
     
 ![cote_roue_bloqueur](https://user-images.githubusercontent.com/16662847/38666242-c3409406-3e3e-11e8-8fb2-ba57039a719b.jpg)
