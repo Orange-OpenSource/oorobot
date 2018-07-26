@@ -18,6 +18,8 @@ Actuellement le robot peut être utilisé de deux façons différentes (comme in
 
 Pour suivre l'évolution du robot vous pouvez suivre le mot dièse [#OoRoBoT sur Twitter](https://twitter.com/hashtag/OoRoBoT?src=hash)
 
+**La notice de montage est disponible [ici](https://orange-opensource.github.io/oorobot/montage.pdf).**
+
 ## Genèse du projet 
 
 J'ai eu cette idée en discutant avec une professeure des écoles (Maître Formatrice) qui utilisait des BeeBot dans son école. Actuellement on trouve de nombreux de robots sur le marché mais ils sont souvent trop "compliqués" pour faire des activités simples. Dans l'exemple que j'ai observé, les BeeBot étaient utilisées pour apprendre le déplacement relatif et la suite de commandes à des enfants de grande section. J'ai cherché un équivalent moins cher et/ou OpenSource je n'ai rien trouver de probant.
@@ -68,7 +70,7 @@ Le robot peut aussi être programmé à distance (Bluetooth) via une application
 - 1 [clavier 3x4 boutons](https://fr.aliexpress.com/item/Button-Keypad-3x4-module/32530917534.html) : 2,00€
 - 1 [écran LCD 2x16 caractères sur interface I2C](https://fr.aliexpress.com/store/product/LCD1602-I2C-LCD-1602-module-Blue-screen-IIC-I2C-for-arduino-LCD1602-Adapter-plate/1022067_32651314933.html) : 1,70€
 - 1 [conteneur de piles LR6](https://fr.aliexpress.com/item/New-6-x-AA-Battery-Case-Storage-Holder-With-DC2-1-Power-Jack-For-Arduino/32801965248.html) : 1,10€
-- 1 [servo-moteur](https://fr.aliexpress.com/item/2016-NEW-SG90-Servo-mini-micro-9g-for-Rc-helicopter-Airplane-Foamy-Plane-Car-Boat/32717599656.html) pour lever/baisser un crayon: 1.20€
+- 1 [servomoteur](https://fr.aliexpress.com/item/2016-NEW-SG90-Servo-mini-micro-9g-for-Rc-helicopter-Airplane-Foamy-Plane-Car-Boat/32717599656.html) pour lever/baisser un crayon: 1.20€
 - 2 [roues "billes"](https://fr.aliexpress.com/item/CY-12A-12mm-bearing-smart-car-casters-small-maverick-eye-round-steel-ball-omni-wheel-universal/32705899129.html) : 2,50€
 - 1 [lot de cables "dupont" de 20cm](https://fr.aliexpress.com/item/Free-Shipping-80pcs-dupont-cable-jumper-wire-dupont-line-female-to-female-dupont-line-20cm-1P/1699285992.html) : 0,85€
 - [des vis M2x5mm ](https://fr.aliexpress.com/item/50Pcs-lot-Screw-M2-5-of-Screws-Nuts-Assortment-Bolts-Screw-Spike-Round-Head-Screw-2mm/32722845879.html) : 0,70€
@@ -176,7 +178,7 @@ Branchement des cartes de contrôle des moteurs pas-à-pas :
 
 Brancher les moteurs pas-à-pas sur les contrôleurs. Marquer les moteurs droite et gauche afin de les différencier facilement lors du montage final.
 
-Branchement du servo-moteur sur le port 3 : brancher le câble de que le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**
+Branchement du servomoteur sur le port 3 : brancher le câble de que le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**
 
 **Attention** pour les personnes ayant commandé [ce modèle de *shield*](https://fr.aliexpress.com/store/product/Nano-I-O-expansion-Shield-for-Arduino-Nano-V3-pinout-Assembled/1950989_32633286806.html) il faut inverser les fils rouge et marron du servomoteur! Pour cela utiliser un petit tournevis plat et soulever légèrement le petit ergot au bout d'un des fils (rouge ou marron) puis tirer légèrement sur ce dernier, il devrait venir facilement. Faire de même avec le deuxième fil. Rebrancher les fils en les inversant par rapport à leur position initiale. Vous pourrez maintenant faire en sorte de respecter la consigne pour que "le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**" 
 
@@ -189,7 +191,9 @@ Branchement du module Bluetooth :
     - Brancher un fil entre la broche **RX** du module Bluetooth et la broche **S** du port 13 de l'Arduino
     - Brancher un fil entre la broche **TX** du module Bluetooth et la broche **S** du port 12 de l'Arduino
 
-Découper les modèles de touches ([disponibles ici](https://github.com/Orange-OpenSource/oorobot/tree/master/doc/menu/menu.pdf)) et les insérer dans le clavier, pour cela il faut sortir les touches (ça vient facilement en tirant dessus) puis enlever la partie transparente (vous pouvez utiliser une paire de ciseaux pour faire levier), placer les découpes et remettre en place les touches.
+Découper les modèles de touches ([disponibles ici](https://github.com/Orange-OpenSource/oorobot/tree/master/doc/menu/menu.pdf)) et les insérer dans le clavier, pour cela il faut sortir les touches (ça vient facilement en tirant dessus) puis enlever la partie transparente (vous pouvez utiliser une paire de ciseaux pour faire levier), placer les découpes et remettre en place les touches comme ci-dessous (pour bien placer le clavier, il faut que les fils sortent sur la droite) :
+
+![positions_touches](https://user-images.githubusercontent.com/16662847/42823193-384c217c-89dd-11e8-95d6-90f48b636311.jpg)
 
 Télécharger et installer le programme [Arduino IDE ](https://www.arduino.cc/en/Main/Software) sur votre PC. Brancher l'Arduino avec un cable USB sur votre PC. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée (*/dev/ttyUSBx* sous Linux, *COMx* sous Windows). Sélectionner dans "Outils/Type de carte" le modèle "Arduino Nano"
 
@@ -218,7 +222,7 @@ Télécharger le programme [oorobot](https://orange-opensource.github.io/oorobot
 Téléverser ensuite le programme *oorobot* sur l'Arduino. Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le câblage est bien réalisé :
 - Vérifier le branchement du clavier, un appui sur un bouton doit afficher des caractères sur l'écran LCD
 - Vérifier le contraste de l'écran : ce dernier doit s'allumer au démarrage, par contre si vous ne voyez rien, pas de panique c'est peut-être tout simplement parce que le contraste est mal réglé. Pour changer ce paramètre il suffit de tourner le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran
-- Marquer le dessus du servo-moteur : l'axe du moteur doit être sur la gauche du composant quand la partie mobile est devant vous. Vérifier que ce dernier bouge bien si vous appuyer sur les boutons lever/baisser le crayon
+- Marquer le dessus du servomoteur : l'axe du moteur doit être sur la gauche du composant quand la partie mobile est devant vous. Vérifier que ce dernier bouge bien si vous appuyer sur les boutons lever/baisser le crayon
 - Vérifier que les moteurs fonctionnent bien : lancer une commande "avance" pour vérifier que les moteurs tournent dans le bon sens, faire de même avec une commande "tourne à droite".
 - Vérifier le sens de l'interrupteur : jouer avec le bouton de l'interrupteur pour voir dans quelle position il allume ou éteint le module Bluetooth. Veillez à noter ces états afin de bien positionner plus tard l'interrupteur sur le châssis.
 - Vérifier que le module Bluetooth fonctionne : activer le Bluetooth sur votre téléphone/tablette et vérifier que vous pouvez bien vous appairez avec le robot (code PIN 0000). Si vous le pouvez vérifier ensuite que vous pouvez piloter le robot avec l'application Android fournie (voir plus bas)
