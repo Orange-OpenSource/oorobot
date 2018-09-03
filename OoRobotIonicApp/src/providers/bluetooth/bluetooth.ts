@@ -28,7 +28,6 @@ export class BluetoothProvider {
 
   setPreferedDevice(device) {
     return this.storage.set("device", device);
-
   }
 
   getPreferedDevice() {
@@ -41,7 +40,6 @@ export class BluetoothProvider {
   }
 
   serialWritePreferedDevice(command) {
-
     console.log("BT serial send :" + command)
 
     return new Promise((resolve, reject) => {
@@ -68,13 +66,8 @@ export class BluetoothProvider {
 
           })
         }
-
-
       })
-
-
     })
-
   }
 
   connectDevice(device) {

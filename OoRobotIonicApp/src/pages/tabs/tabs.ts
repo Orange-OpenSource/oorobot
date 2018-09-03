@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
+import { SettingsPage } from '../settings/settings';
 import { BlocklyPage } from '../blockly/blockly';
 import { SharePage } from "../share/share";
 
@@ -17,6 +18,8 @@ export class TabsPage {
   tab3Root = BluetoothPage;
   tab4Root = BlocklyPage;
   tab5Root = SharePage;
+  tab6Root = SettingsPage;
+
   constructor() {
 
   }
