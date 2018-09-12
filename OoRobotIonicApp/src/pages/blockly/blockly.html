@@ -28,11 +28,21 @@
 <ion-footer>
   <ion-grid>
     <ion-row>
-      <ion-col col-6>
+      <ion-col col-3>
         <button ion-button full color="secondary" (click)="testCode()">Essayer</button>
       </ion-col>
-      <ion-col col-6>
-        <button ion-button full (click)="generateCode()">Envoyer</button>
+      <ion-col col-3>
+        <button ion-button full (click)="sendCode()">Envoyer</button>
+      </ion-col>
+      <ion-col col-3>
+        <button ion-button full icon-only (click)="shareCode()">
+          <ion-icon name="share"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-3>
+        <button ion-button full icon-end (click)="loadCode()">Charger
+          <ion-icon name="qr-scanner"></ion-icon>
+        </button>
       </ion-col>
     </ion-row>
   </ion-grid>

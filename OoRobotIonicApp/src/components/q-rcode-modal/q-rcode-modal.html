@@ -1,0 +1,12 @@
+<!-- Generated template for the QRcodeModalComponent component -->
+<div class="modalContainer">
+
+  <button ion-button icon-end outline large (click)="closeModal()">
+    Close
+    <ion-icon name="close"></ion-icon>
+  </button>
+
+  <div class="qrcode">
+    <qrcode *ngIf="string!=''" [qrdata]="this.code" [size]="256" [level]="'M'"></qrcode>
+  </div>
+</div>
