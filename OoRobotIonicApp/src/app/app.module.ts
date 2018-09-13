@@ -20,13 +20,12 @@ import { BluetoothProvider } from '../providers/bluetooth/bluetooth';
 import { IonicStorageModule } from '@ionic/storage';
 import { ShareProvider } from '../providers/share/share';
 import { QRCodeModule } from 'angularx-qrcode';
-import { QrcodeProvider } from '../providers/qrcode/qrcode';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 @NgModule({
   declarations: [MyApp, AboutPage, BlocklyPage, ContactPage, HomePage, BluetoothPage, SharePage, SettingsPage, CanvasModalComponent, TabsPage, QRcodeModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(MyApp), IonicStorageModule.forRoot(), QRCodeModule],
   bootstrap: [IonicApp],
   entryComponents: [MyApp, BlocklyPage, AboutPage, ContactPage, HomePage, SharePage, SettingsPage, BluetoothPage, CanvasModalComponent, TabsPage, QRcodeModalComponent],
-  providers: [BarcodeScanner, StatusBar, BluetoothSerial, SplashScreen, { provide: ErrorHandler, useClass: IonicErrorHandler }, BluetoothProvider, ScreenOrientation, ShareProvider, QrcodeProvider]
+  providers: [BarcodeScanner, StatusBar, BluetoothSerial, SplashScreen, { provide: ErrorHandler, useClass: IonicErrorHandler }, BluetoothProvider, ScreenOrientation, ShareProvider]
 })
 export class AppModule {}

@@ -1,4 +1,3 @@
-import { QrcodeProvider } from './../../providers/qrcode/qrcode';
 import { QRcodeModalComponent } from './../../components/q-rcode-modal/q-rcode-modal';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ModalController, NavController, NavParams, Platform, Content } from 'ionic-angular';
@@ -11,7 +10,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 declare var Blockly: any;
 declare var Webcom: any;
-//declare var OoRoBoT: any;
+declare var OoRoBoT: any;
 /**
  * Generated class for the BlocklyPage page.
  *
@@ -186,10 +185,10 @@ export class BlocklyPage {
   @ViewChild('content')
   content: Content;
 
-  constructor(private qrScanner: BarcodeScanner, private qrcode: QrcodeProvider, private screenOrientation: ScreenOrientation, private blProvider: BluetoothProvider, private modalCtrl: ModalController, public navCtrl: NavController, private platform: Platform) {
+  constructor(private qrScanner: BarcodeScanner, private screenOrientation: ScreenOrientation, private blProvider: BluetoothProvider, private modalCtrl: ModalController, public navCtrl: NavController, private platform: Platform) {
     this.level = '0';
     this.setBlocks(); // define Oorobot Blocks
-
+    this.oorobot = new OoRoBoT();
     //let ref = new Webcom('https://io.datasync.orange.com/base/legorange/');
   }
 
@@ -202,33 +201,30 @@ export class BlocklyPage {
 
   levelChange(val: any) {
     console.log('LevelChange:', this.level, val);
-    if (((parseInt(this.level) == 0 || parseInt(this.level) == 1) && (parseInt(val) == 1 || parseInt(val) == 0)) || ((parseInt(this.level) == 3 || parseInt(this.level) == 2) && (parseInt(val) == 2 || parseInt(val) == 3))) {
-      this.myWorkspace.updateToolbox(this.toolboxes[val]);
-      this.level = val;
-    } else {
-      this.myWorkspace.dispose();
-      this.myWorkspace = null;
-      this.level = val;
-      this.initWorkspace();
-    }
+
+    this.myWorkspace.updateToolbox(this.toolboxes[val]);
+    this.level = val;
+    // this.initWorkspace();
   }
   loadCode() {
     this.qrScanner
       .scan()
       .then(data => {
         console.log('Scanned something', data.text);
+        console.log(JSON.stringify(data));
 
-        var xml = this.qrcode.decode(data.text);
-        console.log(xml);
+        var decoded = this.oorobot.decode(data.text);
+        console.log('decoded' + JSON.stringify(decoded));
+        this.levelChange(decoded.level);
         Blockly.mainWorkspace.clear();
-        Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
+        Blockly.Xml.domToWorkspace(decoded.xml, Blockly.mainWorkspace);
       })
-      .catch((e: any) => console.log('Error is', e));
+      .catch((e: any) => console.log('Error is' + e));
   }
   shareCode() {
-    var dom = this.generateCode().dom;
-    if (dom) {
-      const modal = this.modalCtrl.create(QRcodeModalComponent, { code: dom });
+    var codedDom = this.generateCode().codedDom;
+    if (codedDom) {
+      const modal = this.modalCtrl.create(QRcodeModalComponent, { codedDom: codedDom });
       modal.present();
     }
   }
@@ -240,20 +236,15 @@ export class BlocklyPage {
     }
   }
 
-  generateCode(): { dom: string; code: string } {
-    console.log(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace));
-    var textDom = this.qrcode.encode(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace));
-
-    console.log(textDom.length, textDom);
+  generateCode(): { codedDom: string; code: string } {
+    var codedDom = this.oorobot.encode(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace), this.level);
     let generated: string = Blockly.JavaScript.workspaceToCode(this.myWorkspace);
-
     generated = generated.replace(/(#\d+)/g, '');
-
     var code = null;
     if (generated.indexOf('command') == 0 && generated.lastIndexOf('command') == 0) {
       code = 'AAW10' + generated.substring(7, generated.length) + 'G';
     }
-    return { dom: textDom, code: code };
+    return { codedDom: codedDom, code: code };
   }
 
   initWorkspace() {
@@ -282,11 +273,6 @@ export class BlocklyPage {
       trashcan: true
     });
     Blockly.svgResize(this.myWorkspace);
-  }
-
-  ngOnChanges() {
-    var contentDim = this.content.getContentDimensions();
-    console.log('ngOnChanges Change', contentDim);
   }
 
   ionViewDidEnter() {

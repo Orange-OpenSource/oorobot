@@ -45,6 +45,7 @@
     "ionic-angular": "3.9.2",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "4.4.3",
+    "lzutf8": "^0.5.5",
     "phonegap-plugin-barcodescanner": "^8.0.0",
     "rxjs": "6.2.2",
     "rxjs-compat": "^6.2.2",
