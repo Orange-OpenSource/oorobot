@@ -1,9 +1,11 @@
+import { QrcodeProvider } from './../../providers/qrcode/qrcode';
 import { QRcodeModalComponent } from './../../components/q-rcode-modal/q-rcode-modal';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ModalController, NavController, NavParams, Platform, Content } from 'ionic-angular';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { CanvasModalComponent } from '../../components/canvas-modal/canvas-modal';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 //import { Dialogs } from '@ionic-native/dialogs';
 
@@ -184,7 +186,7 @@ export class BlocklyPage {
   @ViewChild('content')
   content: Content;
 
-  constructor(private screenOrientation: ScreenOrientation, private blProvider: BluetoothProvider, private modalCtrl: ModalController, public navCtrl: NavController, private platform: Platform) {
+  constructor(private qrScanner: BarcodeScanner, private qrcode: QrcodeProvider, private screenOrientation: ScreenOrientation, private blProvider: BluetoothProvider, private modalCtrl: ModalController, public navCtrl: NavController, private platform: Platform) {
     this.level = '0';
     this.setBlocks(); // define Oorobot Blocks
 
@@ -210,30 +212,48 @@ export class BlocklyPage {
       this.initWorkspace();
     }
   }
-  loadCode() {}
+  loadCode() {
+    this.qrScanner
+      .scan()
+      .then(data => {
+        console.log('Scanned something', data.text);
+
+        var xml = this.qrcode.decode(data.text);
+        console.log(xml);
+        Blockly.mainWorkspace.clear();
+        Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
+      })
+      .catch((e: any) => console.log('Error is', e));
+  }
   shareCode() {
-    var code = this.generateCode();
-    if (code) {
-      const modal = this.modalCtrl.create(QRcodeModalComponent, { code: code });
+    var dom = this.generateCode().dom;
+    if (dom) {
+      const modal = this.modalCtrl.create(QRcodeModalComponent, { code: dom });
       modal.present();
     }
   }
 
   sendCode() {
-    var code = this.generateCode();
+    var code = this.generateCode().code;
     if (code) {
       this.blProvider.serialWritePreferedDevice(code).then(() => {});
     }
   }
 
-  generateCode(): string {
+  generateCode(): { dom: string; code: string } {
+    console.log(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace));
+    var textDom = this.qrcode.encode(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace));
+
+    console.log(textDom.length, textDom);
     let generated: string = Blockly.JavaScript.workspaceToCode(this.myWorkspace);
+
     generated = generated.replace(/(#\d+)/g, '');
+
     var code = null;
     if (generated.indexOf('command') == 0 && generated.lastIndexOf('command') == 0) {
       code = 'AAW10' + generated.substring(7, generated.length) + 'G';
     }
-    return code;
+    return { dom: textDom, code: code };
   }
 
   initWorkspace() {
@@ -281,7 +301,7 @@ export class BlocklyPage {
           blocklyDiv.style.height = contentDim.contentHeight + 'px';
           blocklyDiv.style.width = contentDim.contentWidth + 'px'; //   ({"height": 500+"px","width": this.platform.width()+"px"});
           Blockly.svgResize(this.myWorkspace);
-        }, 10);
+        }, 200);
       }
     });
     if (!this.myWorkspace) {

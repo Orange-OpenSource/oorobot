@@ -6,13 +6,12 @@ import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { SettingsPage } from '../settings/settings';
 import { BlocklyPage } from '../blockly/blockly';
-import { SharePage } from "../share/share";
+import { SharePage } from '../share/share';
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-
   tab1Root = HomePage;
   tab2Root = AboutPage;
   tab3Root = BluetoothPage;
@@ -20,7 +19,5 @@ export class TabsPage {
   tab5Root = SharePage;
   tab6Root = SettingsPage;
 
-  constructor() {
-
-  }
+  constructor() {}
 }
