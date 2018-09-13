@@ -18,7 +18,13 @@ Actuellement le robot peut être utilisé de deux façons différentes (comme in
 
 Pour suivre l'évolution du robot vous pouvez suivre le mot dièse [#OoRoBoT sur Twitter](https://twitter.com/hashtag/OoRoBoT?src=hash)
 
+Le [FabLab de Lannion](http://www.fablab-lannion.org/) propose des kits au prix de 40€ contenant :
+- Tout le matériel électronique nécessaire (voir plus bas dans la page)
+- La dernière version du châssis en MDF réalisé à la découpeuse laser
+
 **La notice de montage est disponible [ici](https://orange-opensource.github.io/oorobot/montage.pdf).**
+
+Si vous voulez une version du robot en impression 3D avec la possibilité de baisser/lever un crayon je vous invite à voir [cette version du projet](http://www.tablettesetpirouettes.com/oorobot-a-lecole-elementaire/) réalisé par [Delphine Thibault](https://twitter.com/DelphineThib).
 
 ## Genèse du projet 
 
@@ -27,6 +33,7 @@ J'ai eu cette idée en discutant avec une professeure des écoles (Maître Forma
 Je me suis donc lancé dans ce projet profitant des imprimantes 3D disponibles au travail, de mes compétences en Arduino et du temps donné par mon employeur pour réaliser des *side-project*. L'idée était aussi de pouvoir utiliser ce robot comme traceur (comme [la mythique tortue "Jeulin" des années 80](http://www.tortue-jeulin.com/articles.php?lng=fr&pg=3&mnuid=2&tconfig=0)).
  
 Au final, le robot revient à moins de 30€ (si vous le fabriquer vous-même) et ne demande aucune soudure. Le châssis peut être imprimé sur une imprimante 3D possédant un plateau de 20cm sur 20cm ou en utilisant une découpeuse laser.
+
 
 Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
 
@@ -121,7 +128,11 @@ A la vue des demandes qui commencent à affluer pour avoir un robot, j'ai conçu
 
 Ajout d'un système pour pouvoir lever et baisser un crayon.
 
-![oorobot mdf](https://user-images.githubusercontent.com/16662847/38424869-af778bd6-39b2-11e8-957d-0aee55cf0180.jpg)
+![oorobot mdf](https://user-images.githubusercontent.com/16662847/44794123-16318680-aba8-11e8-8910-fae8577d0b5f.jpg)
+
+ Les fichiers pour la découpe laser (oorobot.svg pour modifier le modèle avec Inkscape et oorobot.dxf à charger dans le logiciel de votre découpeuse laser) se trouve dans le [répertoire 2d](https://github.com/Orange-OpenSource/oorobot/tree/master/2d). Il ne faut garder que les pièces en blanc :
+ 
+![plan](https://user-images.githubusercontent.com/16662847/45498373-29cd1780-b77a-11e8-8d97-227498b1159d.png)
 
 ### Le char
 
@@ -201,7 +212,7 @@ Il faut installer les dépendances suivantes en allant dans le menu "Croquis/Inc
 - **AccelStepper** v1.57.1 by Mike McCauley
 - **LiquidCrystal I2C** v1.1.2 by Frank de Brabander
 
-Si vous voulez changer le nom du module Bluetooth (sinon votre robot sera visible sous le nom "HC-06") il faut faire la manipulation suivante :
+Si vous voulez changer le nom du module Bluetooth (sinon votre robot sera visible sous le nom "HC-06" ou "HC-05") il faut faire la manipulation suivante :
 - Brancher votre Arduino sur votre PC. La LED du module Bluetooth doit clignoter rapidement
 - Débrancher le cable arrivant sur la broche VCC du module Bluetooth.
 - Faire un pont sur l'entrée EN comme sur le schéma ci-dessus
@@ -229,7 +240,9 @@ Téléverser ensuite le programme *oorobot* sur l'Arduino. Ce programme va pilot
 
 Tout est OK? Vous pouvez passer au montage des composants sur le châssis.
 
-[Ordre de montage des composants sur le châssis 2D](https://github.com/Orange-OpenSource/oorobot/tree/master/2d/)
+Ordre de montage des composants sur le châssis 2D :
+
+Vous trouverez la documentation en ligne [ici](https://github.com/Orange-OpenSource/oorobot/tree/master/2d) et au format PDF [ici](https://orange-opensource.github.io/oorobot/montage.pdf).
 
 Ordre de montage des composants sur le châssis 3D :
 
