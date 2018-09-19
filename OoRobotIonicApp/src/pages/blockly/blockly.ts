@@ -26,7 +26,9 @@ declare var Webcom: any;
 export class BlocklyPage {
   myWorkspace: any;
   code = '';
+  qrCodeCancelled: boolean;
   blocklyDivStyle = {};
+  canvasModal: any;
   oorobot: any;
   level: '0';
   toolboxes = {
@@ -188,16 +190,29 @@ export class BlocklyPage {
 
   constructor(private qrScanner: BarcodeScanner, private qrcode: QrcodeProvider, private screenOrientation: ScreenOrientation, private blProvider: BluetoothProvider, private modalCtrl: ModalController, public navCtrl: NavController, private platform: Platform) {
     this.level = '0';
+    this.qrCodeCancelled=false;
+    platform.registerBackButtonAction(() => {
+      // TODO: manage double 'back' click to exit App ?
+      if (this.qrCodeCancelled) {
+        this.qrCodeCancelled = false;
+      } else {
+        if (this.canvasModal) {
+          this.canvasModal.dismiss();
+        }
+        if (navCtrl.canGoBack()) { //Can we go back?
+          navCtrl.pop();
+        }
+      }
+    }, 101);
     this.setBlocks(); // define Oorobot Blocks
-
     //let ref = new Webcom('https://io.datasync.orange.com/base/legorange/');
   }
 
   testCode() {
     let code: string = Blockly.JavaScript.workspaceToCode(this.myWorkspace);
     code = code.replace(/^command/, '');
-    let canvasModal = this.modalCtrl.create(CanvasModalComponent, { code: code });
-    canvasModal.present();
+    this.canvasModal = this.modalCtrl.create(CanvasModalComponent, { code: code });
+    this.canvasModal.present();
   }
 
   levelChange(val: any) {
@@ -216,20 +231,25 @@ export class BlocklyPage {
     this.qrScanner
       .scan()
       .then(data => {
+        this.qrCodeCancelled=false;
         console.log('Scanned something', data.text);
-
-        var xml = this.qrcode.decode(data.text);
-        console.log(xml);
-        Blockly.mainWorkspace.clear();
-        Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
+        if (data.text) {
+          var xml = this.qrcode.decode(data.text);
+          console.log(xml);
+          Blockly.mainWorkspace.clear();
+          Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
+        } else {
+          this.qrCodeCancelled=true;
+          console.log('no scan done!');
+        }
       })
       .catch((e: any) => console.log('Error is', e));
   }
   shareCode() {
     var dom = this.generateCode().dom;
     if (dom) {
-      const modal = this.modalCtrl.create(QRcodeModalComponent, { code: dom });
-      modal.present();
+      this.canvasModal = this.modalCtrl.create(QRcodeModalComponent, { code: dom });
+      this.canvasModal.present();
     }
   }
 

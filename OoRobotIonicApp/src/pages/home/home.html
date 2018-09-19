@@ -7,39 +7,44 @@
 
 
 <ion-content padding>
-  <ion-title>Contrôle du OoRoBoT</ion-title>
+
   <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <img style="width: 100%; height: auto;" src="assets/imgs/banner.png"/>
+      </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('|')">
-          <ion-icon name="md-arrow-dropup-circle"></ion-icon>
+          <ion-icon name="arrow-dropup-circle"></ion-icon>
         </button>
       </ion-col>
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('U')">
-          <ion-icon name="md-arrow-round-up"></ion-icon>
+          <ion-icon name="arrow-round-up"></ion-icon>
         </button>
       </ion-col>
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('!')">
-          <ion-icon name="md-arrow-dropdown-circle"></ion-icon>
+          <ion-icon name="arrow-dropdown-circle"></ion-icon>
         </button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('L')">
-          <ion-icon name="ios-undo"></ion-icon>
+          <ion-icon name="arrow-round-back"></ion-icon>
         </button>
       </ion-col>
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('P')">
-          <ion-icon name="md-pause"></ion-icon>
+          <ion-icon name="pause"></ion-icon>
         </button>
       </ion-col>
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('R')">
-          <ion-icon name="ios-redo"></ion-icon>
+          <ion-icon name="arrow-round-forward"></ion-icon>
         </button>
       </ion-col>
     </ion-row>
@@ -47,25 +52,25 @@
       <ion-col col-4> </ion-col>
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('D')">
-          <ion-icon name="md-arrow-round-down"></ion-icon>
+          <ion-icon name="arrow-round-down"></ion-icon>
         </button>
       </ion-col>
       <ion-col col-4></ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-4>
-        <button ion-button icon-only full (click)="command('G')">
-          <ion-icon name="md-play"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-4>
         <button ion-button icon-only full (click)="command('C')">
-          <ion-icon name="md-remove-circle"></ion-icon>
+          <ion-icon name="remove-circle"></ion-icon>
         </button>
       </ion-col>
       <ion-col col-4>
         <button ion-button icon-only full (click)="command('S')">
-          <ion-icon name="md-settings"></ion-icon>
+          <ion-icon name="settings"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-only full (click)="command('G')">
+          <ion-icon name="play"></ion-icon>
         </button>
       </ion-col>
     </ion-row>

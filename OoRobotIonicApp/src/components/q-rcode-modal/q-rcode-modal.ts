@@ -18,7 +18,7 @@ export class QRcodeModalComponent {
     console.log('Hello QRcodeModalComponent Component');
     this.code = params.get('code');
   }
-  closeModal() {
+  dismiss() {
     this.navController.pop();
   }
 }

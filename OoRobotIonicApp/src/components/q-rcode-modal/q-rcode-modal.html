@@ -1,12 +1,20 @@
 <!-- Generated template for the QRcodeModalComponent component -->
-<div class="modalContainer">
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      QRCode
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Fermer</span>
+        <ion-icon name="md-close" showWhen="android, windows, core"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <button ion-button icon-end outline large (click)="closeModal()">
-    Close
-    <ion-icon name="close"></ion-icon>
-  </button>
-
+<ion-content>
   <div class="qrcode">
     <qrcode *ngIf="string!=''" [qrdata]="this.code" [usesvg]="true" [size]="256" [level]="'M'"></qrcode>
   </div>
-</div>
+</ion-content>
