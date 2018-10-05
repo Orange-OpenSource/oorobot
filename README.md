@@ -79,7 +79,7 @@ Le robot peut aussi être programmé à distance (Bluetooth) via une application
 - 1 [conteneur de piles LR6](https://fr.aliexpress.com/item/New-6-x-AA-Battery-Case-Storage-Holder-With-DC2-1-Power-Jack-For-Arduino/32801965248.html) : 1,10€
 - 1 [servomoteur](https://fr.aliexpress.com/item/2016-NEW-SG90-Servo-mini-micro-9g-for-Rc-helicopter-Airplane-Foamy-Plane-Car-Boat/32717599656.html) pour lever/baisser un crayon: 1.20€
 - 2 [roues "billes"](https://fr.aliexpress.com/item/CY-12A-12mm-bearing-smart-car-casters-small-maverick-eye-round-steel-ball-omni-wheel-universal/32705899129.html) : 2,50€
-- 1 [lot de cables "dupont" de 20cm](https://fr.aliexpress.com/store/product/Free-Shipping-80pcs-dupont-cable-jumper-wire-dupont-line-male-to-female-dupont-line-20cm-1P/1022067_1699319473.html) : 0,85€
+- 1 [lot de cables "dupont" de 20cm femelle-femelle](https://fr.aliexpress.com/store/product/Free-Shipping-80pcs-dupont-cable-jumper-wire-dupont-line-male-to-female-dupont-line-20cm-1P/1022067_1699319473.html) : 0,85€
 - [des vis M2x5mm ](https://fr.aliexpress.com/item/50Pcs-lot-Screw-M2-5-of-Screws-Nuts-Assortment-Bolts-Screw-Spike-Round-Head-Screw-2mm/32722845879.html) : 0,70€
 - [des vis M3x5mm ](https://fr.aliexpress.com/item/M3-x-5mm-Cross-Flat-Head-Countersunk-Bolts-Machine-Screws-100Pcs/32762532904.html) : 1€ : il y en a besoin de 8 en tout par robot, vous pouvez récupérer des vis utilisées pour tenir les disques durs ou les cartes mères
 
