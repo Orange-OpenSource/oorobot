@@ -28,6 +28,7 @@ export class BlocklyPage {
   blocklyDivStyle = {};
   oorobot: any;
   level: '0';
+  lastLevel = '0';
   toolboxes = {
     '0':
       '<xml id="toolbox" style="display: none">' +

@@ -232,7 +232,12 @@ class OoRoBoT {
     this.statementsIdx = [];
     this.statementsIdxHaveLoop = 0;
     let idx = 0;
-    this.xml = '<xml xmlns="http://www.w3.org/1999/xhtml"><variables></variables><block type="Start"><field name="WIDTH">' + this.width + '</field><field name="HEIGHT">' + this.height + '</field><statement name="DO">';
+    this.xml =
+      '<xml xmlns="http://www.w3.org/1999/xhtml"><variables></variables><block type="Start"><field name="WIDTH">' +
+      this.width +
+      '</field><field name="HEIGHT">' +
+      this.height +
+      '</field><statement name="DO">';
     this.statementsIdx.push(0);
     this.statementsIdxMax = 1;
     while (idx < this.commands.length) {
@@ -405,9 +410,19 @@ U            <next>
         break;
       case 'a':
         if (this.reverseOrientation) {
-          this.xml += '<block type="CircleRight"><field name="RADIUS">' + this.lastCircleRadius + '</field><field name="ANGLE">' + size + '</field><next>';
+          this.xml +=
+            '<block type="CircleRight"><field name="RADIUS">' +
+            this.lastCircleRadius +
+            '</field><field name="ANGLE">' +
+            size +
+            '</field><next>';
         } else {
-          this.xml += '<block type="CircleLeft"><field name="RADIUS">' + this.lastCircleRadius + '</field><field name="ANGLE">' + size + '</field><next>';
+          this.xml +=
+            '<block type="CircleLeft"><field name="RADIUS">' +
+            this.lastCircleRadius +
+            '</field><field name="ANGLE">' +
+            size +
+            '</field><next>';
         }
         this.statementsIdx[this.statementsIdx.length - 1]++;
         break;
