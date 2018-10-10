@@ -15,7 +15,7 @@
 #include "buttons.h"
 
 
-#define OOROBOT_VERSION "1.1.1"
+#define OOROBOT_VERSION "1.1.2"
 
 #define SCREEN_TIMEOUT 25
 
@@ -72,6 +72,7 @@ struct Params {
   int stepCm;
   int turnSteps;
   int lineSteps;
+  char btName[16];
 };
 
 int stepDelay = 800;
@@ -84,7 +85,7 @@ char buttonsMap[] = {
   '-',  0, 'S', 'A', 0, '+', 0,  0,   0,   0,  0, 0
 };
 
-Params params = {140, 1430, 100};
+Params params = {140, 1430, 100, ""};
 int previousMenu = CTRL_MENU;
 int selectedMenu = START_MENU;
 char cmd[MAX_COMMANDS + 1] = {};
@@ -162,7 +163,7 @@ void loop() {
     while (BTSerie.available()) {
       selectedMenu = CTRL_MENU;
       button = BTSerie.read();
-      //Serial.println(button);
+      Serial.println(button);
       if (button != 0) {
         actionButtonForScreen(button);
       }
@@ -406,7 +407,9 @@ void updateScreen() {
         if (i == 16) {
           lcd.setCursor(0, 1);
         }
-        lcd.print(commandToDisplay(cmd[i]));
+        if (i<32) {
+          lcd.print(commandToDisplay(cmd[i]));
+        }
       }
     } else if (selectedMenu == SETTINGS_MENU) {
       lcd.setBacklight(HIGH);
@@ -443,6 +446,9 @@ void updateScreen() {
         lcd.print(F(" 1cm:"));
         lcd.print(params.lineSteps);
         lcd.print(F("pas"));
+        lcd.setCursor(0, lineIdx+1);
+        lcd.print(F(" "));
+        lcd.print(params.btName);
       }
       
       lcd.setCursor(0, selectedLine%2);
@@ -778,6 +784,15 @@ void saveParams() {
 void loadParams() {
   Params savedParams;
   EEPROM.get(0, savedParams);
+  
+    Serial.print("btName from EEPROM : ");
+    Serial.println(savedParams.btName);    
+  if (savedParams.btName[0] >= 48) {
+    strcpy(params.btName, savedParams.btName);
+  } else {
+    strcpy(params.btName, "");  
+  }
+  
   if (savedParams.stepCm > 0 && savedParams.stepCm < 500) {
     params.stepCm = savedParams.stepCm;
   } else {
