@@ -22,6 +22,8 @@ Le [FabLab de Lannion](http://www.fablab-lannion.org/) propose des kits au prix 
 - Tout le matériel électronique nécessaire (voir plus bas dans la page)
 - La dernière version du châssis en MDF réalisé à la découpeuse laser
 
+Pour commander un kit, merci d'envoyer un email à [oorobot@fablab-lannion.org](mailto:oorobot@fablab-lannion.org). Le FabLab ne propose pas l'envoi de kit par la poste, si vous ne pouvez pas venir jusqu'à Lannion, vous pouvez commander les composants vous même et vous rapprocher du FabLab le plus proche de chez vous pour réaliser le châssis en MDF ou en impression 3D.
+
 **La notice de montage est disponible [ici](https://orange-opensource.github.io/oorobot/montage.pdf).**
 
 Si vous voulez une version du robot en impression 3D avec la possibilité de baisser/lever un crayon je vous invite à voir [cette version du projet](http://www.tablettesetpirouettes.com/oorobot-a-lecole-elementaire/) réalisé par [Delphine Thibault](https://twitter.com/DelphineThib).
