@@ -38,7 +38,7 @@ void setup()
   deviceName=deviceSuffix+s[random(strlen(s)-1)]+s[random(strlen(s)-1)]+s[random(strlen(s)-1)]+s[random(strlen(s)-1)];
   
   //Pour choisir vous même le nom du robot, décommentez la ligne suivante (enlever les //) et changez le "OoRoBoT-MATT" par ce que vous voulez (ne pas depasser 16 caractères)
-  deviceName="OoRoBoT-TI0K";
+  //deviceName="OoRoBoT-MATT";
 
   lcd.init();
   lcd.backlight();
