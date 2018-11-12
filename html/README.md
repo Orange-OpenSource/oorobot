@@ -74,24 +74,20 @@ Le robot peut aussi être programmé à distance (Bluetooth) via une application
 
 ### À acheter :
 - 1 [arduino nano](https://fr.aliexpress.com/store/product/Nano-CH340-ATmega328P-MicroUSB-Compatible-for-Arduino-Nano-V3/1950989_32572612009.html) : 2.40€ (3.50€ [avec le cable USB](https://fr.aliexpress.com/item/Nano-V3-ATmega328P-CH340G-USB-2-0-data-CABLE-50cm-Compatible-for-Arduino-Nano-V3-0/32759066704.html)) 
-- 1 [sensor shield](https://fr.aliexpress.com/store/product/A47-1-pcs-SAMIORE-ROBOT-UNO-Bouclier-Nano-Bouclier-pour-NANO-3-0-et-UNO-R3/1022067_32832972324.html) : 1€
+- 1 [sensor shield](https://fr.aliexpress.com/store/product/1pcs-SAMIORE-ROBOT-UNO-Shield-Nano-Shield-for-NANO-3-0-and-UNO-R3-duemilanove-2009/1022067_32906961218.html) : 1€
 - 2 [moteurs pas à pas](https://fr.aliexpress.com/item/5V-Stepper-Motor-28BYJ-48-With-Drive-Test-Module-Board-ULN2003-5-Line-4-Phase/32608569300.html) : 4.50€
 - 1 [clavier 3x4 boutons](https://fr.aliexpress.com/item/Button-Keypad-3x4-module/32530917534.html) : 2,00€
 - 1 [écran LCD 2x16 caractères sur interface I2C](https://fr.aliexpress.com/store/product/LCD1602-I2C-LCD-1602-module-Blue-screen-IIC-I2C-for-arduino-LCD1602-Adapter-plate/1022067_32651314933.html) : 1,70€
 - 1 [conteneur de piles LR6](https://fr.aliexpress.com/item/New-6-x-AA-Battery-Case-Storage-Holder-With-DC2-1-Power-Jack-For-Arduino/32801965248.html) : 1,10€
-- 1 [servomoteur](https://fr.aliexpress.com/item/2016-NEW-SG90-Servo-mini-micro-9g-for-Rc-helicopter-Airplane-Foamy-Plane-Car-Boat/32717599656.html) pour lever/baisser un crayon: 1.20€
+- 1 [servomoteur](https://fr.aliexpress.com/store/product/1pcs-Mitoot-RC-Micro-Servo-9g-SG90-Servo-For-Arduino-Aeromodelismo-Align-Trex-450-Airplane-Helicopters/603538_32890069044.html) pour lever/baisser un crayon: 1.50€
 - 2 [roues "billes"](https://fr.aliexpress.com/item/CY-12A-12mm-bearing-smart-car-casters-small-maverick-eye-round-steel-ball-omni-wheel-universal/32705899129.html) : 2,50€
 - 1 [lot de cables "dupont" de 20cm femelle-femelle](https://fr.aliexpress.com/store/product/Free-Shipping-80pcs-dupont-cable-jumper-wire-dupont-line-male-to-female-dupont-line-20cm-1P/1022067_1699319473.html) : 0,85€
 - [des vis M2x5mm ](https://fr.aliexpress.com/item/50Pcs-lot-Screw-M2-5-of-Screws-Nuts-Assortment-Bolts-Screw-Spike-Round-Head-Screw-2mm/32722845879.html) : 0,70€
 - [des vis M3x5mm ](https://fr.aliexpress.com/item/M3-x-5mm-Cross-Flat-Head-Countersunk-Bolts-Machine-Screws-100Pcs/32762532904.html) : 1€ : il y en a besoin de 8 en tout par robot, vous pouvez récupérer des vis utilisées pour tenir les disques durs ou les cartes mères
-
-
-Pour le Bluetooth :
-- 1 [module Bluetooth HC-06](https://fr.aliexpress.com/store/product/HC-06-Bluetooth-serial-pass-through-module-wireless-serial-communication-from-machine-Wireless-HC06-for-arduino/1022067_32284764842.html) : 2.60€
+- 1 [module Bluetooth HC-06](https://fr.aliexpress.com/store/product/HC-06-Bluetooth-serial-pass-through-module-wireless-serial-communication-from-machine-Wireless-HC06-for-arduino/1022067_32284764842.html) ou [celui-ci](https://fr.aliexpress.com/item/HC-06-Bluetooth-de-S-rie-passe-Module-Sans-Fil-de-Communication-S-rie-HC06-Bluetooth/32857133517.html): 2.60€
 - 1 [bouton on/off](https://fr.aliexpress.com/item/1pcs-Power-on-off-switch-JST-Connector-Receiver-Switch-For-RC-Boat-Car-Flight-two-way/32636753090.html) (choisir le moins cher): 1€
-- ~~1 [convertisseur de niveau](https://fr.aliexpress.com/item/Logic-Level-Converter-Bi-Directional-3-3V-5V-4-Chanels/32713434790.html) : 0.50€~~ : ce composant est **optionel**, en effet bien que la documentation du module Bluetooth HC-06 indique que le niveau de tension pour la communication doit être à 3.3V, le module fonctionne bien avec la tension native de l'Arduino (5V)
 
-Soit un total d'environ **21€** (ou **25€** avec le Bluetooth) et surtout **aucune soudure n'est nécessaire** ! De plus les moteurs pas-à-pas, bien que lents, sont très silencieux.
+Soit un total d'environ **25€** et surtout **aucune soudure n'est nécessaire** ! De plus les moteurs pas-à-pas, bien que lents, sont très silencieux.
 
 ### À récupérer :
 - 2 grands élastiques pour les pneus.
@@ -152,12 +148,6 @@ Premier "vrai" modèle. Présence d'une roue encodeuse pour le réglage du pas q
 
 ![proto](https://user-images.githubusercontent.com/16662847/31553956-59681558-b03c-11e7-8821-879849a6639c.jpg)
 
-## Le code
- 
-Vous trouverez 2 programmes dans le répertoire [arduino](https://github.com/Orange-OpenSource/oorobot/tree/master/arduino/) de ce dépôt :
-- init-bluetooth: ce programme permet d'initialiser le module Bluetooth (lui donner un nom au format "OoRoBoT-XXXX" et affecter le code d'appairage 0000). Ce programme n'est à charger qu'une seule fois.
-- oorobot: le programme principal du robot
-
 ## Le montage des composants
 
 Brancher l'Arduino Nano sur le "sensor shield".
@@ -186,7 +176,7 @@ Branchement des cartes de contrôle des moteurs pas-à-pas :
     - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 9 de l'Arduino
     - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 10 de l'Arduino
     - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 11 de l'Arduino
-    - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 10 de l'Arduino
+    - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 11 de l'Arduino
     - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 11 de l'Arduino
 
 Brancher les moteurs pas-à-pas sur les contrôleurs. Marquer les moteurs droite et gauche afin de les différencier facilement lors du montage final.
@@ -208,7 +198,17 @@ Découper les modèles de touches ([disponibles ici](https://github.com/Orange-O
 
 ![positions_touches](https://user-images.githubusercontent.com/16662847/42823193-384c217c-89dd-11e8-95d6-90f48b636311.jpg)
 
+## Le code
+ 
+Vous trouverez 2 programmes dans le répertoire [arduino](https://github.com/Orange-OpenSource/oorobot/tree/master/arduino/) de ce dépôt :
+- init-bluetooth: ce programme permet d'initialiser le module Bluetooth (lui donner un nom au format "OoRoBoT-XXXX" et affecter le code d'appairage 0000). Ce programme n'est à charger qu'une seule fois.
+- oorobot: le programme principal du robot
+
+Dans kes derniers kits livrés par le [FabLab de Lannion](http://www.fablab-lannion.org/) (depuis novembre 2018) le module Bluetooth est pré-configuré et l'Arduino aura la dernière version du programme 'oorobot' d'installer. Vous n'avez donc pas à faire les étapes suivantes.
+
 Télécharger et installer le programme [Arduino IDE ](https://www.arduino.cc/en/Main/Software) sur votre PC. Brancher l'Arduino avec un cable USB sur votre PC. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée (*/dev/ttyUSBx* sous Linux, *COMx* sous Windows). Sélectionner dans "Outils/Type de carte" le modèle "Arduino Nano"
+
+**IMPORTANT** : dans les dernières versions du logiciel Arduino IDE, le type de "processeur" par défaut a été changé. Afin de pouvoir téléverser les programmes, il faut obligatoirement sélectionner ***"ATmega328P (Old Bootloader)"*** dans le menu "Outils -> Processeur".
 
 Il faut installer les dépendances suivantes en allant dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis en cherchant les bibliothèques à installer :
 - **AccelStepper** v1.57.1 by Mike McCauley
