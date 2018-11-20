@@ -83,9 +83,9 @@ Le robot peut aussi être programmé à distance (Bluetooth) via une application
 - 2 [roues "billes"](https://fr.aliexpress.com/item/CY-12A-12mm-bearing-smart-car-casters-small-maverick-eye-round-steel-ball-omni-wheel-universal/32705899129.html) : 2,50€
 - 1 [lot de cables "dupont" de 20cm femelle-femelle](https://fr.aliexpress.com/store/product/Free-Shipping-80pcs-dupont-cable-jumper-wire-dupont-line-male-to-female-dupont-line-20cm-1P/1022067_1699319473.html) : 0,85€
 - [des vis M2x5mm ](https://fr.aliexpress.com/item/50Pcs-lot-Screw-M2-5-of-Screws-Nuts-Assortment-Bolts-Screw-Spike-Round-Head-Screw-2mm/32722845879.html) : 0,70€
-- [des vis M3x5mm ](https://fr.aliexpress.com/item/M3-x-5mm-Cross-Flat-Head-Countersunk-Bolts-Machine-Screws-100Pcs/32762532904.html) : 1€ : il y en a besoin de 8 en tout par robot, vous pouvez récupérer des vis utilisées pour tenir les disques durs ou les cartes mères
+- [des vis M3x5mm ](https://fr.aliexpress.com/item/M3-x-5mm-Cross-Flat-Head-Countersunk-Bolts-Machine-Screws-100Pcs/32762532904.html) ou [des vis M3x8mm](https://fr.aliexpress.com/item/M3-Screw-50pcs-3x8mm-48mm-Match-M3-Copper-Cylinder-M3-Parafuso-Tornillos-High-Quality/32768440309.html) : 1€ : il y en a besoin de 8 en tout par robot, vous pouvez récupérer des vis utilisées pour tenir les disques durs ou les cartes mères
 - 1 [module Bluetooth HC-06](https://fr.aliexpress.com/store/product/HC-06-Bluetooth-serial-pass-through-module-wireless-serial-communication-from-machine-Wireless-HC06-for-arduino/1022067_32284764842.html) ou [celui-ci](https://fr.aliexpress.com/item/HC-06-Bluetooth-de-S-rie-passe-Module-Sans-Fil-de-Communication-S-rie-HC06-Bluetooth/32857133517.html): 2.60€
-- 1 [bouton on/off](https://fr.aliexpress.com/item/1pcs-Power-on-off-switch-JST-Connector-Receiver-Switch-For-RC-Boat-Car-Flight-two-way/32636753090.html) (choisir le moins cher): 1€
+- 1 [bouton on/off](https://fr.aliexpress.com/item/1pcs-Power-on-off-switch-JST-Connector-Receiver-Switch-For-RC-Boat-Car-Flight-two-way/32636753090.html) (choisir le moins cher) ou [celui-ci](https://fr.aliexpress.com/item/Haute-Qualit-JST-M-le-Femelle-Fil-C-blage-Sur-Off-Micro-Mini-Commutateur-Connecteur-Plug/32843117057.html) : 1€
 
 Soit un total d'environ **25€** et surtout **aucune soudure n'est nécessaire** ! De plus les moteurs pas-à-pas, bien que lents, sont très silencieux.
 
