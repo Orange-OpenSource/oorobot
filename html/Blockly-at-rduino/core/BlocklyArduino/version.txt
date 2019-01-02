@@ -1,4 +1,0 @@
-[release]
-version=3.0
-[update]
-date=12112018
