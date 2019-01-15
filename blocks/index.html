@@ -13,6 +13,7 @@
 	
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	
+	<script src="./lzutf8.js"></script>
 	<script src="./oorobot.js"></script>
 	<script src="qrcode.min.js"></script>
 
@@ -123,7 +124,7 @@
 			</button>
 			<button type="button" class="btn btn-default" id="oorobot-qrcode">
 			  <i class="fa fa-qrcode" aria-hidden="true"></i>
-			  QRCode
+			  QRCode for App
 			</button>
 		  </form>
 		  <div class="navbar-nav navbar-right">
@@ -239,25 +240,26 @@
 	const qrcode = new QRCode($("#qrcode")[0]);
 	$("#oorobot-qrcode").on("click", () => {
 	  $("#oorobot-test").trigger("click");
-	  const url = window.location.origin+window.location.pathname+"?code="+encodeURIComponent(oorobot.commands);
-	  qrcode.makeCode(url);
+      const code = Blockly.JavaScript.workspaceToCode(workspace);
+	  const xml = Blockly.Xml.workspaceToDom(workspace);
+	  const encoded = oorobot.encode(xml, 1);
+	  qrcode.makeCode(encoded);
 	  $("#qrcodeDiv").show();
 	});
 	
 	
 
 	const storedProgram = localStorage.getItem("code");
-	if ($.urlParam("code")) {
+	if (storedProgram) {
+	  Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(storedProgram), workspace);
+	  $("#oorobot-test").trigger("click");
+	} else if ($.urlParam("code")) {
 	  oorobot.setCommands(decodeURIComponent($.urlParam("code")));
-	  console.log($.urlParam("code"));
 	  const xml = oorobot.toBlocklyXml();
 	  Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xml), workspace);
 	  $("#oorobot-test").trigger("click");
-	} else if (storedProgram) {
-	  Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(storedProgram), workspace);
-	  $("#oorobot-test").trigger("click");
 	}
-
+	
 	var onresize = function(e) {
       $("#blocklyDiv").css("left", $("#blocklyArea").offset().left);
       $("#blocklyDiv").css("top", $("#blocklyArea").offset().top);
