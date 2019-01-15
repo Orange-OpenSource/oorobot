@@ -11,7 +11,7 @@
   </ion-navbar>
   <ion-item>
     <ion-label>Niveau</ion-label>
-    <ion-select (ionChange)="levelChange($event)">
+    <ion-select [(ngModel)]="this.level" (ionChange)="levelChange($event)">
       <ion-option value="0" selected="true">Débutant</ion-option>
       <ion-option value="1">Novice</ion-option>
       <ion-option value="2">Confirmé</ion-option>

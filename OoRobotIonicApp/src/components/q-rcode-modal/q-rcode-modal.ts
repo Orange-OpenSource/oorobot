@@ -12,11 +12,11 @@ import { NavParams, NavController } from 'ionic-angular';
   templateUrl: 'q-rcode-modal.html'
 })
 export class QRcodeModalComponent {
-  code: string = '';
+  codedDom: string = '';
 
   constructor(params: NavParams, public navController: NavController) {
     console.log('Hello QRcodeModalComponent Component');
-    this.code = params.get('code');
+    this.codedDom = params.get('codedDom');
   }
   dismiss() {
     this.navController.pop();

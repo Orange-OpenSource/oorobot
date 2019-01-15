@@ -45,6 +45,7 @@
     "ionic-angular": "3.9.2",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "4.4.4",
+    "lzutf8": "^0.5.5",
     "phonegap-plugin-barcodescanner": "^8.0.0",
     "rxjs": "6.3.3",
     "rxjs-compat": "^6.3.3",
@@ -53,7 +54,7 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.2.0",
+    "@ionic/app-scripts": "^3.2.1",
     "typescript": "3.1.2"
   },
   "description": "An Ionic project",
