@@ -61,7 +61,6 @@ SoftwareSerial BTSerie(RxD, TxD);
 #define LED2 A2
 #define LED3 A3
 
-
 int stepperSpeed = MIN_STEPPER_SPEED;
 
 // Initialize with pin sequence IN1-IN3-IN2-IN4 for using the AccelStepper with 28BYJ-48
