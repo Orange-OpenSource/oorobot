@@ -15,13 +15,13 @@
 #include "buttons.h"
 
 
-#define OOROBOT_VERSION "1.1.2"
+#define OOROBOT_VERSION "1.1.3"
 
 #define SCREEN_TIMEOUT 25
 
 // On some step motors direction may be inverted
-// define this symbol to invert the motors direction
 #define INVERT_DIRECTION
+// define this symbol to invert the motors direction
 #define MAX_COMMANDS 512
 #define MAX_LOOPS 10
 
@@ -57,6 +57,11 @@ SoftwareSerial BTSerie(RxD, TxD);
 #define MIN_STEPPER_SPEED 200
 #define WHEEL_SPACING_MM 132
 
+#define LED1 A1
+#define LED2 A2
+#define LED3 A3
+
+
 int stepperSpeed = MIN_STEPPER_SPEED;
 
 // Initialize with pin sequence IN1-IN3-IN2-IN4 for using the AccelStepper with 28BYJ-48
@@ -81,7 +86,7 @@ int steps2 = 0; // keep track of the step count for motor 2
 int isMoving = false;
 
 char buttonsMap[] = {
-  'L', 'G', 's', 'C', 0, 'R', 0, 'U', 'P', 'D', '|', '!',
+  'L', 'G', 's', 'C', 0, 'R', '@', 'U', 'P', 'D', '|', '!',
   '-',  0, 'S', 'A', 0, '+', 0,  0,   0,   0,  0, 0
 };
 
@@ -105,7 +110,7 @@ short consecutive_numbers = 0;
 short num_of_cmd = 0;
 short max_num_cmd = 0;
 long startMovement=0;
-
+boolean ledOn=false;
 
 
 void moveServo(int angle) {
@@ -138,6 +143,10 @@ void setup() {
 
   stepper2.setMaxSpeed(1000);
   stepper2.move(-1);
+
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
 
   moveServo(5);
 
@@ -211,10 +220,22 @@ void loop() {
 
 }
 
+void switchOnLED() {
+  Serial.println(F("switch on LED"));
+  digitalWrite(LED1, HIGH);
+  digitalWrite(LED2, HIGH);
+  digitalWrite(LED3, HIGH);
+}
 
+
+void switchOffLED() {
+  Serial.println(F("switch off LED"));
+  digitalWrite(LED1, LOW);
+  digitalWrite(LED2, LOW);
+  digitalWrite(LED3, LOW);
+}
 
 void actionButtonForScreen(char button) {
-
   if (selectedMenu == START_MENU) {
     selectedMenu = CTRL_MENU;
     changeDisplay = 1;
@@ -239,6 +260,15 @@ void actionButtonForScreen(char button) {
     else
     {
       switch (button) {
+        case '@':
+          if (ledOn) {
+            switchOffLED();
+            ledOn=false;
+          } else  {
+            switchOnLED();
+            ledOn=true;
+          }
+          break;
         case 'S':
           selectedMenu = SETTINGS_MENU;
           changeDisplay = 1;
@@ -420,8 +450,6 @@ void updateScreen() {
       int stepIdx=0;
       int turnIdx=1;
       int lineIdx=2;
-      Serial.print("selectedLine:");
-      Serial.println(selectedLine);
       if (selectedLine==2) {
         stepIdx=2;
         turnIdx=2;
@@ -674,7 +702,6 @@ boolean isCommandTerminated() {
 
   steps1 = stepper1.distanceToGo();
   steps2 = stepper2.distanceToGo();
-  //Serial.println(steps1);
   stepper1.runSpeedToPosition();
   stepper2.runSpeedToPosition();
 
@@ -734,12 +761,11 @@ void stepForward(short distance) {
   isMoving = true;
   startMovement=millis();
   stepperSpeed = MIN_STEPPER_SPEED;
-
-  int target = (int)  (((float)params.stepCm / 10.0f) * ((float)distance * (float)params.lineSteps / 100.0f));
+  
+  int target = (int) ((float)distance * (float)params.lineSteps / 10.0f);
 #ifdef INVERT_DIRECTION
   target = target * -1;
 #endif
-
   stepper1.move(-target);
   stepper2.move(target);
 }
@@ -749,7 +775,7 @@ void stepBackward(short distance) {
   startMovement=millis();
   stepperSpeed = MIN_STEPPER_SPEED;
 
-  int target = (int)  (((float)params.stepCm / 10.0f) * ((float)distance * (float)params.lineSteps / 100.0f));
+  int target = (int) ((float)distance * (float)params.lineSteps / 10.0f);
 #ifdef INVERT_DIRECTION
   target = target * -1;
 #endif
@@ -784,9 +810,7 @@ void saveParams() {
 void loadParams() {
   Params savedParams;
   EEPROM.get(0, savedParams);
-  
-    Serial.print("btName from EEPROM : ");
-    Serial.println(savedParams.btName);    
+
   if (savedParams.btName[0] >= 48) {
     strcpy(params.btName, savedParams.btName);
   } else {
@@ -809,5 +833,3 @@ void loadParams() {
     params.lineSteps = 140;
   }
 }
-
-
