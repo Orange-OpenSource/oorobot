@@ -15,7 +15,6 @@ export class QRcodeModalComponent {
   codedDom: string = '';
 
   constructor(params: NavParams, public navController: NavController) {
-    console.log('Hello QRcodeModalComponent Component');
     this.codedDom = params.get('codedDom');
   }
   dismiss() {
