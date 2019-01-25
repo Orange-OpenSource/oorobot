@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 
-    <title>BlOoRoBoT</title>
+    <title>OoRoBoT</title>
 
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -43,9 +43,22 @@
 
 	#qrcodeDiv {
 	  top:10px;
+	  text-align: center;
+	  background-color: white;
+	  padding: 5px;
+	  border: 1px solid black;
+	  width: 330px;
+	  height: 380px;
 	  left:10px;
 	  z-index: 100;
 	}
+
+	#qrcode {
+	  padding: 24px;
+	  text-align: center;
+
+	}
+	
 	#drawDiv {
 	  padding-top:10px;
 	  text-align: center;
@@ -85,12 +98,12 @@
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<span class="sr-only">Toggle navigation</span>
+			<span class="sr-only">Menu</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		  </button>
-		  <a class="navbar-brand" href="#">BlOoRoBoT</a>
+		  <a class="navbar-brand" href="#">OoRoBoT</a>
 		</div>
 	
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -124,7 +137,7 @@
 			</button>
 			<button type="button" class="btn btn-default" id="oorobot-qrcode">
 			  <i class="fa fa-qrcode" aria-hidden="true"></i>
-			  QRCode for App
+			  Charger sur l'appli
 			</button>
 		  </form>
 		  <div class="navbar-nav navbar-right">
@@ -138,6 +151,8 @@
 	  </div>
 	</nav>
 	<div id="qrcodeDiv" class="modal">
+	  Pour charger le programme sur votre tablette/portable,
+	  scannez ce QRCode dans l'application OoRoBoT<br/>
 	  <div id="qrcode"></div>
 	</div>
 	<div id="drawDiv" class="modal">
