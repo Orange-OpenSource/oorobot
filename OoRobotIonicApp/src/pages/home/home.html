@@ -7,73 +7,76 @@
 
 
 <ion-content padding>
+  <ion-scroll scrollY="true" style="width: 100% !important;height:100% !important">
 
-  <ion-grid>
-    <ion-row>
-      <ion-col col-12>
-        <img style="width: 100%; height: auto;" src="assets/imgs/banner.png"/>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-4>
-        <button ion-button icon-only full (click)="command('|')">
-          <ion-icon name="arrow-dropup-circle"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-4>
-        <button ion-button icon-only full (click)="command('U')">
-          <ion-icon name="arrow-round-up"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-4>
-        <button ion-button icon-only full (click)="command('!')">
-          <ion-icon name="arrow-dropdown-circle"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-4>
-        <button ion-button icon-only full (click)="command('L')">
-          <ion-icon name="arrow-round-back"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-4>
-        <button ion-button icon-only full (click)="command('P')">
-          <ion-icon name="pause"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-4>
-        <button ion-button icon-only full (click)="command('R')">
-          <ion-icon name="arrow-round-forward"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-4> </ion-col>
-      <ion-col col-4>
-        <button ion-button icon-only full (click)="command('D')">
-          <ion-icon name="arrow-round-down"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-4></ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-4>
-        <button ion-button icon-only full (click)="command('C')">
-          <ion-icon name="remove-circle"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-4>
-        <button ion-button icon-only full (click)="command('S')">
-          <ion-icon name="settings"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-4>
-        <button ion-button icon-only full (click)="command('G')">
-          <ion-icon name="play"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <img style="width: 100%; height: auto;" src="assets/imgs/banner.png"/>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <button ion-button icon-only full (click)="command('|')">
+            <ion-icon name="arrow-dropup-circle"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-3>
+          <button ion-button icon-only full (click)="command('U')">
+            <ion-icon name="arrow-round-up"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-3>
 
+        </ion-col>
+        <ion-col col-3>
+          <button ion-button icon-only full (click)="command('G')">
+            <ion-icon name="play"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <button ion-button icon-only full (click)="command('L')">
+            <ion-icon name="arrow-round-back"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-3>
+          <button ion-button icon-only full (click)="command('P')">
+            <ion-icon name="pause"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-3>
+          <button ion-button icon-only full (click)="command('R')">
+            <ion-icon name="arrow-round-forward"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-3>
+          <button ion-button icon-only full (click)="command('S')">
+            <ion-icon name="settings"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <button ion-button icon-only full (click)="command('!')">
+            <ion-icon name="arrow-dropdown-circle"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-3>
+          <button ion-button icon-only full (click)="command('D')">
+            <ion-icon name="arrow-round-down"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-3>
+
+        </ion-col>
+        <ion-col col-3>
+          <button ion-button icon-only full (click)="command('C')">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-scroll>
 </ion-content>
