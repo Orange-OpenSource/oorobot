@@ -29,8 +29,8 @@ export class BlocklyPage {
   blocklyDivStyle = {};
   currentModal: any;
   oorobot: any;
-  level: '0';
-  lastLevel = '0';
+  level = '1';
+  lastLevel = '1';
   toolboxes = {
     '0':
     '<xml id="toolbox" style="display: none">' +
@@ -68,7 +68,7 @@ export class BlocklyPage {
   content: Content;
 
   constructor(private qrScanner: BarcodeScanner, private screenOrientation: ScreenOrientation, private blProvider: BluetoothProvider, private modalCtrl: ModalController, public navCtrl: NavController, private platform: Platform) {
-    this.level = '0';
+    this.level = '1';
     this.qrCodeCancelled=false;
     platform.registerBackButtonAction(() => {
       // TODO: manage double 'back' click to exit App ?
