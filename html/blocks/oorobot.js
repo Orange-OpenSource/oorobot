@@ -76,7 +76,7 @@ class OoRoBoT {
       textDom = textDom.replace(re, this.dictionary[obj]);
     }
     textDom = level + '' + textDom;
-
+	  
     let code = LZUTF8.compress(textDom, { outputEncoding: 'Base64' });
 
     return code;

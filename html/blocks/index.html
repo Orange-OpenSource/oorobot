@@ -15,7 +15,7 @@
 	
 	<script src="./lzutf8.js"></script>
 	<script src="./oorobot.js"></script>
-	<script src="qrcode.min.js"></script>
+	<script src="./qrcode.js"></script>
 
 	<script src="assets/blockly/blockly_compressed.js"></script>
 	<script src="assets/blockly/blocks_compressed.js"></script>
@@ -252,20 +252,21 @@
         return url;
       }
 	});
-	const qrcode = new QRCode($("#qrcode")[0]);
+	const qrcode = new QRCode($("#qrcode")[0], {
+	  correctLevel : QRCode.CorrectLevel.M,
+	});
 	$("#oorobot-qrcode").on("click", () => {
 	  $("#oorobot-test").trigger("click");
       const code = Blockly.JavaScript.workspaceToCode(workspace);
 	  const xml = Blockly.Xml.workspaceToDom(workspace);
 	  const encoded = oorobot.encode(xml, 1);
+	  console.log(encoded, encoded.length);
 	  qrcode.makeCode(encoded);
 	  $("#qrcodeDiv").show();
 	});
-	
-	
 
 	const storedProgram = localStorage.getItem("code");
-	if (storedProgram) {
+	if (storedProgram && storedProgram!='<xml xmlns="http://www.w3.org/1999/xhtml"><variables></variables></xml>') {
 	  Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(storedProgram), workspace);
 	  $("#oorobot-test").trigger("click");
 	} else if ($.urlParam("code")) {
