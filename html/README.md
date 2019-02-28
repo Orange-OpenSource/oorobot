@@ -83,7 +83,7 @@ Le robot peut aussi être programmé à distance (Bluetooth) via une application
 - 2 [roues "billes"](https://fr.aliexpress.com/item/CY-12A-12mm-bearing-smart-car-casters-small-maverick-eye-round-steel-ball-omni-wheel-universal/32705899129.html) : 2,50€
 - 1 [lot de cables "dupont" de 20cm femelle-femelle F-F](https://fr.aliexpress.com/store/product/Free-Shipping-80pcs-dupont-cable-jumper-wire-dupont-line-male-to-female-dupont-line-20cm-1P/1022067_1699319473.html) : 0,85€
 - [des vis M2x5mm ](https://fr.aliexpress.com/item/50Pcs-lot-Screw-M2-5-of-Screws-Nuts-Assortment-Bolts-Screw-Spike-Round-Head-Screw-2mm/32722845879.html) : 0,70€
-- [des vis M3x5mm ](https://fr.aliexpress.com/item/Urijk-50-pcs-M3-M4-5-6-8-10-12-16-20-25-30mm-En-Acier/32882026998.html) : 1.6€ : il y en a besoin de 8 en tout par robot, vous pouvez récupérer des vis utilisées pour tenir les disques durs ou les cartes mères
+- [des vis M3x5mm ](https://fr.aliexpress.com/item/M3-x-5mm-Croix-Plat-T-te-Frais-e-Boulons-Machine-Vis-100-pcs/32958567739.html) : 1.6€ : il y en a besoin de 8 en tout par robot, vous pouvez récupérer des vis utilisées pour tenir les disques durs ou les cartes mères
 - 1 [module Bluetooth HC-06](https://fr.aliexpress.com/item/HC-06-Bluetooth-de-S-rie-passe-Module-Sans-Fil-de-Communication-S-rie-HC06-Bluetooth/32857133517.html): 2.60€
 - 1 [bouton on/off](https://fr.aliexpress.com/item/Connecteur-Plug-avec-JST-M-le-Femelle-Fil-Ligne-de-Commutateur-On-Off-Connecteur-Plug-Pour/32837794940.html) (choisir le moins cher) ou [celui-ci](https://fr.aliexpress.com/item/Haute-Qualit-JST-M-le-Femelle-Fil-C-blage-Sur-Off-Micro-Mini-Commutateur-Connecteur-Plug/32843117057.html) : 1,30€
 
@@ -297,7 +297,7 @@ ou
 ```
 ## Licences
 
-Le code est sous [GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.fr.html), les modèles 3D et la documentation sont sous [CC-BY-SA](https://creativecommons.org/licenses/by-sa/2.0/deed.fr).
+Le code est sous [GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.fr.html), les modèles (3D et 2D) et la documentation sont sous [CC-BY-SA](https://creativecommons.org/licenses/by-sa/2.0/deed.fr).
 
 ## Les projets équivalents
 
