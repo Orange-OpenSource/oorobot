@@ -31,6 +31,7 @@ static const char s[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 int i=0;
 String deviceName;
 bool btFound = false;
+bool oldHC06Module = false;
 
 void setup() 
 { 
@@ -80,22 +81,35 @@ void loop()
   if (i==0) {
     delay(600);
     Serial.println("Try to set name to "+deviceName);
-    BTSerie.print("AT+NAME="+deviceName+"\r\n");
+    if (oldHC06Module) {
+      BTSerie.print("AT+NAME"+deviceName);
+    } else {
+      BTSerie.print("AT+NAME="+deviceName+"\r\n");
+    }
     delay(1000);
   } else if (i==1) {
     Serial.println("Try to set PIN Code to "+pin);
-    BTSerie.print("AT+PSWD=\""+pin+"\"\r\n");
+    if (oldHC06Module) {
+      BTSerie.print("AT+PIN"+pin);
+    } else {
+      BTSerie.print("AT+PSWD=\""+pin+"\"\r\n");  
+    }
     delay(1000);
   } else if (i==2) {
     Serial.println("Try to set baud rate to 9600");
-    BTSerie.print("AT+UART=9600,0,0\r\n");
+    if (oldHC06Module) {
+      BTSerie.print("AT+BAUD4");  
+    } else {
+      BTSerie.print("AT+UART=9600,0,0\r\n");  
+    }
     delay(1000);
   } else if (i==3) {
     Serial.println("Ready for other AT commands"); 
     i++;
   } else if (i==4) {
     if (Serial.available()) { 
-      recvChar = Serial.read(); 
+      recvChar = Serial.read();
+      Serial.println(recvChar);
       BTSerie.write(recvChar); 
     }         
   }
@@ -103,7 +117,7 @@ void loop()
   int j=0;
   while (BTSerie.available()) {
     recvChar = BTSerie.read();
-    //Serial.print(recvChar);
+    Serial.print(recvChar);
     if (recvChar>32 && recvChar < 128) {
       res[j]=recvChar;
       j++;
@@ -112,29 +126,37 @@ void loop()
   res[j]=0;
   if (strlen(res) > 0) {
     btFound=true;
-    Serial.print("Res:");
-    Serial.println(res);
-    if (strcmp(res, "OK") == 0) {
-      if (i==0) {
-        lcd.clear();
-        // Le nom du module a bien été modifié
-        // On l'affiche sur l'écran LCD
-        lcd.print("Nom="+deviceName);
-      }
-      if (i==2) {
-        lcd.setCursor(0, 1);
-        Serial.println("Conf OK");  
-        char btName[16];
-        deviceName.toCharArray(btName, 16);
-        Params params = {140, 1430, 100};
-        strcpy(params.btName, btName);
-        EEPROM.put(0, params);
-        lcd.print("Conf. OK");
-      }      
-      if (i<4) {
-        i++;
+    // Manage HC-06 module with AT+NAMEXXXX command instead of AT+NAME=XXXX
+    // If return equal "OKsetname" set oldHC06Module to true and reset 
+    Serial.println(res[2]);
+    if (!oldHC06Module && res[2]=='s') {
+      oldHC06Module=true;
+      i=0;
+    } else {
+      res[2]=0;
+      Serial.print("Res:");
+      Serial.println(res);
+      if (strcmp(res, "OK") == 0) {
+        if (i==0) {
+          lcd.clear();
+          // Le nom du module a bien été modifié
+          // On l'affiche sur l'écran LCD
+          lcd.print("Nom="+deviceName);
+        }
+        if (i==2) {
+          lcd.setCursor(0, 1);
+          Serial.println("Conf OK");  
+          char btName[16];
+          deviceName.toCharArray(btName, 16);
+          Params params = {140, 1440, 140};
+          strcpy(params.btName, btName);
+          EEPROM.put(0, params);
+          lcd.print("Conf. OK");
+        }      
+        if (i<4) {
+          i++;
+        }
       }
     }
   }
 } 
-
