@@ -8,7 +8,7 @@ L'idée est de créer un robot éducatif destiné aux enfants de maternelle et �
 - Éviter les opérations "complexes" (soudure, usinage)
 
 Au fil des évolutions du projet, l'OoRoBoT apporte tout un lot de fonctionnalités complémentaires :
-- Présence d'un écran LCD de 2 lignes de 16 caractères permettant à l'enfant de visualiser le programme qu'il écrit. Cet écran associé au clavier permet aussi de régler le robot très précisement
+- Présence d'un écran LCD de 2 lignes de 16 caractères permettant à l'enfant de visualiser le programme qu'il écrit. Cet écran associé au clavier permet aussi de régler le robot très précisément
 - Ajout d'une interface Bluetooth permettant de piloter le robot à distance et ainsi permettre de lui donner des ordres complexes (boucles, tracé d'arc de cercle ...)
 - Ajout d'un servomoteur afin de baisser/lever un crayon
 
@@ -55,8 +55,8 @@ Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
 - À chaque appui sur un bouton d'ordre ce dernier s'affiche sur l'écran LCD. NB : L'écran LCD ne peut afficher que 32 ordres (l'Arduino quant à lui peut en gérer plus)
 - En cas d'erreur l'enfant peut effacer le dernier ordre ou tout son programme par un appui long sur le bouton "effacer"
 - Quand l'enfant le veut il peut lancer son programme avec le bouton "Lancer"
-- Le robot éxecute alors chaque ordre en faisant une courte pause entre chacun d'entre eux.
-- Quand le programme est terminé, la liste des ordres se réaffiche et l'enfant peut faire d'éventuels ajustements.
+- Le robot exécute alors chaque ordre en faisant une courte pause entre chacun d'entre eux.
+- Quand le programme est terminé, la liste des ordres s'affiche à nouveau et l'enfant peut faire d'éventuels ajustements.
 - On peut accéder au réglage des paramètres en faisant un appui long sur un bouton dédié. Les paramètres sont :
     - La distance parcourue pour les déplacements "avancer" et "reculer".
     - Le nombre de pas que les moteurs doivent faire pour effectuer un tour complet (qui peut varier selon la surface sur laquelle doit évoluer le robot)
@@ -64,7 +64,7 @@ Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
 
 Pour changer de ligne il faut appuyer sur les touches "avancer" ou "reculer", pour changer les valeurs il faut appuyer sur les touches "tourner à droite" et "tourner à gauche". Un appui long sur ces touches permet d'augmenter la valeur d'incrément.
 
-Pour annuler les changements des paramètres il faut appuyer sur le bouton "effacer". Pour quitter les paramètres en les sauvegardant il faut apppuyer sur la touche "lancer" ou "paramètre"
+Pour annuler les changements des paramètres il faut appuyer sur le bouton "effacer". Pour quitter les paramètres en les sauvegardant il faut appuyer sur la touche "lancer" ou "paramètre"
 
 Le robot peut aussi être programmé à distance (Bluetooth) via une application Android (disponible [ici](https://orange-opensource.github.io/oorobot/apk/oorobot.apk)).
 
@@ -73,7 +73,7 @@ Le robot peut aussi être programmé à distance (Bluetooth) via une application
 ![composant_s](https://user-images.githubusercontent.com/16662847/38428438-0807efa8-39bc-11e8-9a5e-c5d2540ab3b0.jpg)
 
 ### À acheter :
-- 1 [arduino nano](https://fr.aliexpress.com/store/product/Nano-CH340-ATmega328P-MicroUSB-Compatible-for-Arduino-Nano-V3/1950989_32572612009.html) : 2.40€ (3.50€ [avec le cable USB](https://fr.aliexpress.com/item/Nano-V3-ATmega328P-CH340G-USB-2-0-data-CABLE-50cm-Compatible-for-Arduino-Nano-V3-0/32759066704.html)) 
+- 1 [arduino nano](https://fr.aliexpress.com/store/product/Nano-CH340-ATmega328P-MicroUSB-Compatible-for-Arduino-Nano-V3/1950989_32572612009.html) : 2.40€ (3.50€ [avec le câble USB](https://fr.aliexpress.com/item/Nano-V3-ATmega328P-CH340G-USB-2-0-data-câble-50cm-Compatible-for-Arduino-Nano-V3-0/32759066704.html)) 
 - 1 [sensor shield](https://fr.aliexpress.com/store/product/1pcs-SAMIORE-ROBOT-UNO-Shield-Nano-Shield-for-NANO-3-0-and-UNO-R3-duemilanove-2009/1022067_32906961218.html) : 1€
 - 2 [moteurs pas à pas](https://fr.aliexpress.com/item/5V-Stepper-Motor-28BYJ-48-With-Drive-Test-Module-Board-ULN2003-5-Line-4-Phase/32608569300.html) : 4.50€
 - 1 [clavier 3x4 boutons](https://fr.aliexpress.com/item/Button-Keypad-3x4-module/32530917534.html) : 2,00€
@@ -81,7 +81,7 @@ Le robot peut aussi être programmé à distance (Bluetooth) via une application
 - 1 [conteneur de piles LR6](https://fr.aliexpress.com/item/New-6-x-AA-Battery-Case-Storage-Holder-With-DC2-1-Power-Jack-For-Arduino/32821210909.html) : 0,80€
 - 1 [servomoteur](https://fr.aliexpress.com/store/product/1pcs-Mitoot-RC-Micro-Servo-9g-SG90-Servo-For-Arduino-Aeromodelismo-Align-Trex-450-Airplane-Helicopters/603538_32890069044.html) pour lever/baisser un crayon: 1.50€
 - 2 [roues "billes"](https://fr.aliexpress.com/item/CY-12A-12mm-bearing-smart-car-casters-small-maverick-eye-round-steel-ball-omni-wheel-universal/32705899129.html) : 2,50€
-- 1 [lot de cables "dupont" de 20cm femelle-femelle F-F](https://fr.aliexpress.com/store/product/Free-Shipping-80pcs-dupont-cable-jumper-wire-dupont-line-male-to-female-dupont-line-20cm-1P/1022067_1699319473.html) : 0,85€
+- 1 [lot de câbles "dupont" de 20cm femelle-femelle F-F](https://fr.aliexpress.com/store/product/Free-Shipping-80pcs-dupont-câble-jumper-wire-dupont-line-male-to-female-dupont-line-20cm-1P/1022067_1699319473.html) : 0,85€
 - [des vis M2x5mm ](https://fr.aliexpress.com/item/50Pcs-lot-Screw-M2-5-of-Screws-Nuts-Assortment-Bolts-Screw-Spike-Round-Head-Screw-2mm/32722845879.html) : 0,70€
 - [des vis M3x5mm ](https://fr.aliexpress.com/item/M3-x-5mm-Croix-Plat-T-te-Frais-e-Boulons-Machine-Vis-100-pcs/32958567739.html) : 1.6€ : il y en a besoin de 8 en tout par robot, vous pouvez récupérer des vis utilisées pour tenir les disques durs ou les cartes mères
 - 1 [module Bluetooth HC-06](https://fr.aliexpress.com/item/HC-06-Bluetooth-de-S-rie-passe-Module-Sans-Fil-de-Communication-S-rie-HC06-Bluetooth/32857133517.html): 2.60€
@@ -92,11 +92,11 @@ Soit un total d'environ **23€** et surtout **aucune soudure n'est nécessaire*
 ### À récupérer :
 - 2 grands élastiques pour les pneus.
 - des petits élastiques pour le système permettant de baisser/lever un crayon
-- Un tube de colle liquide (forte, à bois ...) qui est utile pour coller certaines parties ou au cas où les trous de vis soient un peu trop grands. C'est aussi pratique pour coller les elastiques sur les roues ou pour éviter que la prise du conteneur de piles ne se dévisse.
+- Un tube de colle liquide (forte, à bois ...) qui est utile pour coller certaines parties ou au cas où les trous de vis soient un peu trop grands. C'est aussi pratique pour coller les élastiques sur les roues ou pour éviter que la prise du conteneur de piles ne se dévisse.
 
 ### Notes sur l'alimentation électrique
 - Dans la liste de matériel j'ai indiqué de prendre un conteneur de 6 piles LR6 (soit 9V). Ces piles sont à brancher sur l'entrée régulée du shield. Cette solution permet d'assurer la stabilité de l'alimentation du robot même quand les piles commencent à faiblir. L'inconvénient c'est que ça oblige à avoir 6 piles pour chaque robot.
-- On peut utiliser un contenur de 4 piles, mais ce dernier doit être branché directement sur l'alimentation 5V derrière le régulateur (celui-ci est prévu pour des tensions de 7V à 12v). Le problème de cette solution est qu'elle surcharge un peu les composants au début de vie des piles et peut entrainer des instabilités de fonctionnement en fin de vie des piles.
+- On peut utiliser un conteneur de 4 piles, mais ce dernier doit être branché directement sur l'alimentation 5V derrière le régulateur (celui-ci est prévu pour des tensions de 7V à 12v). Le problème de cette solution est qu'elle surcharge un peu les composants au début de vie des piles et peut entraîner des instabilités de fonctionnement en fin de vie des piles.
 - On peut utiliser une batterie 5V pour téléphone portable de [ce style](https://fr.aliexpress.com/item/Remax-2500mAh-Pino-Small-Mobile-Phone-Large-Capacity-Mini-Power-Bank-General-Charge-Treasure-Extra-Power/32790051749.html) à 7€ à brancher directement sur la prise micro-USB de l'Arduino. 
 
 Les batteries ont l'avantage d'être bien régulées (et peuvent donc être directement branchées sur l'Arduino). L'autre avantage est qu'elles disposent, la plupart du temps, d'un bouton marche/arrêt.
@@ -150,12 +150,12 @@ Premier "vrai" modèle. Présence d'une roue encodeuse pour le réglage du pas q
 
 ## Le montage des composants
 
-Brancher l'Arduino Nano sur le "sensor shield".
+Brancher l'Arduino Nano sur le "sensor shield" en expliquant dans quel sens (il n'y a pas de détrompeur) : le port usb de l'arduino doit être dirigé vers l'extérieur, et non vers le port I2C.
 
 Branchement du clavier sur le port A0 (détacher un groupe de 3 fils):
-- Brancher un fil entre la broche **VCC** du clavier et la broche **V** de l'Arduino
-- Brancher un fil entre la broche **GND** du clavier et la broche **G** de l'Arduino
-- Brancher un fil entre la broche **Out** du clavier et la broche **S** de l'Arduino
+- Brancher un fil entre la broche **VCC** du clavier et la broche **V** du "sensor shield"
+- Brancher un fil entre la broche **GND** du clavier et la broche **G** du "sensor shield"
+- Brancher un fil entre la broche **Out** du clavier et la broche **S** du "sensor shield"
 
 Branchement de l'écran LCD sur une des ligne I2C (détacher un groupe de 4 fils): 
 - Brancher un fil entre la broche **GND** de l'écran et la broche **GND** la ligne I2C choisie
@@ -164,35 +164,35 @@ Branchement de l'écran LCD sur une des ligne I2C (détacher un groupe de 4 fils
 - Brancher un fil entre la broche **SCL** de l'écran et la broche **SCL* la ligne I2C choisie
 
 Branchement des cartes de contrôle des moteurs pas-à-pas :
-- Moteur roue droite sur les ports 4, 5, 6 et 7 de l'Arduino (détacher un groupe de 4 fils pour les broches **IN** et un groupe de 2 fils pour les broches **-** et **+**):
-    - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 4 de l'Arduino
-    - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 5 de l'Arduino
-    - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 6 de l'Arduino
-    - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 7 de l'Arduino
-    - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 7 de l'Arduino
-    - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 7 de l'Arduino
-- Moteur roue gauche sur les ports 8, 9, 10 et 11 de l'Arduino (détacher un groupe de 4 fils pour les broches **IN** et un groupe de 2 fils pour les broches **-** et **+**):
-    - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 8 de l'Arduino
-    - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 9 de l'Arduino
-    - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 10 de l'Arduino
-    - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 11 de l'Arduino
-    - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 11 de l'Arduino
-    - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 11 de l'Arduino
+- Moteur roue droite sur les ports 4, 5, 6 et 7 de l'Arduino (détacher un groupe de 6 fils pour les broches **IN** et pour les broches **-** et **+**):
+    - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 4 du "sensor shield"
+    - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 5 du "sensor shield"
+    - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 6 du "sensor shield"
+    - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 7 du "sensor shield"
+    - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 7 du "sensor shield"
+    - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 7 du "sensor shield"
+- Moteur roue gauche sur les ports 8, 9, 10 et 11 de l'Arduino (détacher un groupe de 6 fils pour les broches **IN** et pour les broches **-** et **+**):
+    - Brancher un fil entre la broche **IN1** du contrôleur et la broche **S** du port 8 du "sensor shield"
+    - Brancher un fil entre la broche **IN2** du contrôleur et la broche **S** du port 9 du "sensor shield"
+    - Brancher un fil entre la broche **IN3** du contrôleur et la broche **S** du port 10 du "sensor shield"
+    - Brancher un fil entre la broche **IN4** du contrôleur et la broche **S** du port 11 du "sensor shield"
+    - Brancher un fil entre la broche **-** du contrôleur et la broche **G** du port 11 du "sensor shield"
+    - Brancher un fil entre la broche **+** du contrôleur et la broche **V** du port 11 du "sensor shield"
 
 Brancher les moteurs pas-à-pas sur les contrôleurs. Marquer les moteurs droite et gauche afin de les différencier facilement lors du montage final.
 
-Branchement du servomoteur sur le port 3 : brancher le câble de que le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**
+Branchement du servomoteur sur le port 3 : brancher le câble de façon à ce que le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**
 
 **Attention** pour les personnes ayant commandé [ce modèle de *shield*](https://fr.aliexpress.com/store/product/Nano-I-O-expansion-Shield-for-Arduino-Nano-V3-pinout-Assembled/1950989_32633286806.html) il faut inverser les fils rouge et marron du servomoteur! Pour cela utiliser un petit tournevis plat et soulever légèrement le petit ergot au bout d'un des fils (rouge ou marron) puis tirer légèrement sur ce dernier, il devrait venir facilement. Faire de même avec le deuxième fil. Rebrancher les fils en les inversant par rapport à leur position initiale. Vous pourrez maintenant faire en sorte de respecter la consigne pour que "le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**" 
 
 Branchement du module Bluetooth :
-- Brancher le cable de l'interrupteur (détacher un groupe de 2 fils):
-    - Brancher un fil entre la broche **G** du port 12 de l'Arduino en face du fil noir de l'interrupteur
-    - Brancher un fil entre la broche **V** du port 12 de l'Arduino en face du fil rouge de l'interrupteur
+- Brancher le câble de l'interrupteur (détacher un groupe de 2 fils):
+    - Brancher un fil entre la broche **G** du port 12 du "sensor shield" en face du fil noir de l'interrupteur
+    - Brancher un fil entre la broche **V** du port 12 du "sensor shield" en face du fil rouge de l'interrupteur
     - Brancher l'autre extrémité de l'interrupteur de manière à ce que le fil noir soit en face de la broche **GND** du module Bluetooth et le fil rouge en face de la broche **+5V**
 - Brancher le module à l'Arduino (détacher un groupe de 2 fils) :
-    - Brancher un fil entre la broche **RX** du module Bluetooth et la broche **S** du port 13 de l'Arduino
-    - Brancher un fil entre la broche **TX** du module Bluetooth et la broche **S** du port 12 de l'Arduino
+    - Brancher un fil entre la broche **RX** du module Bluetooth et la broche **S** du port 13 du "sensor shield"
+    - Brancher un fil entre la broche **TX** du module Bluetooth et la broche **S** du port 12 du "sensor shield"
 
 Découper les modèles de touches ([disponibles ici](https://github.com/Orange-OpenSource/oorobot/tree/master/doc/menu/menu.pdf)) et les insérer dans le clavier, pour cela il faut sortir les touches (ça vient facilement en tirant dessus) puis enlever la partie transparente (vous pouvez utiliser une paire de ciseaux pour faire levier), placer les découpes et remettre en place les touches comme ci-dessous (pour bien placer le clavier, il faut que les fils sortent sur la droite) :
 
@@ -206,7 +206,7 @@ Vous trouverez 2 programmes dans le répertoire [arduino](https://github.com/Ora
 
 Dans kes derniers kits livrés par le [FabLab de Lannion](http://www.fablab-lannion.org/) (depuis novembre 2018) le module Bluetooth est pré-configuré et l'Arduino aura la dernière version du programme 'oorobot' d'installer. Vous n'avez donc pas à faire les étapes suivantes.
 
-Télécharger et installer le programme [Arduino IDE ](https://www.arduino.cc/en/Main/Software) sur votre PC. Brancher l'Arduino avec un cable USB sur votre PC. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée (*/dev/ttyUSBx* sous Linux, *COMx* sous Windows). Sélectionner dans "Outils/Type de carte" le modèle "Arduino Nano"
+Télécharger et installer le programme [Arduino IDE ](https://www.arduino.cc/en/Main/Software) sur votre PC. Brancher l'Arduino avec un câble USB sur votre PC. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée (*/dev/ttyUSBx* sous Linux, *COMx* sous Windows). Sélectionner dans "Outils/Type de carte" le modèle "Arduino Nano"
 
 **IMPORTANT** : dans les dernières versions du logiciel Arduino IDE, le type de "processeur" par défaut a été changé. Afin de pouvoir téléverser les programmes, il faut obligatoirement sélectionner ***"ATmega328P (Old Bootloader)"*** dans le menu "Outils -> Processeur".
 
@@ -216,23 +216,29 @@ Il faut installer les dépendances suivantes en allant dans le menu "Croquis/Inc
 
 Si vous voulez changer le nom du module Bluetooth (sinon votre robot sera visible sous le nom "HC-06" ou "HC-05") il faut faire la manipulation suivante :
 - Brancher votre Arduino sur votre PC. La LED du module Bluetooth doit clignoter rapidement
-- Débrancher le cable arrivant sur la broche VCC du module Bluetooth.
+- Débrancher le câble arrivant sur la broche VCC du module Bluetooth.
 - Faire un pont sur l'entrée EN comme sur le schéma ci-dessus
 ![init-bluetooth-zs-040](https://user-images.githubusercontent.com/16662847/42039305-5c4448ec-7aed-11e8-94a6-b699e708ccbd.jpg)
-- Rebrancher le cable arrivant sur la broche VCC du module Bluetooth. La LED du module Bluetooth devrait clignoter moins rapidement
+- la photo n'est pas assez nette pour que ça soit compréhensible...
+- Rebrancher le câble arrivant sur la broche VCC du module Bluetooth. La LED du module Bluetooth devrait clignoter moins rapidement
 
-Télécharger le programme [init-bluetooth](https://orange-opensource.github.io/oorobot/arduino/init-bluetooth.zip), décompresser le et l'ouvrir avec *Arduino IDE*. Téléverser le programme (2ème bouton en haut à gauche de l'interface) sur l'Arduino. Ce programme va configurer le module Bluetooth pour :
+Télécharger le programme [init-bluetooth](https://orange-opensource.github.io/oorobot/arduino/init-bluetooth.zip), le décompresser et l'ouvrir avec *Arduino IDE*. Téléverser le programme (2ème bouton en haut à gauche de l'interface) sur l'Arduino. Ce programme va configurer le module Bluetooth pour :
 - Donner un nom au format "OoRoBoT-XXXX"
 - Configurer le code PIN à 0000
 - Configurer la vitesse de communication à 9600 bauds
 
 Vous pouvez utiliser le "moniteur série" (Menu "Options/Moniteur série") du programme Arduino IDE pour voir où en est la configuration du Bluetooth.
 
-Le nom de votre robot sera affiché sur l'écran LCD. Si ce n'est pas le cas vérifier le contraste de votre écran (en tournant le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran). Si c'est bon vous pouvez enlever le pont sur l'entrée EN du module Bluetooth. Débranchez et rebranchez le cable arrivant sur la broche VCC du module Bluetooth. Votre module Bluetooth devrait clignoter rapidement, il est prêt à être appairé. Vérifiez que vous voyez bien le robot dans la liste des périphériques Bluetooth depuis votre téléphone/tablette.
+Le nom de votre robot sera affiché sur l'écran LCD. Si ce n'est pas le cas vérifier le contraste de votre écran (en tournant le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran). Si c'est bon vous pouvez enlever le pont sur l'entrée EN du module Bluetooth. Débranchez et rebranchez le câble arrivant sur la broche VCC du module Bluetooth. Votre module Bluetooth devrait clignoter rapidement, il est prêt à être appairé. Vérifiez que vous voyez bien le robot dans la liste des périphériques Bluetooth depuis votre téléphone/tablette.
 
 Télécharger le programme [oorobot](https://orange-opensource.github.io/oorobot/arduino/oorobot.zip), le décompresser et l'ouvrir avec le programme *Arduino IDE*. 
 
 Téléverser ensuite le programme *oorobot* sur l'Arduino. Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le câblage est bien réalisé :
+
+indiquer si le montage peut être branché sur un port usb quelconque, ou sur le bloc de piles
+
+indiquer si on peut utiliser des piles rechargeables (1.2 v) ou s'il faut impérativement des piles non-rechargeables (1.5 v)
+
 - Vérifier le branchement du clavier, un appui sur un bouton doit afficher des caractères sur l'écran LCD
 - Vérifier le contraste de l'écran : ce dernier doit s'allumer au démarrage, par contre si vous ne voyez rien, pas de panique c'est peut-être tout simplement parce que le contraste est mal réglé. Pour changer ce paramètre il suffit de tourner le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran
 - Marquer le dessus du servomoteur : l'axe du moteur doit être sur la gauche du composant quand la partie mobile est devant vous. Vérifier que ce dernier bouge bien si vous appuyer sur les boutons lever/baisser le crayon
@@ -254,9 +260,9 @@ Ordre de montage des composants sur le châssis 3D :
 - Fixer les roues en force sur les moteurs pas-à-pas
 - Faire passer les contrôleurs des moteurs dans les trous placés derrière le support de l'Arduino
 - Visser l'Arduino sur son support
-- Visser les controleurs sur leurs support (garder la cohérence contrôleur moteur droit fixer à droite du robot)
-- Visser le clavier sur son support en passant les cables entre le châssis et le clavier
-- Plier les broches de l'écrans pour les mettre à la verticale. Visser ensuite l'écran sur le châssis
+- Visser les contrôleurs sur leurs support (garder la cohérence contrôleur moteur droit fixer à droite du robot)
+- Visser le clavier sur son support en passant les câbles entre le châssis et le clavier
+- Plier les broches de l'écran pour les mettre à la verticale. Visser ensuite l'écran sur le châssis
 - Entrer en force les moteurs pas-à-pas dans leur emplacement. Faire passer leurs fils jusqu'à leur contrôleur respectif. Visser ensuite les vis M3 pour maintenir les moteurs au châssis
 - Placer le bloc de pile devant l'Arduino
 
