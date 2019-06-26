@@ -20,7 +20,7 @@ L'Arduino est une carte construite autour d'un microcontrôleur qui peut être p
 
 ![arduino](https://ae01.alicdn.com/kf/HTB11nPYOpXXXXbOapXXq6xXFXXXN/225552329/HTB11nPYOpXXXXbOapXXq6xXFXXXN.jpg?size=144900&height=1000&width=1000&hash=f5fd08d9de92dc32c720726cd0ea707a =50%x50%)
 
-![arduino](https://ae01.alicdn.com/kf/HTB1EhFHb2NNTKJjSspeq6ySwpXaU.jpg =50%x50%)
+![arduino](https://ae01.alicdn.com/kf/HTB1EhFHb2NNTKJjSspeq6ySwpXaU.jpg){:height="50%" width="50%"}
 
 Le plus simple est d'avoir un "shield" (bouclier) permettant d'avoir une alimentation (+5V, Ground) pour chaque broche afin de faciliter le câblage des composants.
 
@@ -124,13 +124,13 @@ void loop() {
 
 On va utiliser ici un bouton un peu particulier :
 
-![bouton led](https://ae01.alicdn.com/kf/HTB1EpxhdRfM8KJjSZFhq6ARyFXad/Bouton-d-arcade-5-couleurs-lumi-re-LED-lampe-60-MM-45-MM-grand-rond-Arcade.jpg =50%x50%)
+![bouton led](https://ae01.alicdn.com/kf/HTB1EpxhdRfM8KJjSZFhq6ARyFXad/Bouton-d-arcade-5-couleurs-lumi-re-LED-lampe-60-MM-45-MM-grand-rond-Arcade.jpg){:height="50%" width="50%"}
 
 Ce bouton intégre en plus d'un contact on/off une DEL. N'hésitez pas à démonter le bouton pour voir la DEL intégrée.
 
 Pour commencer on ne va n'utiliser que le bouton.
 
-![vue eclatée](https://ae01.alicdn.com/kf/HTB1iuZ_j4HI8KJjy1zbq6yxdpXaS/Bouton-d-arcade-5-couleurs-lumi-re-LED-lampe-60-MM-45-MM-grand-rond-Arcade.jpg =50%x50%)
+![vue eclatée](https://ae01.alicdn.com/kf/HTB1iuZ_j4HI8KJjy1zbq6yxdpXaS/Bouton-d-arcade-5-couleurs-lumi-re-LED-lampe-60-MM-45-MM-grand-rond-Arcade.jpg){:height="50%" width="50%"}
 
 Récupérer les 2 fils venant de la partie centrale du bouton (le bloc rouge et noir sur la photo précédente) :
 * Branchez le fil de la partie coudée sur la broche **G** du port 4
@@ -190,7 +190,7 @@ Quand vous appuyerez sur le bouton la DEL devrait s'allumer.
 
 Ce composant permet d'avoir une valeur analogique comprise entre 0 et 1023 selon la position du curseur. Il faut brancher ce type de composant analogique sur une des broches de A0 à A7.
 
-![lcd](https://i2.cdscdn.com/pdt2/2/6/4/1/700x700/sou0712662893264/rw/commutateur-rotatif-sourcingmap-r-b10k-10k-ohm-si.jpg =50%x50%)
+![lcd](https://i2.cdscdn.com/pdt2/2/6/4/1/700x700/sou0712662893264/rw/commutateur-rotatif-sourcingmap-r-b10k-10k-ohm-si.jpg){:height="50%" width="50%"}
 
 
 Détachez un groupe de 3 fils et positionnez le potentionmère comme sur la photo précédente :
@@ -228,7 +228,7 @@ Proposition d'exercice : Faire varier le temps de clignotement d'une LED avec le
 
 Un servomoteur est un petit moteur pouvant tourner précisément sur 180°.
 
-![servo](https://ae01.alicdn.com/kf/HTB1QbQfmHSYBuNjSspfq6AZCpXaa.jpg =50%x50%)
+![servo](https://ae01.alicdn.com/kf/HTB1QbQfmHSYBuNjSspfq6AZCpXaa.jpg){:height="50%" width="50%"}
 
 Branchez directement la prise du servomoteur sur le port 8 de l'Arduino en faisant attention à ce que le fil marron soit sur la broche ***G*** du port 3, le fil rouge sur la broche ***V*** et le fil orange sur la broche ***S***
 
@@ -316,7 +316,7 @@ Les écrans LCD permettent d'afficher des informations facilement. La version pr
 
 Ces écrans nécessitent que l'on installe une bibliothèque nous permettant de les contrôler facilement. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **LiquidCrystal I2C v1.1.2 de Frank de Brabander**
 
-![lcd](https://ae01.alicdn.com/kf/HTB1lQ0qu9BYBeNjy0Feq6znmFXas/10-pcs-SAMIORE-ROBOT-LCD1602-I2C-LCD-1602-module-cran-Bleu-IIC-I2C-pour-LCD1602-Adaptateur.jpg_640x640.jpg =50%x50%)
+![lcd](https://ae01.alicdn.com/kf/HTB1lQ0qu9BYBeNjy0Feq6znmFXas/10-pcs-SAMIORE-ROBOT-LCD1602-I2C-LCD-1602-module-cran-Bleu-IIC-I2C-pour-LCD1602-Adaptateur.jpg_640x640.jpg){:height="50%" width="50%"}
 
 Détachez un groupe de 4 fils :
 * Branchez un fil entre la broche ***SCL*** de l'écran et la broche ***SCL*** de votre rampe I²C
@@ -365,7 +365,7 @@ On va utiliser un composant I²C BMP280 afin de récupérer des informations sur
 
 Afin de gérer ce composant vous aurez besoin d'une nouvelle bibliothèque. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **BME280 by Tyler Glenn v2.3.0**
 
-![bmc](https://ae01.alicdn.com/kf/HTB1_NQjkamWBuNjy1Xaq6xCbXXaY/10-pi-ces-SAMIORE-ROBOT-BMP280-Remplacer-BMP180-3-3-V-Num-rique-Capteur-De-Pression.jpg =50%x50%)
+![bmc](https://ae01.alicdn.com/kf/HTB1_NQjkamWBuNjy1Xaq6xCbXXaY/10-pi-ces-SAMIORE-ROBOT-BMP280-Remplacer-BMP180-3-3-V-Num-rique-Capteur-De-Pression.jpg){:height="50%" width="50%"}
 
 Détachez un groupe de 4 fils :
 * Branchez un fil entre la broche ***SCL*** de l'écran et la broche ***SCL*** de votre rampe I²C
@@ -561,7 +561,7 @@ void loop() {
 
 Voici un nouveau composant (DHT11) qui va permettre de récupérer la température (comme le BMP280 précédemment vu) mais aussi le taux d'humidité de la pièce.
 
-![dht11](https://ae01.alicdn.com/kf/HTB1WbV_ayLrK1Rjy1zdq6ynnpXa5/10-pi-ces-DHT22-AM2302-DHT11-DHT12-AM2320-Module-de-capteur-d-humidit-de-temp-rature.jpg =50%x50%)
+![dht11](https://ae01.alicdn.com/kf/HTB1WbV_ayLrK1Rjy1zdq6ynnpXa5/10-pi-ces-DHT22-AM2302-DHT11-DHT12-AM2320-Module-de-capteur-d-humidit-de-temp-rature.jpg){:height="50%" width="50%"}
 
 Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **SDHT by Helder Rodrigues v1.1.0**
 
@@ -598,7 +598,7 @@ void loop() {
 ## Afficher l'heure sur un écran 4*7 segments
 
 Un afficheurs 4*7 segments permet d'afficher l'heure de façon claire (visible de loin).
-![tm](https://ae01.alicdn.com/kf/HTB1N13if0fJ8KJjy0Feq6xKEXXaO/4-LED-num-rique-0-56-Tube-d-affichage-d-cimal-7-Segments-TM1637-horloge-Double.jpg =50%x50%)
+![tm](https://ae01.alicdn.com/kf/HTB1N13if0fJ8KJjy0Feq6xKEXXaO/4-LED-num-rique-0-56-Tube-d-affichage-d-cimal-7-Segments-TM1637-horloge-Double.jpg){:height="50%" width="50%"}
 
 Détachez un groupe de 3 fils :
 * Brancher un fil entre la broche **CLK** de l'afficheur et la broche **S** du port 12
@@ -730,14 +730,14 @@ void loop() {
 
 Nous allons utiliser un module DFPLayer afin de lire des MP3 depuis une carte micro-SD.
 
-![dfplayer](https://ae01.alicdn.com/kf/HTB1O54OFuySBuNjy1zdq6xPxFXaT/A14-10-pi-ces-SAMIORE-ROBOT-Mini-lecteur-MP3-Module-TF-carte-U-disque-Mini-lecteur.jpg =50%x50%)
+![dfplayer](https://ae01.alicdn.com/kf/HTB1O54OFuySBuNjy1zdq6xPxFXaT/A14-10-pi-ces-SAMIORE-ROBOT-Mini-lecteur-MP3-Module-TF-carte-U-disque-Mini-lecteur.jpg){:height="50%" width="50%"}
 
 Les chansons suivantes ont été installée sur la carte micro-SD :
     
 Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **DFRobotDFPlayerMini by DFRobot v1.0.5**
 
 
-![dfplayer2](https://raw.githubusercontent.com/DFRobot/DFRobotMediaWikiImage/master/Image/miniplayer_pin_map.png =50%x50%)
+![dfplayer2](https://raw.githubusercontent.com/DFRobot/DFRobotMediaWikiImage/master/Image/miniplayer_pin_map.png){:height="50%" width="50%"}
 
 
 Récupérez le cable avec la résistance intégrée et branchez le entre la broche **S** du port 11 et la broche **TX** du module.
@@ -836,7 +836,7 @@ Vous pouvez contrôler la lecture avec les commandes suivantes depuis le moniteu
 Vous pouvez utiliser la matrice à DEL (8*8) pour afficher des messages ou des icones.
 
 
-![neopixel](https://ae01.alicdn.com/kf/HTB1c6WwmSMmBKNjSZTEq6ysKpXaG/10-pi-ces-WS2812-LED-5050-RVB-8x8-64-LED-Matrice.jpg =50%x50%)
+![neopixel](https://ae01.alicdn.com/kf/HTB1c6WwmSMmBKNjSZTEq6ysKpXaG/10-pi-ces-WS2812-LED-5050-RVB-8x8-64-LED-Matrice.jpg){:height="50%" width="50%"}
 
 Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **Adafruit NeoPixel by Adafruit v1.2.2**
 
@@ -1469,7 +1469,7 @@ Pour cela on va connecter le WeMos de telle façon à ce qu'il puisse utiliser l
 
 On va donc connecter 2 broches du WeMos sur le port série de l'Arduino. Pour cela on va devoir utiliser un convertisseur de niveau. En effet le WeMos utilse une tension de 3.3V pour communiquer alors que l'arduino utilise une tension de 5V.
 
-![level](https://ae01.alicdn.com/kf/HTB1z3ifLpXXXXa5XXXXq6xXFXXXq/Convertisseur-de-niveau-logique-haute-vitesse-bidirectionnelle-3-3-V-5-V-4-Chanels.jpg =50%x50%)
+![level](https://ae01.alicdn.com/kf/HTB1z3ifLpXXXXa5XXXXq6xXFXXXq/Convertisseur-de-niveau-logique-haute-vitesse-bidirectionnelle-3-3-V-5-V-4-Chanels.jpg){:height="50%" width="50%"}
 
 Détachez un groupe de 4 fils:
 *
