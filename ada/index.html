@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Challenge Ada Lovelace</title>
+	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+	<script> 
+	showdown.setFlavor('github');
+	$.get("README.md", data => {
+	  const converter = new showdown.Converter(),
+		text      = data,
+		html      = converter.makeHtml(text);
+	  $("#mdcontent").html(html);
+	});
+	</script>
+	<style>
+	body {
+	  background-color: #4bb4e6;
+	  color: #333;
+	}
+	body a {
+	  color: #006680;
+	  font-weight: bold;
+	}
+	h1 {
+	  background-color: #006680;
+	  width: 100%;
+	  padding: 0px;
+	  padding-top: 5px;
+	  padding-bottom: 5px;
+	  margin: 0px;
+	  color: white;
+	  text-align:center;
+	}
+	h2 {
+	  border-bottom: 1px dashed #006680;
+	  width:100%;
+	}
+	#gh-link a {
+	  text-decoration: none;
+	  color: white;
+	}
+	#gh-link {
+	  position: fixed;
+	  top: 2em;
+	  width: 14em;
+	  text-align: center;
+	  right: -3em;
+	  background-color: #006680;
+	  font-weight: bold;
+	  transform: rotate(45deg);
+	}
+
+	#mdcontent {
+	  padding: 0px;
+	  padding-bottom: 20px;
+	  border-left: 4px solid #006680;
+	  border-right: 4px solid #006680;
+	  background-color: white;
+	  margin-left: 10%;
+	  width: 80%;
+	}
+	#mdcontent p {
+	  padding: 0.5em 0.5em 0.5em 0.5em;
+	  margin:0px;
+	}
+	#mdcontent img {
+	  max-width: 100%;
+	  width: 600px;
+	  display: block;
+      margin-left: auto;
+      margin-right: auto;
+	}	
+	</style>
+  </head>
+  <body>
+	<div id="mdcontent"></div>
+  </body>
+</html>
