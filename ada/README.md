@@ -1,4 +1,3 @@
-
 # Initiation à la programmation Arduino et ESP8266
 
 ---
@@ -7,7 +6,7 @@
 
 Il vous faudra télécharger l'environnement de développement (IDE) Arduino sur le site officiel : https://www.arduino.cc/en/Main/Software
 
-Ceci n'est pas un cours d'électronique, nous passons sous silence un grand nombre de terminologie afin de pouvoir programmer rapidement un objet fonctionnel
+Ceci n'est pas un cours d'électronique, nous passons sous silence un grand nombre de terminologie afin de pouvoir programmer rapidement un objet fonctionnel.
 
 
 ![logo](https://pbs.twimg.com/profile_images/928655749605199872/ygogGX2j_400x400.jpg)
@@ -48,6 +47,8 @@ void loop() {
 ```
 Téléversez le programme sur l'Arduino (bouton en forme de fléche en haut de l'IDE).
 Ouvrez le moniteur série (menu "Outils/Moniteur série" ou via le bouton en haut à droite de l'IDE), vous devriez voir apparaître toutes les secondes une nouvelle ligne.
+
+Vérifez que la vitesse de communication est bien égale à *9600 baud* (menu en bas à droite de la fênêtre).
  
 ---
 ## La structure d'un programme Arduino
@@ -90,7 +91,7 @@ A noter : quand vous utilsez la liaison série USB vous ne devez pas utiliser le
 
 ## Allumer une DEL
 
-La DEL (ou LED en anglais) est un composant simple s'allumant quand elle reçoit du courant. Nous allons commencer par brancher une DEL sur notre arduino. Pour cela prennez 2 fils.
+La DEL (ou LED en anglais) est un composant simple s'allumant quand elle reçoit du courant. Nous allons commencer par brancher une DEL sur notre arduino. Pour cela prenez 2 fils.
 
 Les DEL ont des tensions précises de fonctionnement (entre 2.2V et 3V selon leur couleur) mais les broches de l'Arduino fournissent du +5V, il faudra donc réduire l'alimentation des DEL en utilisant une résistance. Pour gagner du temps nous allons brancher directement nos DEL. Cela va réduire leur durée de vie mais dans le cadre de ce TP ça ne sera pas gếnant.
 
@@ -126,11 +127,11 @@ On va utiliser ici un bouton un peu particulier :
 
 ![bouton led](https://ae01.alicdn.com/kf/HTB1EpxhdRfM8KJjSZFhq6ARyFXad/Bouton-d-arcade-5-couleurs-lumi-re-LED-lampe-60-MM-45-MM-grand-rond-Arcade.jpg)
 
-Ce bouton intégre en plus d'un contact on/off une DEL. N'hésitez pas à démonter le bouton pour voir la DEL intégrée.
+Ce bouton intègre une DEL en plus d'un contact on/off. N'hésitez pas à démonter le bouton pour voir la DEL intégrée.
 
-Pour commencer on ne va n'utiliser que le bouton.
+Pour commencer on va n'utiliser que le bouton.
 
-![vue eclatée](https://ae01.alicdn.com/kf/HTB1iuZ_j4HI8KJjy1zbq6yxdpXaS/Bouton-d-arcade-5-couleurs-lumi-re-LED-lampe-60-MM-45-MM-grand-rond-Arcade.jpg)
+![vue éclatée](https://ae01.alicdn.com/kf/HTB1iuZ_j4HI8KJjy1zbq6yxdpXaS/Bouton-d-arcade-5-couleurs-lumi-re-LED-lampe-60-MM-45-MM-grand-rond-Arcade.jpg)
 
 Récupérer les 2 fils venant de la partie centrale du bouton (le bloc rouge et noir sur la photo précédente) :
 * Branchez le fil de la partie coudée sur la broche **G** du port 4
@@ -156,11 +157,13 @@ void loop() {
   delay(400);
 }
 ```
-Quand vous appuyez sur le bouton, vous devriez voir apparaître l'état du bouton (appuyé ou relaché)
 
-Vous remarquerez ici que l'on déclare le "port" en "INPUT_PULLUP", cela veut dire que l'Arduino va connecter une de ses résistances interne entre la broche V du port (reliée au 5V) et sa broche d'entrée (S). A compléter !!!!!!
 
-On va maintenant utiliser la DEL intégrée. Débranchez la DEL précédemment branchée sur le port 5. Branchez ensuite le fil restant venant du bouton sur la broche **S** du port 5.
+Quand vous appuyez sur le bouton, vous devriez voir apparaître sur le moniteur série l'état du bouton (appuyé ou relaché)
+
+Vous remarquerez ici que l'on déclare le "port" en "INPUT_PULLUP", cela veut dire que l'Arduino va connecter une de ses résistances interne entre la broche V du port (reliée au 5V) et sa broche d'entrée (S).
+
+On va maintenant utiliser la DEL intégrée. Débranchez la DEL précédemment branchée sur le port 5. Branchez ensuite le fil venant du côté noir du bouton sur la broche **G** du port 5 et le fil venant du côté rouge du bouton sur la broche **S** du port 5 
 
 Téléverser le programme suivant :
 ```C
@@ -220,7 +223,7 @@ void loop() {
 ```
 
 
-Proposition d'exercice : Faire varier le temps de clignotement d'une LED avec le potentiomètre
+Proposition d'exercice : Faire varier le temps de clignotement d'une DEL avec le potentiomètre
 
 ---
 
@@ -262,6 +265,7 @@ void loop() {
 
 La ligne *#include &lt;Servo.h&gt;* charge la bibliothèque permettant de piloter facilement un servomoteur. Cette bibliothèque est fournie avec l'IDE Arduino.
 
+Ajouter un des morceaux de plastique sur l'axe du servomoteur afin de bien visualiser les mouvements.
 
 Exemple complémentaire : Faire tourner le servomoteur à partir de la valeur d'un potentiomètre (utilisation de la fonction [map](https://www.arduino.cc/reference/en/language/functions/math/map/) pour convertir les valeurs d'entrées du potentiomètre - de 0 à 1023 - en une valeur en degrée - de 0 à 180) :
 
@@ -310,11 +314,11 @@ Pour cela le plus simple est de noter sur une feuille les couleurs des fils sort
 
 ---
 
-## Afficher des informatios sur un écran LCD I²C
+## Afficher des informations sur un écran LCD I²C
 
 Les écrans LCD permettent d'afficher des informations facilement. La version présentée ici utilise une interface I²C .
 
-Ces écrans nécessitent que l'on installe une bibliothèque nous permettant de les contrôler facilement. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **LiquidCrystal I2C v1.1.2 de Frank de Brabander**
+Ces écrans nécessitent que l'on installe une bibliothèque nous permettant de les contrôler facilement. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **LiquidCrystal I2C** de Frank de Brabander
 
 ![lcd](https://ae01.alicdn.com/kf/HTB1lQ0qu9BYBeNjy0Feq6znmFXas/10-pcs-SAMIORE-ROBOT-LCD1602-I2C-LCD-1602-module-cran-Bleu-IIC-I2C-pour-LCD1602-Adaptateur.jpg_640x640.jpg)
 
@@ -363,7 +367,7 @@ Vérifier le contraste de l'écran : ce dernier doit s'allumer au démarrage. Si
 
 On va utiliser un composant I²C BMP280 afin de récupérer des informations sur la température et la pression atmosphérique.
 
-Afin de gérer ce composant vous aurez besoin d'une nouvelle bibliothèque. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **BME280 by Tyler Glenn v2.3.0**
+Afin de gérer ce composant vous aurez besoin d'une nouvelle bibliothèque. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **BME280** by Tyler Glenn
 
 ![bmc](https://ae01.alicdn.com/kf/HTB1_NQjkamWBuNjy1Xaq6xCbXXaY/10-pi-ces-SAMIORE-ROBOT-BMP280-Remplacer-BMP180-3-3-V-Num-rique-Capteur-De-Pression.jpg)
 
@@ -429,7 +433,7 @@ Proposition d'exercide : afficher sur l'écrab LCD la température (sur la premi
 
 **Explication à ajouter**
 
-Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer notre horloge interne. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **RTCLib by Adafruit v1.2.0**
+Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer notre horloge interne. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **RTCLib** by Adafruit
 
 
 Détachez un groupe de 4 fils :
@@ -563,7 +567,7 @@ Voici un nouveau composant (DHT11) qui va permettre de récupérer la températu
 
 ![dht11](https://ae01.alicdn.com/kf/HTB1WbV_ayLrK1Rjy1zdq6ynnpXa5/10-pi-ces-DHT22-AM2302-DHT11-DHT12-AM2320-Module-de-capteur-d-humidit-de-temp-rature.jpg)
 
-Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **SDHT by Helder Rodrigues v1.1.0**
+Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **SDHT** by Helder Rodrigues
 
 Détachez un groupe de 3 fils :
 * Branchez un fil entre la broche **DAT** du capteur et la broche **S** du port 9
@@ -600,6 +604,8 @@ void loop() {
 Un afficheurs 4*7 segments permet d'afficher l'heure de façon claire (visible de loin).
 ![tm](https://ae01.alicdn.com/kf/HTB1N13if0fJ8KJjy0Feq6xKEXXaO/4-LED-num-rique-0-56-Tube-d-affichage-d-cimal-7-Segments-TM1637-horloge-Double.jpg)
 
+Ici encore, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **TM1637** by Avishay Orpaz
+
 Détachez un groupe de 3 fils :
 * Brancher un fil entre la broche **CLK** de l'afficheur et la broche **S** du port 12
 * Brancher un fil entre la broche **DIO** de l'afficheur et la broche **S** du port 13
@@ -616,8 +622,8 @@ TM1637Display display(TM1637_CLK, TM1637_DIO);
 
 void setup() {
   Serial.begin(9600);
-  // Luminosité de l'afficheur de 0 à 15
-  display.setBrightness(12);
+  // Luminosité de l'afficheur de 0 à 7
+  display.setBrightness(5);
 }
 
 int seconds=0;
@@ -732,18 +738,65 @@ Nous allons utiliser un module DFPLayer afin de lire des MP3 depuis une carte mi
 
 ![dfplayer](https://ae01.alicdn.com/kf/HTB1O54OFuySBuNjy1zdq6xPxFXaT/A14-10-pi-ces-SAMIORE-ROBOT-Mini-lecteur-MP3-Module-TF-carte-U-disque-Mini-lecteur.jpg)
 
-Les chansons suivantes ont été installée sur la carte micro-SD :
+Les chansons doivent être placées dans un répertoire nommé *mp3* sur la carte micro-SD et doivent être renommées afin quelles commencent par quatre chiffres (indiquant l'ordre de lecture). Les chansons suivantes ont été installées sur votre carte micro-SD :
     
-Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **DFRobotDFPlayerMini by DFRobot v1.0.5**
+Chanson 0001 : 
+* Titre:  Broke Inside My Mind (feat Ellie Griffiths)
+* Auteur: Anitek
+* Source: [https://soundcloud.com/anitek](https://soundcloud.com/anitek)
+* Licence: [CC BY-NC-ND](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.fr)
+* Téléchargement (6MB): [https://www.auboutdufil.com/index.php?id=472](https://www.auboutdufil.com/index.php?id=472)
+
+Chanson 0002 :
+* Titre:  Summer Spliffs
+* Auteur: Broke For Free
+* Source: [http://brokeforfree.bandcamp.com/](http://brokeforfree.bandcamp.com/)
+* Licence: [CC BY](https://creativecommons.org/licenses/by/3.0/deed.fr)
+* Téléchargement (9MB): [https://www.auboutdufil.com/index.php?id=495](https://www.auboutdufil.com/index.php?id=495)
+
+Chanson 0003 :
+* Titre:  Barefoot Girl Pebble Road
+* Auteur: Twizzle
+* Source: [http://www.myspace.com/twizzlesizzles](http://www.myspace.com/twizzlesizzles)
+* Licence: http://creativecommons.org/licenses/by-nc/2.0/deed.fr
+* Téléchargement (4MB): [https://www.auboutdufil.com/index.php?id=432](https://www.auboutdufil.com/index.php?id=432)
+
+Chanson 0004 : 
+* Titre:  Final
+* Auteur: K Soviet
+* Source: [http://ksoviet.blogspot.com](http://ksoviet.blogspot.com)
+* Licence: [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr)
+* Téléchargement (5MB): [https://www.auboutdufil.com/index.php?id=484](https://www.auboutdufil.com/index.php?id=484)
+               
+Chanson 0005 :
+* Titre:  Mr Disco
+* Auteur: Nezoomie
+* Source: [https://www.facebook.com/NeZoomieFanPage](https://www.facebook.com/NeZoomieFanPage)
+* Licence: [CC BY-NC-ND](http://creativecommons.org/licenses/by-nc-nd/2.5/it/deed.fr)
+* Téléchargement (12MB): [https://www.auboutdufil.com/index.php?id=418](https://www.auboutdufil.com/index.php?id=418)
+
+Chanson 0006 : 
+* Titre:  Plastic Submarine
+* Auteur: The Grammar Club
+* Source: [https://www.facebook.com/TheGrammarClub](https://www.facebook.com/TheGrammarClub)
+* Licence: [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.fr)
+* Téléchargement (10MB): [https://www.auboutdufil.com/index.php?id=478](https://www.auboutdufil.com/index.php?id=478)
+
+
+Insérez la carte micro-SD dans le module.
+    
+Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **DFRobotDFPlayerMini** by DFRobot
 
 
 ![dfplayer2](https://raw.githubusercontent.com/DFRobot/DFRobotMediaWikiImage/master/Image/miniplayer_pin_map.png)
 
 
-Récupérez le cable avec la résistance intégrée et branchez le entre la broche **S** du port 11 et la broche **TX** du module.
+**Attention** : Aidez-vous du schéma ci-dessus pour faire les branchements. Faites toutefois attention, les broches de connexions sont en dessous du module si vous le mettez dans même position que sur le schéma.
+
+Récupérez le cable avec la résistance intégrée et branchez le entre la broche **S** du port 11 et la broche **RX** du module.
 
 Détachez un groupe de 3 fils :
-* Branchez un fil entre la broche **S** du port 10 et la broche **RX** du module
+* Branchez un fil entre la broche **S** du port 10 et la broche **TX** du module
 * Branchez un fil entre la broche **G** du port 10 et la broche **GND**  du module
 * Branchez un fil entre la broche **V** du port 10 et la broche **VCC**  du module
 
@@ -838,7 +891,7 @@ Vous pouvez utiliser la matrice à DEL (8*8) pour afficher des messages ou des i
 
 ![neopixel](https://ae01.alicdn.com/kf/HTB1c6WwmSMmBKNjSZTEq6ysKpXaG/10-pi-ces-WS2812-LED-5050-RVB-8x8-64-LED-Matrice.jpg)
 
-Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **Adafruit NeoPixel by Adafruit v1.2.2**
+Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **Adafruit NeoPixel** by Adafruit
 
 
 Détachez un groupe de 3 fils  :
@@ -940,15 +993,11 @@ void loop() {
 
 ---
 
-## Utiliser un buzzer
-
----
-
 ## Stocker des informations dans l'arduino
 
 Par défaut, quand on arrête l'arduino on va perdre toutes les valeurs du programme. Dans certain cas, on aimerait garder une information après le redémarrage de l'arduino. 
 
-Pour cela on peut utiliser la partie où est stocké le programme pour enregistrer des informations. Cette partie s'appelle l'EEPROM https://fr.wikipedia.org/wiki/Electrically-erasable_programmable_read-only_memory.
+Pour cela on peut utiliser la partie où est stocké le programme pour enregistrer des informations. Cette partie s'appelle l'[EEPROM](https://fr.wikipedia.org/wiki/Electrically-erasable_programmable_read-only_memory).
 
 On va donc utiliser cette mémoire pour stocker des informations.
 
@@ -1036,20 +1085,283 @@ On peut utiliser le moniteur série pour régler l'alarme via les commandes :
 * "activer" pour activer l'alarme
 * "desactiver" pour désactiver l'alarme
 
-Régler l'alarme puis redémarrer l'arduino (en appuyant sur le petit bouton noir "reset" sur le dessus de l'arduino)
+Régler l'alarme puis redémarrer l'arduino (en appuyant sur le petit bouton noir "reset" sur le dessus de l'arduino) afin de vérifier que vos modifications sont bien sauvegardées après le redémarrage.
+
+
+---
+
+## Utiliser un buzzer
+
+Le buzzer MH-FMG permet de générer des sons de manière simple. 
+
+![buzzer](https://ae01.alicdn.com/kf/HTB14yOBaLLsK1Rjy0Fbq6xSEXXah/10-pi-ces-Module-de-sonnerie-actif-nouveau-kit-de-bricolage-Module-de-sonnerie-Active-bas.jpg)
+
+Détachez un groupe de 3 fils :
+* Branchez un fil entre la broche **I/O** du buzzer et la broche **S** du port 3
+* Branchez un fil entre la broche **VCC** du buzzer et la broche **V** du port 3
+* Branchez un fil entre la broche **GND** du buzzer et la broche **G** du port 3
+
+Laissez le cache devant le buzzer avant de téléverser le programme suivant, en effet le son sortant du buzzer est très fort :
+```C
+const byte PIN_BUZZER = 3;
+
+void playTetris() {
+   tone(PIN_BUZZER, 2637, 200);
+  delay(400);
+  tone(PIN_BUZZER, 1975, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2093, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2349, 200);
+  delay(400);
+  tone(PIN_BUZZER, 2093, 200);
+  delay(200);
+  tone(PIN_BUZZER, 1975, 200);
+  delay(200);
+  tone(PIN_BUZZER, 1760, 200);
+  delay(400);
+  tone(PIN_BUZZER, 1760, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2093, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2637, 200);
+  delay(400);
+  tone(PIN_BUZZER, 2349, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2093, 200);
+  delay(200);
+  tone(PIN_BUZZER, 1975, 200);
+  delay(400);
+  tone(PIN_BUZZER, 1975, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2093, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2349, 200);
+  delay(400);
+  tone(PIN_BUZZER, 2637, 200);
+  delay(400);
+  tone(PIN_BUZZER, 2093, 200);
+  delay(400);
+  tone(PIN_BUZZER, 1760, 200);
+  delay(400);
+  tone(PIN_BUZZER, 1760, 200);
+  delay(800);
+  tone(PIN_BUZZER, 1760, 200);
+  delay(400);
+  tone(PIN_BUZZER, 2349, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2794, 200);
+  delay(200);
+  tone(PIN_BUZZER, 3520, 200);
+  delay(400);
+  tone(PIN_BUZZER, 3136, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2794, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2637, 200);
+  delay(600);
+  tone(PIN_BUZZER, 2093, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2637, 200);
+  delay(400);
+  tone(PIN_BUZZER, 2349, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2093, 200);
+  delay(200);
+  tone(PIN_BUZZER, 1975, 200);
+  delay(400);
+  tone(PIN_BUZZER, 1975, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2093, 200);
+  delay(200);
+  tone(PIN_BUZZER, 2349, 200);
+  delay(400);
+  tone(PIN_BUZZER, 2637, 200);
+  delay(400);
+  tone(PIN_BUZZER, 2093, 200);
+  delay(400);
+  tone(PIN_BUZZER, 1760, 200);
+  delay(400);
+  tone(PIN_BUZZER, 1760, 200);
+  delay(800); 
+}
+
+void setup() {
+  pinMode(PIN_BUZZER, OUTPUT);
+}
+
+void loop() {
+  playTetris();
+  delay(2000);
+}
+```
 
 
 ---
 
 ## Utiliser un encodeur rotatif
 
+Un encodeur rotatif permet d'incrémenter ou décrémenter une valeur. L'encodeur contient aussi un bouton.
 
+![encoder](https://ae01.alicdn.com/kf/HTB1lSn3kb1YBuNjSszhq6AUsFXaJ/10-pi-ces-SAMIORE-ROBOT-codeur-rotatif-Module-brique-capteur-d-veloppement.jpg)
+
+Détachez un groupe de 5 fils :
+* Branchez un fil entre la broche **GND** de l'encodeur et la broche **G** du port A1
+* Branchez un fil entre la broche **+** de l'encodeur et la broche **V** du port A1
+* Branchez un fil entre la broche **SW** de l'encodeur et la broche **S** du port A3
+* Branchez un fil entre la broche **DT** de l'encodeur et la broche **S** du port A2
+* Branchez un fil entre la broche **CLK** de l'encodeur et la broche **S** du port A1
+
+Téléversez le programme suivant :
+    
+```C
+int ROTARY_CLK = A1;  // Pin 9 to clk on encoder
+int ROTARY_DT = A2;  // Pin 8 to DT on encoder
+int ROTARY_BUTTON = A3;
+
+
+int position = 0; 
+int rotation;
+int lastClicked;
+
+void setup() {
+  Serial.begin (9600);
+  pinMode (ROTARY_CLK,INPUT);
+  pinMode (ROTARY_DT,INPUT);
+  pinMode(ROTARY_BUTTON, INPUT_PULLUP);    
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  int value = digitalRead(ROTARY_CLK);
+  if (value != rotation){ // we use the DT pin to find out which way we turning.
+     if (digitalRead(ROTARY_DT) != value) {  // Clockwise
+       position ++;
+     } else { //Counterclockwise
+       position--;
+     }
+     Serial.print("Encoder position: ");
+     Serial.println(position);
+  }
+  int clicked = ! digitalRead(ROTARY_BUTTON);
+  if (lastClicked != clicked) {
+    Serial.print("Button clicked: ");
+    Serial.println(clicked);
+    lastClicked=clicked;
+  }
+
+  rotation = value;
+}
+```
 
 ---
 
-## Utiliser un capteur de luminosité
+## Mesurer une distance avec des ultrasons
+
+On peut utiliser un capteur ultrason (HR-SR04) pour mesurer une distance. L'idée est d'envoyer des ondes sonores (inaudibles) et de mesurer le temps qui s'écoule avant de les recapter. A partir de ce temps écoulés on peut grâce à la connaissance de la vitesse du son dans l'air estimé la distance entre le capteur et l'objet devant lui.
+
+En théorie, le capteur peut capter les obstacles sur un angle de 15° environ et permet de faire des mesures de distance entre 2 centimètres et 4 mètres avec une précision de 3mm.
+
+![ultrason](https://ae01.alicdn.com/kf/HTB1uVMfa6rguuRjy0Feq6xcbFXam/10-pi-ces-SAMIORE-ROBOT-Module-ultrasons-HC-SR04-Distance-mesure-capteur-capteur-chantillons-meilleurs-prix.jpg)
+
+Détachez un groupe de 4 fils :
+* Branchez un fil entre la broche **Trig** du capteur et la broche **S** du port 6
+* Branchez un fil entre la broche **Echo** du capteur et la broche **V** du port 7
+* Branchez un fil entre la broche **GND** du capteur et la broche **G** du port 7
+* Branchez un fil entre la broche **VCC** du capteur et la broche **V** du port 7
+
+Téléversez le code suivant :
+```C
+#define trigPin 7
+#define echoPin 6
+
+void setup() {
+  Serial.begin (9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+}
+
+void loop() {
+  // Envoi une impulsion de 10 micro seconde sur la broche "trigger"
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+
+  digitalWrite(trigPin, LOW);
+  // Attend que la broche Echo passe au niveau HAUT
+  // retourne la durée
+  int duration = pulseIn(echoPin, HIGH);
+
+  //Calculer la distance (en cm, basé sur la vitesse du son).
+  int distance = duration / 58.2;
+  Serial.print("distance=");
+  Serial.println(distance);
+  delay(500);
+}
+```
+
+---
+
+## Utiliser un capteur de luminosité (LDR)
 
 
+On peut mesurer la luminosité ambiante grâce à une [photorésistance](https://fr.wikipedia.org/wiki/Photor%C3%A9sistance) (*Light Dependent Resistor*, *LDR* ou *photoresistor* en anglais). 
+
+![LDR](https://ae01.alicdn.com/kf/HTB1Xe3lIFXXXXcOaXXXq6xXFXXXR/20-pcs-lot-GL5516-5516-r-sistance-d-pendante-de-la-lumi-re-LDR-5-MM.jpg)
+
+
+On ne va pas détailler ici le pré-cablage que l'on a fait avec la photorésitance et la résistance, suivez simplement ces étapes :
+* Branchez le fils réunissant une patte de la photorésistance et une patte de la résistance sur la broche **S** du port A7
+* Branchez le fils venant de la patte restante de la photorésistance sur la broche **V** du port A7
+* Branchez le fils venant de la patte restante de la résistance sur la broche **G** du port A7
+
+Téléverser le code suivante :
+```C
+#define LDR A7
+
+void setup() {
+    Serial.begin(9600);
+
+}
+
+void loop() {
+  int lum = analogRead(LDR);
+  Serial.print("luminosite=");
+  Serial.println(lum);
+  delay(500);
+}
+```
+    
+Vous devriez voir dans la console développeur la valeur de la luminosité, recouvrer ou éclairer la photorésistance pour voir cette valeur changer.
+
+En combinant ce code avec celui de l'afficheur 4*7 segments, on peut faire un programme qui change l'éclairage de l'afficheur selon la luminosité :
+
+```C
+#include <TM1637Display.h>
+#define TM1637_CLK 12
+#define TM1637_DIO 13
+#define LDR A7
+
+TM1637Display display(TM1637_CLK, TM1637_DIO);
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int lum = analogRead(LDR);
+  Serial.print("luminosite=");
+  Serial.println(lum);
+  int brightness = map(lum, 0, 1023, 0, 7);
+  display.setBrightness(brightness);
+  display.showNumberDec(lum);
+  delay(500);
+}
+```
+
+    
 
 ---
 
@@ -1129,16 +1441,17 @@ Commandes à distance :
 
 Maintenant que vous avez définit votre interface de programmation de votre projet via le moniteur série, on va pouvoir passer à l'étape suivante.
 
-Pour que votre projet soit "connecté" il faut pouvoir communiquer avec lui (et de préférence sans fil). Ici on a le choix dans les protocoles : bluetooth, Z-Wave, ZigBee, Wifi ...
+Pour que votre projet soit "connecté" il faut pouvoir communiquer avec lui (et de préférence sans fil). Ici on a le choix dans les protocoles : LoRa, bluetooth, Z-Wave, ZigBee, Wifi ...
 
-Dans cette session on va utiliser le Wifi via une carte WeMos D1 R1. Cette carte contient un [ESP8266](https://fr.wikipedia.org/wiki/ESP8266) qui permet de gérer facilement une connexion Wifi. Ce type de carte contient aussi assez de mémoire et de puissance de calcul pour héberger un mini site Web.
+Dans cette session on va utiliser le Wifi via une carte WeMos D1 R1. Cette carte contient un [ESP8266](https://fr.wikipedia.org/wiki/ESP8266) qui permet de gérer facilement une connexion Wifi. Ce type de carte contient aussi assez de mémoire et de puissance de calcul pour héberger un mini [serveur Web](https://fr.wikipedia.org/wiki/Serveur_web).
 
-On va continuer à utiliser l'IDE Arduino pour programmer le Wemos, mais il va falloir installer tout l'environnement :
+On va continuer à utiliser l'IDE Arduino pour programmer le Wemos, mais il va falloir installer tout l'environnement (cette partie est déjà réalisée sur les ordinateurs fournis) :
 * Allez dans "Fichier/Préférences" et placez l’URL https://arduino.esp8266.com/stable/package_esp8266com_index.json dans « URL de gestionnaire de cartes supplémentaires
 * Allez dans "Outils/Type de carte/Gestionnaire de carte", rechercher « esp8266 » et installer la dernière version proposée.
 * Branchez le Wemos sur votre ordinateur avec le cable USB
-* Sélectionner le nouveau port dans "Outils/ports"
-* Sélectionner "WeMos D1 R1" dans "Outils/Type de carte"
+* Sélectionnez le nouveau port dans "Outils/ports"
+* Sélectionnez "WeMos D1 R1" dans "Outils/Type de carte"
+* Ouvrez le moniteur série et vérifez que la vitesse de communication est bien toujours égale à *9600 baud* (menu en bas à droite de la fenêtre)
 
 Modifiez les déclarations de STASSID et STAPSK selon les paramètres de votre box et téléversez le programme suivant :
 ```C
@@ -1146,7 +1459,6 @@ Modifiez les déclarations de STASSID et STAPSK selon les paramètres de votre b
 #include <ESP8266WiFiMulti.h>
 #include <ESP8266WebServer.h>
 #include <SoftwareSerial.h>
-#include <LiquidCrystal_I2C_ESP.h>
 
 #ifndef STASSID
 #define STASSID "NomReseauWifi"
@@ -1200,7 +1512,7 @@ IP address:
 192.168.1.XX
 ```
 
-Notez cette dernière adresse (192.168.1.XX ou XX doit être un nombre de 0 à 255) et copiez la dans un navigateur Web sur votre PC. Vous deviez voir apparaître le mot "Bienvenue". Vous pouvez essayer la même manipulation depuis votre téléphone portable s'il est connecté au même Wifi.
+Notez cette dernière adresse (192.168.1.XX ou XX doit être un nombre de 0 à 255) et copiez la dans un navigateur Web sur votre PC. Vous deviez voir apparaître le mot "Bienvenue". Vous pouvez essayer la même manipulation depuis votre téléphone portable s'il est connecté au même réseau Wifi.
 
 Modifiez le code précédent pour afficher une autre phrase.
  
@@ -1211,7 +1523,7 @@ Pour le moment notre petit serveur Web ne sait gérer que les requêtes appelant
 #include <ESP8266WiFiMulti.h>
 #include <ESP8266WebServer.h>
 #include <SoftwareSerial.h>
-#include <LiquidCrystal_I2C_ESP.h>
+
 
 #ifndef STASSID
 #define STASSID "NomReseauWifi"
@@ -1264,6 +1576,7 @@ void loop() {
   server.handleClient();
 }
 ```
+Retounez sur votre navigateur et tapez l'URL http://192.168.1.XX/IP vous deviez voir apparaître l'adresse IP de votre WeMos.
 
 Modifiez le code précédent pour afficher d'autre page.
 
@@ -1273,7 +1586,7 @@ On va maintenant utiliser le moniteur série pour modifier une variable que l'on
 #include <ESP8266WiFiMulti.h>
 #include <ESP8266WebServer.h>
 #include <SoftwareSerial.h>
-#include <LiquidCrystal_I2C_ESP.h>
+
 
 #ifndef STASSID
 #define STASSID "Livebox-8A44"
@@ -1363,7 +1676,7 @@ Dans nos projet on ne gérera pas plus d'un paramètre, dans le code ci-dessous 
 #include <ESP8266WiFiMulti.h>
 #include <ESP8266WebServer.h>
 #include <SoftwareSerial.h>
-#include <LiquidCrystal_I2C_ESP.h>
+
 
 #ifndef STASSID
 #define STASSID "Livebox-8A44"
@@ -1471,17 +1784,197 @@ On va donc connecter 2 broches du WeMos sur le port série de l'Arduino. Pour ce
 
 ![level](https://ae01.alicdn.com/kf/HTB1z3ifLpXXXXa5XXXXq6xXFXXXq/Convertisseur-de-niveau-logique-haute-vitesse-bidirectionnelle-3-3-V-5-V-4-Chanels.jpg)
 
-Détachez un groupe de 4 fils:
-*
-*
-*
-*
+Repérez sur le *shield* arduino la ligne de broches **RX TX 5V GND** (au dessus de la ligne I2C) et détachez un groupe de 4 fils :
+* Branchez un fil entre la broche **5V** du convertisseur sur la broche **5V** sur l'arduino
+* Branchez un fil entre la broche **GND** (sous la broche **5V**) du convertisseur sur la broche **GND** sur l'arduino
+* Branchez un fil entre la broche **A4** du convertisseur sur la broche **TX** sur l'arduino
+* Branchez un fil entre la broche **A3** du convertisseur sur la broche **RX** sur l'arduino
 
-Détachez un groupe de 4 fils :
-*
-*
-*
-*
+Détachez un groupe de 2 fils :
+* Branchez un fil entre la broche **3.3V** du convertisseur sur une des broches **3V3** de l'arduino
+* Branchez un fil entre la broche **GND** (sous la broche **3.3V**) du convertisseur sur une des broches **GND** (sous la broche **3V3** précédemment connectée) de l'arduino
+
+Détachez un groupe de 2 fils de la même couleurs que ceux brancher sur les broches **A4** et **A3** du convertisseur :
+* Branchez le fil de la même couleur que celui partant de **A4** entre la broche **B4** du convertisseur sur la broche **D6** du WeMos
+* Branchez un fil de la même couleur que celui partant de **A3** entre la broche **B3** du convertisseur sur la broche **D5** du WeMos
+
+Détachez un groupe de 2 fils :
+* Branchez un fil entre la broche **V** du port **0** de l'arduino sur la broche **5V** du WeMos
+* Branchez un fil entre la broche **G** du port **0** de l'arduino sur la broche **G** du WeMos
+
+Téléversez le programme suivant :
+    
+```C
+#include <ESP8266WiFi.h>
+#include <ESP8266WiFiMulti.h>
+#include <ESP8266WebServer.h>
+#include <SoftwareSerial.h>
+
+#ifndef STASSID
+#define STASSID "Livebox-8A44"
+#define STAPSK  "mGrfwzHYZwMfvPLNCX"
+#endif
+
+#define RX D6
+#define TX D5
+SoftwareSerial arduino(RX, TX);
+ESP8266WiFiMulti WiFiMulti;
+ESP8266WebServer server(80);
+
+const char* ssid     = STASSID;
+const char* password = STAPSK;
+
+void setup() {
+  Serial.begin(9600);
+  arduino.begin(9600);
+
+  // On essaye de se connecter au réseau Wifi
+  WiFi.mode(WIFI_STA);
+  WiFiMulti.addAP(ssid, password);
+
+  Serial.println();
+  Serial.println();
+  Serial.print("Wait for WiFi... ");
+  while (WiFiMulti.run() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  server.on("/", handleRoot);
+  server.on("/IP", displayIP);
+  server.on("/temperature", displayTemp);
+  server.on("/mp3/volume", setMP3Volume);
+  server.on("/mp3/play", playMP3);
+  server.on("/mp3/pause", pauseMP3);
+  server.on("/mp3/next", nextMP3);
+  server.on("/mp3/previous", previousMP3);
+  server.on("/image", setImage);
+
+  server.begin();
+
+  delay(500);
+}
+
+String getKey(String str) {
+  return str.substring(0, str.indexOf('='));
+}
+
+String getValue(String str) {
+  return str.substring(str.indexOf('=') + 1);
+}
+
+
+int temperature = 0;
+int volume = 10;
+
+void handleRoot() {
+  // Sur la page d'accueil on ajoute des liens (HTML) pour controler notre arduino
+  server.send(200, "text/html", "<h1>Bienvenue</h1>"
+              "<hr>"
+              "<a href='/mp3/play'>MP3 : lancer</a><br>"
+              "<a href='/mp3/pause'>MP3 : pause</a><br>"
+              "<a href='/mp3/next'>MP3 : chanson suivante</a><br>"
+              "<a href='/mp3/previous'>MP3 : chanson precedente</a><br>"
+              "<a href='/mp3/volume'>MP3 : recuperer volume</a><br>"
+              "<a href='/mp3/volume?volume=25'>MP3 : mettre volume a 25</a><br>"
+              "<a href='/mp3/volume?volume=10'>MP3 : mettre volume a 10</a><br>"
+              "<hr>"
+              "<a href='/image?image='>image : aucune</a><br>"              
+              "<a href='/image?image=coeur'>image : coeur</a><br>"
+              "<a href='/image?image=smiley'>image : smiley</a><br>"              
+              "<a href='/image?image=pluie'>image : pluie</a><br>"
+              "<a href='/image?image=soleil'>image : soleil</a><br>"
+              "<a href='/image?image=nuage'>image : nuage</a><br>"
+              "<a href='/image?image=nuit'>image : nuit</a><br>"
+              "<hr>"              
+              "<a href='/temperature'>Recuperer temperature</a><br>"
+             );
+}
+
+void displayIP() {
+  String ip = WiFi.localIP().toString();
+  server.send(200, "text/html", "IP=" + ip);
+}
+
+void setImage() {
+  String image = server.arg(0);
+  arduino.print("image=");
+  arduino.println(image);
+  server.send(200, "text/html", "image="+image);  
+}
+
+void setMP3Volume() {
+  // On récupére la première valeur passée en paramètre de la page
+  // ex ?volume=22 ... normalement on devrait vérifier que le server.argName(0) vaut bien "volume"
+  // Mais comme on n'aura qu'un seul paramètre sur nos projets on ignore cette phase.
+  String volumeStr = server.arg(0);
+  if (volumeStr != "") {
+    volume = volumeStr.toInt();
+    arduino.print("volume=");
+    arduino.println(volume);
+  }
+  server.send(200, "text/html", "volume=" + String(volume));
+}
+
+void playMP3() {
+  arduino.println("lecture");
+  server.send(200, "text/html", "mp3=lecture");
+}
+
+void pauseMP3() {
+  arduino.println("pause");
+  server.send(200, "text/html", "mp3=pause");
+}
+
+void nextMP3() {
+  arduino.println("suivante");
+  server.send(200, "text/html", "mp3=suivante");
+}
+
+void previousMP3() {
+  arduino.println("precedente");
+  server.send(200, "text/html", "mp3=precedente");
+}
+
+
+void displayTemp() {
+  server.send(200, "text/html", "temperature=" + String(temperature));
+}
+
+void loop() {
+  // Ici on peut récupérer les lignes venant de l'arduino
+  while (arduino.available()) {
+    String line = arduino.readStringUntil('\n');// read the incoming data as string
+    line.trim();
+    Serial.print("received:<");
+    Serial.print(line);
+    Serial.println(">");
+    if (getKey(line) == "temp") {
+      temperature = getValue(line).toInt();
+    } else if (getKey(line) == "volume") {
+      volume = getValue(line).toInt();
+    }
+  }
+  // Si on écrit des lignes dans le moniteur série on les envoie sur l'arduino
+  while (Serial.available() > 0) {
+    arduino.write(Serial.read());
+  }
+  server.handleClient();
+
+}
+
+```
+
+Vous devriez voir apparaître des lignes venant de votre arduino dans le moniteur série. Toutes les lignes écrites dans le moniteur série seront envoyée vers l'arduino. Faites quelques essais pour vérifier que vous pouvez bien piloter votre arduino depuis le WeMos.
+
+**Remarques importantes** :
+* Vous pouvez brancher l'arduino et le WeMos sur le même PC. Pensez juste à changer le port et le type de carte avant de téléverser vos programmes
+* Si vous voulez changer votre programme arduino quand ce dernier est connecté au WeMos vous aurez des problème durant le téléversement. En effet le fait que le WeMos soit connecté sur les ports RX et TX de l'arduino perturbe le téléversement. Il faut donc débrancher les cables reliant les ports RX/TX de l'arduino et D5/D6 du WeMos. Le plus simple est de débrancher 2 fils au niveau du convertisseur de niveau (broches A4/A3 ou B3/B4). Le fait de choisir des couleurs identiques pour ces fils vous permettra de les rebrancher facilement quand votre programme arduino sera finalisé. 
+* Attention à ne pas mettre trop de luminosité sur la matrice de DEL. Si trop de courant passe par l'arduino ce dernier peut "cramer". Quand on veut mettre la luminosité à fond il faut alimenter la matrice via une alimentation externe.
 
 ---
 
@@ -1490,12 +1983,10 @@ Détachez un groupe de 4 fils :
 A vous maintenant de mettre en place les pages Web qui vont permettre de piloter votre projet.
 
 
-
 ---
 
 ## La suite
 
 
 Vous allez maintenant utiliser AppInventor afin de contrôler votre projet depuis une application mobile.
-
 
