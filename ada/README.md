@@ -85,8 +85,6 @@ void loop() {
 ```
 A noter : quand vous utilsez la liaison série USB vous ne devez pas utiliser les broches 0 et 1.
 
-
-
 ---
 
 ## Allumer une DEL
@@ -117,6 +115,91 @@ void loop() {
 }
 ```
 
+
+Vous pouvez aussi utiliser le feu tricolore preséent dans votre kit, détachez un groupe de 4 fils :
+* Branchez un fil entre la broche **G** du feu vers la broche **S** du port 8
+* Branchez un fil entre la broche **Y** du feu vers la broche **S** du port 9
+* Branchez un fil entre la broche **R** du feu vers la broche **S** du port 10
+* Branchez un fil entre la broche **GND** du feu vers la broche **G** du port 8, 9 ou 10
+
+![feu](https://ae01.alicdn.com/kf/HTB1mnOyaULrK1Rjy1zbq6AenFXao/Mini-Module-d-affichage-de-LED-de-feu-de-signalisation-5-V-pour-Arduino-rouge-jaune.jpg)
+
+```C
+#define GREEN_PIN 8
+#define YELLOW_PIN 9
+#define RED_PIN 10
+
+void setup() {
+  pinMode(GREEN_PIN, OUTPUT);
+  pinMode(YELLOW_PIN, OUTPUT);
+  pinMode(RED_PIN, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(GREEN_PIN, HIGH);
+  digitalWrite(YELLOW_PIN, LOW);
+  digitalWrite(RED_PIN, LOW);
+  delay(500); 
+  digitalWrite(GREEN_PIN, LOW);
+  digitalWrite(YELLOW_PIN, HIGH);
+  digitalWrite(RED_PIN, LOW);
+  delay(500);
+  digitalWrite(GREEN_PIN, LOW);
+  digitalWrite(YELLOW_PIN, LOW);
+  digitalWrite(RED_PIN, HIGH);
+  delay(500); 
+}
+```
+
+---
+
+## Mesurer une distance avec des ultrasons
+
+On peut utiliser un capteur ultrason (HR-SR04) pour mesurer une distance. L'idée est d'envoyer des ondes sonores (inaudibles) et de mesurer le temps qui s'écoule avant de les recapter. A partir de ce temps écoulés on peut grâce à la connaissance de la vitesse du son dans l'air estimé la distance entre le capteur et l'objet devant lui.
+
+En théorie, le capteur peut capter les obstacles sur un angle de 15° environ et permet de faire des mesures de distance entre 2 centimètres et 4 mètres avec une précision de 3mm.
+
+![ultrason](https://ae01.alicdn.com/kf/HTB1uVMfa6rguuRjy0Feq6xcbFXam/10-pi-ces-SAMIORE-ROBOT-Module-ultrasons-HC-SR04-Distance-mesure-capteur-capteur-chantillons-meilleurs-prix.jpg)
+
+Détachez un groupe de 4 fils :
+* Branchez un fil entre la broche **Trig** du capteur et la broche **S** du port 6
+* Branchez un fil entre la broche **Echo** du capteur et la broche **V** du port 7
+* Branchez un fil entre la broche **GND** du capteur et la broche **G** du port 7
+* Branchez un fil entre la broche **VCC** du capteur et la broche **V** du port 7
+
+Téléversez le code suivant :
+```C
+#define trigPin 7
+#define echoPin 6
+
+void setup() {
+  Serial.begin (9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+}
+
+void loop() {
+  // Envoi une impulsion de 10 micro seconde sur la broche "trigger"
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+
+  digitalWrite(trigPin, LOW);
+  // Attend que la broche Echo passe au niveau HAUT
+  // retourne la durée
+  int duration = pulseIn(echoPin, HIGH);
+
+  //Calculer la distance (en cm, basé sur la vitesse du son).
+  int distance = duration / 58.2;
+  Serial.print("distance=");
+  Serial.println(distance);
+  delay(500);
+}
+```
+
+Travail complémentaire : faire un radar de recul, selon la distance de l'obstacle, vous allumerez les DEL verte, jaune et enfin rouge du feu tricolore.
 
 ---
 
@@ -193,7 +276,7 @@ Quand vous appuyerez sur le bouton la DEL devrait s'allumer.
 
 Ce composant permet d'avoir une valeur analogique comprise entre 0 et 1023 selon la position du curseur. Il faut brancher ce type de composant analogique sur une des broches de A0 à A7.
 
-![lcd](https://i2.cdscdn.com/pdt2/2/6/4/1/700x700/sou0712662893264/rw/commutateur-rotatif-sourcingmap-r-b10k-10k-ohm-si.jpg)
+![potar](https://i2.cdscdn.com/pdt2/2/6/4/1/700x700/sou0712662893264/rw/commutateur-rotatif-sourcingmap-r-b10k-10k-ohm-si.jpg)
 
 
 Détachez un groupe de 3 fils et positionnez le potentionmère comme sur la photo précédente :
@@ -267,7 +350,7 @@ La ligne *#include &lt;Servo.h&gt;* charge la bibliothèque permettant de pilote
 
 Ajouter un des morceaux de plastique sur l'axe du servomoteur afin de bien visualiser les mouvements.
 
-Exemple complémentaire : Faire tourner le servomoteur à partir de la valeur d'un potentiomètre (utilisation de la fonction [map](https://www.arduino.cc/reference/en/language/functions/math/map/) pour convertir les valeurs d'entrées du potentiomètre - de 0 à 1023 - en une valeur en degrée - de 0 à 180) :
+Travail complémentaire : Faire tourner le servomoteur à partir de la valeur d'un potentiomètre (utilisation de la fonction [map](https://www.arduino.cc/reference/en/language/functions/math/map/) pour convertir les valeurs d'entrées du potentiomètre - de 0 à 1023 - en une valeur en degrée - de 0 à 180) :
 
 ```C
 #include "Servo.h"
@@ -429,9 +512,16 @@ Proposition d'exercide : afficher sur l'écrab LCD la température (sur la premi
 
 ---
 
-## Gérer une horloge interne (I²C)
+## Gérer une horloge temps réel (I²C)
 
-**Explication à ajouter**
+L'arduino n'est pas capable de récupérer l'heure et la date courante. 
+
+On peut lui adjoindre une horloge temps réel afin de gérer précisement l'heure et la date courante. Une horloge RTC contient un emplacement pour une pile afin que ce dernier puisse continuer à faire vibrer un quartz piézoélectrique et ainsi connaître combien de temps s'est écoulé depuis la dernière fois que le composant a été éteint. 
+
+**Remarque** : On trouve le même type de composant dans les unité centrales des ordinateurs afin que ces derniers gardent la bonne date même lorsqu'ils sont débrancher électriquement.
+
+
+![rtc](https://ae01.alicdn.com/kf/HTB1hJgePNTpK1RjSZR0q6zEwXXaG/DS3231-AT24C32-IIC-pr-cision-RTC-Module-de-m-moire-d-horloge-en-temps-r-el.jpg)
 
 Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer notre horloge interne. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **RTCLib** by Adafruit
 
@@ -1254,53 +1344,6 @@ void loop() {
 }
 ```
 
----
-
-## Mesurer une distance avec des ultrasons
-
-On peut utiliser un capteur ultrason (HR-SR04) pour mesurer une distance. L'idée est d'envoyer des ondes sonores (inaudibles) et de mesurer le temps qui s'écoule avant de les recapter. A partir de ce temps écoulés on peut grâce à la connaissance de la vitesse du son dans l'air estimé la distance entre le capteur et l'objet devant lui.
-
-En théorie, le capteur peut capter les obstacles sur un angle de 15° environ et permet de faire des mesures de distance entre 2 centimètres et 4 mètres avec une précision de 3mm.
-
-![ultrason](https://ae01.alicdn.com/kf/HTB1uVMfa6rguuRjy0Feq6xcbFXam/10-pi-ces-SAMIORE-ROBOT-Module-ultrasons-HC-SR04-Distance-mesure-capteur-capteur-chantillons-meilleurs-prix.jpg)
-
-Détachez un groupe de 4 fils :
-* Branchez un fil entre la broche **Trig** du capteur et la broche **S** du port 6
-* Branchez un fil entre la broche **Echo** du capteur et la broche **V** du port 7
-* Branchez un fil entre la broche **GND** du capteur et la broche **G** du port 7
-* Branchez un fil entre la broche **VCC** du capteur et la broche **V** du port 7
-
-Téléversez le code suivant :
-```C
-#define trigPin 7
-#define echoPin 6
-
-void setup() {
-  Serial.begin (9600);
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-}
-
-void loop() {
-  // Envoi une impulsion de 10 micro seconde sur la broche "trigger"
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-
-  digitalWrite(trigPin, LOW);
-  // Attend que la broche Echo passe au niveau HAUT
-  // retourne la durée
-  int duration = pulseIn(echoPin, HIGH);
-
-  //Calculer la distance (en cm, basé sur la vitesse du son).
-  int distance = duration / 58.2;
-  Serial.print("distance=");
-  Serial.println(distance);
-  delay(500);
-}
-```
 
 ---
 
@@ -1361,7 +1404,135 @@ void loop() {
 }
 ```
 
-    
+---
+
+## DEL RVB
+
+Vous n'aurez normalement pas besoin de ce composant pour votre projet, mais voici tout de même sa documentation si vous voulez l'utiliser plus tard.
+
+Une DEL RVB (Rouge, Vert, Bleu ou RGB en anglais pour Red, Green, Blue) permet de choisir la couleur de la lumière. Chaque composante de la lumière (rouge, verte et bleue) peut prendre une valeur de 0 à 255. 
+
+![rgb led](https://ae01.alicdn.com/kf/HTB1j1U4XhuaVKJjSZFjq6AjmpXar.jpg)
+
+Il faut brancher les broches R,G et B de la DEL sur des ports PWM de l'Arduino (typiquement les port 9, 10 et 11). Détachez un groupe de 4 fils :
+* Branchez un fil entre la broche ***G*** de la DEL sur la broche ***S*** du port 9
+* Branchez un fil entre la broche ***B*** de la DEL sur la broche ***S*** du port 10
+* Branchez un fil entre la broche ***R*** de la DEL sur la broche ***S*** du port 11
+* Branchez un fil entre la broche ***-*** de la DEL sur la broche ***G*** du port 9, 10 ou 11 
+
+```C
+int redpin=11;
+int bluepin=10;
+int greenpin=9;
+void setup() {
+  pinMode(redpin, OUTPUT);
+  pinMode(bluepin, OUTPUT);
+  pinMode(greenpin, OUTPUT);
+  randomSeed(analogRead(0));
+}
+void loop() {
+  analogWrite(redpin,
+              random(255));
+  analogWrite(bluepin,
+              random(255));
+  analogWrite(greenpin,
+              random(255));
+  delay(500); 
+}
+```
+
+---
+
+## Moteur pas-à-pas 
+
+Vous n'aurez normalement pas besoin de ce composant pour votre projet, mais voici tout de même sa documentation si vous voulez l'utiliser plus tard.
+
+Un moteur pas-à-pas permet de gérer des rotations précises ([documentation](http://www.airspayce.com/mikem/arduino/AccelStepper/))
+
+
+![step motor](https://ae01.alicdn.com/kf/HTB1jujvLFXXXXX7XXXXq6xXFXXX2/225895102/HTB1jujvLFXXXXX7XXXXq6xXFXXX2.jpg)
+
+
+Une nouvelle fois, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **AccelStepper** de Mike McCauley
+
+
+Branchez le cable du moteur pas-à-pas sur la carte de contrôle. Détachez un groupe de 4 fils pour les broches ***IN*** et un groupe de 2 fils pour les broches ***-*** et ***+***): 
+* Branchez un fil entre la broche ***IN1*** du contrôleur et la broche ***S*** du port ***4*** de l'Arduino
+* Branchez un fil entre la broche ***IN2*** du contrôleur et la broche ***S*** du port ***5*** de l'Arduino
+* Branchez un fil entre la broche ***IN3*** du contrôleur et la broche ***S*** du port ***6*** de l'Arduino
+* Branchez un fil entre la broche ***IN4*** du contrôleur et la broche ***S*** du port ***7*** de l'Arduino
+* Branchez un fil entre la broche ***-*** du contrôleur et la broche ***G*** du port ***7*** de l'Arduino
+* Branchez un fil entre la broche ***+*** du contrôleur et la broche ***V*** du port ***7*** de l'Arduino
+
+
+### Mode bloquant
+
+```C
+#include <AccelStepper.h>
+#define motorPin1  4
+#define motorPin2  5
+#define motorPin3  6
+#define motorPin4  7
+AccelStepper stepper(
+    AccelStepper::HALF4WIRE,
+    motorPin1, motorPin3,
+    motorPin2, motorPin4);
+
+void setup() {
+  stepper.setMaxSpeed(1000);
+  stepper.setAcceleration(100.0);
+  stepper.enableOutputs();
+}
+void loop() {
+    stepper.runToNewPosition(0);
+    stepper.runToNewPosition(1000);
+}
+```
+
+
+### Mode non-bloquant
+
+Dans le code précédent à chaque appel à la fonction ***runToNewPosition*** le programme attend la fin de la rotation du moteur pour exécuter la ligne de code suivante. Voici ici un exemple de code permettant de faire tourner le moteur sans bloquer le programme :
+
+```C
+#include <AccelStepper.h>
+#define motorPin1  4
+#define motorPin2  5
+#define motorPin3  6
+#define motorPin4  7
+AccelStepper stepper(
+    AccelStepper::HALF4WIRE,
+    motorPin1, motorPin3,
+    motorPin2, motorPin4);
+
+void setup() {
+  stepper.setMaxSpeed(1000);
+  stepper.move(1);
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (isCommandTerminated()) {
+    Serial.println("fin");
+    delay(500);
+    stepper.move(300);
+  }
+}
+
+boolean isCommandTerminated() {
+  stepper.setSpeed(1000);    
+  int d = stepper.distanceToGo();
+  stepper.runSpeedToPosition();
+  if (d == 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+```
+
+---
+
 
 ---
 
@@ -1413,7 +1584,6 @@ Données à remonter sur le moniteur série toutes les X secondes :
 
 Commandes à distance :
 * Eteindre/Allumer le(s) écran(s)
- 
 
 
 ### Un radio-reveil connecté
@@ -1989,4 +2159,3 @@ A vous maintenant de mettre en place les pages Web qui vont permettre de piloter
 
 
 Vous allez maintenant utiliser AppInventor afin de contrôler votre projet depuis une application mobile.
-
