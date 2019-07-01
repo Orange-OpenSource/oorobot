@@ -6,7 +6,7 @@
 
 Il vous faudra télécharger l'environnement de développement (IDE) Arduino sur le site officiel : https://www.arduino.cc/en/Main/Software
 
-Ceci n'est pas un cours d'électronique, nous passons sous silence un grand nombre de terminologie afin de pouvoir programmer rapidement un objet fonctionnel.
+Ce n'est pas un cours d'électronique : nous passons donc sous silence un grand nombre de terminologies afin de pouvoir programmer rapidement un objet fonctionnel.
 
 
 ![logo](https://pbs.twimg.com/profile_images/928655749605199872/ygogGX2j_400x400.jpg)
@@ -21,14 +21,14 @@ L'Arduino est une carte construite autour d'un microcontrôleur qui peut être p
 
 ![arduino](https://ae01.alicdn.com/kf/HTB1EhFHb2NNTKJjSspeq6ySwpXaU.jpg)
 
-Le plus simple est d'avoir un "shield" (bouclier) permettant d'avoir une alimentation (+5V, Ground) pour chaque broche afin de faciliter le câblage des composants.
+Le plus simple est d'utiliser un "shield" (bouclier) permettant d'avoir une alimentation (+5V, Ground) pour chaque broche afin de faciliter le câblage des composants.
 
 
 ---
 
 ## Branchement de l'Arduino
 
-Pour programmer l'Arduino il suffit de le brancher sur un des ports USB de votre ordinateur. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée, sélectionnez là. Vérifiez ensuite que c'est bien un "Arduino Nano" qui est sélectionné dans le menu "Outils/Type de carte".
+Pour programmer l'Arduino il suffit de le brancher sur un des ports USB de votre ordinateur. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée, sélectionnez-là. Vérifiez ensuite que c'est bien "Arduino Nano" qui est sélectionné dans le menu "Outils/Type de carte".
 
 Tapez le programme suivant :
     
@@ -45,10 +45,10 @@ void loop() {
   delay(1000);
 }
 ```
-Téléversez le programme sur l'Arduino (bouton en forme de fléche en haut de l'IDE).
+Téléversez le programme sur l'Arduino (bouton en forme de flèche en haut de l'IDE).
 Ouvrez le moniteur série (menu "Outils/Moniteur série" ou via le bouton en haut à droite de l'IDE), vous devriez voir apparaître toutes les secondes une nouvelle ligne.
 
-Vérifez que la vitesse de communication est bien égale à *9600 baud* (menu en bas à droite de la fênêtre).
+Vérifez que la vitesse de communication est bien égale à *9600 baud* (menu en bas à droite de la fenêtre).
  
 ---
 ## La structure d'un programme Arduino
@@ -83,23 +83,23 @@ void loop() {
 
 }
 ```
-A noter : quand vous utilsez la liaison série USB vous ne devez pas utiliser les broches 0 et 1.
+A noter : quand vous utilsez la liaison série USB vous ne devez pas utiliser les broches 0 ni 1.
 
 ---
 
 ## Allumer une DEL
 
-La DEL (ou LED en anglais) est un composant simple s'allumant quand elle reçoit du courant. Nous allons commencer par brancher une DEL sur notre arduino. Pour cela prenez 2 fils.
+La DEL (ou LED en anglais) est un composant simple s'allumant quand elle reçoit du courant. Nous allons commencer par brancher une DEL sur notre Arduino. Pour cela prenez 2 fils.
 
-Les DEL ont des tensions précises de fonctionnement (entre 2.2V et 3V selon leur couleur) mais les broches de l'Arduino fournissent du +5V, il faudra donc réduire l'alimentation des DEL en utilisant une résistance. Pour gagner du temps nous allons brancher directement nos DEL. Cela va réduire leur durée de vie mais dans le cadre de ce TP ça ne sera pas gếnant.
+Les DEL ont des tensions précises de fonctionnement (entre 2.2V et 3V selon leur couleur) mais les broches de l'Arduino fournissent du +5V, il faut donc réduire l'alimentation des DEL en utilisant une résistance. Pour gagner du temps nous allons brancher directement nos DEL. Cela va réduire leur durée de vie mais dans le cadre de ce TP ça ne sera pas gếnant.
 
 
 * Branchez un fil entre la patte courte de la DEL et la broche G du port 5 de l'Arduino
 * Branchez un fil entre la patte longue de la DEL et la broche S du port 5 de l'Arduino
 
-Téléversez le programme suivant. La DEL devrait clignoter!
+Téléversez le programme suivant. La DEL devrait clignoter !
 
-Jouez avec la valeur inscrite dans les fonctions delay pour faire clignoter plus ou moins vite la DEL
+Jouez avec la valeur inscrite dans les fonctions *delay* pour la faire clignoter plus ou moins vite.
 
 ```C
 #define LED1 5
@@ -116,11 +116,11 @@ void loop() {
 ```
 
 
-Vous pouvez aussi utiliser le feu tricolore preséent dans votre kit, détachez un groupe de 4 fils :
-* Branchez un fil entre la broche **G** du feu vers la broche **S** du port 8
-* Branchez un fil entre la broche **Y** du feu vers la broche **S** du port 9
-* Branchez un fil entre la broche **R** du feu vers la broche **S** du port 10
-* Branchez un fil entre la broche **GND** du feu vers la broche **G** du port 8, 9 ou 10
+Vous pouvez aussi utiliser le feu tricolore présent dans votre kit. Détachez un groupe de 4 fils :
+* Branchez un fil entre la broche **G** du feu et la broche **S** du port 8
+* Branchez un fil entre la broche **Y** du feu et la broche **S** du port 9
+* Branchez un fil entre la broche **R** du feu et la broche **S** du port 10
+* Branchez un fil entre la broche **GND** du feu et la broche **G** du port 8, 9 ou 10
 
 ![feu](https://ae01.alicdn.com/kf/HTB1mnOyaULrK1Rjy1zbq6AenFXao/Mini-Module-d-affichage-de-LED-de-feu-de-signalisation-5-V-pour-Arduino-rouge-jaune.jpg)
 
@@ -155,9 +155,9 @@ void loop() {
 
 ## Mesurer une distance avec des ultrasons
 
-On peut utiliser un capteur ultrason (HR-SR04) pour mesurer une distance. L'idée est d'envoyer des ondes sonores (inaudibles) et de mesurer le temps qui s'écoule avant de les recapter. A partir de ce temps écoulés on peut grâce à la connaissance de la vitesse du son dans l'air estimé la distance entre le capteur et l'objet devant lui.
+On peut utiliser un capteur ultrason (HR-SR04) pour mesurer une distance. On envoie des ondes sonores (inaudibles) vers un obstacle et on mesure le temps qui s'écoule avant de les recapter. A partir de la mesure de ce temps écoulé on peut, grâce à la connaissance de la vitesse du son dans l'air, estimer la distance entre le capteur et l'objet devant lui.
 
-En théorie, le capteur peut capter les obstacles sur un angle de 15° environ et permet de faire des mesures de distance entre 2 centimètres et 4 mètres avec une précision de 3mm.
+En théorie, le capteur peut capter les obstacles sur un angle de 15° environ et permet de faire des mesures de distance entre 2 centimètres et 4 mètres avec une précision de 3 millimètres.
 
 ![ultrason](https://ae01.alicdn.com/kf/HTB1uVMfa6rguuRjy0Feq6xcbFXam/10-pi-ces-SAMIORE-ROBOT-Module-ultrasons-HC-SR04-Distance-mesure-capteur-capteur-chantillons-meilleurs-prix.jpg)
 
@@ -191,7 +191,7 @@ void loop() {
   // retourne la durée
   int duration = pulseIn(echoPin, HIGH);
 
-  //Calculer la distance (en cm, basé sur la vitesse du son).
+  //Calculer la distance (en cm, basée sur la vitesse du son).
   int distance = duration / 58.2;
   Serial.print("distance=");
   Serial.println(distance);
@@ -199,7 +199,7 @@ void loop() {
 }
 ```
 
-Travail complémentaire : faire un radar de recul, selon la distance de l'obstacle, vous allumerez les DEL verte, jaune et enfin rouge du feu tricolore.
+Travail complémentaire : faire un radar de recul. Selon la distance de l'obstacle, vous allumerez les DEL verte, jaune et enfin rouge du feu tricolore.
 
 ---
 
@@ -212,11 +212,11 @@ On va utiliser ici un bouton un peu particulier :
 
 Ce bouton intègre une DEL en plus d'un contact on/off. N'hésitez pas à démonter le bouton pour voir la DEL intégrée.
 
-Pour commencer on va n'utiliser que le bouton.
+Pour commencer on ne va utiliser que le bouton.
 
 ![vue éclatée](https://ae01.alicdn.com/kf/HTB1iuZ_j4HI8KJjy1zbq6yxdpXaS/Bouton-d-arcade-5-couleurs-lumi-re-LED-lampe-60-MM-45-MM-grand-rond-Arcade.jpg)
 
-Récupérer les 2 fils venant de la partie centrale du bouton (le bloc rouge et noir sur la photo précédente) :
+Récupérer les 2 fils issus de la partie centrale du bouton (le bloc rouge et noir sur la photo précédente) :
 * Branchez le fil de la partie coudée sur la broche **G** du port 4
 * Branchez l'autre fil sur la broche ***S*** du port 4
 
@@ -242,11 +242,11 @@ void loop() {
 ```
 
 
-Quand vous appuyez sur le bouton, vous devriez voir apparaître sur le moniteur série l'état du bouton (appuyé ou relaché)
+Quand vous appuyez sur le bouton, vous devez voir apparaître sur le moniteur série l'état du bouton (appuyé ou relaché).
 
-Vous remarquerez ici que l'on déclare le "port" en "INPUT_PULLUP", cela veut dire que l'Arduino va connecter une de ses résistances interne entre la broche V du port (reliée au 5V) et sa broche d'entrée (S).
+Vous remarquerez ici que l'on déclare le "port" en "INPUT_PULLUP", cela veut dire que l'Arduino va connecter une de ses résistances internes entre la broche V du port (reliée au 5V) et sa broche d'entrée S.
 
-On va maintenant utiliser la DEL intégrée. Débranchez la DEL précédemment branchée sur le port 5 (et le feu tricolore). Branchez ensuite le fil venant du côté noir du bouton sur la broche **G** du port 5 et le fil venant du côté rouge du bouton sur la broche **S** du port 5 
+On va maintenant utiliser la DEL intégrée. Débranchez la DEL précédemment branchée sur le port 5 (et le feu tricolore). Branchez ensuite le fil venant du côté noir du bouton sur la broche **G** du port 5 puis le fil venant du côté rouge du bouton sur la broche **S** du port 5 
 
 Téléverser le programme suivant :
 ```C
@@ -274,7 +274,7 @@ Quand vous appuyerez sur le bouton la DEL devrait s'allumer.
 
 ## Utiliser un potentiomètre
 
-Ce composant permet d'avoir une valeur analogique comprise entre 0 et 1023 selon la position du curseur. Il faut brancher ce type de composant analogique sur une des broches de A0 à A7.
+Ce composant permet d'avoir une valeur analogique comprise entre 0 et 1023 selon la position du curseur. Il faut brancher ce type de composant analogique sur un des ports de A0 à A7.
 
 ![potar](https://i2.cdscdn.com/pdt2/2/6/4/1/700x700/sou0712662893264/rw/commutateur-rotatif-sourcingmap-r-b10k-10k-ohm-si.jpg)
 
@@ -306,7 +306,7 @@ void loop() {
 ```
 
 
-Proposition d'exercice : Faire varier le temps de clignotement d'une DEL avec le potentiomètre
+Proposition d'exercice : Faire varier le temps de clignotement d'une DEL avec le potentiomètre.
 
 ---
 
@@ -440,7 +440,7 @@ void loop() {
 
 
 
-Vérifier le contraste de l'écran : ce dernier doit s'allumer au démarrage. Si vous ne voyez rien, pas de panique c'est peut-être tout simplement parce que le contraste est mal réglé. Pour changer ce paramètre il suffit de tourner le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à obtenir un bon contraste entre l'affichage des caractères et le fond de l'écran
+Vérifier le contraste de l'écran : ce dernier doit s'allumer au démarrage. Si vous ne voyez rien, pas de panique c'est peut-être tout simplement parce que le contraste est mal réglé. Pour changer ce paramètre il suffit de tourner le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à obtenir un bon contraste entre l'affichage des caractères et le fond de l'écran.
 
 
 ---
@@ -506,7 +506,7 @@ void loop() {
 }
 ```
 
-Proposition d'exercide : afficher sur l'écrab LCD la température (sur la première ligne) et la pression atmosphérique (sur la deuxième ligne) 
+Proposition d'exercide : afficher sur l'écran LCD la température (sur la première ligne) et la pression atmosphérique (sur la deuxième ligne).
 
 **A savoir :** La pression atmosphérique permet de connaître (à peu près) le temps qu'il fait. On vous invite à regarder [le site http://leguidemeteo.com/prevoir-le-temps-a-partir-de-son-barometre/) ](http://leguidemeteo.com/prevoir-le-temps-a-partir-de-son-barometre/) afin de voir comment faire une correspondance entre la valeur récupérée et la météo courante.
 
@@ -516,7 +516,7 @@ Proposition d'exercide : afficher sur l'écrab LCD la température (sur la premi
 
 L'arduino n'est pas capable de récupérer l'heure et la date courante. 
 
-On peut lui adjoindre une horloge temps réel afin de gérer précisement l'heure et la date courante. Une horloge RTC contient un emplacement pour une pile afin que ce dernier puisse continuer à faire vibrer un quartz piézoélectrique et ainsi connaître combien de temps s'est écoulé depuis la dernière fois que le composant a été éteint. 
+On peut lui adjoindre une horloge temps réel afin de gérer précisement l'heure et la date courante. Une horloge RTC contient un emplacement pour une pile afin que ce dernier puisse continuer à faire vibrer un quartz piézoélectrique et ainsi connaître combien le temps écoulé depuis la dernière fois que le composant a été éteint. 
 
 **Remarque** : On trouve le même type de composant dans les unité centrales des ordinateurs afin que ces derniers gardent la bonne date même lorsqu'ils sont débranchés électriquement.
 
@@ -548,7 +548,7 @@ void setup() {
   }
   if (rtc.lostPower()) {
     Serial.println("RTC lost power, lets set the time!");
-    // les lignes suivantes permettente de configurer l'heure et la date quand l'horloge n'est pas encore configurée
+    // les lignes suivantes permettent de configurer l'heure et la date quand l'horloge n'est pas encore configurée
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // cela utilise l'heure et la date du PC
   }
@@ -614,7 +614,7 @@ void setup() {
   }
   if (rtc.lostPower()) {
     Serial.println("RTC lost power, lets set the time!");
-    // les lignes suivantes permettente de configurer l'heure et la date quand l'horloge n'est pas encore configurée
+    // les lignes suivantes permettent de configurer l'heure et la date quand l'horloge n'est pas encore configurée
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // cela utilise l'heure et la date du PC
   }
@@ -643,7 +643,7 @@ void loop() {
       rtc.adjust(strToDateTime(heure));
     }
   }
-  // attente de 1s pour ne pas afficher trop d'information dans le moniteur série
+  // attente de 1s pour ne pas afficher trop d'informations dans le moniteur série
   delay(1000);
 }
 ```
@@ -653,7 +653,7 @@ void loop() {
 
 ## Récupérer le taux d'humidité et la température
 
-Voici un nouveau composant (DHT11) qui va permettre de récupérer la température (comme le BMP280 précédemment vu) mais aussi le taux d'humidité de la pièce.
+Voici un nouveau composant (DHT11) qui va permettre de récupérer la température (comme le BMP280 précédemment vu) mais aussi le taux d'humidité d'une pièce.
 
 ![dht11](https://ae01.alicdn.com/kf/HTB1WbV_ayLrK1Rjy1zdq6ynnpXa5/10-pi-ces-DHT22-AM2302-DHT11-DHT12-AM2320-Module-de-capteur-d-humidit-de-temp-rature.jpg)
 
@@ -720,7 +720,7 @@ int seconds=0;
 void loop() {
   int sep = 0;
   if (seconds % 2 == 0) {
-    // On affiche de séparateur ':' qu'une seconde sur 2
+    // On n'affiche le séparateur ':' qu'une seconde sur deux
     sep = 64;
   }
   display.showNumberDecEx(seconds, sep, true, 4, 0);
@@ -775,7 +775,7 @@ void setup() {
   }
   if (rtc.lostPower()) {
     Serial.println("RTC lost power, lets set the time!");
-    // les lignes suivantes permettente de configurer l'heure et la date quand l'horloge n'est pas encore configurée
+    // les lignes suivantes permettent de configurer l'heure et la date quand l'horloge n'est pas encore configurée
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // cela utilise l'heure et la date du PC
   }
@@ -799,7 +799,7 @@ void loop() {
   Serial.println();
   int sep = 0;
   if (now.second() % 2 == 0) {
-    // On affiche de séparateur ':' qu'une seconde sur 2
+    // On n'affiche le séparateur ':' qu'une seconde sur deux
     sep = 64;
   }
   display.showNumberDecEx(now.hour() * 100 + now.minute(), sep, true, 4, 0);
@@ -813,7 +813,7 @@ void loop() {
       rtc.adjust(strToDateTime(heure));
     }
   }
-  // attente de 1s pour ne pas afficher trop d'information dans le moniteur série
+  // attente de 1s pour ne pas afficher trop d'informations dans le moniteur série
   delay(1000);
 }
 ```
@@ -894,7 +894,7 @@ Pour les enceintes, détachez un groupe de 2 fils  :
 * Branchez un fil entre une des broche côté enceinte et la broche **SPK_1** du module
 * Branchez un fil entre l'autre broche côté enceinte et la broche **SPK_2** du module
 
-Téléverser le programme suivant:
+Téléverser le programme suivant :
 
 ```C
 #include "DFRobotDFPlayerMini.h"
@@ -964,19 +964,19 @@ void loop() {
 ```
 
 Vous pouvez contrôler la lecture avec les commandes suivantes depuis le moniteur série :
-* lecture: lance la première chanson
-* pause: mets en pause/relance la chanson courante
-* suivante: passe à la chanson suivante
-* precedente: reviens à la chanson précédente
-* volume=XX : régle le volume à la valeur XX (pouvant aller de 0 à 30)
-* stop: arrête le module
+* lecture : lance la première chanson
+* pause : met en pause/relance la chanson courante
+* suivante : passe à la chanson suivante
+* precedente : revient à la chanson précédente
+* volume=XX : règle le volume à la valeur XX (pouvant aller de 0 à 30)
+* stop : arrête le module
 
 
 ---
 
 ## Utiliser une matrice à DEL
 
-Vous pouvez utiliser la matrice à DEL (8*8) pour afficher des messages ou des icones.
+Vous pouvez utiliser la matrice à DEL (8*8) pour afficher des messages ou des icônes.
 
 
 ![neopixel](https://ae01.alicdn.com/kf/HTB1c6WwmSMmBKNjSZTEq6ysKpXaG/10-pi-ces-WS2812-LED-5050-RVB-8x8-64-LED-Matrice.jpg)
@@ -1058,7 +1058,7 @@ void setup() {
 
   Wire.begin();
   pixels.begin();
-  // Ne pas mettre trop fort (>50) les DEL au risque de "cramer" l'arduino
+  // Ne pas mettre trop fort (>50) les DEL au risque de "cramer" l'Arduino
   pixels.setBrightness(30);
 }
 
@@ -1083,9 +1083,9 @@ void loop() {
 
 ---
 
-## Stocker des informations dans l'arduino
+## Stocker des informations dans l'Arduino
 
-Par défaut, quand on arrête l'arduino on va perdre toutes les valeurs du programme. Dans certain cas, on aimerait garder une information après le redémarrage de l'arduino. 
+Par défaut, quand on arrête l'Arduino on perd toutes les valeurs du programme. Dans certains cas, on aimerait garder une information après le redémarrage de l'Arduino. 
 
 Pour cela on peut utiliser la partie où est stocké le programme pour enregistrer des informations. Cette partie s'appelle l'[EEPROM](https://fr.wikipedia.org/wiki/Electrically-erasable_programmable_read-only_memory).
 
@@ -1167,7 +1167,7 @@ void loop() {
 
 Ce code permet de stocker 3 informations simples (un *byte* correspond à un nombre ayant une valeur entre 0 et 255) dans l'EEPROM:
 * alarmHour : l'heure d'une alarme
-* alarmMinute: les minutes d'une alarme
+* alarmMinute : les minutes d'une alarme
 * alarmState : l'état de l'alarme (0=désactivée, 1=activée)
 
 On peut utiliser le moniteur série pour régler l'alarme via les commandes :
@@ -1175,7 +1175,7 @@ On peut utiliser le moniteur série pour régler l'alarme via les commandes :
 * "activer" pour activer l'alarme
 * "desactiver" pour désactiver l'alarme
 
-Régler l'alarme puis redémarrer l'arduino (en appuyant sur le petit bouton noir "reset" sur le dessus de l'arduino) afin de vérifier que vos modifications sont bien sauvegardées après le redémarrage.
+Régler l'alarme puis redémarrer l'Arduino (en appuyant sur le petit bouton noir "reset" sur le dessus de l'arduino) afin de vérifier que vos modifications sont bien sauvegardées après le redémarrage.
 
 
 ---
@@ -1360,7 +1360,7 @@ On ne va pas détailler ici le pré-cablage que l'on a fait avec la photorésita
 * Branchez le fils venant de la patte restante de la photorésistance sur la broche **V** du port A7
 * Branchez le fils venant de la patte restante de la résistance sur la broche **G** du port A7
 
-Téléverser le code suivante :
+Téléverser le code suivant :
 ```C
 #define LDR A7
 
@@ -1377,7 +1377,7 @@ void loop() {
 }
 ```
     
-Vous devriez voir dans la console développeur la valeur de la luminosité, recouvrer ou éclairer la photorésistance pour voir cette valeur changer.
+Vous devriez voir dans la console développeur la valeur de la luminosité, recouvrez ou éclairez la photorésistance pour voir cette valeur changer.
 
 En combinant ce code avec celui de l'afficheur 4*7 segments, on peut faire un programme qui change l'éclairage de l'afficheur selon la luminosité :
 
@@ -1414,7 +1414,7 @@ Une DEL RVB (Rouge, Vert, Bleu ou RGB en anglais pour Red, Green, Blue) permet d
 
 ![rgb led](https://ae01.alicdn.com/kf/HTB1j1U4XhuaVKJjSZFjq6AjmpXar.jpg)
 
-Il faut brancher les broches R,G et B de la DEL sur des ports PWM de l'Arduino (typiquement les port 9, 10 et 11). Détachez un groupe de 4 fils :
+Il faut brancher les broches R,G et B de la DEL sur des ports PWM de l'Arduino (typiquement les ports 9, 10 et 11). Détachez un groupe de 4 fils :
 * Branchez un fil entre la broche ***G*** de la DEL sur la broche ***S*** du port 9
 * Branchez un fil entre la broche ***B*** de la DEL sur la broche ***S*** du port 10
 * Branchez un fil entre la broche ***R*** de la DEL sur la broche ***S*** du port 11
@@ -1535,7 +1535,7 @@ boolean isCommandTerminated() {
 
 ## Construire votre projet 
 
-A vous de choisir ce que vous voulez faire comme projet avec le matériel précédemment présenté :
+Maintenant, c'est à vous de choisir ce que vous voulez faire comme projet avec le matériel précédemment présenté :
 * Un lecteur MP3 pilotable à distance
 * Une station météo connectée
 * Un radio-reveil connecté
@@ -1544,7 +1544,7 @@ Ou encore un mix de tout ça.
 
 Pour commencer on va utiliser le moniteur série pour contrôler et récupérer les informations. En faisant cela vous aurez créé une [Interface de programmation](https://fr.wikipedia.org/wiki/Interface_de_programmation) (ou API en anglais)
 
-Voici un exemple de chose à faire pour chaque type de projet 
+Voici pour chaque projet certaines choses à ne pas oublier :
 
 ### Un lecteur MP3 pilotable à distance
 
@@ -1606,7 +1606,7 @@ Commandes à distance :
 ---
 ## Préparer la communication entre l'Arduino et le Wemos
 
-Maintenant que vous avez définit votre interface de programmation de votre projet via le moniteur série, on va pouvoir passer à l'étape suivante.
+Maintenant que vous avez définit l'interface de programmation de votre projet via le moniteur série, on va pouvoir passer à l'étape suivante.
 
 Pour que votre projet soit "connecté" il faut pouvoir communiquer avec lui (et de préférence sans fil). Ici on a le choix dans les protocoles : LoRa, bluetooth, Z-Wave, ZigBee, Wifi ...
 
@@ -1618,7 +1618,7 @@ On va continuer à utiliser l'IDE Arduino pour programmer le Wemos, mais il va f
 * Branchez le Wemos sur votre ordinateur avec le cable USB
 * Sélectionnez le nouveau port dans "Outils/ports"
 * Sélectionnez "WeMos D1 R1" dans "Outils/Type de carte"
-* Ouvrez le moniteur série et vérifez que la vitesse de communication est bien toujours égale à *9600 baud* (menu en bas à droite de la fenêtre)
+* Ouvrez le moniteur série et vérifiez que la vitesse de communication est bien toujours égale à *9600 baud* (menu en bas à droite de la fenêtre).
 
 Modifiez les déclarations de STASSID et STAPSK selon les paramètres de votre box et téléversez le programme suivant :
 ```C
@@ -1672,14 +1672,14 @@ void loop() {
 }
 ```
 
-Ouvrez le moniteur série, vous devriez voir apparaître les lignes suivantes:
+Ouvrez le moniteur série, vous devriez voir apparaître les lignes suivantes :
 ```
 WiFi connected
 IP address:
 192.168.1.XX
 ```
 
-Notez cette dernière adresse (192.168.1.XX ou XX doit être un nombre de 0 à 255) et copiez la dans un navigateur Web sur votre PC. Vous deviez voir apparaître le mot "Bienvenue". Vous pouvez essayer la même manipulation depuis votre téléphone portable s'il est connecté au même réseau Wifi.
+Notez cette dernière adresse (192.168.1.XX ou XX doit être un nombre de 0 à 255) et copiez-la dans un navigateur Web sur votre PC. Vous devriez voir apparaître le mot "Bienvenue". Vous pouvez essayer la même manipulation depuis votre téléphone portable s'il est connecté au même réseau Wifi.
 
 Modifiez le code précédent pour afficher une autre phrase.
  
@@ -1743,9 +1743,9 @@ void loop() {
   server.handleClient();
 }
 ```
-Retounez sur votre navigateur et tapez l'URL http://192.168.1.XX/IP vous deviez voir apparaître l'adresse IP de votre WeMos.
+Retournez sur votre navigateur et tapez l'URL http://192.168.1.XX/IP vous devriez voir apparaître l'adresse IP de votre WeMos.
 
-Modifiez le code précédent pour afficher d'autre page.
+Modifiez le code précédent pour afficher d'autres pages.
 
 On va maintenant utiliser le moniteur série pour modifier une variable que l'on affichera sur le serveur Web :
 ```C
@@ -1834,9 +1834,9 @@ Ici quand on tape dans le moniteur série "temperature=XX" on devrait voir la va
 
 On va maintenant voir comment on peut changer une variable du WeMos depuis l'appel d'une page du serveur Web. Pour cela on va utiliser la propriété des URL qui permet de passer des paramètres au serveur Web.
 
-Il faut pour cela utiliser ajouter à la fin de notre URL ?XXX=YYY, ou XXX correspond au nom de notre variable et YYY à sa valeur.
+Il faut pour cela ajouter à la fin de notre URL ?XXX=YYY, ou XXX correspond au nom de notre variable et YYY à sa valeur.
 
-Dans nos projet on ne gérera pas plus d'un paramètre, dans le code ci-dessous on ne fait donc pas attention au nom du paramètre :
+Dans nos projets on ne gérera pas plus d'un paramètre, dans le code ci-dessous on ne fait donc pas attention au nom du paramètre :
 
 ```C
 #include <ESP8266WiFi.h>
@@ -1937,29 +1937,29 @@ void loop() {
 }
 ```
 
-Si vous allez sur la page /mp3/volume vous devriez voir la valeur actuelle du volume (par défaut égale à 10). Si vous allez sur la page /mp3/volume?volume=20 vous devriez voir apparaître la nouvelle valeur. Un nouvel appel à /mp3/volume vous confirmera que vous bien changer la valeur de la variable "volume" dans votre programme.
+Si vous allez sur la page /mp3/volume vous devriez voir la valeur actuelle du volume (par défaut égale à 10). Si vous allez sur la page /mp3/volume?volume=20 vous devriez voir apparaître la nouvelle valeur. Un nouvel appel à /mp3/volume vous confirmera que vous avez bien changé la valeur de la variable "volume" dans votre programme.
 
 ---
 
 ## Connecter le Wemos sur l'Arduino
 
-Grâce aux étapes précédentes nous somme maintenant en mesure de faire en sorte que notre WeMos puisse récupérer et envoyer des informations sur l'arduino.
+Grâce aux étapes précédentes nous sommes maintenant en mesure de faire en sorte que notre WeMos puisse récupérer et envoyer des informations sur l'Arduino.
 
-Pour cela on va connecter le WeMos de telle façon à ce qu'il puisse utiliser les interfaces de programmation que vous définies sur l'arduino via le moniteur série.
+Pour cela on va connecter le WeMos afin qu'il puisse utiliser les interfaces de programmation que vous avez définies sur l'arduino via le moniteur série.
 
-On va donc connecter 2 broches du WeMos sur le port série de l'Arduino. Pour cela on va devoir utiliser un convertisseur de niveau. En effet le WeMos utilse une tension de 3.3V pour communiquer alors que l'arduino utilise une tension de 5V.
+On va donc connecter 2 broches du WeMos sur le port série de l'Arduino. Pour cela on va devoir utiliser un convertisseur de niveau. En effet le WeMos utilise une tension de 3.3V pour communiquer alors que l'Arduino utilise une tension de 5V.
 
 ![level](https://ae01.alicdn.com/kf/HTB1z3ifLpXXXXa5XXXXq6xXFXXXq/Convertisseur-de-niveau-logique-haute-vitesse-bidirectionnelle-3-3-V-5-V-4-Chanels.jpg)
 
 Repérez sur le *shield* arduino la ligne de broches **RX TX 5V GND** (au dessus de la ligne I2C) et détachez un groupe de 4 fils :
-* Branchez un fil entre la broche **5V** du convertisseur sur la broche **5V** sur l'arduino
-* Branchez un fil entre la broche **GND** (sous la broche **5V**) du convertisseur sur la broche **GND** sur l'arduino
-* Branchez un fil entre la broche **A4** du convertisseur sur la broche **TX** sur l'arduino
-* Branchez un fil entre la broche **A3** du convertisseur sur la broche **RX** sur l'arduino
+* Branchez un fil entre la broche **5V** du convertisseur sur la broche **5V** sur l'Arduino
+* Branchez un fil entre la broche **GND** (sous la broche **5V**) du convertisseur sur la broche **GND** sur l'Arduino
+* Branchez un fil entre la broche **A4** du convertisseur sur la broche **TX** sur l'Arduino
+* Branchez un fil entre la broche **A3** du convertisseur sur la broche **RX** sur l'Arduino
 
 Détachez un groupe de 2 fils :
-* Branchez un fil entre la broche **3.3V** du convertisseur sur une des broches **3V3** de l'arduino
-* Branchez un fil entre la broche **GND** (sous la broche **3.3V**) du convertisseur sur une des broches **GND** (sous la broche **3V3** précédemment connectée) de l'arduino
+* Branchez un fil entre la broche **3.3V** du convertisseur sur une des broches **3V3** de l'Arduino
+* Branchez un fil entre la broche **GND** (sous la broche **3.3V**) du convertisseur sur une des broches **GND** (sous la broche **3V3** précédemment connectée) de l'Arduino.
 
 Détachez un groupe de 2 fils de la même couleurs que ceux brancher sur les broches **A4** et **A3** du convertisseur :
 * Branchez le fil de la même couleur que celui partant de **A4** entre la broche **B4** du convertisseur sur la broche **D6** du WeMos
@@ -2039,7 +2039,7 @@ int temperature = 0;
 int volume = 10;
 
 void handleRoot() {
-  // Sur la page d'accueil on ajoute des liens (HTML) pour controler notre arduino
+  // Sur la page d'accueil on ajoute des liens (HTML) pour contrôler notre Arduino
   server.send(200, "text/html", "<h1>Bienvenue</h1>"
               "<hr>"
               "<a href='/mp3/play'>MP3 : lancer</a><br>"
@@ -2075,7 +2075,7 @@ void setImage() {
 }
 
 void setMP3Volume() {
-  // On récupére la première valeur passée en paramètre de la page
+  // On récupère la première valeur passée en paramètre de la page
   // ex ?volume=22 ... normalement on devrait vérifier que le server.argName(0) vaut bien "volume"
   // Mais comme on n'aura qu'un seul paramètre sur nos projets on ignore cette phase.
   String volumeStr = server.arg(0);
@@ -2113,9 +2113,9 @@ void displayTemp() {
 }
 
 void loop() {
-  // Ici on peut récupérer les lignes venant de l'arduino
+  // Ici on peut récupérer les lignes venant de l'Arduino
   while (arduino.available()) {
-    String line = arduino.readStringUntil('\n');// read the incoming data as string
+    String line = arduino.readStringUntil('\n');
     line.trim();
     Serial.print("received:<");
     Serial.print(line);
@@ -2126,7 +2126,7 @@ void loop() {
       volume = getValue(line).toInt();
     }
   }
-  // Si on écrit des lignes dans le moniteur série on les envoie sur l'arduino
+  // Si on écrit des lignes dans le moniteur série on les envoie sur l'Arduino
   while (Serial.available() > 0) {
     arduino.write(Serial.read());
   }
@@ -2136,12 +2136,12 @@ void loop() {
 
 ```
 
-Vous devriez voir apparaître des lignes venant de votre arduino dans le moniteur série. Toutes les lignes écrites dans le moniteur série seront envoyée vers l'arduino. Faites quelques essais pour vérifier que vous pouvez bien piloter votre arduino depuis le WeMos.
+Vous devriez voir apparaître des lignes venant de votre Arduino dans le moniteur série. Toutes les lignes écrites dans le moniteur série seront envoyées vers l'Arduino. Faites quelques essais pour vérifier que vous pouvez bien piloter votre Arduino depuis le WeMos.
 
 **Remarques importantes** :
-* Vous pouvez brancher l'arduino et le WeMos sur le même PC. Pensez juste à changer le port et le type de carte avant de téléverser vos programmes
-* Si vous voulez changer votre programme arduino quand ce dernier est connecté au WeMos vous aurez des problème durant le téléversement. En effet le fait que le WeMos soit connecté sur les ports RX et TX de l'arduino perturbe le téléversement. Il faut donc débrancher les cables reliant les ports RX/TX de l'arduino et D5/D6 du WeMos. Le plus simple est de débrancher 2 fils au niveau du convertisseur de niveau (broches A4/A3 ou B3/B4). Le fait de choisir des couleurs identiques pour ces fils vous permettra de les rebrancher facilement quand votre programme arduino sera finalisé. 
-* Attention à ne pas mettre trop de luminosité sur la matrice de DEL. Si trop de courant passe par l'arduino ce dernier peut "cramer". Quand on veut mettre la luminosité à fond il faut alimenter la matrice via une alimentation externe.
+* Vous pouvez brancher l'Arduino et le WeMos sur le même PC. Pensez juste à changer le port et le type de carte avant de téléverser vos programmes.
+* Si vous voulez changer votre programme Arduino quand ce dernier est connecté au WeMos vous aurez des problèmes durant le téléversement. En effet le fait que le WeMos soit connecté sur les ports RX et TX de l'arduino perturbe le téléversement. Il faut donc débrancher les cables reliant les ports RX/TX de l'Arduino et D5/D6 du WeMos. Le plus simple est donc de débrancher 2 fils au niveau du convertisseur de niveau (broches A4/A3 ou B3/B4). Le fait de choisir des couleurs identiques pour ces fils vous permettra de les rebrancher facilement quand votre programme Arduino sera finalisé. 
+* Rappel : Attention à ne pas mettre trop de luminosité sur la matrice de DEL. Si trop de courant passe par l'Arduino ce dernier peut "cramer". Quand on veut mettre la luminosité à fond il faut alimenter la matrice via une alimentation externe.
 
 ---
 
