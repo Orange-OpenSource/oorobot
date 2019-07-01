@@ -17,7 +17,7 @@ Ceci n'est pas un cours d'électronique, nous passons sous silence un grand nomb
 
 L'Arduino est une carte construite autour d'un microcontrôleur qui peut être programmé pour analyser et produire des signaux électriques de manière à effectuer des tâches très diverses comme la domotique (le contrôle des appareils domestiques - éclairage, chauffage…), le pilotage d'un robot, de l'informatique embarquée, etc.
 
-![arduino](https://ae01.alicdn.com/kf/HTB11nPYOpXXXXbOapXXq6xXFXXXN/225552329/HTB11nPYOpXXXXbOapXXq6xXFXXXN.jpg?size=144900&height=1000&width=1000&hash=f5fd08d9de92dc32c720726cd0ea707a =50%x50%)
+![arduino](https://ae01.alicdn.com/kf/HTB11nPYOpXXXXbOapXXq6xXFXXXN/225552329/HTB11nPYOpXXXXbOapXXq6xXFXXXN.jpg?size=144900&height=1000&width=1000&hash=f5fd08d9de92dc32c720726cd0ea707a)
 
 ![arduino](https://ae01.alicdn.com/kf/HTB1EhFHb2NNTKJjSspeq6ySwpXaU.jpg)
 
@@ -246,7 +246,7 @@ Quand vous appuyez sur le bouton, vous devriez voir apparaître sur le moniteur 
 
 Vous remarquerez ici que l'on déclare le "port" en "INPUT_PULLUP", cela veut dire que l'Arduino va connecter une de ses résistances interne entre la broche V du port (reliée au 5V) et sa broche d'entrée (S).
 
-On va maintenant utiliser la DEL intégrée. Débranchez la DEL précédemment branchée sur le port 5. Branchez ensuite le fil venant du côté noir du bouton sur la broche **G** du port 5 et le fil venant du côté rouge du bouton sur la broche **S** du port 5 
+On va maintenant utiliser la DEL intégrée. Débranchez la DEL précédemment branchée sur le port 5 (et le feu tricolore). Branchez ensuite le fil venant du côté noir du bouton sur la broche **G** du port 5 et le fil venant du côté rouge du bouton sur la broche **S** du port 5 
 
 Téléverser le programme suivant :
 ```C
@@ -518,7 +518,7 @@ L'arduino n'est pas capable de récupérer l'heure et la date courante.
 
 On peut lui adjoindre une horloge temps réel afin de gérer précisement l'heure et la date courante. Une horloge RTC contient un emplacement pour une pile afin que ce dernier puisse continuer à faire vibrer un quartz piézoélectrique et ainsi connaître combien de temps s'est écoulé depuis la dernière fois que le composant a été éteint. 
 
-**Remarque** : On trouve le même type de composant dans les unité centrales des ordinateurs afin que ces derniers gardent la bonne date même lorsqu'ils sont débrancher électriquement.
+**Remarque** : On trouve le même type de composant dans les unité centrales des ordinateurs afin que ces derniers gardent la bonne date même lorsqu'ils sont débranchés électriquement.
 
 
 ![rtc](https://ae01.alicdn.com/kf/HTB1hJgePNTpK1RjSZR0q6zEwXXaG/DS3231-AT24C32-IIC-pr-cision-RTC-Module-de-m-moire-d-horloge-en-temps-r-el.jpg)
@@ -1533,9 +1533,6 @@ boolean isCommandTerminated() {
 
 ---
 
-
----
-
 ## Construire votre projet 
 
 A vous de choisir ce que vous voulez faire comme projet avec le matériel précédemment présenté :
@@ -2159,3 +2156,4 @@ A vous maintenant de mettre en place les pages Web qui vont permettre de piloter
 
 
 Vous allez maintenant utiliser AppInventor afin de contrôler votre projet depuis une application mobile.
+
