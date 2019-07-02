@@ -698,7 +698,7 @@ Un afficheurs 4*7 segments permet d'afficher l'heure de façon claire (visible d
 
 Ici encore, il va falloir ajouter une bibliothèque pour gérer ce composant. Pour cela dans l'IDE Arduino allez dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis cherchez et installez la bibliothèque suivante : **TM1637** by Avishay Orpaz
 
-Détachez un groupe de 3 fils :
+Détachez un groupe de 4 fils :
 * Brancher un fil entre la broche **CLK** de l'afficheur et la broche **S** du port 12
 * Brancher un fil entre la broche **DIO** de l'afficheur et la broche **S** du port 13
 * Brancher un fil entre la broche **GND** de l'afficheur et la broche **G** du port 13
