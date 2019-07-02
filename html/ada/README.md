@@ -169,8 +169,8 @@ Détachez un groupe de 4 fils :
 
 Téléversez le code suivant :
 ```C
-#define trigPin 7
-#define echoPin 6
+#define trigPin 6
+#define echoPin 7
 
 void setup() {
   Serial.begin (9600);
