@@ -21,7 +21,7 @@ L'Arduino est une carte construite autour d'un microcontrôleur qui peut être p
 
 ![arduino](https://ae01.alicdn.com/kf/HTB1EhFHb2NNTKJjSspeq6ySwpXaU.jpg)
 
-Le plus simple est d'utiliser un "shield" (bouclier) permettant d'avoir une alimentation (+5V, Ground) pour chaque broche afin de faciliter le câblage des composants.
+Le plus simple est d'utiliser un "shield" (bouclier) permettant d'avoir une alimentation (+5V, Ground) pour chaque broche afin de faciliter le câblage des composants. Branchez l'Arduino sur le bouclier en faisant en sorte que le pour USB de l'Arduino soit du même côté que la grosse prise noire du bouclier.
 
 
 ---
@@ -325,6 +325,7 @@ Téléversez le programme suivant :
 
 Servo myservo;
 void setup() {
+  Serial.begin(9600);
   myservo.attach(SERVO);
   myservo.write(0);
 }
@@ -360,6 +361,7 @@ Travail complémentaire : Faire tourner le servomoteur à partir de la valeur d'
 Servo myservo;
 
 void setup() {
+  Serial.begin(9600);
   pinMode(POTAR, INPUT);
   myservo.attach(SERVO);
   myservo.write(0);
@@ -514,7 +516,7 @@ Proposition d'exercide : afficher sur l'écran LCD la température (sur la premi
 
 ## Gérer une horloge temps réel (I²C)
 
-L'arduino n'est pas capable de récupérer l'heure et la date courante. 
+L'Arduino n'est pas capable de récupérer l'heure et la date courante. 
 
 On peut lui adjoindre une horloge temps réel afin de gérer précisement l'heure et la date courante. Une horloge RTC contient un emplacement pour une pile afin que ce dernier puisse continuer à faire vibrer un quartz piézoélectrique et ainsi connaître combien le temps écoulé depuis la dernière fois que le composant a été éteint. 
 
@@ -1175,7 +1177,7 @@ On peut utiliser le moniteur série pour régler l'alarme via les commandes :
 * "activer" pour activer l'alarme
 * "desactiver" pour désactiver l'alarme
 
-Régler l'alarme puis redémarrer l'Arduino (en appuyant sur le petit bouton noir "reset" sur le dessus de l'arduino) afin de vérifier que vos modifications sont bien sauvegardées après le redémarrage.
+Régler l'alarme puis redémarrer l'Arduino (en appuyant sur le petit bouton noir "reset" sur le dessus de l'Arduino) afin de vérifier que vos modifications sont bien sauvegardées après le redémarrage.
 
 
 ---
@@ -1550,7 +1552,7 @@ Voici pour chaque projet certaines choses à ne pas oublier :
 
 Comme dans l'exemple du module MP3 vous allez définir une liste de commande à taper pour contrôler le lecteur.
 
-Programme arduino :
+Programme Arduino :
 * gérer le module MP3
 * pouvoir régler le volume avec le potentiomètre
 * pouvoir passer à la chanson suivante/précédente avec l'encodeur rotatif
@@ -1569,7 +1571,7 @@ Commandes à distance :
 
 ### Une station météo connectée
 
-Programme arduino :
+Programme Arduino :
 * récupérer les données de température/humidité/pression atmosphérique
 * analyser ces données pour définir la méteo : beau temps/nuaugeux/pluvieux/nuit
 * afficher la méteo sur la matrice de DEL ou sur l'écran
@@ -1586,7 +1588,7 @@ Commandes à distance :
 ### Un radio-reveil connecté
 
 
-Programme arduino :
+Programme Arduino :
 * gérer l'horloge
 * stocker l'heure du réveil
 * quand l'heure du réveil arrive, faire du son (buzzer ou lecteur MP3) et allumer la DEL du bouton
@@ -1945,7 +1947,7 @@ Si vous allez sur la page /mp3/volume vous devriez voir la valeur actuelle du vo
 
 Grâce aux étapes précédentes nous sommes maintenant en mesure de faire en sorte que notre WeMos puisse récupérer et envoyer des informations sur l'Arduino.
 
-Pour cela on va connecter le WeMos afin qu'il puisse utiliser les interfaces de programmation que vous avez définies sur l'arduino via le moniteur série.
+Pour cela on va connecter le WeMos afin qu'il puisse utiliser les interfaces de programmation que vous avez définies sur l'Arduino via le moniteur série.
 
 On va donc connecter 2 broches du WeMos sur le port série de l'Arduino. Pour cela on va devoir utiliser un convertisseur de niveau. En effet le WeMos utilise une tension de 3.3V pour communiquer alors que l'Arduino utilise une tension de 5V.
 
@@ -1966,8 +1968,8 @@ Détachez un groupe de 2 fils de la même couleurs que ceux brancher sur les bro
 * Branchez un fil de la même couleur que celui partant de **A3** entre la broche **B3** du convertisseur sur la broche **D5** du WeMos
 
 Détachez un groupe de 2 fils :
-* Branchez un fil entre la broche **V** du port **0** de l'arduino sur la broche **5V** du WeMos
-* Branchez un fil entre la broche **G** du port **0** de l'arduino sur la broche **G** du WeMos
+* Branchez un fil entre la broche **V** du port **0** de l'Arduino sur la broche **5V** du WeMos
+* Branchez un fil entre la broche **G** du port **0** de l'Arduino sur la broche **G** du WeMos
 
 Téléversez le programme suivant :
     
@@ -2140,7 +2142,7 @@ Vous devriez voir apparaître des lignes venant de votre Arduino dans le moniteu
 
 **Remarques importantes** :
 * Vous pouvez brancher l'Arduino et le WeMos sur le même PC. Pensez juste à changer le port et le type de carte avant de téléverser vos programmes.
-* Si vous voulez changer votre programme Arduino quand ce dernier est connecté au WeMos vous aurez des problèmes durant le téléversement. En effet le fait que le WeMos soit connecté sur les ports RX et TX de l'arduino perturbe le téléversement. Il faut donc débrancher les cables reliant les ports RX/TX de l'Arduino et D5/D6 du WeMos. Le plus simple est donc de débrancher 2 fils au niveau du convertisseur de niveau (broches A4/A3 ou B3/B4). Le fait de choisir des couleurs identiques pour ces fils vous permettra de les rebrancher facilement quand votre programme Arduino sera finalisé. 
+* Si vous voulez changer votre programme Arduino quand ce dernier est connecté au WeMos vous aurez des problèmes durant le téléversement. En effet le fait que le WeMos soit connecté sur les ports RX et TX de l'Arduino perturbe le téléversement. Il faut donc débrancher les cables reliant les ports RX/TX de l'Arduino et D5/D6 du WeMos. Le plus simple est donc de débrancher 2 fils au niveau du convertisseur de niveau (broches A4/A3 ou B3/B4). Le fait de choisir des couleurs identiques pour ces fils vous permettra de les rebrancher facilement quand votre programme Arduino sera finalisé. 
 * Rappel : Attention à ne pas mettre trop de luminosité sur la matrice de DEL. Si trop de courant passe par l'Arduino ce dernier peut "cramer". Quand on veut mettre la luminosité à fond il faut alimenter la matrice via une alimentation externe.
 
 ---
