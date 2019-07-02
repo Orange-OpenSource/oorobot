@@ -163,7 +163,7 @@ En théorie, le capteur peut capter les obstacles sur un angle de 15° environ e
 
 Détachez un groupe de 4 fils :
 * Branchez un fil entre la broche **Trig** du capteur et la broche **S** du port 6
-* Branchez un fil entre la broche **Echo** du capteur et la broche **V** du port 7
+* Branchez un fil entre la broche **Echo** du capteur et la broche **S** du port 7
 * Branchez un fil entre la broche **GND** du capteur et la broche **G** du port 7
 * Branchez un fil entre la broche **VCC** du capteur et la broche **V** du port 7
 
