@@ -316,7 +316,7 @@ Un servomoteur est un petit moteur pouvant tourner précisément sur 180°.
 
 ![servo](https://ae01.alicdn.com/kf/HTB1QbQfmHSYBuNjSspfq6AZCpXaa.jpg)
 
-Branchez directement la prise du servomoteur sur le port 8 de l'Arduino en faisant attention à ce que le fil marron soit sur la broche ***G*** du port 3, le fil rouge sur la broche ***V*** et le fil orange sur la broche ***S***
+Branchez directement la prise du servomoteur sur le port 8 de l'Arduino en faisant attention à ce que le fil marron soit sur la broche ***G*** du port 8, le fil rouge sur la broche ***V*** et le fil orange sur la broche ***S***
 
 Téléversez le programme suivant : 
 ```C
