@@ -232,10 +232,10 @@ void setup() {
 
 void loop() {
   if (digitalRead(BUTTON_CLICK)) {
-    Serial.println("button appuye");
+    Serial.println("bouton appuye");
 
   } else {
-    Serial.println("button appuye");
+    Serial.println("bouton relache");
   }
   delay(400);
 }
