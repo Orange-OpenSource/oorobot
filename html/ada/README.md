@@ -1758,8 +1758,8 @@ On va maintenant utiliser le moniteur série pour modifier une variable que l'on
 
 
 #ifndef STASSID
-#define STASSID "Livebox-8A44"
-#define STAPSK  "mGrfwzHYZwMfvPLNCX"
+#define STASSID "NomReseauWifi"
+#define STAPSK  "MotDePasse"
 #endif
 
 const char* ssid     = STASSID;
@@ -1848,8 +1848,8 @@ Dans nos projets on ne gérera pas plus d'un paramètre, dans le code ci-dessous
 
 
 #ifndef STASSID
-#define STASSID "Livebox-8A44"
-#define STAPSK  "mGrfwzHYZwMfvPLNCX"
+#define STASSID "NomReseauWifi"
+#define STAPSK  "MotDePasse"
 #endif
 
 const char* ssid     = STASSID;
@@ -1980,8 +1980,8 @@ Téléversez le programme suivant :
 #include <SoftwareSerial.h>
 
 #ifndef STASSID
-#define STASSID "Livebox-8A44"
-#define STAPSK  "mGrfwzHYZwMfvPLNCX"
+#define STASSID "NomReseauWifi"
+#define STAPSK  "MotDePasse"
 #endif
 
 #define RX D6
