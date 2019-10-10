@@ -105,20 +105,20 @@
 		  </button>
 		  <a class="navbar-brand" href="#">OoRoBoT</a>
 		</div>
-	
+		
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		  <form class="navbar-form navbar-left">
 			<!-- 
 			<div class="form-group">
-			  <input type="text" class="form-control" id="your-name" placeholder="Ton nom"/>
+			<input type="text" class="form-control" id="your-name" placeholder="Ton nom"/>
 			</div>
 			<div class="form-group">
-			  <input type="text" class="form-control" id="oorobot-name" placeholder="Nom du OoRoBoT"/>
+			<input type="text" class="form-control" id="oorobot-name" placeholder="Nom du OoRoBoT"/>
 			</div>
 			<button type="button" class="btn btn-default" id="oorobot-connect">
-			  <i class="fa fa-link" aria-hidden="true"></i>
-			  Connecter
+			<i class="fa fa-link" aria-hidden="true"></i>
+			Connecter
 			</button>
 			-->			
 			<button type="button" class="btn btn-default btn-success" id="oorobot-test">
@@ -127,8 +127,8 @@
 			</button>
 			<!--
 			<button type="button" class="btn btn-default" id="oorobot-launch">
-			  <i class="fa fa-play-circle" aria-hidden="true"></i>
-			  Lancer
+			<i class="fa fa-play-circle" aria-hidden="true"></i>
+			Lancer
 			</button>
 			-->
 			<button type="button" class="btn btn-default share" id="oorobot-share">
@@ -171,18 +171,30 @@
 	}
 
 	setBlocks();
+	
     let toolbox = '<xml id="toolbox" style="display: none">' +
       '<block type="Start">   </block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="Up">   </block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="Down"></block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="Left"></block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="Right"></block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="Loop">   </block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="PenUp">   </block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="PenDown">   </block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="PenColor">   </block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="CircleRight">   </block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="CircleLeft">   </block>' +
+	  '<sep gap="10"></sep>' +
       '<block type="Pause"></block>' +
       '</xml>';
 
@@ -198,29 +210,31 @@
 	  }, 1000);
 	}
 	
-    const workspace = Blockly.inject("blocklyDiv",
-	  { media: 'assets/blockly/media/',
-        toolbox: toolbox,
-		zoom:
-        {
-		  controls: true,
-		  wheel: true,
-		  startScale: 1.0,
-		  maxScale: 3,
-		  minScale: 0.3,
-		  scaleSpeed: 1.2
-		},
-        grid:
-        {
-          spacing: 50,
-          length: 3,
-          colour: '#ccc',
-          snap: true
-        },
-        trashcan: true});
-
+    const workspace = Blockly.inject("blocklyDiv", {
+	  media: 'assets/blockly/media/',
+      toolbox: toolbox,
+	  move:{
+        scrollbars: true,
+        drag: true,
+        wheel: false
+	  },
+	  zoom: {
+		controls: true,
+		wheel: true,
+		startScale: 1.2,
+		maxScale: 3,
+		minScale: 0.3,
+		scaleSpeed: 1.1
+	  },
+      grid:{
+        spacing: 20,
+        length: 3,
+        colour: '#ccc',
+        snap: true
+      },
+      trashcan: true});
+	
 	const oorobot = new OoRoBoT($("#draw")[0], 500, 300, "#33cc00");
-
 	
 	$(".modal").on("click", e => {
 	  $(e.target.closest('.modal')).toggle();
@@ -310,457 +324,556 @@
 	}
 	
 	function setBlocks() {
-		let moveColor = "#3C8BDA";
-		let controlColor = "#F0DC27";
-		let startColor = "#74C042";
+	  let moveColor = "#3C8BDA";
+	  let controlColor = "#F0DC27";
+	  let startColor = "#74C042";
 
-		Blockly.Generator.prototype.prefixLines = function (text, prefix) {  // Need to Overide this function not supported by ionic
-		  return text;
-		};
-
-		Blockly.FieldAngle.ROUND = 5;
-		Blockly.FieldAngle.HALF = 100;
-		Blockly.FieldAngle.CLOCKWISE = true;
-		Blockly.FieldAngle.OFFSET = 90;
-		Blockly.FieldAngle.WRAP = 360;
-		Blockly.FieldAngle.RADIUS = Blockly.FieldAngle.HALF - 1;
-
-		Blockly.Blocks['Start'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1',
-			  "args0": [
-
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/flag.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				}
-			  ],
-			  "message1": "%1",
-			  "args1": [
-				{ "type": "input_statement", "name": "DO" }
-			  ],
-			  "colour": startColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			});
-		  }
-		};
-
-		Blockly.Blocks['Up'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1 %2',
-			  "args0": [
-
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/arrow-thick-top.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				},
-				{
-				  "type": "field_number",
-				  "name": "FIELDNAME",
-				  "value": 100
-				}
-			  ],
-			  "colour": moveColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			  "previousStatement": null,
-			  "nextStatement": null,
-			});
-		  }
-		};
-
-	  Blockly.Blocks['PenColor'] = {
-		init: function () {
-		  this.jsonInit({
-			"message0": '%1 %2',
-			"args0": [
-
-			  {
-				"type": "field_image",
-				"src": "assets/svg/color-picker.svg",
-				"width": 40,
-				"height": 40,
-				"alt": "*"
-			  },
-			  {
-				"type": "field_colour",
-				"name": "FIELDNAME",
-				"colour": "#33cc00"			
-			  }
-			],
-			"colour": moveColor,
-			"tooltip": "",
-			"helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			"previousStatement": null,
-			"nextStatement": null,
-		  });
-		}
+	  Blockly.Generator.prototype.prefixLines = function (text, prefix) {  // Need to Overide this function not supported by ionic
+		return text;
 	  };
+	  
+	  Blockly.FieldAngle.ROUND = 5;
+	  Blockly.FieldAngle.HALF = 100;
+	  Blockly.FieldAngle.CLOCKWISE = true;
+	  Blockly.FieldAngle.OFFSET = 90;
+	  Blockly.FieldAngle.WRAP = 360;
+	  Blockly.FieldAngle.RADIUS = Blockly.FieldAngle.HALF - 1;
+	  
+	  Blockly.Blocks['Start'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1 plateau %2 %3cm*%4cm %5 %6',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/flag.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              },
+              {
+				"type": "input_dummy"
+              },
+              {
+				type: 'field_number',
+				name: 'WIDTH',
+				value: 100
+              },
+              {
+				type: 'field_number',
+				name: 'HEIGHT',
+				value: 60
+              },
+              {
+				"type": "input_dummy"
+              },
+              { type: 'input_statement',
+				name: 'DO'
+              },
+			],
+			colour: startColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp'
+          });
+		}
+      };
 
+      Blockly.Blocks['Up'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1 %2cm',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/arrow-thick-top.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              },
+              {
+				type: 'field_number',
+				name: 'FIELDNAME',
+				value: 10
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-	  Blockly.Blocks['Pause'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1 %2',
-			  "args0": [
+      Blockly.Blocks['UpSimple'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/arrow-thick-top.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/media-pause.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				},
-				{
-				  "type": "field_number",
-				  "name": "FIELDNAME",
-				  "value": 100
-				}
-			  ],
-			  "colour": moveColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			  "previousStatement": null,
-			  "nextStatement": null,
-			});
-		  }
-		};
+      Blockly.Blocks['Pause'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1 %2 s',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/media-pause.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              },
+              {
+				type: 'field_number',
+				name: 'FIELDNAME',
+				value: 10
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
+      Blockly.Blocks['Down'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1 %2cm',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/arrow-thick-bottom.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              },
+              {
+				type: 'field_number',
+				name: 'FIELDNAME',
+				value: 10
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
+      Blockly.Blocks['DownSimple'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/arrow-thick-bottom.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-		Blockly.Blocks['Down'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1 %2',
-			  "args0": [
+      Blockly.Blocks['Left'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1 %2',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/left.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              },
+              {
+				type: 'field_angle',
+				name: 'FIELDNAME',
+				angle: '90'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/arrow-thick-bottom.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				},
-				{
-				  "type": "field_number",
-				  "name": "FIELDNAME",
-				  "value": 100
-				}
-			  ],
-			  "colour": moveColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			  "previousStatement": null,
-			  "nextStatement": null,
-			});
-		  }
-		};
+      Blockly.Blocks['LeftSimple'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/left.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-		Blockly.Blocks['Left'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1 %2',
-			  "args0": [
+      Blockly.Blocks['Right'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1 %2',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/right.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              },
+              {
+				type: 'field_angle',
+				name: 'FIELDNAME',
+				angle: '90'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/left.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				},
-				{
-				  "type": "field_angle",
-				  "name": "FIELDNAME",
-				  "angle": "90"
-				}
-			  ],
-			  "colour": moveColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			  "previousStatement": null,
-			  "nextStatement": null,
-			});
-		  }
-		};
+      Blockly.Blocks['RightSimple'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/right.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-		Blockly.Blocks['Right'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1 %2',
-			  "args0": [
+      Blockly.Blocks['CircleRight'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1 r%2 a%3',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/circle-right.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              },
+              {
+				type: 'field_input',
+				name: 'RADIUS',
+				text: '10'
+              },
+              {
+				type: 'field_angle',
+				name: 'ANGLE',
+				angle: '90'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/right.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				},
-				{
-				  "type": "field_angle",
-				  "name": "FIELDNAME",
-				  "angle": "90"
-				}
-			  ],
-			  "colour": moveColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			  "previousStatement": null,
-			  "nextStatement": null,
-			});
-		  }
-		};
+      Blockly.Blocks['CircleLeft'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1 r%2 a%3',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/circle-left.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              },
+              {
+				type: 'field_input',
+				name: 'RADIUS',
+				text: '10'
+              },
+              {
+				type: 'field_angle',
+				name: 'ANGLE',
+				angle: '90'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-		Blockly.Blocks['CircleRight'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1 r%2 a%3',
-			  "args0": [
+      Blockly.Blocks['Loop'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1 %2',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/repeat.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              },
+              {
+				type: 'field_number',
+				name: 'FIELDNAME',
+				value: 4
+              }
+			],
+			message1: '%1',
+			args1: [{ type: 'input_statement', name: 'DO' }],
+			colour: controlColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/circle-right.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				},
-				{
-				  "type": "field_input",
-				  "name": "RADIUS",
-				  "text": "100"
-				},
-				{
-				  "type": "field_angle",
-				  "name": "ANGLE",
-				  "angle": "90"
-				}
-			  ],
-			  "colour": moveColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			  "previousStatement": null,
-			  "nextStatement": null,
-			});
-		  }
-		};
+      Blockly.Blocks['PenUp'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/pen-up.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
+      Blockly.Blocks['PenDown'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/pen-down.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-		Blockly.Blocks['CircleLeft'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1 r%2 a%3',
-			  "args0": [
+      Blockly.Blocks['PenColor'] = {
+		init: function() {
+          this.jsonInit({
+			message0: '%1 %2',
+			args0: [
+              {
+				type: 'field_image',
+				src: 'assets/svg/color-picker.svg',
+				width: 22,
+				height: 22,
+				alt: '*'
+              },
+              {
+				type: 'field_colour',
+				name: 'FIELDNAME',
+				colour: '#33cc00'
+              }
+			],
+			colour: moveColor,
+			tooltip: '',
+			helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp',
+			previousStatement: null,
+			nextStatement: null
+          });
+		}
+      };
 
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/circle-left.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				},
-				{
-				  "type": "field_input",
-				  "name": "RADIUS",
-				  "text": "100"
-				},
-				{
-				  "type": "field_angle",
-				  "name": "ANGLE",
-				  "angle": "90"
-				}
-			  ],
-			  "colour": moveColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			  "previousStatement": null,
-			  "nextStatement": null,
-			});
-		  }
-		};
+      Blockly.JavaScript['Start'] = function(block) {
+		// Search the text for a substring.
+		  let code = Blockly.JavaScript.statementToCode(block, 'DO');
+		let width = block.getFieldValue('WIDTH');
+		let height = block.getFieldValue('HEIGHT');
+		return 'commandw' + width*10 + 'h' + height*10 + code;
+      };
 
-		Blockly.Blocks['Loop'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1 %2',
-			  "args0": [
+      Blockly.JavaScript['Up'] = function(block) {
+		// Search the text for a substring.
+		  let operator = block.getFieldValue('FIELDNAME');
 
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/repeat.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				},
-				{
-				  "type": "field_number",
-				  "name": "FIELDNAME",
-				  "value": 4
-				}
-			  ],
-			  "message1": "%1",
-			  "args1": [
-				{ "type": "input_statement", "name": "DO" }
-			  ],
-			  "colour": controlColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			  "previousStatement": null,
-			  "nextStatement": null,
-			});
-		  }
-		};
+		let code = 'U' + operator*10;
+		return code;
+      };
 
-		Blockly.Blocks['PenUp'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1',
-			  "args0": [
+      Blockly.JavaScript['UpSimple'] = function(block) {
+		return 'U';
+      };
 
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/pen-up.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				}
-			  ],
-			  "colour": moveColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			  "previousStatement": null,
-			  "nextStatement": null,
-			});
-		  }
-		};
+      Blockly.JavaScript['PenUp'] = function() {
+		// Search the text for a substring.
+		  let code = '|';
+		return code;
+      };
 
-		Blockly.Blocks['PenDown'] = {
-		  init: function () {
-			this.jsonInit({
-			  "message0": '%1',
-			  "args0": [
+      Blockly.JavaScript['PenDown'] = function() {
+		// Search the text for a substring.
+		  let code = '!';
+		return code;
+      };
 
-				{
-				  "type": "field_image",
-				  "src": "assets/svg/pen-down.svg",
-				  "width": 40,
-				  "height": 40,
-				  "alt": "*"
-				}
-			  ],
-			  "colour": moveColor,
-			  "tooltip": "",
-			  "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp",
-			  "previousStatement": null,
-			  "nextStatement": null,
-			});
-		  }
-		};
+      Blockly.JavaScript['Down'] = function(block) {
+		// Search the text for a substring.
+		  let operator = block.getFieldValue('FIELDNAME');
 
+		let code = 'D' + operator*10;
+		return code;
+      };
 
+      Blockly.JavaScript['DownSimple'] = function(block) {
+		return 'D';
+      };
 
-		Blockly.JavaScript['Start'] = function (block) {
-		  // Search the text for a substring.
-			let code = Blockly.JavaScript.statementToCode(block, 'DO');
+      Blockly.JavaScript['Left'] = function(block) {
+		// Search the text for a substring.
+		  let operator = block.getFieldValue('FIELDNAME');
 
-		  return code
-		};
+		let code = 'L' + operator;
+		return code;
+      };
 
-		Blockly.JavaScript['Up'] = function (block) {
-		  // Search the text for a substring.
-			let operator = block.getFieldValue('FIELDNAME');
+      Blockly.JavaScript['LeftSimple'] = function(block) {
+		return 'L';
+      };
 
-		  let code = "U" + operator;
-		  return code;
-		};
+      Blockly.JavaScript['Pause'] = function(block) {
+		// Search the text for a substring.
+		  let operator = block.getFieldValue('FIELDNAME');
 
-		Blockly.JavaScript['PenUp'] = function () {
-		  // Search the text for a substring.
-			let code = "|";
-		  return code;
-		};
+		let code = 'P' + operator;
+		return code;
+      };
 
-
-		Blockly.JavaScript['PenDown'] = function () {
-		  // Search the text for a substring.
-			let code = "!";
-		  return code;
-		};
-
-		Blockly.JavaScript['Down'] = function (block) {
-		  // Search the text for a substring.
-			let operator = block.getFieldValue('FIELDNAME');
-
-		  let code = "D" + operator;
-		  return code;
-		};
-
-		Blockly.JavaScript['Left'] = function (block) {
-		  // Search the text for a substring.
-			let operator = block.getFieldValue('FIELDNAME');
-
-		  let code = "L" + operator;
-		  return code;
-		};
-
-		Blockly.JavaScript['Pause'] = function (block) {
-		  // Search the text for a substring.
-			let operator = block.getFieldValue('FIELDNAME');
-
-		  let code = "P" + operator;
-		  return code;
-		};
-
-	  Blockly.JavaScript['PenColor'] = function (block) {
+      Blockly.JavaScript['PenColor'] = function(block) {
 		let hexColor = block.getFieldValue('FIELDNAME');
-		let color="#";
-		for (let i=1;i<hexColor.length;i+=2) {
-		  color+=pad(""+parseInt(hexColor.substr(i, 2), 16), 3);
+		let color = '#';
+		for (let i = 1; i < hexColor.length; i += 2) {
+          const v = '' + parseInt(hexColor.substr(i, 2), 16);
+          color += new Array(3 - v.length + 1).join('0') + v;
 		}
 		return color;
-	  };
+      };
 
-		Blockly.JavaScript['Right'] = function (block) {
-		  // Search the text for a substring.
-			let operator = block.getFieldValue('FIELDNAME');
+      Blockly.JavaScript['Right'] = function(block) {
+		// Search the text for a substring.
+		  let operator = block.getFieldValue('FIELDNAME');
 
-		  let code = "R" + operator;
-		  return code;
-		};
+		let code = 'R' + operator;
+		return code;
+      };
 
-		Blockly.JavaScript['CircleLeft'] = function (block) {
-		  let radius= block.getFieldValue('RADIUS');
-		  let angle = block.getFieldValue('ANGLE');
+      Blockly.JavaScript['RightSimple'] = function(block) {
+		return 'R';
+      };
 
-		  let code = "r0c" + radius + "a" + angle;
-		  return code;
-		};
+      Blockly.JavaScript['CircleLeft'] = function(block) {
+		let radius = block.getFieldValue('RADIUS');
+		let angle = block.getFieldValue('ANGLE');
 
-		Blockly.JavaScript['CircleRight'] = function (block) {
-		  let radius= block.getFieldValue('RADIUS');
-		  let angle = block.getFieldValue('ANGLE');
+		let code = 'r0c' + radius*10 + 'a' + angle;
+		return code;
+      };
 
-		  let code = "r1c" + radius + "a" + angle;
-		  return code;
-		};
+      Blockly.JavaScript['CircleRight'] = function(block) {
+		let radius = block.getFieldValue('RADIUS');
+		let angle = block.getFieldValue('ANGLE');
 
+		let code = 'r1c' + radius*10 + 'a' + angle;
+		return code;
+      };
 
-		Blockly.JavaScript['Loop'] = function (block) {
-		  // Search the text for a substring.
-			let operator = block.getFieldValue('FIELDNAME');
-		  let subcode = Blockly.JavaScript.statementToCode(block, 'DO');
-		  return "B"+operator+subcode+"E";
-		};
-	  }
+      Blockly.JavaScript['Loop'] = function(block) {
+		// Search the text for a substring.
+		  let operator = block.getFieldValue('FIELDNAME');
+		let subcode = Blockly.JavaScript.statementToCode(block, 'DO');
+		return 'B' + operator + subcode + 'E';
+      };
+	}
 
 	</script>
   </body>
