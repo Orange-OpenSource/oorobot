@@ -10,33 +10,36 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-scroll scrollY="true" style="width: 100% !important;height:100% !important">
-    <ion-list radio-group [(ngModel)]="selectedBL">
-      <ion-list-header>
-        Sélectionnez votre robot dans la liste
-      </ion-list-header>
+        <ion-list radio-group [(ngModel)]="selectedBL">
+          <ion-list-header>
+            Sélectionnez votre robot dans la liste
+          </ion-list-header>
 
-      <ion-item>
-          <ion-label>Aucun</ion-label>
-          <ion-radio [value]="'none'" (ionSelect)="OnBTChange('none')"></ion-radio>
-        </ion-item>
+          <ion-item>
+              <ion-label>Aucun</ion-label>
+              <ion-radio [value]="'none'" (ionSelect)="OnBTChange('none')"></ion-radio>
+            </ion-item>
 
 
-      <ion-item *ngFor="let device of btledevices">
-        <ion-label>{{device.name}}</ion-label>
-        <ion-radio [value]="device" (ionSelect)="OnBTChange(device)"></ion-radio>
-      </ion-item>
+          <ion-item *ngFor="let device of btledevices">
+            <ion-label>{{device.name}}</ion-label>
+            <ion-radio [value]="device" (ionSelect)="OnBTChange(device)"></ion-radio>
+          </ion-item>
 
-    </ion-list>
-    <ion-list>
-      <ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-item>
 
-        <img *ngIf="BLstatus==false" src="assets/svg/link-broken.svg" style="width:20%;margin-left:40%">
-        <img  *ngIf="BLstatus==true" src="assets/svg/link-intact.svg" style="width:20%;margin-left:40%">
+            <img *ngIf="BLstatus==false" src="assets/svg/link-broken.svg" style="width:20%;margin-left:40%">
+            <img  *ngIf="BLstatus==true" src="assets/svg/link-intact.svg" style="width:20%;margin-left:40%">
 
-      </ion-item>
-    </ion-list>
+          </ion-item>
+        </ion-list>
   </ion-scroll>
 </ion-content>

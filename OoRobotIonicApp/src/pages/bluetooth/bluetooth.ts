@@ -32,6 +32,15 @@ export class BluetoothPage {
 
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    this.blprovide.getDeviceList().then((data) => {
+      this.btledevices = data;
+      event.complete();
+    });
+  }
+
   OnBTChange(device) {
 
     let loader = this.loadingCtrl.create({
