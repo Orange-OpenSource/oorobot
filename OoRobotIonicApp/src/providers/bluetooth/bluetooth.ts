@@ -3,7 +3,6 @@ import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 import { Storage } from '@ionic/storage';
-import { ShareProvider } from '../share/share';
 
 //import { Observable } from 'rxjs/Observable';
 /*
@@ -17,7 +16,7 @@ import { ShareProvider } from '../share/share';
 @Injectable()
 export class BluetoothProvider {
 
-  constructor(private bluetoothSerial: BluetoothSerial, private shareProvider: ShareProvider, private storage: Storage, private platform: Platform) {
+  constructor(private bluetoothSerial: BluetoothSerial, private storage: Storage, private platform: Platform) {
     console.log('Hello BluetoothProvider Provider');
   }
   public btledevices;
@@ -35,7 +34,6 @@ export class BluetoothProvider {
   }
 
   disconnect() {
-    this.shareProvider.disconnect();
     return this.bluetoothSerial.disconnect();
   }
 
@@ -72,7 +70,6 @@ export class BluetoothProvider {
 
   connectDevice(device) {
     const deviceId=device.id;
-    //this.shareProvider.shareRobot(deviceId);
     return this.bluetoothSerial.connect(deviceId);
   }
 

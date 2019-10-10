@@ -35,29 +35,49 @@ export class BlocklyPage {
     '0':
     '<xml id="toolbox" style="display: none">' +
     '<block type="Start"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="UpSimple"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="DownSimple"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="LeftSimple"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="RightSimple"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="Loop"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="PenUp"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="PenDown"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="PenColor"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="Pause"></block>' +
     '</xml>',
     '1':
     '<xml id="toolbox" style="display: none">' +
     '<block type="Start"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="Up"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="Down"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="Left"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="Right"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="Loop"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="PenUp"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="PenDown"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="PenColor"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="CircleRight"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="CircleLeft"></block>' +
+    '<sep gap="10"></sep>' +
     '<block type="Pause"></block>' +
     '</xml>'
   };
@@ -165,22 +185,27 @@ export class BlocklyPage {
     this.myWorkspace = Blockly.inject(blocklyDiv, {
       media: 'assets/blockly/media/',
       toolbox: this.toolboxes[this.level],
+      move:{
+        scrollbars: true,
+        drag: true,
+        wheel: false
+      },
       zoom: {
         controls: true,
         wheel: true,
-        startScale: 1.0,
+        startScale: 1.2,
         maxScale: 3,
         minScale: 0.3,
-        scaleSpeed: 1.2
+        scaleSpeed: 1.1
       },
-      grid: {
-        spacing: 50,
+      grid:{
+        spacing: 20,
         length: 3,
         colour: '#ccc',
         snap: true
       },
-      trashcan: true
-    });
+      trashcan: true});
+
     Blockly.svgResize(this.myWorkspace);
   }
 
@@ -205,12 +230,11 @@ export class BlocklyPage {
   }
 
   setBlocks() {
-    let moveColor = '#3C8BDA';
-    let controlColor = '#F0DC27';
-    let startColor = '#74C042';
+    let moveColor = "#3C8BDA";
+    let controlColor = "#F0DC27";
+    let startColor = "#74C042";
 
-    Blockly.Generator.prototype.prefixLines = function(text, prefix) {
-      // Need to Overide this function not supported by ionic
+    Blockly.Generator.prototype.prefixLines = function (text, prefix) {  // Need to Overide this function not supported by ionic
       return text;
     };
 
@@ -224,28 +248,35 @@ export class BlocklyPage {
     Blockly.Blocks['Start'] = {
       init: function() {
         this.jsonInit({
-          message0: '%1 x%2 y%3',
+          message0: '%1 plateau %2 %3cm*%4cm %5 %6',
           args0: [
             {
               type: 'field_image',
               src: 'assets/svg/flag.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
+            },
+            {
+              "type": "input_dummy"
             },
             {
               type: 'field_number',
               name: 'WIDTH',
-              value: '1000'
+              value: 100
             },
             {
               type: 'field_number',
               name: 'HEIGHT',
-              value: '600'
-            }
+              value: 60
+            },
+            {
+              "type": "input_dummy"
+            },
+            { type: 'input_statement',
+              name: 'DO'
+            },
           ],
-          message1: '%1',
-          args1: [{ type: 'input_statement', name: 'DO' }],
           colour: startColor,
           tooltip: '',
           helpUrl: 'http://www.w3schools.com/jsref/jsref_length_string.asp'
@@ -256,19 +287,19 @@ export class BlocklyPage {
     Blockly.Blocks['Up'] = {
       init: function() {
         this.jsonInit({
-          message0: '%1 %2',
+          message0: '%1 %2cm',
           args0: [
             {
               type: 'field_image',
               src: 'assets/svg/arrow-thick-top.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             },
             {
               type: 'field_number',
               name: 'FIELDNAME',
-              value: 100
+              value: 10
             }
           ],
           colour: moveColor,
@@ -288,8 +319,8 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/arrow-thick-top.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             }
           ],
@@ -305,19 +336,19 @@ export class BlocklyPage {
     Blockly.Blocks['Pause'] = {
       init: function() {
         this.jsonInit({
-          message0: '%1 %2',
+          message0: '%1 %2 s',
           args0: [
             {
               type: 'field_image',
               src: 'assets/svg/media-pause.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             },
             {
               type: 'field_number',
               name: 'FIELDNAME',
-              value: 100
+              value: 10
             }
           ],
           colour: moveColor,
@@ -332,19 +363,19 @@ export class BlocklyPage {
     Blockly.Blocks['Down'] = {
       init: function() {
         this.jsonInit({
-          message0: '%1 %2',
+          message0: '%1 %2cm',
           args0: [
             {
               type: 'field_image',
               src: 'assets/svg/arrow-thick-bottom.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             },
             {
               type: 'field_number',
               name: 'FIELDNAME',
-              value: 100
+              value: 10
             }
           ],
           colour: moveColor,
@@ -364,8 +395,8 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/arrow-thick-bottom.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             }
           ],
@@ -386,8 +417,8 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/left.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             },
             {
@@ -413,8 +444,8 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/left.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             }
           ],
@@ -435,8 +466,8 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/right.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             },
             {
@@ -462,8 +493,8 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/right.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             }
           ],
@@ -484,14 +515,14 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/circle-right.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             },
             {
               type: 'field_input',
               name: 'RADIUS',
-              text: '100'
+              text: '10'
             },
             {
               type: 'field_angle',
@@ -516,14 +547,14 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/circle-left.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             },
             {
               type: 'field_input',
               name: 'RADIUS',
-              text: '100'
+              text: '10'
             },
             {
               type: 'field_angle',
@@ -548,8 +579,8 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/repeat.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             },
             {
@@ -577,8 +608,8 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/pen-up.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             }
           ],
@@ -599,8 +630,8 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/pen-down.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             }
           ],
@@ -621,8 +652,8 @@ export class BlocklyPage {
             {
               type: 'field_image',
               src: 'assets/svg/color-picker.svg',
-              width: 40,
-              height: 40,
+              width: 22,
+              height: 22,
               alt: '*'
             },
             {
@@ -645,14 +676,14 @@ export class BlocklyPage {
       let code = Blockly.JavaScript.statementToCode(block, 'DO');
       let width = block.getFieldValue('WIDTH');
       let height = block.getFieldValue('HEIGHT');
-      return 'commandw' + width + 'h' + height + code;
+      return 'commandw' + width*10 + 'h' + height*10 + code;
     };
 
     Blockly.JavaScript['Up'] = function(block) {
       // Search the text for a substring.
       let operator = block.getFieldValue('FIELDNAME');
 
-      let code = 'U' + operator;
+      let code = 'U' + operator*10;
       return code;
     };
 
@@ -676,7 +707,7 @@ export class BlocklyPage {
       // Search the text for a substring.
       let operator = block.getFieldValue('FIELDNAME');
 
-      let code = 'D' + operator;
+      let code = 'D' + operator*10;
       return code;
     };
 
@@ -730,7 +761,7 @@ export class BlocklyPage {
       let radius = block.getFieldValue('RADIUS');
       let angle = block.getFieldValue('ANGLE');
 
-      let code = 'r0c' + radius + 'a' + angle;
+      let code = 'r0c' + radius*10 + 'a' + angle;
       return code;
     };
 
@@ -738,7 +769,7 @@ export class BlocklyPage {
       let radius = block.getFieldValue('RADIUS');
       let angle = block.getFieldValue('ANGLE');
 
-      let code = 'r1c' + radius + 'a' + angle;
+      let code = 'r1c' + radius*10 + 'a' + angle;
       return code;
     };
 
@@ -749,4 +780,5 @@ export class BlocklyPage {
       return 'B' + operator + subcode + 'E';
     };
   }
+
 }
