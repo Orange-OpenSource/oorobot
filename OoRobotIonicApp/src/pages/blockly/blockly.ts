@@ -132,8 +132,16 @@ export class BlocklyPage {
 
   sendCode() {
     var code = this.generateCode().code;
+    // Wait 400ms between each 20 characters
+    const p = x =>
+      new Promise(f =>
+        setTimeout(f, 500, x))
+
     if (code) {
-      this.blProvider.serialWritePreferedDevice(code).then(() => {});
+      var parts = code.match(/.{1,20}/g);
+      parts.reduce((acc, x) =>
+        acc.then(() => p(x)).then((c)=> this.blProvider.serialWritePreferedDevice(c).then(() => {})
+      ), Promise.resolve());
     }
   }
 

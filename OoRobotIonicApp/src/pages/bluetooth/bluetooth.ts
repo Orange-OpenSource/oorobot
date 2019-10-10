@@ -26,7 +26,7 @@ export class BluetoothPage {
       console.log(JSON.stringify(data))
       this.btledevices = data;
     });
-    this.message = "not connected";
+    this.message = "pas connecté";
 
     this.selectedBL = 'none';
 
@@ -35,10 +35,10 @@ export class BluetoothPage {
   OnBTChange(device) {
 
     let loader = this.loadingCtrl.create({
-      content: "Please wait for connection...",
+      content: "Connexion en cours ...",
       duration: 30000
     });
-    
+
 
 
     if (device == 'none') {
@@ -53,15 +53,15 @@ export class BluetoothPage {
 
             console.log("connected")
             this.BLstatus=true;
-            this.message = "connected";
+            this.message = "Connecté";
             loader.dismiss();
           }).catch((err) => {
-            this.message = "error :" + err;
+            this.message = "Erreur :" + err;
             loader.dismiss();
           })
 
         }, (err) => {
-          this.message = "error :" + err;
+          this.message = "Erreur :" + err;
           loader.dismiss();
         }
         );
@@ -76,17 +76,17 @@ export class BluetoothPage {
   disconnect() {
     console.log("disconnect")
     let loader = this.loadingCtrl.create({
-      content: "Please wait for disconnection.",
+      content: "Déconnexion en cours ...",
       duration: 30000
     });
-    
+
     this.blprovide.disconnect().then(() => {
-      this.message = "not connected";
+      this.message = "non connecté";
       this.BLstatus=false;
 
       loader.dismiss();
     }).catch((err) => {
-      this.message = "error :" + err;
+      this.message = "Erreur :" + err;
       loader.dismiss();
     });
   }
