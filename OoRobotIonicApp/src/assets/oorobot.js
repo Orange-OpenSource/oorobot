@@ -76,7 +76,7 @@ class OoRoBoT {
       textDom = textDom.replace(re, this.dictionary[obj]);
     }
     textDom = level + '' + textDom;
-
+	  
     let code = LZUTF8.compress(textDom, { outputEncoding: 'Base64' });
 
     return code;
@@ -375,11 +375,11 @@ U            <next>
         this.statementsIdx[this.statementsIdx.length - 1]++;
         break;
       case 'U':
-        this.xml += '<block type="Up"><field name="FIELDNAME">' + size + '</field><next>';
+        this.xml += '<block type="Up"><field name="FIELDNAME">' + (size/10) + '</field><next>';
         this.statementsIdx[this.statementsIdx.length - 1]++;
         break;
       case 'D':
-        this.xml += '<block type="Down"><field name="FIELDNAME">' + size + '</field><next>';
+        this.xml += '<block type="Down"><field name="FIELDNAME">' + (size/10) + '</field><next>';
         this.statementsIdx[this.statementsIdx.length - 1]++;
         break;
       case 'R':
@@ -414,14 +414,14 @@ U            <next>
             '<block type="CircleRight"><field name="RADIUS">' +
             this.lastCircleRadius +
             '</field><field name="ANGLE">' +
-            size +
+            (size/10) +
             '</field><next>';
         } else {
           this.xml +=
             '<block type="CircleLeft"><field name="RADIUS">' +
             this.lastCircleRadius +
             '</field><field name="ANGLE">' +
-            size +
+            (size/10) +
             '</field><next>';
         }
         this.statementsIdx[this.statementsIdx.length - 1]++;
