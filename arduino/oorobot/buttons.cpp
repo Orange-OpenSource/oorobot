@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include "buttons.h"
 
-int LONG_CLICK_DELAY = 500;
-int DEBOUNCING_DELAY = 300;
+int LONG_CLICK_DELAY = 700;
+int DEBOUNCING_DELAY = 600;
 int lastButtonId = -1;
 unsigned long lastClick = 0;
 unsigned long lastRawPressed = 0;
@@ -65,7 +65,7 @@ int getPressedButton() {
       }
     }
   } else {
-    if (millis() - lastRawPressed > 100) {
+    if (millis() - lastRawPressed > 200) {
       lastButtonId = -1;
     }
   }

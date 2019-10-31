@@ -11,13 +11,22 @@
 #include <LiquidCrystal_I2C.h>
 #include <AccelStepper.h>
 #include <Servo.h>
+// #include <NewPing.h>
 #include "charset.h"
 #include "buttons.h"
 
 
-#define OOROBOT_VERSION "1.1.3"
+#define OOROBOT_VERSION "1.1.4"
+#define SCREEN_TIMEOUT 45000
 
-#define SCREEN_TIMEOUT 25
+#define TRIGGER_PIN A1
+#define ECHO_PIN A2
+#define MAX_DISTANCE 200
+ 
+//NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+
+#define LINE_SENSOR_LEFT A3
+#define LINE_SENSOR_RIGHT 2
 
 // On some step motors direction may be inverted
 #define INVERT_DIRECTION
@@ -57,9 +66,7 @@ SoftwareSerial BTSerie(RxD, TxD);
 #define MIN_STEPPER_SPEED 200
 #define WHEEL_SPACING_MM 132
 
-#define LED1 A1
-#define LED2 A2
-#define LED3 A3
+#define MAX_CONSECUTIVE_NUMBERS 3
 
 int stepperSpeed = MIN_STEPPER_SPEED;
 
@@ -78,6 +85,9 @@ struct Params {
   int lineSteps;
   char btName[16];
 };
+
+const unsigned long MEASURE_TIMEOUT = 25000UL; // 25ms = ~8m à 340m/s
+const float SOUND_SPEED = 340.0 / 1000;
 
 int stepDelay = 800;
 int steps1 = 0; // keep track of the step count for motor 1
@@ -105,12 +115,9 @@ long lastChangeDisplay = 0;
 unsigned int selectedLine = 0;
 short commandLaunched = 0;
 short consecutive_numbers = 0;
-#define MAX_CONSECUTIVE_NUMBERS 3
 short num_of_cmd = 0;
 short max_num_cmd = 0;
 long startMovement=0;
-boolean ledOn=false;
-
 
 void moveServo(int angle) {
   penServo.attach(3);
@@ -118,7 +125,6 @@ void moveServo(int angle) {
   delay(200);
   penServo.detach();
 }
-
 
 void setup() {
   Serial.begin(9600);
@@ -137,17 +143,20 @@ void setup() {
   lcd.createChar(7, agrave);
 
   // stepper motors init
-  stepper1.setMaxSpeed(1000);
+  stepper1.setMaxSpeed(2000);
   stepper1.move(1);
 
-  stepper2.setMaxSpeed(1000);
+  stepper2.setMaxSpeed(2000);
   stepper2.move(-1);
 
-  pinMode(LED1, OUTPUT);
-  pinMode(LED2, OUTPUT);
-  pinMode(LED3, OUTPUT);
-
   moveServo(5);
+
+  pinMode(TRIGGER_PIN, OUTPUT);
+  digitalWrite(TRIGGER_PIN, LOW);
+  pinMode(ECHO_PIN, INPUT);
+
+  pinMode(LINE_SENSOR_LEFT, INPUT);
+  pinMode(LINE_SENSOR_RIGHT, INPUT);
 
   // Bluetooth module init
 #ifdef HAVE_BLUETOOTH
@@ -159,6 +168,11 @@ void setup() {
 
 void loop() {
   long currentTime = millis();
+  
+  //int distance = sonar.ping_cm();
+  //byte somethingLeft = digitalRead(LINE_SENSOR_LEFT);
+  //byte somethingRight = digitalRead(LINE_SENSOR_RIGHT);
+    
   int buttonId = getPressedButton();
   char button = 0;
   if (buttonId >= 0) {
@@ -208,8 +222,8 @@ void loop() {
   }
   updateScreen();
 
-  // Screen off after 4s
-  if (currentTime > lastChangeDisplay + SCREEN_TIMEOUT * 1000) {
+  // Screen off after SCREEN_TIMEOUT ms
+  if (currentTime > lastChangeDisplay + SCREEN_TIMEOUT) {
     if (selectedMenu != OFF_MENU) {
       previousMenu = selectedMenu;
       selectedMenu = OFF_MENU;
@@ -217,21 +231,6 @@ void loop() {
     }
   }
 
-}
-
-void switchOnLED() {
-  Serial.println(F("switch on LED"));
-  digitalWrite(LED1, HIGH);
-  digitalWrite(LED2, HIGH);
-  digitalWrite(LED3, HIGH);
-}
-
-
-void switchOffLED() {
-  Serial.println(F("switch off LED"));
-  digitalWrite(LED1, LOW);
-  digitalWrite(LED2, LOW);
-  digitalWrite(LED3, LOW);
 }
 
 void actionButtonForScreen(char button) {
@@ -242,32 +241,18 @@ void actionButtonForScreen(char button) {
     changeDisplay = 1;
     Serial.print(F("New char : "));
     Serial.println(button);
-    if ( button > 47  && button < 58) // it's a number
-    {
+    // it's a number
+    if ( button > 47  && button < 58) {
       consecutive_numbers++;
-      if (consecutive_numbers > MAX_CONSECUTIVE_NUMBERS)
-      {
+      if (consecutive_numbers > MAX_CONSECUTIVE_NUMBERS) {
         Serial.println(F("number too hight"));
         return;
-      }
-      else
-      {
+      } else {
         cmd[cmd_l++] = button;
         return;
       }
-    }
-    else
-    {
+    } else {
       switch (button) {
-        case '@':
-          if (ledOn) {
-            switchOffLED();
-            ledOn=false;
-          } else  {
-            switchOnLED();
-            ledOn=true;
-          }
-          break;
         case 'S':
           selectedMenu = SETTINGS_MENU;
           changeDisplay = 1;
@@ -415,11 +400,13 @@ void updateScreen() {
       //lcd.setBacklight(HIGH);
       lcd.display();
       lcd.setCursor(0, 0);
-      lcd.print(" OoRoBoT  " OOROBOT_VERSION);
+      lcd.print(F(" OoRoBoT  "));
+      lcd.print(OOROBOT_VERSION);
       lcd.setCursor(0, 1);
       lcd.print(F("Pret \7 demarrer!"));
 #ifdef HAVE_BLUETOOTH
-      BTSerie.println("OoRoBoT " OOROBOT_VERSION);
+      BTSerie.print(F("OoRoBoT "));
+      BTSerie.println(OOROBOT_VERSION);
       BTSerie.println(F("En attente de commandes"));
 #endif
       previousMenu = CTRL_MENU;
