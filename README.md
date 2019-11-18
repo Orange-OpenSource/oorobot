@@ -14,7 +14,7 @@ Au fil des évolutions du projet, l'OoRoBoT apporte tout un lot de fonctionnalit
 
 Actuellement le robot peut être utilisé de deux façons différentes (comme indiqué dans sur [ce poster](https://github.com/Orange-OpenSource/oorobot/blob/master/doc/com/oorobot_poster-LIGHT.pdf)) :
 - Pour les enfants de 4 à 7 ans : programmer des parcours sur des plateaux (voir les plateaux disponibles dans le [répertoire /doc/exercices](https://github.com/Orange-OpenSource/oorobot/blob/master/doc/exercices))
-- Pour les enfants de 7 à 12 ans : réaliser des tracés avec un langage de programmation par blocs via une tablette Android ([programme disponible ici](https://orange-opensource.github.io/oorobot/apk/oorobot.apk) ). Vous pouvez vous entrainer à faire des tracés sur [cette page Web](https://orange-opensource.github.io/oorobot/blocks/index.html?code=B4U100R90E%23255000000%7CR45U150!U100r1c100a130r1c100a90) (reproduction de l'interface disponible dans l'application Android)
+- Pour les enfants de 7 à 12 ans : réaliser des tracés avec un langage de programmation par blocs via une tablette Android ([programme disponible ici](https://github.com/Orange-OpenSource/oorobot/releases) ). Vous pouvez vous entrainer à faire des tracés sur [cette page Web](https://orange-opensource.github.io/oorobot/blocks/index.html?code=B4U100R90E%23255000000%7CR45U150!U100r1c100a130r1c100a90) (reproduction de l'interface disponible dans l'application Android)
 
 Pour suivre l'évolution du robot vous pouvez suivre le mot dièse [#OoRoBoT sur Twitter](https://twitter.com/hashtag/OoRoBoT?src=hash)
 
