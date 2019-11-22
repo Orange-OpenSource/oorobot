@@ -165,7 +165,7 @@ Les stylos pour tableau blanc déjà validés sont de marques Lyreco (diamètre 
 
 ![montage-agrafe3](https://user-images.githubusercontent.com/16662847/69248610-d8ee5580-0bac-11ea-9ee8-ae4e334b051e.jpg)
 
-- Prennez les pièces suivante afin de monter les roues
+- Prenez les pièces suivante afin de monter les roues
 
 ![montage-roue1](https://user-images.githubusercontent.com/16662847/69248591-d1c74780-0bac-11ea-9555-ac1bd50761ad.jpg)
 
@@ -179,7 +179,7 @@ Les stylos pour tableau blanc déjà validés sont de marques Lyreco (diamètre 
 
 ![montage-roue4](https://user-images.githubusercontent.com/16662847/69248564-c8d67600-0bac-11ea-8479-ca635d62e3bb.jpg)
 
-- Retounez la pièce créee et collez la dernière partie dessus :
+- Retournez la pièce créée et collez la dernière partie dessus :
 
 ![montage-roue5](https://user-images.githubusercontent.com/16662847/69248555-c5db8580-0bac-11ea-8336-a2362b9efcb0.jpg)
 
@@ -195,19 +195,28 @@ Les stylos pour tableau blanc déjà validés sont de marques Lyreco (diamètre 
 
 ![montage-roue8](https://user-images.githubusercontent.com/16662847/69248538-be1be100-0bac-11ea-937e-27aa825d7b12.jpg)
 
-- Repétez les 8 dernières étapes pour installer la 2ème roue.
+- Répétez les 8 dernières étapes pour installer la 2ème roue.
 
 - Retournez le robot et fixez les roues à bille avec des vis M3 :
 
 ![montage-roues-dessous](https://user-images.githubusercontent.com/16662847/69248526-ba885a00-0bac-11ea-8819-41bae6e9f994.jpg)
 
 - Collez le petit rectangle sur l'ovale gravé pour fabriquer un petit cache pour le connecteur Arduino :
-![preparer_colle_cache_prise_arduino](https://user-images.githubusercontent.com/16662847/38666271-ced9af3c-3e3e-11e8-832c-024e2eeb7543.jpg) ![cache_prise_arduino](https://user-images.githubusercontent.com/16662847/38666270-ceb3263c-3e3e-11e8-9d23-f2681b224782.jpg)
+![montage-cache-usb1](https://user-images.githubusercontent.com/16662847/69429488-f7cb2400-0d33-11ea-9b36-147b71c6503e.jpg)![montage-cache-usb2](https://user-images.githubusercontent.com/16662847/69429488-f7cb2400-0d33-11ea-9b36-147b71c6503e.jpg)
 
 - Insérez les élastiques dans l'encoche de chaque roue :
 
+![montage-elastique](https://user-images.githubusercontent.com/16662847/69429496-fc8fd800-0d33-11ea-9bdc-f4137f369125.jpg)
 
-En option :
+## Et pour terminer
+
+- Si ce n'est pas déjà fait, découpez les modèles de touches ([disponible ici](../doc/menu/menu.pdf)) et insérez-les dans le clavier, pour cela sortez les touches (ça vient facilement en tirant dessus) puis enlevez la partie transparente (vous pouvez utiliser une paire de ciseaux pour faire levier), placez les découpes et remettez en place les touches.
+- Insérer le support de crayon externe dans le robot, vous pouvez mettre un élastique entre le dessus du robot et ce support pour avoir une meilleure pression sur le crayon
+- Calibrer votre robot via le menu "paramètres" (appui long sur le bouton au milieu de la colonne  la plus à droite du clavier):
+    - Le nombre de pas que les moteurs doivent faire pour effectuer un 1/4 de tour : pour cela, avec le clavier entrez le programme "tourner à droite" 4 fois et lancez le. Si le robot n'a pas fait exactement un tour, rentrez dans le menu "paramètres" et changez le nombre de pas, appuyez sur le bouton start, vous reviendrez sur votre programme que vous pourrez relancer pour affiner votre réglage
+    - Le nombre de pas que les moteurs doivent faire pour avancer de 10 cm, procédez comme pour le réglage d'un tour complet. Vous pouvez utiliser la fonction de dessin avec un crayon pour mesurer la précision du robot.
+
+## Option des roues Lego
 
 Vous pouvez aussi installer des roues LEGO (référence 88516 & 88517) sur l'OoRoBoT.
 
@@ -219,21 +228,16 @@ Vous pouvez aussi installer des roues LEGO (référence 88516 & 88517) sur l'OoR
 
 ![montage-roue-lego1](https://user-images.githubusercontent.com/16662847/69248509-b52b0f80-0bac-11ea-989f-e43c8ea770a7.jpg)
 
-Et pour terminer :
-- Si ce n'est pas déjà fait, découpez les modèles de touches ([disponible ici](../doc/menu/menu.pdf)) et insérez-les dans le clavier, pour cela sortez les touches (ça vient facilement en tirant dessus) puis enlevez la partie transparente (vous pouvez utiliser une paire de ciseaux pour faire levier), placez les découpes et remettez en place les touches.
-- Insérer le support de crayon externe dans le robot, vous pouvez mettre un élastique entre le dessus du robot et ce support pour avoir une meilleure pression sur le crayon
-- Calibrer votre robot via le menu "paramètres" (appui long sur le bouton au milieu de la colonne  la plus à droite du clavier):
-    - Le nombre de pas que les moteurs doivent faire pour effectuer un 1/4 de tour : pour cela, avec le clavier entrez le programme "tourner à droite" 4 fois et lancez le. Si le robot n'a pas fait exactement un tour, rentrez dans le menu "paramètres" et changez le nombre de pas, appuyez sur le bouton start, vous reviendrez sur votre programme que vous pourrez relancer pour affiner votre réglage
-    - Le nombre de pas que les moteurs doivent faire pour avancer de 10 cm, procédez comme pour le réglage d'un tour complet. Vous pouvez utiliser la fonction de dessin avec un crayon pour mesurer la précision du robot.
-
-## Fichiers
+## Fichiers de découpes
 
 Pour ceux qui veulent modifier ou fabriquer la structure :
 - oorobot.svg : le modèle réalisé avec Inkscape
 - oorobot.dxf : export DXF pour les découpeuses laser
 
 Correspondance des couleurs :
-- Vert : couche de travail, ne pas prendre en compte pour la découpe ou la gravure
+- Verte : couche de travail, ne pas prendre en compte pour la découpe ou la gravure
 - Rouge : couche à découper
 - Noire : couche à graver
+
+
 
