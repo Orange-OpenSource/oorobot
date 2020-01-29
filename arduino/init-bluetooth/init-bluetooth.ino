@@ -6,8 +6,10 @@
 //
 //***********************************************/
 #include <EEPROM.h>
+#include <Wire.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>
+
 #include <LiquidCrystal_I2C.h>
 
 struct Params {
@@ -41,6 +43,17 @@ void setup()
   //Pour choisir vous même le nom du robot, décommentez la ligne suivante (enlever les //) et changez le "OoRoBoT-MATT" par ce que vous voulez (ne pas depasser 16 caractères)
   //deviceName="OoRoBoT-MATT";
 
+  Wire.begin();
+  byte error, address;
+  // Scan I2C bus to find LCD address
+  for (address = 1; address < 127; address++ ) {
+    Wire.beginTransmission(address);
+    error = Wire.endTransmission();
+    if (error == 0) {
+      break;
+    }
+  }
+  lcd=LiquidCrystal_I2C(address, 16, 2);
   lcd.init();
   lcd.backlight();
 

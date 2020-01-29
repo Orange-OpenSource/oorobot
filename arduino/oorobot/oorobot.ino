@@ -76,7 +76,7 @@ AccelStepper stepper2(AccelStepper::HALF4WIRE, motorPin5, motorPin7, motorPin6, 
 Servo penServo;
 
 // The I2C LCD object
-LiquidCrystal_I2C *lcd;
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 struct Params {
   int stepCm;
@@ -138,16 +138,16 @@ void setup() {
       break;
     }
   }
-  lcd = new LiquidCrystal_I2C(address, 16, 2);
-  lcd->init();
-  lcd->backlight();
-  lcd->createChar(1, up);
-  lcd->createChar(2, down);
-  lcd->createChar(4, right);
-  lcd->createChar(3, left);
-  lcd->createChar(5, pause);
-  lcd->createChar(6, bullet);
-  lcd->createChar(7, agrave);
+  lcd=LiquidCrystal_I2C(address, 16, 2);
+  lcd.init();
+  lcd.backlight();
+  lcd.createChar(1, up);
+  lcd.createChar(2, down);
+  lcd.createChar(4, right);
+  lcd.createChar(3, left);
+  lcd.createChar(5, pause);
+  lcd.createChar(6, bullet);
+  lcd.createChar(7, agrave);
   
   loadParams();
   setupButtons();
@@ -219,9 +219,9 @@ void loop() {
         Serial.println(F("program terminated"));
         isMoving = false;
         disableMotors();
-        lcd->clear();
-        lcd->setBacklight(HIGH);
-        lcd->print(F("fin !"));
+        lcd.clear();
+        lcd.setBacklight(HIGH);
+        lcd.print(F("fin !"));
 #ifdef HAVE_BLUETOOTH
         BTSerie.println(F("fin !"));
 #endif
@@ -334,9 +334,9 @@ void actionButtonForScreen(char button) {
   } else if (selectedMenu == RUNNING_MENU) {
     disableMotors();
     isMoving = false;
-    lcd->clear();
-    lcd->setBacklight(HIGH);
-    lcd->print(F("Arret!"));
+    lcd.clear();
+    lcd.setBacklight(HIGH);
+    lcd.print(F("Arret!"));
     delay(1000);
     selectedMenu = CTRL_MENU;
     changeDisplay = 1;
@@ -408,13 +408,13 @@ void actionButtonForSettingsScreen(char button) {
 void updateScreen() {
   if (changeDisplay) {
     if (selectedMenu == START_MENU) {
-      //lcd->setBacklight(HIGH);
-      lcd->display();
-      lcd->setCursor(0, 0);
-      lcd->print(F(" OoRoBoT  "));
-      lcd->print(OOROBOT_VERSION);
-      lcd->setCursor(0, 1);
-      lcd->print(F("Pret \7 demarrer!"));
+      //lcd.setBacklight(HIGH);
+      lcd.display();
+      lcd.setCursor(0, 0);
+      lcd.print(F(" OoRoBoT  "));
+      lcd.print(OOROBOT_VERSION);
+      lcd.setCursor(0, 1);
+      lcd.print(F("Pret \7 demarrer!"));
 #ifdef HAVE_BLUETOOTH
       BTSerie.print(F("OoRoBoT "));
       BTSerie.println(OOROBOT_VERSION);
@@ -423,24 +423,24 @@ void updateScreen() {
       previousMenu = CTRL_MENU;
       selectedMenu = CTRL_MENU;
     } else if (selectedMenu == CTRL_MENU) {
-      lcd->setBacklight(HIGH);
+      lcd.setBacklight(HIGH);
       cmd[cmd_l] = 0;
 #ifdef HAVE_BLUETOOTH
       BTSerie.println(cmd);
 #endif
-      lcd->clear();
-      lcd->setCursor(0, 0);
+      lcd.clear();
+      lcd.setCursor(0, 0);
       for (char i = 0 ; i < cmd_l ; i++) {
         if (i == 16) {
-          lcd->setCursor(0, 1);
+          lcd.setCursor(0, 1);
         }
         if (i < 32) {
-          lcd->print(commandToDisplay(cmd[i]));
+          lcd.print(commandToDisplay(cmd[i]));
         }
       }
     } else if (selectedMenu == SETTINGS_MENU) {
-      lcd->setBacklight(HIGH);
-      lcd->clear();
+      lcd.setBacklight(HIGH);
+      lcd.clear();
       int cm = params.stepCm / 10;
       int mm = params.stepCm - 10 * cm;
       int currentLine = selectedLine;
@@ -453,31 +453,31 @@ void updateScreen() {
         lineIdx = 0;
       }
       if (stepIdx < 2) {
-        lcd->setCursor(0, stepIdx);
-        lcd->print(F(" Distance:"));
-        lcd->print(cm);
-        lcd->print(F("."));
-        lcd->print(mm);
-        lcd->print(F("cm"));
+        lcd.setCursor(0, stepIdx);
+        lcd.print(F(" Distance:"));
+        lcd.print(cm);
+        lcd.print(F("."));
+        lcd.print(mm);
+        lcd.print(F("cm"));
       }
       if (turnIdx < 2) {
-        lcd->setCursor(0, turnIdx);
-        lcd->print(F(" 1/4Tour:"));
-        lcd->print(params.turnSteps);
-        lcd->print(F("pas"));
+        lcd.setCursor(0, turnIdx);
+        lcd.print(F(" 1/4Tour:"));
+        lcd.print(params.turnSteps);
+        lcd.print(F("pas"));
       }
       if (lineIdx < 2) {
-        lcd->setCursor(0, lineIdx);
-        lcd->print(F(" 1cm:"));
-        lcd->print(params.lineSteps);
-        lcd->print(F("pas"));
-        lcd->setCursor(0, lineIdx + 1);
-        lcd->print(F(" "));
-        lcd->print(params.btName);
+        lcd.setCursor(0, lineIdx);
+        lcd.print(F(" 1cm:"));
+        lcd.print(params.lineSteps);
+        lcd.print(F("pas"));
+        lcd.setCursor(0, lineIdx + 1);
+        lcd.print(F(" "));
+        lcd.print(params.btName);
       }
 
-      lcd->setCursor(0, selectedLine % 2);
-      lcd->print("\6");
+      lcd.setCursor(0, selectedLine % 2);
+      lcd.print("\6");
 #ifdef HAVE_BLUETOOTH
       if (selectedLine == 0) {
         BTSerie.print(F("Distance:"));
@@ -493,9 +493,9 @@ void updateScreen() {
 #endif
 
     } else if (selectedMenu == CTRL_MENU) {
-      lcd->setBacklight(HIGH);
+      lcd.setBacklight(HIGH);
     } else if (selectedMenu == OFF_MENU) {
-      lcd->setBacklight(LOW);
+      lcd.setBacklight(LOW);
     }
     lastChangeDisplay = millis();
   }
@@ -532,14 +532,14 @@ boolean launchNextCommand() {
     return false;
   } else {
     disableMotors();
-    lcd->clear();
+    lcd.clear();
     if (stepDelay > 100) {
-      lcd->setBacklight(HIGH);
-      lcd->print((num_of_cmd + 1));
-      lcd->print(F(" sur "));
-      lcd->print(max_num_cmd);
-      lcd->print(F(" : "));
-      lcd->print(commandToDisplay(cmd[commandLaunched]));
+      lcd.setBacklight(HIGH);
+      lcd.print((num_of_cmd + 1));
+      lcd.print(F(" sur "));
+      lcd.print(max_num_cmd);
+      lcd.print(F(" : "));
+      lcd.print(commandToDisplay(cmd[commandLaunched]));
     }
 #ifdef HAVE_BLUETOOTH
     BTSerie.println(cmd[commandLaunched]);
@@ -553,7 +553,7 @@ boolean launchNextCommand() {
 
     num_of_cmd++;
     delay(stepDelay);
-    lcd->setBacklight(LOW);
+    lcd.setBacklight(LOW);
 
     enableMotors();
 
