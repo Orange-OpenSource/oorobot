@@ -4,7 +4,7 @@
    Get the following libraries (using the Arduino IDE library manager)
   - **AccelStepper** v1.57.1 by Mike McCauley
   - **LiquidCrystal I2C** v1.1.2 by Frank de Brabander
- 
+
 */
 #include <EEPROM.h>
 #include <Wire.h>
@@ -15,14 +15,13 @@
 #include "charset.h"
 #include "buttons.h"
 
-
-#define OOROBOT_VERSION "1.1.4"
+#define OOROBOT_VERSION "1.1.5"
 #define SCREEN_TIMEOUT 45000
 
 #define TRIGGER_PIN A1
 #define ECHO_PIN A2
 #define MAX_DISTANCE 200
- 
+
 //NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
 
 #define LINE_SENSOR_LEFT A3
@@ -77,7 +76,7 @@ AccelStepper stepper2(AccelStepper::HALF4WIRE, motorPin5, motorPin7, motorPin6, 
 Servo penServo;
 
 // The I2C LCD object
-LiquidCrystal_I2C lcd(0x27, 16, 2);
+LiquidCrystal_I2C *lcd;
 
 struct Params {
   int stepCm;
@@ -105,9 +104,9 @@ int selectedMenu = START_MENU;
 char cmd[MAX_COMMANDS + 1] = {};
 int loopCounter[MAX_LOOPS] = {};
 int loopPointer[MAX_LOOPS] = {};
-int loopIndex=0;
-int currentRadius=0;
-boolean reverseOrientation=false;
+int loopIndex = 0;
+int currentRadius = 0;
+boolean reverseOrientation = false;
 
 unsigned char cmd_l = 0;
 int changeDisplay = 1;
@@ -117,7 +116,7 @@ short commandLaunched = 0;
 short consecutive_numbers = 0;
 short num_of_cmd = 0;
 short max_num_cmd = 0;
-long startMovement=0;
+long startMovement = 0;
 
 void moveServo(int angle) {
   penServo.attach(3);
@@ -128,20 +127,30 @@ void moveServo(int angle) {
 
 void setup() {
   Serial.begin(9600);
+  Serial.println(F("Setup"));
+  Wire.begin();
+  byte error, address;
+  // Scan I2C bus to find LCD address
+  for (address = 1; address < 127; address++ ) {
+    Wire.beginTransmission(address);
+    error = Wire.endTransmission();
+    if (error == 0) {
+      break;
+    }
+  }
+  lcd = new LiquidCrystal_I2C(address, 16, 2);
+  lcd->init();
+  lcd->backlight();
+  lcd->createChar(1, up);
+  lcd->createChar(2, down);
+  lcd->createChar(4, right);
+  lcd->createChar(3, left);
+  lcd->createChar(5, pause);
+  lcd->createChar(6, bullet);
+  lcd->createChar(7, agrave);
+  
   loadParams();
   setupButtons();
-  Serial.println(F("Setup"));
-
-  lcd.init();
-  lcd.backlight();
-  lcd.createChar(1, up);
-  lcd.createChar(2, down);
-  lcd.createChar(4, right);
-  lcd.createChar(3, left);
-  lcd.createChar(5, pause);
-  lcd.createChar(6, bullet);
-  lcd.createChar(7, agrave);
-
   // stepper motors init
   stepper1.setMaxSpeed(2000);
   stepper1.move(1);
@@ -164,15 +173,17 @@ void setup() {
   pinMode(TxD, OUTPUT);
   BTSerie.begin(9600);
 #endif
+
+
 }
 
 void loop() {
   long currentTime = millis();
-  
+
   //int distance = sonar.ping_cm();
   //byte somethingLeft = digitalRead(LINE_SENSOR_LEFT);
   //byte somethingRight = digitalRead(LINE_SENSOR_RIGHT);
-    
+
   int buttonId = getPressedButton();
   char button = 0;
   if (buttonId >= 0) {
@@ -208,9 +219,9 @@ void loop() {
         Serial.println(F("program terminated"));
         isMoving = false;
         disableMotors();
-        lcd.clear();
-        lcd.setBacklight(HIGH);
-        lcd.print(F("fin !"));
+        lcd->clear();
+        lcd->setBacklight(HIGH);
+        lcd->print(F("fin !"));
 #ifdef HAVE_BLUETOOTH
         BTSerie.println(F("fin !"));
 #endif
@@ -285,7 +296,7 @@ void actionButtonForScreen(char button) {
           break;
         case 'B' :
         case 'a' :
-        case 'c' : 
+        case 'c' :
         case 'r' :
         case 'E' :
         case 'U' :
@@ -323,9 +334,9 @@ void actionButtonForScreen(char button) {
   } else if (selectedMenu == RUNNING_MENU) {
     disableMotors();
     isMoving = false;
-    lcd.clear();
-    lcd.setBacklight(HIGH);
-    lcd.print(F("Arret!"));
+    lcd->clear();
+    lcd->setBacklight(HIGH);
+    lcd->print(F("Arret!"));
     delay(1000);
     selectedMenu = CTRL_MENU;
     changeDisplay = 1;
@@ -397,13 +408,13 @@ void actionButtonForSettingsScreen(char button) {
 void updateScreen() {
   if (changeDisplay) {
     if (selectedMenu == START_MENU) {
-      //lcd.setBacklight(HIGH);
-      lcd.display();
-      lcd.setCursor(0, 0);
-      lcd.print(F(" OoRoBoT  "));
-      lcd.print(OOROBOT_VERSION);
-      lcd.setCursor(0, 1);
-      lcd.print(F("Pret \7 demarrer!"));
+      //lcd->setBacklight(HIGH);
+      lcd->display();
+      lcd->setCursor(0, 0);
+      lcd->print(F(" OoRoBoT  "));
+      lcd->print(OOROBOT_VERSION);
+      lcd->setCursor(0, 1);
+      lcd->print(F("Pret \7 demarrer!"));
 #ifdef HAVE_BLUETOOTH
       BTSerie.print(F("OoRoBoT "));
       BTSerie.println(OOROBOT_VERSION);
@@ -412,61 +423,61 @@ void updateScreen() {
       previousMenu = CTRL_MENU;
       selectedMenu = CTRL_MENU;
     } else if (selectedMenu == CTRL_MENU) {
-      lcd.setBacklight(HIGH);
+      lcd->setBacklight(HIGH);
       cmd[cmd_l] = 0;
 #ifdef HAVE_BLUETOOTH
       BTSerie.println(cmd);
 #endif
-      lcd.clear();
-      lcd.setCursor(0, 0);
+      lcd->clear();
+      lcd->setCursor(0, 0);
       for (char i = 0 ; i < cmd_l ; i++) {
         if (i == 16) {
-          lcd.setCursor(0, 1);
+          lcd->setCursor(0, 1);
         }
-        if (i<32) {
-          lcd.print(commandToDisplay(cmd[i]));
+        if (i < 32) {
+          lcd->print(commandToDisplay(cmd[i]));
         }
       }
     } else if (selectedMenu == SETTINGS_MENU) {
-      lcd.setBacklight(HIGH);
-      lcd.clear();
+      lcd->setBacklight(HIGH);
+      lcd->clear();
       int cm = params.stepCm / 10;
       int mm = params.stepCm - 10 * cm;
-      int currentLine=selectedLine;
-      int stepIdx=0;
-      int turnIdx=1;
-      int lineIdx=2;
-      if (selectedLine==2) {
-        stepIdx=2;
-        turnIdx=2;
-        lineIdx=0;  
+      int currentLine = selectedLine;
+      int stepIdx = 0;
+      int turnIdx = 1;
+      int lineIdx = 2;
+      if (selectedLine == 2) {
+        stepIdx = 2;
+        turnIdx = 2;
+        lineIdx = 0;
       }
-      if (stepIdx<2) {
-        lcd.setCursor(0, stepIdx);
-        lcd.print(F(" Distance:"));
-        lcd.print(cm);
-        lcd.print(F("."));
-        lcd.print(mm);
-        lcd.print(F("cm"));
-      }      
-      if (turnIdx<2) {
-        lcd.setCursor(0, turnIdx);
-        lcd.print(F(" 1/4Tour:"));
-        lcd.print(params.turnSteps);
-        lcd.print(F("pas"));
+      if (stepIdx < 2) {
+        lcd->setCursor(0, stepIdx);
+        lcd->print(F(" Distance:"));
+        lcd->print(cm);
+        lcd->print(F("."));
+        lcd->print(mm);
+        lcd->print(F("cm"));
       }
-      if (lineIdx<2) {
-        lcd.setCursor(0, lineIdx);
-        lcd.print(F(" 1cm:"));
-        lcd.print(params.lineSteps);
-        lcd.print(F("pas"));
-        lcd.setCursor(0, lineIdx+1);
-        lcd.print(F(" "));
-        lcd.print(params.btName);
+      if (turnIdx < 2) {
+        lcd->setCursor(0, turnIdx);
+        lcd->print(F(" 1/4Tour:"));
+        lcd->print(params.turnSteps);
+        lcd->print(F("pas"));
       }
-      
-      lcd.setCursor(0, selectedLine%2);
-      lcd.print("\6");
+      if (lineIdx < 2) {
+        lcd->setCursor(0, lineIdx);
+        lcd->print(F(" 1cm:"));
+        lcd->print(params.lineSteps);
+        lcd->print(F("pas"));
+        lcd->setCursor(0, lineIdx + 1);
+        lcd->print(F(" "));
+        lcd->print(params.btName);
+      }
+
+      lcd->setCursor(0, selectedLine % 2);
+      lcd->print("\6");
 #ifdef HAVE_BLUETOOTH
       if (selectedLine == 0) {
         BTSerie.print(F("Distance:"));
@@ -482,9 +493,9 @@ void updateScreen() {
 #endif
 
     } else if (selectedMenu == CTRL_MENU) {
-      lcd.setBacklight(HIGH);
+      lcd->setBacklight(HIGH);
     } else if (selectedMenu == OFF_MENU) {
-      lcd.setBacklight(LOW);
+      lcd->setBacklight(LOW);
     }
     lastChangeDisplay = millis();
   }
@@ -513,22 +524,22 @@ char commandToDisplay(char c) {
   }
 }
 
-int startLoop=-1;
-int remainingLoop=0;
+int startLoop = -1;
+int remainingLoop = 0;
 
 boolean launchNextCommand() {
   if (commandLaunched >= cmd_l) {
     return false;
   } else {
     disableMotors();
-    lcd.clear();
-    if (stepDelay>100) {
-      lcd.setBacklight(HIGH);
-      lcd.print((num_of_cmd + 1));
-      lcd.print(F(" sur "));
-      lcd.print(max_num_cmd);
-      lcd.print(F(" : "));
-      lcd.print(commandToDisplay(cmd[commandLaunched]));
+    lcd->clear();
+    if (stepDelay > 100) {
+      lcd->setBacklight(HIGH);
+      lcd->print((num_of_cmd + 1));
+      lcd->print(F(" sur "));
+      lcd->print(max_num_cmd);
+      lcd->print(F(" : "));
+      lcd->print(commandToDisplay(cmd[commandLaunched]));
     }
 #ifdef HAVE_BLUETOOTH
     BTSerie.println(cmd[commandLaunched]);
@@ -542,8 +553,8 @@ boolean launchNextCommand() {
 
     num_of_cmd++;
     delay(stepDelay);
-    lcd.setBacklight(LOW);
-    
+    lcd->setBacklight(LOW);
+
     enableMotors();
 
     char command = cmd[commandLaunched];
@@ -554,7 +565,7 @@ boolean launchNextCommand() {
     switch (command) {
       case 'W':
         Serial.println(F("set waiting step delay"));
-        stepDelay=stepSize;
+        stepDelay = stepSize;
         break;
       case 'U':
         Serial.println(F("stepForward"));
@@ -581,17 +592,17 @@ boolean launchNextCommand() {
         moveServo(0);
         break;
       case '|' :
-        Serial.println(F("pen up"));  
+        Serial.println(F("pen up"));
         moveServo(30);
         break;
       case 'c' :
         currentRadius = stepSize;
         break;
       case 'r':
-        if (stepSize==1) {
-          reverseOrientation=true;
+        if (stepSize == 1) {
+          reverseOrientation = true;
         } else {
-          reverseOrientation=false;         
+          reverseOrientation = false;
         }
         break;
       case 'a' :
@@ -600,23 +611,23 @@ boolean launchNextCommand() {
         break;
       case 'B':
         Serial.println(F("begin loop"));
-        if (loopIndex>=MAX_LOOPS) {
+        if (loopIndex >= MAX_LOOPS) {
           Serial.println(F("too many loops included"));
         } else {
           loopCounter[loopIndex] = stepSize;
           loopPointer[loopIndex] = commandLaunched;
           loopIndex++;
-          startLoop=commandLaunched;
-          remainingLoop=stepSize;
+          startLoop = commandLaunched;
+          remainingLoop = stepSize;
         }
         break;
       case 'E':
         Serial.println(F("end loop"));
-        if (loopCounter[loopIndex-1]>1) {
-          commandLaunched=loopPointer[loopIndex-1];
-          loopCounter[loopIndex-1]--;
+        if (loopCounter[loopIndex - 1] > 1) {
+          commandLaunched = loopPointer[loopIndex - 1];
+          loopCounter[loopIndex - 1]--;
         } else {
-          if (loopIndex>0) {
+          if (loopIndex > 0) {
             loopIndex--;
           }
         }
@@ -658,7 +669,7 @@ short getStepSize(char* cmd,  short* commandLaunched)
         stepsize = 90;  // 90°;
         break;
       case 'P':
-        stepsize=stepDelay*2;
+        stepsize = stepDelay * 2;
         break;
     }
   }
@@ -669,8 +680,8 @@ short getStepSize(char* cmd,  short* commandLaunched)
 
 boolean isCommandTerminated() {
   /*
-  int diff = (millis() - startMovement);
-  if (diff>=100) {
+    int diff = (millis() - startMovement);
+    if (diff>=100) {
     startMovement=millis();
     stepperSpeed+=100;
     if (stepperSpeed>MAX_STEPPER_SPEED) {
@@ -681,9 +692,9 @@ boolean isCommandTerminated() {
       stepper2.setSpeed(stepperSpeed);
       stepper1.setSpeed(stepperSpeed);
     }
-  }
+    }
   */
-  stepper2.setSpeed(MAX_STEPPER_SPEED);    
+  stepper2.setSpeed(MAX_STEPPER_SPEED);
   stepper1.setSpeed(MAX_STEPPER_SPEED);
 
   steps1 = stepper1.distanceToGo();
@@ -712,22 +723,22 @@ void disableMotors() {
   stepper2.disableOutputs();
 }
 
-void doCircle(float radius, float angle, boolean reverseOrientation){
+void doCircle(float radius, float angle, boolean reverseOrientation) {
   isMoving = true;
-  startMovement=millis();
+  startMovement = millis();
   //AAW10r1c50a90G
   //AAW10r0c200a45G
   float lenght_big_arc, lenght_small_arc;
   float steps_big_arc, steps_small_arc;
   float speed_big_arc, speed_small_arc;
 
-  lenght_big_arc = 2 * PI * (radius + (WHEEL_SPACING_MM/2)) * (angle / 360);
+  lenght_big_arc = 2 * PI * (radius + (WHEEL_SPACING_MM / 2)) * (angle / 360);
   steps_big_arc = round(lenght_big_arc * params.stepCm / 10);
   speed_big_arc = MAX_STEPPER_SPEED;
 
-  lenght_small_arc = 2 * PI * (radius - (WHEEL_SPACING_MM/2)) * (angle / 360);
+  lenght_small_arc = 2 * PI * (radius - (WHEEL_SPACING_MM / 2)) * (angle / 360);
   steps_small_arc = round(lenght_small_arc * params.stepCm / 10);
-  speed_small_arc = abs((steps_small_arc*speed_big_arc)/steps_big_arc);
+  speed_small_arc = abs((steps_small_arc * speed_big_arc) / steps_big_arc);
 
   if (reverseOrientation) {
     stepper2.move(-steps_big_arc);
@@ -745,9 +756,9 @@ void doCircle(float radius, float angle, boolean reverseOrientation){
 
 void stepForward(short distance) {
   isMoving = true;
-  startMovement=millis();
+  startMovement = millis();
   stepperSpeed = MIN_STEPPER_SPEED;
-  
+
   int target = (int) ((float)distance * (float)params.lineSteps / 10.0f);
 #ifdef INVERT_DIRECTION
   target = target * -1;
@@ -758,7 +769,7 @@ void stepForward(short distance) {
 
 void stepBackward(short distance) {
   isMoving = true;
-  startMovement=millis();
+  startMovement = millis();
   stepperSpeed = MIN_STEPPER_SPEED;
 
   int target = (int) ((float)distance * (float)params.lineSteps / 10.0f);
@@ -771,7 +782,7 @@ void stepBackward(short distance) {
 
 void turnLeft(short angle) {
   isMoving = true;
-  startMovement=millis();
+  startMovement = millis();
   stepperSpeed = MIN_STEPPER_SPEED;
 
   int angleStep = (int)((float)angle / 90.0 * (float)params.turnSteps);
@@ -781,7 +792,7 @@ void turnLeft(short angle) {
 
 void turnRight(short angle) {
   isMoving = true;
-  startMovement=millis();
+  startMovement = millis();
   stepperSpeed = MIN_STEPPER_SPEED;
 
   int angleStep = (int)((float)angle / 90.0 * (float)params.turnSteps);
@@ -800,9 +811,9 @@ void loadParams() {
   if (savedParams.btName[0] >= 48) {
     strcpy(params.btName, savedParams.btName);
   } else {
-    strcpy(params.btName, "");  
+    strcpy(params.btName, "");
   }
-  
+
   if (savedParams.stepCm > 0 && savedParams.stepCm < 500) {
     params.stepCm = savedParams.stepCm;
   } else {
@@ -811,7 +822,7 @@ void loadParams() {
   if (savedParams.turnSteps > 0 && savedParams.turnSteps < 5000) {
     params.turnSteps = savedParams.turnSteps;
   } else {
-    params.turnSteps=1250;
+    params.turnSteps = 1250;
   }
   if (savedParams.lineSteps > 0 && savedParams.lineSteps < 500) {
     params.lineSteps = savedParams.lineSteps;
