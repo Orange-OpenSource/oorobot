@@ -1,16 +1,48 @@
 ![logo_s](https://user-images.githubusercontent.com/16662847/38424117-4c38fe12-39b0-11e8-9f6f-9993243ba1fd.png)
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
+- [OoRoBoT : Un robot éducatif à construire soi-même](#oorobot-un-robot-ducatif-construire-soi-mme)
+	- [Genèse du projet](#gense-du-projet)
+	- [Le principe](#le-principe)
+	- [Le matériel](#le-matriel)
+		- [À acheter :](#-acheter-)
+		- [À récupérer :](#-rcuprer-)
+		- [Notes sur l'alimentation électrique](#notes-sur-lalimentation-lectrique)
+	- [Le châssis](#le-chssis)
+		- [Impression 3D](#impression-3d)
+		- [Découpe laser](#dcoupe-laser)
+	- [Historique](#historique)
+		- [La version en MDF](#la-version-en-mdf)
+		- [Le char](#le-char)
+		- [Le chariot](#le-chariot)
+		- [Le prototype](#le-prototype)
+	- [Le montage des composants](#le-montage-des-composants)
+	- [Le code](#le-code)
+	- [Pilotage avec le Bluetooth](#pilotage-avec-le-bluetooth)
+	- [Licences](#licences)
+	- [Les projets équivalents](#les-projets-quivalents)
+
+<!-- /TOC -->
 # OoRoBoT : Un robot éducatif à construire soi-même
 
-L'idée est de créer un robot éducatif destiné aux enfants de maternelle et élémentaire sur le principe de [la BeeBot](http://www.robotsenclasse.ch/robots-en-classe/beebot), tout en suivant les contraintes suivantes :
-- Mettre le projet en OpenSource : page github avec le code, la liste de matériel et les plans nécessaires
-- Utiliser du matériel électronique standard (Arduino) et peu onéreux
-- Éviter les opérations "complexes" (soudure, usinage)
+OoRoBoT est un robot éducatif destiné aux enfants de maternelle et élémentaire sur le principe de [la BeeBot](http://www.robotsenclasse.ch/robots-en-classe/beebot), tout en suivant les contraintes suivantes :
+- projet en OpenSource : page github avec le code, la liste de matériel et les plans nécessaires
+- matériel électronique standard (Arduino) et peu onéreux
+- pas d'opérations "complexes" (soudure, usinage)
 
-Au fil des évolutions du projet, l'OoRoBoT apporte tout un lot de fonctionnalités complémentaires :
-- Présence d'un écran LCD de 2 lignes de 16 caractères permettant à l'enfant de visualiser le programme qu'il écrit. Cet écran associé au clavier permet aussi de régler le robot très précisément
-- Ajout d'une interface Bluetooth permettant de piloter le robot à distance et ainsi permettre de lui donner des ordres complexes (boucles, tracé d'arc de cercle ...)
-- Ajout d'un servomoteur afin de baisser/lever un crayon
+Le robot est programmable avec des commandes simples :
+- avancer
+- reculer
+- tourner à droite à angle droit
+- tourner à gauche à angle droit
+- faire une pause
+- *lever ou baisser le crayon* au centre du robot
+
+Ces commandes sont réalisables par des enfants.
+
+L'OoRoBoT est composé de deux parties :
+* [matérielle](##-Le-matériel)
+* [logicielle](##-Le-code)
 
 Actuellement le robot peut être utilisé de deux façons différentes (comme indiqué dans sur [ce poster](https://github.com/Orange-OpenSource/oorobot/blob/master/doc/com/oorobot_poster-LIGHT.pdf)) :
 - Pour les enfants de 4 à 7 ans : programmer des parcours sur des plateaux (voir les plateaux disponibles dans le [répertoire /doc/exercices](https://github.com/Orange-OpenSource/oorobot/blob/master/doc/exercices))
@@ -26,15 +58,13 @@ Pour commander un kit, merci d'envoyer un email à [oorobot@fablab-lannion.org](
 
 **La notice de montage est disponible [ici](https://orange-opensource.github.io/oorobot/montage.pdf).**
 
-Si vous voulez une version du robot en impression 3D avec la possibilité de baisser/lever un crayon je vous invite à voir [cette version du projet](http://www.tablettesetpirouettes.com/oorobot-a-lecole-elementaire/) réalisé par [Delphine Thibault](https://twitter.com/DelphineThib).
-
-## Genèse du projet 
+## Genèse du projet
 
 J'ai eu cette idée en discutant avec une professeure des écoles (Maître Formatrice) qui utilisait des BeeBot dans son école. Actuellement on trouve de nombreux de robots sur le marché mais ils sont souvent trop "compliqués" pour faire des activités simples. Dans l'exemple que j'ai observé, les BeeBot étaient utilisées pour apprendre le déplacement relatif et la suite de commandes à des enfants de grande section. J'ai cherché un équivalent moins cher et/ou OpenSource je n'ai rien trouver de probant.
 
 Je me suis donc lancé dans ce projet profitant des imprimantes 3D disponibles au travail, de mes compétences en Arduino et du temps donné par mon employeur pour réaliser des *side-project*. L'idée était aussi de pouvoir utiliser ce robot comme traceur (comme [la mythique tortue "Jeulin" des années 80](http://www.tortue-jeulin.com/articles.php?lng=fr&pg=3&mnuid=2&tconfig=0)).
- 
-Au final, le robot revient à moins de 30€ (si vous le fabriquer vous-même) et ne demande aucune soudure. Le châssis peut être imprimé sur une imprimante 3D possédant un plateau de 20cm sur 20cm ou en utilisant une découpeuse laser.
+
+Au final, le robot revient à moins de 30€ (si vous le fabriquez vous-même) et ne demande aucune soudure. Le châssis peut être imprimé sur une imprimante 3D possédant un plateau de 20cm sur 20cm ou en utilisant une découpeuse laser.
 
 
 Le nom du projet **OoRoBoT** pour **Orange Open ROBOT**.
@@ -73,7 +103,7 @@ Le robot peut aussi être programmé à distance (Bluetooth) via une application
 ![composant_s](https://user-images.githubusercontent.com/16662847/38428438-0807efa8-39bc-11e8-9a5e-c5d2540ab3b0.jpg)
 
 ### À acheter :
-- 1 [arduino nano](https://fr.aliexpress.com/store/product/Nano-CH340-ATmega328P-MicroUSB-Compatible-for-Arduino-Nano-V3/1950989_32572612009.html) : 2.40€ (3.50€ [avec le câble USB](https://fr.aliexpress.com/item/Nano-V3-ATmega328P-CH340G-USB-2-0-data-câble-50cm-Compatible-for-Arduino-Nano-V3-0/32759066704.html)) 
+- 1 [arduino nano](https://fr.aliexpress.com/store/product/Nano-CH340-ATmega328P-MicroUSB-Compatible-for-Arduino-Nano-V3/1950989_32572612009.html) : 2.40€ (3.50€ [avec le câble USB](https://fr.aliexpress.com/item/Nano-V3-ATmega328P-CH340G-USB-2-0-data-câble-50cm-Compatible-for-Arduino-Nano-V3-0/32759066704.html))
 - 1 [sensor shield](https://fr.aliexpress.com/store/product/1pcs-SAMIORE-ROBOT-UNO-Shield-Nano-Shield-for-NANO-3-0-and-UNO-R3-duemilanove-2009/1022067_32906961218.html) : 1€
 - 2 [moteurs pas à pas](https://fr.aliexpress.com/item/5V-Stepper-Motor-28BYJ-48-With-Drive-Test-Module-Board-ULN2003-5-Line-4-Phase/32608569300.html) : 4.50€
 - 1 [clavier 3x4 boutons](https://fr.aliexpress.com/item/Button-Keypad-3x4-module/32530917534.html) : 2,00€
@@ -97,7 +127,7 @@ Soit un total d'environ **23€** et surtout **aucune soudure n'est nécessaire*
 ### Notes sur l'alimentation électrique
 - Dans la liste de matériel j'ai indiqué de prendre un conteneur de 6 piles LR6 (soit 9V). Ces piles sont à brancher sur l'entrée régulée du shield. Cette solution permet d'assurer la stabilité de l'alimentation du robot même quand les piles commencent à faiblir. L'inconvénient c'est que ça oblige à avoir 6 piles pour chaque robot.
 - On peut utiliser un conteneur de 4 piles, mais ce dernier doit être branché directement sur l'alimentation 5V derrière le régulateur (celui-ci est prévu pour des tensions de 7V à 12v). Le problème de cette solution est qu'elle surcharge un peu les composants au début de vie des piles et peut entraîner des instabilités de fonctionnement en fin de vie des piles.
-- On peut utiliser une batterie 5V pour téléphone portable de [ce style](https://fr.aliexpress.com/item/Remax-2500mAh-Pino-Small-Mobile-Phone-Large-Capacity-Mini-Power-Bank-General-Charge-Treasure-Extra-Power/32790051749.html) à 7€ à brancher directement sur la prise micro-USB de l'Arduino. 
+- On peut utiliser une batterie 5V pour téléphone portable de [ce style](https://fr.aliexpress.com/item/Remax-2500mAh-Pino-Small-Mobile-Phone-Large-Capacity-Mini-Power-Bank-General-Charge-Treasure-Extra-Power/32790051749.html) à 7€ à brancher directement sur la prise micro-USB de l'Arduino.
 
 Les batteries ont l'avantage d'être bien régulées (et peuvent donc être directement branchées sur l'Arduino). L'autre avantage est qu'elles disposent, la plupart du temps, d'un bouton marche/arrêt.
 
@@ -109,18 +139,31 @@ Sans optimisation, lors des premiers essais réalisés on mesure que lors des d�
 - Les roues doivent être assez grandes pour que le robot avance assez rapidement
 - Il faut garder un trou dans l'axe des roues pour pouvoir insérer un crayon
 
+Il existe deux types de patron pour le châssis :
+* impressions 3D
+* découpe laser
+
+### Impression 3D
 Les parties conçues (voir répertoire 3D) :
 - Deux roues rapides à imprimer de diamètre 9cm avec les encoches pour insérer en force les moteurs pas-à-pas et des rebords pour retenir les élastiques
 - Un châssis contenant les supports nécessaires pour fixer les composants. Utilisation des contrôleurs des moteurs pas-à-pas pour faire des "yeux".
- 
+
 L'impression de la version actuelle des pièces a pris 5h20 et consommé 98g de matière (PLA) avec les réglages suivant (sur une imprimante Volumic Stream20Pro):
 - qualité normale (200 microns)
 - densité de remplissage : 20%
 - épaisseur des bords : 0.8 mm (au lieu de 1.2mm par défaut sur les profils Cura de l'imprimante)
- 
-A la vue des demandes qui commencent à affluer pour avoir un robot, j'ai conçu un modèle à fabriquer avec une découpeuse laser comme celle disponible au [FabLab de Lannion](http://www.fablab-lannion.org/). Cette version en découpe laser permet maintenant de lever/baisser un crayon. 
+
+### Découpe laser
+A la vue des demandes qui commencent à affluer pour avoir un robot, j'ai conçu un modèle à fabriquer avec une découpeuse laser comme celle disponible au [FabLab de Lannion](http://www.fablab-lannion.org/). Cette version en découpe laser permet maintenant de lever/baisser un crayon.
 
 ## Historique
+
+Au fil des évolutions du projet, l'OoRoBoT apporte tout un lot de fonctionnalités complémentaires :
+- Présence d'un écran LCD de 2 lignes de 16 caractères permettant à l'enfant de visualiser le programme qu'il écrit. Cet écran associé au clavier permet aussi de régler le robot très précisément
+- Ajout d'une interface Bluetooth permettant de piloter le robot à distance et ainsi permettre de lui donner des ordres complexes (boucles, tracé d'arc de cercle ...)
+- Ajout d'un servomoteur afin de baisser/lever un crayon
+
+[Delphine Thibault](https://twitter.com/DelphineThib) avait réalisé une première version du robot en impression 3D avec la possibilité de baisser/lever un crayon, [voir son article](http://www.tablettesetpirouettes.com/oorobot-a-lecole-elementaire/)
 
 ### La version en MDF
 
@@ -129,7 +172,7 @@ Ajout d'un système pour pouvoir lever et baisser un crayon.
 ![oorobot mdf](https://user-images.githubusercontent.com/16662847/44794123-16318680-aba8-11e8-8910-fae8577d0b5f.jpg)
 
  Les fichiers pour la découpe laser (oorobot.svg pour modifier le modèle avec Inkscape et oorobot.dxf à charger dans le logiciel de votre découpeuse laser) se trouve dans le [répertoire 2d](https://github.com/Orange-OpenSource/oorobot/tree/master/2d). Il ne faut garder que les pièces en blanc :
- 
+
 ![plan](https://user-images.githubusercontent.com/16662847/45498373-29cd1780-b77a-11e8-8d97-227498b1159d.png)
 
 ### Le char
@@ -157,7 +200,7 @@ Branchement du clavier sur le port A0 (détacher un groupe de 3 fils):
 - Brancher un fil entre la broche **GND** du clavier et la broche **G** du "sensor shield"
 - Brancher un fil entre la broche **Out** du clavier et la broche **S** du "sensor shield"
 
-Branchement de l'écran LCD sur une des ligne I2C (détacher un groupe de 4 fils): 
+Branchement de l'écran LCD sur une des ligne I2C (détacher un groupe de 4 fils):
 - Brancher un fil entre la broche **GND** de l'écran et la broche **GND** la ligne I2C choisie
 - Brancher un fil entre la broche **VCC** de l'écran et la broche **5V** la ligne I2C choisie
 - Brancher un fil entre la broche **SDA** de l'écran et la broche **SDA** la ligne I2C choisie
@@ -183,7 +226,7 @@ Brancher les moteurs pas-à-pas sur les contrôleurs. Marquer les moteurs droite
 
 Branchement du servomoteur sur le port 3 : brancher le câble de façon à ce que le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**
 
-**Attention** pour les personnes ayant commandé [ce modèle de *shield*](https://fr.aliexpress.com/store/product/Nano-I-O-expansion-Shield-for-Arduino-Nano-V3-pinout-Assembled/1950989_32633286806.html) il faut inverser les fils rouge et marron du servomoteur! Pour cela utiliser un petit tournevis plat et soulever légèrement le petit ergot au bout d'un des fils (rouge ou marron) puis tirer légèrement sur ce dernier, il devrait venir facilement. Faire de même avec le deuxième fil. Rebrancher les fils en les inversant par rapport à leur position initiale. Vous pourrez maintenant faire en sorte de respecter la consigne pour que "le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**" 
+**Attention** pour les personnes ayant commandé [ce modèle de *shield*](https://fr.aliexpress.com/store/product/Nano-I-O-expansion-Shield-for-Arduino-Nano-V3-pinout-Assembled/1950989_32633286806.html) il faut inverser les fils rouge et marron du servomoteur! Pour cela utiliser un petit tournevis plat et soulever légèrement le petit ergot au bout d'un des fils (rouge ou marron) puis tirer légèrement sur ce dernier, il devrait venir facilement. Faire de même avec le deuxième fil. Rebrancher les fils en les inversant par rapport à leur position initiale. Vous pourrez maintenant faire en sorte de respecter la consigne pour que "le fil marron soit sur la broche **G** du port 3, le fil rouge sur la broche **V** et le fil orange sur la broche **S**"
 
 Branchement du module Bluetooth :
 - Brancher le câble de l'interrupteur (détacher un groupe de 2 fils):
@@ -199,12 +242,12 @@ Découper les modèles de touches ([disponibles ici](https://github.com/Orange-O
 ![positions_touches](https://user-images.githubusercontent.com/16662847/42823193-384c217c-89dd-11e8-95d6-90f48b636311.jpg)
 
 ## Le code
- 
+
 Vous trouverez 2 programmes dans le répertoire [arduino](https://github.com/Orange-OpenSource/oorobot/tree/master/arduino/) de ce dépôt :
 - init-bluetooth: ce programme permet d'initialiser le module Bluetooth (lui donner un nom au format "OoRoBoT-XXXX" et affecter le code d'appairage 0000). Ce programme n'est à charger qu'une seule fois.
 - oorobot: le programme principal du robot
 
-Dans kes derniers kits livrés par le [FabLab de Lannion](http://www.fablab-lannion.org/) (depuis novembre 2018) le module Bluetooth est pré-configuré et l'Arduino aura la dernière version du programme 'oorobot' d'installer. Vous n'avez donc pas à faire les étapes suivantes.
+Dans les derniers kits livrés par le [FabLab de Lannion](http://www.fablab-lannion.org/) (depuis novembre 2018) le module Bluetooth est pré-configuré et l'Arduino aura la dernière version du programme 'oorobot' d'installé. Vous n'avez donc pas à faire les étapes suivantes.
 
 Télécharger et installer le programme [Arduino IDE ](https://www.arduino.cc/en/Main/Software) sur votre PC. Brancher l'Arduino avec un câble USB sur votre PC. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée (*/dev/ttyUSBx* sous Linux, *COMx* sous Windows). Sélectionner dans "Outils/Type de carte" le modèle "Arduino Nano"
 
@@ -231,7 +274,7 @@ Vous pouvez utiliser le "moniteur série" (Menu "Options/Moniteur série") du pr
 
 Le nom de votre robot sera affiché sur l'écran LCD. Si ce n'est pas le cas vérifier le contraste de votre écran (en tournant le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran). Si c'est bon vous pouvez enlever le pont sur l'entrée EN du module Bluetooth. Débranchez et rebranchez le câble arrivant sur la broche VCC du module Bluetooth. Votre module Bluetooth devrait clignoter rapidement, il est prêt à être appairé. Vérifiez que vous voyez bien le robot dans la liste des périphériques Bluetooth depuis votre téléphone/tablette.
 
-Télécharger le programme [oorobot](https://orange-opensource.github.io/oorobot/arduino/oorobot.zip), le décompresser et l'ouvrir avec le programme *Arduino IDE*. 
+Télécharger le programme [oorobot](https://orange-opensource.github.io/oorobot/arduino/oorobot.zip), le décompresser et l'ouvrir avec le programme *Arduino IDE*.
 
 Téléverser ensuite le programme *oorobot* sur l'Arduino. Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le câblage est bien réalisé :
 
@@ -267,12 +310,12 @@ Ordre de montage des composants sur le châssis 3D :
 - Placer le bloc de pile devant l'Arduino
 
 ## Pilotage avec le Bluetooth
- 
+
 Le robot est maintenant pilotable via une application pour mobile/tablette (Android pour le moment) conçue par un collègue (merci Julien) avec Ionic (voir répertoire OoRobotIonicApp) et utilisant Blockly :
 
 ![app](https://user-images.githubusercontent.com/16662847/36200888-63228792-117e-11e8-93df-88c7be66a311.png)
 
-Vous pouvez télécharger l'APK [ici](https://orange-opensource.github.io/oorobot/apk/oorobot.apk) 
+Vous pouvez télécharger l'APK [ici](https://orange-opensource.github.io/oorobot/apk/oorobot.apk)
 
 Afin d'envoyer les programmes sur l'Arduino on a définit un pseudo langage simple sous la forme :
 ```
@@ -307,6 +350,5 @@ Le code est sous [GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.fr.htm
 
 ## Les projets équivalents
 
-- [escornabot](http://escornabot.com/web/en) : un projet espagnol vraiment dans le même esprit mais qui demande un peu connaissance technique pour la partie clavier (soudure)
+- [escornabot](http://escornabot.com/) : un projet espagnol vraiment dans le même esprit mais qui demande un peu connaissance technique pour la partie clavier (soudure)
 - [scott](http://lamachinerie.org/ressources/scott/) : un projet assez proche de l'OoRoBoT dans l'esprit et le matériel utilisé. La différence principale se situe dans le fait que l'OoRoBoT peut fonctionner de façon autonome avec son clavier et son écran.
-
