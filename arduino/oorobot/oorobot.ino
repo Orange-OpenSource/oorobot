@@ -7,7 +7,7 @@
 
 */
 #include <EEPROM.h>
-#include <Wire.h>
+#include <Wire.h>/
 #include <LiquidCrystal_I2C.h>
 #include <AccelStepper.h>
 #include <Servo.h>
@@ -15,7 +15,7 @@
 #include "charset.h"
 #include "buttons.h"
 
-#define OOROBOT_VERSION "1.1.5"
+#define OOROBOT_VERSION "1.1.6"
 #define SCREEN_TIMEOUT 45000
 
 #define TRIGGER_PIN A1
@@ -138,6 +138,8 @@ void setup() {
       break;
     }
   }
+  Serial.print(F("I2C screen found "));
+  Serial.println(address);
   lcd=LiquidCrystal_I2C(address, 16, 2);
   lcd.init();
   lcd.backlight();
@@ -196,7 +198,7 @@ void loop() {
     while (BTSerie.available()) {
       selectedMenu = CTRL_MENU;
       button = BTSerie.read();
-      Serial.println(button);
+      //Serial.println(button);
       if (button != 0) {
         actionButtonForScreen(button);
       }
@@ -253,6 +255,7 @@ void actionButtonForScreen(char button) {
     Serial.print(F("New char : "));
     Serial.println(button);
     // it's a number
+
     if ( button > 47  && button < 58) {
       consecutive_numbers++;
       if (consecutive_numbers > MAX_CONSECUTIVE_NUMBERS) {
@@ -271,13 +274,14 @@ void actionButtonForScreen(char button) {
         case 'G':
           stepDelay = 800;
           selectedMenu = RUNNING_MENU;
-          isMoving = true;
-          commandLaunched = 0;
-
-          max_num_cmd = num_of_cmd;
-          num_of_cmd = 0;
-          launchNextCommand();
-
+          if (num_of_cmd>0) {
+            isMoving = true;
+            commandLaunched = 0;
+  
+            max_num_cmd = num_of_cmd;
+            num_of_cmd = 0;
+            launchNextCommand();
+          }
           break;
         case 'A':
           cmd_l = 0;
@@ -344,6 +348,7 @@ void actionButtonForScreen(char button) {
     selectedMenu = previousMenu;
     changeDisplay = 1;
   }
+
 }
 
 void actionButtonForSettingsScreen(char button) {
