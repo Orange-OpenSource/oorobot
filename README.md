@@ -315,7 +315,7 @@ Le robot est maintenant pilotable via une application pour mobile/tablette (Andr
 
 ![app](https://user-images.githubusercontent.com/16662847/36200888-63228792-117e-11e8-93df-88c7be66a311.png)
 
-Vous pouvez télécharger l'APK [ici](https://orange-opensource.github.io/oorobot/apk/oorobot.apk)
+Vous pouvez télécharger l'APK [ici](https://github.com/Orange-OpenSource/oorobot/releases)
 
 Afin d'envoyer les programmes sur l'Arduino on a définit un pseudo langage simple sous la forme :
 ```
