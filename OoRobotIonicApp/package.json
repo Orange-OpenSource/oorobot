@@ -14,7 +14,7 @@
   "dependencies": {
     "@angular/common": "6.1.9",
     "@angular/compiler": "6.1.9",
-    "@angular/compiler-cli": "^7.2.6",
+    "@angular/compiler-cli": "^13.2.4",
     "@angular/core": "6.1.9",
     "@angular/forms": "6.1.9",
     "@angular/http": "6.1.9",
@@ -31,7 +31,7 @@
     "@ionic/storage": "^2.2.0",
     "android-versions": "^1.4.0",
     "angularx-qrcode": "^1.5.3",
-    "cordova-android": "^7.1.1",
+    "cordova-android": "^10.1.1",
     "cordova-android-support-gradle-release": "^2.0.1",
     "cordova-plugin-bluetooth-serial": "^0.4.7",
     "cordova-plugin-crosswalk-webview": "^2.4.0",
@@ -52,11 +52,11 @@
     "rxjs": "6.3.3",
     "rxjs-compat": "^6.4.0",
     "sw-toolbox": "3.6.0",
-    "webcom": "^2.6.1",
+    "webcom": "^2.15.11",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^3.2.2",
+    "@ionic/app-scripts": "^3.2.4",
     "typescript": "3.1.2"
   },
   "description": "An Ionic project",
