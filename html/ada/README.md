@@ -514,6 +514,36 @@ Proposition d'exercide : afficher sur l'écran LCD la température (sur la premi
 
 ---
 
+### Utiliser un capteur de basculement (tilt)
+
+Ce composant permet de détecter les
+
+![title](https://ae01.alicdn.com/kf/HTB1d7PFKpXXXXXoXXXXq6xXFXXXg/Capteur-num-rique-d-inclinaison-assembl.jpg_Q90.jpg_.webp)
+
+```C
+/* Tilt Sensor
+ *
+ */
+
+int inPin = 13; 
+int value = 0;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(inPin, INPUT); // initializes digital pin 7 as input
+}
+
+
+void loop() {
+  value = digitalRead(inPin); // reads the value at a digital input
+  Serial.print("Tilt = ");
+  Serial.println(value);
+  delay(500);
+}
+```
+
+---
+
 ## Gérer une horloge temps réel (I²C)
 
 L'Arduino n'est pas capable de récupérer l'heure et la date courante. 
@@ -1079,6 +1109,120 @@ void loop() {
         displayImage(logo);
       }
     }
+  }
+}
+```
+
+---
+
+## Utiliser une bande de 8 DEL
+
+![bande](https://ae01.alicdn.com/kf/H37ecb95652a94eb1a09954d4af65dfb9h/SAMIORE-carte-de-d-veloppement-LED-RGB-5050-8Bits-8-canaux-WS2812b-10-pi-ces.jpg_Q90.jpg_.webp)
+
+```C
+#include <Wire.h>
+#include <Adafruit_NeoPixel.h>
+
+Adafruit_NeoPixel pixels(64, 2, NEO_GRB + NEO_KHZ800);
+String line;
+uint32_t rouge = pixels.Color(255, 0, 0);
+uint32_t verte = pixels.Color(0, 255, 0);
+uint32_t bleue = pixels.Color(0, 0, 255);
+uint32_t orange = pixels.Color(255, 80, 0);
+uint32_t blanche = pixels.Color(255, 255, 255);
+uint32_t noire = pixels.Color(0, 0, 0);
+
+String getKey(String str) {
+  return str.substring(0, str.indexOf('='));
+}
+
+String getValue(String str) {
+  if (str.indexOf('=')) {
+    return str.substring(str.indexOf('=') + 1);
+  } else {
+    return "";
+  }
+}
+void setup() {
+  Serial.begin(9600);
+
+  Wire.begin();
+  pixels.begin();
+  // Ne pas mettre trop fort
+  pixels.setBrightness(50);
+}
+
+
+void loop() {
+  while (Serial.available()) {
+    line = Serial.readStringUntil('\n');// read the incoming data as string
+    line.trim();
+    if (line.startsWith("led")) {
+      String cle = getKey(line);
+      String valeur = getValue(line);
+      uint32_t couleurLed;
+      int positionLed=-1;
+      if (cle == "led0") {
+        positionLed=0;
+      } else if (cle == "led1") {
+        positionLed=1;
+      } else if (cle == "led2") {
+        positionLed=2;
+      } else if (cle == "led3") {
+        positionLed=3;
+      } else if (cle == "led4") {
+        positionLed=4;
+      } else if (cle == "led5") {
+        positionLed=5;
+      } else if (cle == "led6") {
+        positionLed=6;
+      } else if (cle == "led7") {
+        positionLed=7;
+      }
+      if (valeur == "blanche") {
+        couleurLed=blanche;
+      } else if (valeur == "noire") {
+        couleurLed=noire;
+      } else if (valeur == "rouge") {
+        couleurLed=rouge;
+      } else if (valeur == "verte") {
+        couleurLed=verte;
+      } else if (valeur == "bleue") {
+        couleurLed=bleue;
+      } else if (valeur == "orange") {
+        couleurLed=orange;
+      }
+      if (positionLed>=0) {
+        pixels.setPixelColor(positionLed, couleurLed);
+        pixels.show();
+      } 
+    } else if (line.startsWith("luminosite")) {
+      Serial.print("luminosite=");
+      String valeur = getValue(line);
+
+      Serial.println(valeur);
+      String cle = getKey(line);
+      pixels.setBrightness(valeur.toInt());
+      pixels.show();
+
+    } else if (line.startsWith("arc-en-ciel")) {
+       rainbow(10);
+    } else if (line.startsWith("eteindre")) {
+      pixels.clear();
+          pixels.show();
+
+    }
+  }
+}
+
+void rainbow(int wait) {
+  for(long firstPixelHue = 0; firstPixelHue < 5*65536; firstPixelHue += 256) {
+    for(int i=0; i<pixels.numPixels(); i++) { 
+      int pixelHue = firstPixelHue + (i * 65536L / pixels.numPixels());
+      pixels.setPixelColor(i, pixels.gamma32(pixels.ColorHSV(pixelHue)));
+    }
+    pixels.show();
+    delay(wait);
   }
 }
 ```
