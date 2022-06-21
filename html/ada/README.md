@@ -1123,7 +1123,7 @@ void loop() {
 #include <Wire.h>
 #include <Adafruit_NeoPixel.h>
 
-Adafruit_NeoPixel pixels(64, 2, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixels(8, 2, NEO_GRB + NEO_KHZ800);
 String line;
 uint32_t rouge = pixels.Color(255, 0, 0);
 uint32_t verte = pixels.Color(0, 255, 0);
