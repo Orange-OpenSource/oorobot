@@ -103,25 +103,24 @@ Le robot peut aussi être programmé à distance (Bluetooth) via une application
 ![composant_s](https://user-images.githubusercontent.com/16662847/38428438-0807efa8-39bc-11e8-9a5e-c5d2540ab3b0.jpg)
 
 ### À acheter :
-- 1 [arduino nano](https://fr.aliexpress.com/store/product/Nano-CH340-ATmega328P-MicroUSB-Compatible-for-Arduino-Nano-V3/1950989_32572612009.html) : 2.40€ (3.50€ [avec le câble USB](https://fr.aliexpress.com/item/Nano-V3-ATmega328P-CH340G-USB-2-0-data-câble-50cm-Compatible-for-Arduino-Nano-V3-0/32759066704.html))
-- 1 [sensor shield](https://fr.aliexpress.com/store/product/1pcs-SAMIORE-ROBOT-UNO-Shield-Nano-Shield-for-NANO-3-0-and-UNO-R3-duemilanove-2009/1022067_32906961218.html) : 1€
-- 2 [moteurs pas à pas](https://fr.aliexpress.com/item/5V-Stepper-Motor-28BYJ-48-With-Drive-Test-Module-Board-ULN2003-5-Line-4-Phase/32608569300.html) : 4.50€
-- 1 [clavier 3x4 boutons](https://fr.aliexpress.com/item/Button-Keypad-3x4-module/32530917534.html) : 2,00€
-- 1 [écran LCD 2x16 caractères sur interface I2C](https://fr.aliexpress.com/store/product/LCD1602-I2C-LCD-1602-module-Blue-screen-IIC-I2C-for-arduino-LCD1602-Adapter-plate/1022067_32651314933.html) : 1,70€
-- 1 [conteneur de piles LR6](https://fr.aliexpress.com/item/New-6-x-AA-Battery-Case-Storage-Holder-With-DC2-1-Power-Jack-For-Arduino/32821210909.html) : 0,80€
-- 1 [servomoteur](https://fr.aliexpress.com/store/product/1pcs-Mitoot-RC-Micro-Servo-9g-SG90-Servo-For-Arduino-Aeromodelismo-Align-Trex-450-Airplane-Helicopters/603538_32890069044.html) pour lever/baisser un crayon: 1.50€
-- 2 [roues "billes"](https://fr.aliexpress.com/item/CY-12A-12mm-bearing-smart-car-casters-small-maverick-eye-round-steel-ball-omni-wheel-universal/32705899129.html) : 2,50€
+- 1 [arduino nano](https://fr.aliexpress.com/item/4000903444456.html) (prendre la version avec les broches soudées et le câble USB) : 5,70€
+- 1 [sensor shield](https://fr.aliexpress.com/store/product/1pcs-SAMIORE-ROBOT-UNO-Shield-Nano-Shield-for-NANO-3-0-and-UNO-R3-duemilanove-2009/1022067_32906961218.html) : 1,20€
+- 2 [moteurs pas à pas](https://fr.aliexpress.com/item/32714267741.html) : 3,80€
+- 1 [clavier 3x4 boutons](https://fr.aliexpress.com/item/Button-Keypad-3x4-module/32530917534.html) : 3,40€
+- 1 [écran LCD 2x16 caractères sur interface I2C](https://fr.aliexpress.com/store/product/LCD1602-I2C-LCD-1602-module-Blue-screen-IIC-I2C-for-arduino-LCD1602-Adapter-plate/1022067_32651314933.html) : 2,50€
+- 1 [conteneur de piles LR6](https://fr.aliexpress.com/item/32847111391.html) : 1,50€
+- 1 [servomoteur](https://fr.aliexpress.com/item/32864196324.html) (choisir le modèle SG90) pour lever/baisser un crayon: 1.40€
+- 2 [roues "billes"](https://fr.aliexpress.com/item/CY-12A-12mm-bearing-smart-car-casters-small-maverick-eye-round-steel-ball-omni-wheel-universal/32705899129.html) : 3,50€
 - 1 [lot de câbles "dupont" de 20cm femelle-femelle F-F](https://fr.aliexpress.com/store/product/Free-Shipping-80pcs-dupont-câble-jumper-wire-dupont-line-male-to-female-dupont-line-20cm-1P/1022067_1699319473.html) : 0,85€
-- [des vis M2x5mm ](https://fr.aliexpress.com/item/50Pcs-lot-Screw-M2-5-of-Screws-Nuts-Assortment-Bolts-Screw-Spike-Round-Head-Screw-2mm/32722845879.html) : 0,70€
-- [des vis M3x5mm ](https://fr.aliexpress.com/item/M3-x-5mm-Croix-Plat-T-te-Frais-e-Boulons-Machine-Vis-100-pcs/32958567739.html) : 1.6€ : il y en a besoin de 8 en tout par robot, vous pouvez récupérer des vis utilisées pour tenir les disques durs ou les cartes mères
-- 1 [module Bluetooth HC-06](https://fr.aliexpress.com/item/HC-06-Bluetooth-de-S-rie-passe-Module-Sans-Fil-de-Communication-S-rie-HC06-Bluetooth/32857133517.html): 2.60€
-- 1 [bouton on/off](https://fr.aliexpress.com/item/Connecteur-Plug-avec-JST-M-le-Femelle-Fil-Ligne-de-Commutateur-On-Off-Connecteur-Plug-Pour/32837794940.html) (choisir le moins cher) ou [celui-ci](https://fr.aliexpress.com/item/Haute-Qualit-JST-M-le-Femelle-Fil-C-blage-Sur-Off-Micro-Mini-Commutateur-Connecteur-Plug/32843117057.html) : 1,30€
+- [des vis M2x5mm ](https://fr.aliexpress.com/item/1005001763933939.html?) : 1€
+- [des vis M3x5mm ](https://fr.aliexpress.com/item/1005001763933939.html?) : 2.6€ : il y en a besoin de 8 en tout par robot, vous pouvez récupérer des vis utilisées pour tenir les disques durs ou les cartes mères
+- 1 [module Bluetooth HC-06](https://fr.aliexpress.com/item/32857224039.html): 1.70€
+- 1 [bouton on/off](https://fr.aliexpress.com/item/1005003125710260.html) : 1,35€
 
-Soit un total d'environ **23€** et surtout **aucune soudure n'est nécessaire** ! De plus les moteurs pas-à-pas, bien que lents, sont très silencieux.
+Soit un total d'environ **30€** et surtout **aucune soudure n'est nécessaire** ! De plus les moteurs pas-à-pas, bien que lents, sont très silencieux.
 
 ### À récupérer :
 - 2 grands élastiques pour les pneus.
-- des petits élastiques pour le système permettant de baisser/lever un crayon
 - Un tube de colle liquide (forte, à bois ...) qui est utile pour coller certaines parties ou au cas où les trous de vis soient un peu trop grands. C'est aussi pratique pour coller les élastiques sur les roues ou pour éviter que la prise du conteneur de piles ne se dévisse.
 
 ### Notes sur l'alimentation électrique
