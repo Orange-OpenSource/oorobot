@@ -96,7 +96,7 @@ Pour changer de ligne il faut appuyer sur les touches "avancer" ou "reculer", po
 
 Pour annuler les changements des paramètres il faut appuyer sur le bouton "effacer". Pour quitter les paramètres en les sauvegardant il faut appuyer sur la touche "lancer" ou "paramètre"
 
-Le robot peut aussi être programmé à distance (Bluetooth) via une application Android (disponible [ici](https://orange-opensource.github.io/oorobot/apk/oorobot.apk)).
+Le robot peut aussi être programmé à distance (Bluetooth) via une application Android (disponible [ici](https://github.com/Orange-OpenSource/oorobot/releases)).
 
 ## Le matériel
 
