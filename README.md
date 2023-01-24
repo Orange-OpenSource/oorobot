@@ -248,13 +248,10 @@ Vous trouverez 2 programmes dans le répertoire [arduino](https://github.com/Ora
 
 Dans les derniers kits livrés par le [FabLab de Lannion](http://www.fablab-lannion.org/) (depuis novembre 2018) le module Bluetooth est pré-configuré et l'Arduino aura la dernière version du programme 'oorobot' d'installé. Vous n'avez donc pas à faire les étapes suivantes.
 
-Télécharger et installer le programme [Arduino IDE ](https://www.arduino.cc/en/Main/Software) sur votre PC. Brancher l'Arduino avec un câble USB sur votre PC. Vous devriez voir apparaître dans le menu "Outils/Port" une nouvelle entrée (*/dev/ttyUSBx* sous Linux, *COMx* sous Windows). Sélectionner dans "Outils/Type de carte" le modèle "Arduino Nano"
-
-**IMPORTANT** : dans les dernières versions du logiciel Arduino IDE, le type de "processeur" par défaut a été changé. Afin de pouvoir téléverser les programmes, il faut obligatoirement sélectionner ***"ATmega328P (Old Bootloader)"*** dans le menu "Outils -> Processeur".
-
-Il faut installer les dépendances suivantes en allant dans le menu "Croquis/Inclure une bibliothèque/Gérer les bibliothèques" puis en cherchant les bibliothèques à installer :
+Télécharger et installer l'IDE [Visual Studio Code](https://code.visualstudio.com/download) sur votre ordinateur. installer ensuite l'extension [PlatformIO](https://www.aranacorp.com/fr/installer-platformio-ide-sur-visual-studio-code/) dans Visual Studio Code. Si vous utilisez un Arduino Nano comme indiqué ci dessus, la configuration du projet PlatformIO est déjà prête, sinon, vous devez adapter la configuration de PlatformIO aux composants que vous utilisez, en utilisant la fonction PIOHome dans Visual Studio Code pour modifier votre configuration. Les librairies nécessaires au fonctionnement du robot sont déjà pré-installée ; liste des librairies pre-installées :
 - **AccelStepper** v1.57.1 by Mike McCauley
 - **LiquidCrystal I2C** v1.1.2 by Frank de Brabander
+- **Servo** v1.1.8 by Michael Margolis
 
 Si vous voulez changer le nom du module Bluetooth (sinon votre robot sera visible sous le nom "HC-06" ou "HC-05") il faut faire la manipulation suivante :
 - Brancher votre Arduino sur votre PC. La LED du module Bluetooth doit clignoter rapidement
@@ -264,7 +261,7 @@ Si vous voulez changer le nom du module Bluetooth (sinon votre robot sera visibl
 - la photo n'est pas assez nette pour que ça soit compréhensible...
 - Rebrancher le câble arrivant sur la broche VCC du module Bluetooth. La LED du module Bluetooth devrait clignoter moins rapidement
 
-Télécharger le programme [init-bluetooth](https://orange-opensource.github.io/oorobot/arduino/init-bluetooth.zip), le décompresser et l'ouvrir avec *Arduino IDE*. Téléverser le programme (2ème bouton en haut à gauche de l'interface) sur l'Arduino. Ce programme va configurer le module Bluetooth pour :
+Télécharger le programme [init-bluetooth](https://orange-opensource.github.io/oorobot/arduino/init-bluetooth.zip), le décompresser et l'ouvrir avec *Visual Studio Code*. Téléverser le programme (item Upload and Monitor du menu PlatformIO) sur l'Arduino. Ce programme va configurer le module Bluetooth pour :
 - Donner un nom au format "OoRoBoT-XXXX"
 - Configurer le code PIN à 0000
 - Configurer la vitesse de communication à 9600 bauds
@@ -273,7 +270,7 @@ Vous pouvez utiliser le "moniteur série" (Menu "Options/Moniteur série") du pr
 
 Le nom de votre robot sera affiché sur l'écran LCD. Si ce n'est pas le cas vérifier le contraste de votre écran (en tournant le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran). Si c'est bon vous pouvez enlever le pont sur l'entrée EN du module Bluetooth. Débranchez et rebranchez le câble arrivant sur la broche VCC du module Bluetooth. Votre module Bluetooth devrait clignoter rapidement, il est prêt à être appairé. Vérifiez que vous voyez bien le robot dans la liste des périphériques Bluetooth depuis votre téléphone/tablette.
 
-Télécharger le programme [oorobot](https://orange-opensource.github.io/oorobot/arduino/oorobot.zip), le décompresser et l'ouvrir avec le programme *Arduino IDE*.
+Télécharger le programme [oorobot](https://orange-opensource.github.io/oorobot/arduino/oorobot.zip), le décompresser et l'ouvrir avec le programme *Visual Studio Code*.
 
 Téléverser ensuite le programme *oorobot* sur l'Arduino. Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le câblage est bien réalisé :
 
