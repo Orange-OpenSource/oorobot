@@ -28,7 +28,7 @@ int getPressedButton() {
         maxRaw = raw;
       }
       if (b_index >= 8) {
-        int sumRaw = 0;
+        //int sumRaw = 0;
         retainedRaw = maxRaw;
         b_index = 0;
       }
