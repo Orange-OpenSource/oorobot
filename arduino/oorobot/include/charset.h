@@ -1,4 +1,7 @@
-char up[8] = {
+
+#include <arduino.h>
+
+uint8_t up[8] = {
   0b00000,
   0b00100,
   0b01110,
@@ -9,7 +12,7 @@ char up[8] = {
   0b00000
 };
 
-char down[8] = {
+uint8_t down[8] = {
   0b00000,
   0b00100,
   0b00100,
@@ -20,7 +23,7 @@ char down[8] = {
   0b00000
 };
 
-char bullet[8] = {
+uint8_t bullet[8] = {
   0b00000,
   0b00100,
   0b00010,
@@ -31,7 +34,7 @@ char bullet[8] = {
   0b00000
 };
 
-char right[8] = {
+uint8_t right[8] = {
   0b00000,
   0b00100,
   0b00010,
@@ -42,7 +45,7 @@ char right[8] = {
   0b00000
 };
 
-char left[8]  = {
+uint8_t left[8]  = {
   0b00000,
   0b00100,
   0b01000,
@@ -52,7 +55,7 @@ char left[8]  = {
   0b00001,
   0b00000
 };
-char pause[8] = {
+uint8_t pause[8] = {
   0b00000,
   0b00000,
   0b01010,
@@ -63,7 +66,7 @@ char pause[8] = {
   0b00000
 };
 
-char agrave[8] = {
+uint8_t agrave[8] = {
   0b01000,
   0b00100,
   0b01110,
@@ -74,7 +77,7 @@ char agrave[8] = {
   0b00000
 };
 
-char ecirc[8] = {
+uint8_t ecirc[8] = {
   0b00100,
   0b01010,
   0b01110,

@@ -7,13 +7,14 @@
 
 */
 #include <EEPROM.h>
-#include <Wire.h>/
+#include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <AccelStepper.h>
 #include <Servo.h>
 // #include <NewPing.h>
 #include "charset.h"
 #include "buttons.h"
+#include "functions.h"
 
 #define OOROBOT_VERSION "1.1.6"
 #define SCREEN_TIMEOUT 45000
@@ -435,7 +436,7 @@ void updateScreen() {
 #endif
       lcd.clear();
       lcd.setCursor(0, 0);
-      for (char i = 0 ; i < cmd_l ; i++) {
+      for (int i = 0 ; i < cmd_l ; i++) {
         if (i == 16) {
           lcd.setCursor(0, 1);
         }
@@ -448,7 +449,7 @@ void updateScreen() {
       lcd.clear();
       int cm = params.stepCm / 10;
       int mm = params.stepCm - 10 * cm;
-      int currentLine = selectedLine;
+      //int currentLine = selectedLine;
       int stepIdx = 0;
       int turnIdx = 1;
       int lineIdx = 2;
