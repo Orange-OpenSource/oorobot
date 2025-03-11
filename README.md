@@ -107,7 +107,7 @@ Le robot peut aussi être programmé à distance (Bluetooth) via une application
 - 1 [sensor shield](https://fr.aliexpress.com/store/product/1pcs-SAMIORE-ROBOT-UNO-Shield-Nano-Shield-for-NANO-3-0-and-UNO-R3-duemilanove-2009/1022067_32906961218.html) : 1,20€
 - 2 [moteurs pas à pas](https://fr.aliexpress.com/item/32714267741.html) : 3,80€
 - ~~1 [clavier 3x4 boutons](https://fr.aliexpress.com/item/Button-Keypad-3x4-module/32530917534.html) : 3,40€~~ : le clavier n'est plus fabriqué
-- 1 [clavier tactile 4*4 boutons](https://fr.aliexpress.com/item/1005003922720254.html) (version "with PH2.0 Dupont"):  4,50€
+- 1 [clavier tactile 4*4 boutons](https://fr.aliexpress.com/item/1005003922142647.html) (version "with PH2.0 Dupont"):  3€
 - 1 [écran LCD 2x16 caractères sur interface I2C](https://fr.aliexpress.com/store/product/LCD1602-I2C-LCD-1602-module-Blue-screen-IIC-I2C-for-arduino-LCD1602-Adapter-plate/1022067_32651314933.html) : 2,50€
 - 1 [conteneur de piles LR6](https://fr.aliexpress.com/item/32847111391.html) : 1,50€
 - 1 [servomoteur](https://fr.aliexpress.com/item/32864196324.html) (choisir le modèle SG90) pour lever/baisser un crayon: 1.40€
