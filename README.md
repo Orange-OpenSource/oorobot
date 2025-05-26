@@ -253,20 +253,9 @@ Vous trouverez 2 programmes dans le répertoire [arduino](https://github.com/Ora
 
 Dans les derniers kits livrés par le [FabLab de Lannion](http://www.fablab-lannion.org/) (depuis novembre 2018) le module Bluetooth est pré-configuré et l'Arduino aura la dernière version du programme 'oorobot' d'installé. Vous n'avez donc pas à faire les étapes suivantes.
 
-Télécharger et installer l'IDE [Visual Studio Code](https://code.visualstudio.com/download) sur votre ordinateur. installer ensuite l'extension [PlatformIO](https://www.aranacorp.com/fr/installer-platformio-ide-sur-visual-studio-code/) dans Visual Studio Code. Si vous utilisez un Arduino Nano comme indiqué ci dessus, la configuration du projet PlatformIO est déjà prête, sinon, vous devez adapter la configuration de PlatformIO aux composants que vous utilisez, en utilisant la fonction PIOHome dans Visual Studio Code pour modifier votre configuration. Les librairies nécessaires au fonctionnement du robot sont déjà pré-installée ; liste des librairies pre-installées :
-- **AccelStepper** v1.57.1 by Mike McCauley
-- **LiquidCrystal I2C** v1.1.2 by Frank de Brabander
-- **Servo** v1.1.8 by Michael Margolis
+Télécharger et installer l'IDE [Visual Studio Code](https://code.visualstudio.com/download) sur votre ordinateur. Installer ensuite l'extension [PlatformIO](https://www.aranacorp.com/fr/installer-platformio-ide-sur-visual-studio-code/) dans Visual Studio Code. Si vous utilisez un Arduino Nano comme indiqué ci dessus, la configuration du projet PlatformIO est déjà prête, sinon, vous devez adapter la configuration de PlatformIO aux composants que vous utilisez, en utilisant la fonction PIOHome dans Visual Studio Code pour modifier votre configuration.
 
-Si vous voulez changer le nom du module Bluetooth (sinon votre robot sera visible sous le nom "HC-06" ou "HC-05") il faut faire la manipulation suivante :
-- Brancher votre Arduino sur votre PC. La LED du module Bluetooth doit clignoter rapidement
-- Débrancher le câble arrivant sur la broche VCC du module Bluetooth.
-- Faire un pont sur l'entrée EN comme sur le schéma ci-dessus
-![init-bluetooth-zs-040](https://user-images.githubusercontent.com/16662847/42039305-5c4448ec-7aed-11e8-94a6-b699e708ccbd.jpg)
-- la photo n'est pas assez nette pour que ça soit compréhensible...
-- Rebrancher le câble arrivant sur la broche VCC du module Bluetooth. La LED du module Bluetooth devrait clignoter moins rapidement
-
-Télécharger le programme [init-bluetooth](https://orange-opensource.github.io/oorobot/arduino/init-bluetooth.zip), le décompresser et l'ouvrir avec *Visual Studio Code*. Téléverser le programme (item Upload and Monitor du menu PlatformIO) sur l'Arduino. Ce programme va configurer le module Bluetooth pour :
+Télécharger le programme [init-bluetooth](https://orange-opensource.github.io/oorobot/arduino/init-bluetooth.zip), le décompresser et l'ouvrir avec *Visual Studio Code*. Téléverser le programme (item "Upload and Monitor" du menu PlatformIO "nanoatmega368") sur l'Arduino. Ce programme va configurer le module Bluetooth pour :
 - Donner un nom au format "OoRoBoT-XXXX"
 - Configurer le code PIN à 0000
 - Configurer la vitesse de communication à 9600 bauds
@@ -277,12 +266,7 @@ Le nom de votre robot sera affiché sur l'écran LCD. Si ce n'est pas le cas vé
 
 Télécharger le programme [oorobot](https://orange-opensource.github.io/oorobot/arduino/oorobot.zip), le décompresser et l'ouvrir avec le programme *Visual Studio Code*.
 
-Téléverser ensuite le programme *oorobot* sur l'Arduino. Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le câblage est bien réalisé :
-
-indiquer si le montage peut être branché sur un port usb quelconque, ou sur le bloc de piles
-
-indiquer si on peut utiliser des piles rechargeables (1.2 v) ou s'il faut impérativement des piles non-rechargeables (1.5 v)
-
+Téléverser ensuite le programme *oorobot* sur l'Arduino (item "Upload and Monitor" du menu PlatformIO "nanoatmega368"). Ce programme va piloter tout le robot. Après le téléchargement il est temps de vérifier que le câblage est bien réalisé :
 - Vérifier le branchement du clavier, un appui sur un bouton doit afficher des caractères sur l'écran LCD
 - Vérifier le contraste de l'écran : ce dernier doit s'allumer au démarrage, par contre si vous ne voyez rien, pas de panique c'est peut-être tout simplement parce que le contraste est mal réglé. Pour changer ce paramètre il suffit de tourner le petit potentiomètre derrière l'écran avec un tournevis cruciforme jusqu'à avoir un bon contraste entre l'affichage des caractères et le fond de l'écran
 - Marquer le dessus du servomoteur : l'axe du moteur doit être sur la gauche du composant quand la partie mobile est devant vous. Vérifier que ce dernier bouge bien si vous appuyer sur les boutons lever/baisser le crayon
