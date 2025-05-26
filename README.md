@@ -198,11 +198,12 @@ Premier "vrai" modèle. Présence d'une roue encodeuse pour le réglage du pas q
 
 Brancher l'Arduino Nano sur le "sensor shield" en expliquant dans quel sens (il n'y a pas de détrompeur) : le port usb de l'arduino doit être dirigé vers l'extérieur, et non vers le port I2C.
 
-Branchement du clavier sur le port A0 (détacher un groupe de 3 fils):
-- Brancher un fil entre la broche **VCC** du clavier et la broche **V** du "sensor shield"
-- Brancher un fil entre la broche **GND** du clavier et la broche **G** du "sensor shield"
-- Brancher un fil entre la broche **Out** du clavier et la broche **S** du "sensor shield"
-
+Branchement du clavier tactile sur le port A1 et A2 (utiliser le cable fourni avec le clavier):
+- Brancher un fil entre la broche **V** du clavier et la broche **V** du "sensor shield"
+- Brancher un fil entre la broche **G** du clavier et la broche **G** du "sensor shield"
+- Brancher un fil entre la broche **SCL** du clavier et la broche **A1** du "sensor shield"
+- Brancher un fil entre la broche **SDO** du clavier et la broche **A2** du "sensor shield"
+- 
 Branchement de l'écran LCD sur une des ligne I2C (détacher un groupe de 4 fils):
 - Brancher un fil entre la broche **GND** de l'écran et la broche **GND** la ligne I2C choisie
 - Brancher un fil entre la broche **VCC** de l'écran et la broche **5V** la ligne I2C choisie
