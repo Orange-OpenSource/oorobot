@@ -16,7 +16,8 @@
 #include "buttons.h"
 #include "functions.h"
 
-#define OOROBOT_VERSION "1.1.6"
+
+#define OOROBOT_VERSION "1.2.0"
 #define SCREEN_TIMEOUT 45000
 
 #define TRIGGER_PIN A1
@@ -94,11 +95,6 @@ int steps1 = 0; // keep track of the step count for motor 1
 int steps2 = 0; // keep track of the step count for motor 2
 int isMoving = false;
 
-char buttonsMap[] = {
-  'L', 'G', 's', 'C', 0, 'R', '@', 'U', 'P', 'D', '|', '!',
-  '-',  0, 'S', 'A', 0, '+', 0,  0,   0,   0,  0, 0
-};
-
 Params params = {140, 1430, 100, ""};
 int previousMenu = CTRL_MENU;
 int selectedMenu = START_MENU;
@@ -127,7 +123,7 @@ void moveServo(int angle) {
 }
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println(F("Setup"));
   Wire.begin();
   byte error, address;
@@ -186,35 +182,31 @@ void loop() {
   //int distance = sonar.ping_cm();
   //byte somethingLeft = digitalRead(LINE_SENSOR_LEFT);
   //byte somethingRight = digitalRead(LINE_SENSOR_RIGHT);
+ 
+  char button=getPressedButton();
 
-  int buttonId = getPressedButton();
-  char button = 0;
-  if (buttonId >= 0) {
-    button = buttonsMap[buttonId];
+  if (button != 0) {
+    actionButtonForScreen(button);
+  }
+  #ifdef HAVE_BLUETOOTH
+  while (BTSerie.available()) {
+    selectedMenu = CTRL_MENU;
+    button = BTSerie.read();
+    //Serial.println(button);
     if (button != 0) {
       actionButtonForScreen(button);
     }
-  } else {
-#ifdef HAVE_BLUETOOTH
-    while (BTSerie.available()) {
-      selectedMenu = CTRL_MENU;
-      button = BTSerie.read();
-      //Serial.println(button);
-      if (button != 0) {
-        actionButtonForScreen(button);
-      }
-    }
-#endif
-    while (Serial.available()) {
-      selectedMenu = CTRL_MENU;
-      button = Serial.read();
-      //Serial.println(button);
-      if (button != 0) {
-        actionButtonForScreen(button);
-      }
+  }
+  #endif
+  while (Serial.available()) {
+    selectedMenu = CTRL_MENU;
+    button = Serial.read();
+    //Serial.println(button);
+    if (button != 0) {
+      actionButtonForScreen(button);
     }
   }
-
+  
   if (isMoving) {
     if (isCommandTerminated()) {
       Serial.println(F("step delay"));

@@ -1,6 +1,3 @@
-
-#include <arduino.h>
-
 uint8_t up[8] = {
   0b00000,
   0b00100,
